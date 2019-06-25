@@ -1,0 +1,148 @@
+<form>
+  <label>Administrator Audit</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="dropdown" token="select242" searchWhenChanged="true">
+      <label>Account Domain</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>eventtype=msad-admin-audit NOT src_nt_domain="NT AUTHORITY"|stats count by src_user,src_nt_domain |dedup src_nt_domain|sort src_nt_domain</query>
+      </search>
+      <fieldForLabel>src_nt_domain</fieldForLabel>
+      <fieldForValue>src_nt_domain</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" searchWhenChanged="true" token="ldap_src_nt_domain" depends="$fakeTokenToHideThisElement$">
+      <label>Domain used by sa-ldapsearch commands</label>
+      <search>
+        <query>index=_internal | head 1 | eval ldap_domain = if("$select242$" == "*", "default", "$select242$") | table ldap_domain | dedup ldap_domain | sort ldap_domain</query>
+      </search>
+      <selectFirstChoice>true</selectFirstChoice>
+      <fieldForLabel>ldap_domain</fieldForLabel>
+      <fieldForValue>ldap_domain</fieldForValue>
+    </input>
+    <input type="dropdown" token="select244" searchWhenChanged="true">
+      <label>Administrator</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>eventtype=msad-admin-audit NOT src_nt_domain="NT AUTHORITY"|stats count by src_user,src_nt_domain | search src_nt_domain="$select242$"|dedup src_user|sort src_user</query>
+      </search>
+      <fieldForLabel>src_user</fieldForLabel>
+      <fieldForValue>src_user</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="time" token="Time">
+      <label></label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Administrator Logons</title>
+        <search>
+          <query>eventtype=msad-successful-user-logons dest_nt_domain="$select242$" user="$select244$"|rename src as src_ip|`ip-to-host`|`fix-localhost`|lookup SiteInfo host|dedup consecutive=t Site,src_nt_host,src_ip|table _time,Site,src_nt_host,src_ip|rename src_nt_host as Workstation,src_ip as "IP Address"</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Account Unlock Actions</title>
+        <search>
+          <query>eventtype=msad-account-unlock msad_action="Unlocked" src_nt_domain="$select242$" src_user="$select244$"|where isnotnull(user)|table _time,msad_action,user,dest_nt_domain|rename msad_action as "Action",user as "Username",dest_nt_domain as "Domain"</query>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/ad_audit_user?form.ldaprecord.nt_domain=$row.Domain$&form.ldaprecord.user=$row.Username$
+          ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>User Administrative Changes</title>
+        <search>
+          <query>eventtype=msad-user-changes src_nt_domain="$select242$" src_user="$select244$"|where isnotnull(user)|`msad-changed-attributes`|table _time,msad_action,user,dest_nt_domain,MSADChanges|rename msad_action as "Action",user as "Username",dest_nt_domain as "Domain",MSADChanges as "Changes"</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">cell</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/ad_audit_user?form.ldaprecord.nt_domain=$row.Domain$&form.ldaprecord.user=$row.Username$
+          ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Group Membership Changes</title>
+        <search>
+          <query>eventtype=msad-groupmembership-changes src_nt_domain="$select242$" src_user="$select244$"|table _time,msad_action,dest_nt_domain,user_group,member_id|rename msad_action as "Action",dest_nt_domain as "Domain", user_group as "Group",member_id as "Member"</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/ad_audit_group?form.ldaprecord.nt_domain=$row.Domain$&form.ldaprecord.groupName=$row.Group$
+          ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Group Policy Changes</title>
+        <search>
+          <query>eventtype=msad-ad-access src_nt_domain="$select242$" src_user="$select244$" Object_Type="groupPolicyContainer"|eval srch="CN={" . Object_Name_Guid . "}"|transaction maxspan=5m session_id,host,srch|`session-to-host`|table _time,login_host,srch,src_nt_domain|ldapfilter domain="$ldap_src_nt_domain$" search="($$srch$$)" attrs=displayName|table _time,login_host,displayName|rename login_host as "Workstation",displayName as "Group Policy"</query>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Computer Account Changes - Admin Audit</title>
+        <search>
+          <query>eventtype=msad-computer-changes src_nt_domain="$select242$" src_user="$select244$"|eval dest_host=dest_nt_domain."\\\\".user|`msad-changed-attributes`|table _time,action,dest_host,MSADChanges|rename action as Action,dest_host as "Workstation", MSADChanges as "Changes"</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+      </table>
+    </panel>
+  </row>
+</form>

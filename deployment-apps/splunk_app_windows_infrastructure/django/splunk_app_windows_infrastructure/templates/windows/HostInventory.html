@@ -1,0 +1,108 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Host Inventory | Splunk{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/windows/HostInventory.css" />
+{% endblock css %}
+
+{% block content %}
+    <div>
+        <div class="dashboard-body container-fluid main-section-body">
+            <h2>Host Inventory</h2> 
+            <div class="divider"></div>
+            <div class="section-separator">
+                <div>
+                    <div class="pull-left">Host Name: </div>
+                    <div id="host-filter" class="pull-left"></div>
+                    <div id="page-timepicker" class="pull-left"></div>
+                </div>
+                <div style="clear: both" id="host-updating"></div>
+            </div>
+            <div class="dashboard-row section-separator" id="host-details-pane">
+                <div class="dashboard-cell">
+                    <div class="dashboard-panel host-info-pane">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="title-cell">Computer name</td><td id="computer-name" class="value-cell">Unknown</td>
+                                    <td class="title-cell">Operating system version</td><td class="value-cell"><span id="os">Unknown</span> (<span id="os-arch">Unknown architecture</span>)</td>
+                                    </tr>
+                                <tr>
+                                    <td class="title-cell">Domain</td><td id="domain" class="value-cell">Unknown</td>
+                                    <td class="title-cell">Service pack</td><td id="service-pack" class="value-cell">Unknown</td>
+                                    </tr>
+                                <tr>
+                                    <td class="title-cell">Hardware information</td>
+                                    <td class="value-cell"><span id="manufacturer">Unknown</span> <span id="model">(Unknown model)</span></td>
+                                    <td class="title-cell">Last installed update</td><td id="last-update" class="value-cell">Unknown</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="section-separator"></div>
+                        <div class="section-separator"></div>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="title-cell">Processors</td><td id="processors-trend" class="value-cell">(No info on usage)</td>
+                                    <td class="title-cell">Installed memory (RAM)</td>
+                                    <td class="value-cell"><span id="total-ram">Unknown</span> MB Available memory:<span id="memory-trend">(No info)</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="title-cell">Network</td><td id="network-trend" class="value-cell">(No info on usage)</td>
+                                    <td class="title-cell">Disk</td>
+                                    <td class="value-cell">
+                                        <p>Disk space: <span id="total-disk">Unknown</span> MB (<span id="free-disk">Unknown</span> MB free)</p>
+                                        <p>Reads: <span id="disk-read-trend">(No info on usage)</span> Writes: <span id="disk-write-trend">(No info on usage)</span></p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div id="message-board">
+            </div>
+            <div class="dashboard-row section-separator" id="key-events-details-pane">
+                <div class="dashboard-cell" style="width: 100%">
+                    <h5>Key Events (<span id="key-events-count"></span>)</h5>
+                    <p id="key-events-updating"></p>
+                </div>
+                <div class="dashboard-cell"  style="width: 30%">
+                    <div class="dashboard-panel">
+                        <div id="left-pane" class="key-events-pane">
+                            <div id="no-key-events">None</div>
+                            <ul id="key-events-list">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-cell"  style="width: 70%">
+                    <div class="dashboard-panel">
+                        <div id="right-pane" class="key-events-pane">
+                            <div id="no-key-events">None</div>
+                            <div id="key-event-details"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content%}
+
+{% block js %}    
+    <script>
+        requirejs.config({ urlArgs: "bust=267225" });
+        require(['jquery', 'splunk.util', '{{app_name}}/windows/HostInventory'], function($, splunkUtil, HostInventory) {
+            var args = splunkUtil.queryStringToProp(window.location.search);
+            
+            HostInventory.render(args);
+        });
+    </script>
+{% endblock js %}

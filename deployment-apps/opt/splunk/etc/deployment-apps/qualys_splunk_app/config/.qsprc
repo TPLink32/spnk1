@@ -1,0 +1,6 @@
+[QUALYS]
+log_output_directory = 
+minimum_qid = 0
+first_run = False
+last_run_datetime = 
+

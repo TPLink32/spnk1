@@ -1,0 +1,36 @@
+##############################################################################
+#
+# Data Definition for Splunk for Active Directory
+# Application Level Permissions
+#
+# Copyright (C) 2011 Splunk, Inc.
+# All Rights Reserved
+#
+# History
+# -------
+# $History$
+#
+##############################################################################
+[]
+access = read : [ * ], write : [ admin, power ]
+
+[views/windows__setup]
+access = read : [ admin ], write : [ admin ]
+
+[savedsearches]
+access = read : [ * ], write : [ admin ]
+owner = admin
+export = none
+
+[eventtypes]
+export = splunk_app_windows_infrastructure, Splunk_TA_microsoft_ad, Splunk_TA_windows
+#export = system
+
+[props]
+export = system
+
+[transforms]
+export = system
+
+[lookups]
+export = system

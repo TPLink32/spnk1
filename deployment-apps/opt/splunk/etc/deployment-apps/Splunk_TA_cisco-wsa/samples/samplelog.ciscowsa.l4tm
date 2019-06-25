@@ -1,0 +1,90 @@
+Mon May 20 12:03:42 2013 Info: Begin Logfile
+Mon May 20 12:03:42 2013 Info: Version: 7.1.4-053 SN: 0024E87E0359-2QQG0L1
+Mon May 20 12:03:42 2013 Info: Time offset from UTC: 19800 seconds
+Mon May 20 12:03:42 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:3256 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Mon May 20 12:03:42 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:28234 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Mon May 20 12:03:44 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:3262 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Mon May 20 12:03:44 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:28247 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Mon May 20 12:03:47 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:3266 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Mon May 20 12:03:47 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:28263 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Mon May 20 12:03:49 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:35786 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):80.
+Mon May 20 12:03:49 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:58591 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):80.
+Mon May 20 12:03:49 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:3270 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Mon May 20 12:03:49 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:28275 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Mon May 20 12:03:51 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:3274 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Mon May 20 12:03:51 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:28288 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Mon May 20 12:03:57 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ for acmetech.com (Timed Out) removed from firewall blacklist.
+Mon May 20 12:04:11 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:35939 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):80.
+Mon May 20 17:25:19 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:24051 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):443.
+Mon May 20 17:25:21 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ discovered for www.google.co.in (www.google.co.in) added to firewall exemption table.
+Mon May 20 17:25:21 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ discovered for www.google.co.in (www.google.co.in) added to firewall exemption table.
+Mon May 20 17:25:21 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ discovered for www.google.co.in (www.google.co.in) added to firewall exemption table.
+Mon May 20 17:30:00 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ discovered for acmetech.com (acmetech.com) added to firewall greylist.
+Mon May 20 17:30:00 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ discovered for DDDDDDDD (DDDDDDDD) added to firewall blacklist.
+Mon May 20 17:30:00 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ discovered for DDDDDDDD (DDDDDDDD) added to firewall blacklist.
+Mon May 20 17:30:00 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ discovered for DDDDDDDD (DDDDDDDD) added to firewall blacklist.
+Mon May 20 17:30:00 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ discovered for DDDDDDDD (DDDDDDDD) added to firewall blacklist.
+Mon May 20 17:30:00 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ discovered for DDDDDDDD (DDDDDDDD) added to firewall blacklist.
+Mon May 20 17:31:50 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ for acmetech.com (Timed Out) removed from firewall blacklist.
+Mon May 20 17:31:50 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ for acmetech.com (Timed Out) removed from firewall blacklist.
+Mon May 20 17:31:50 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ for acmetech.com (Timed Out) removed from firewall blacklist.
+Mon May 20 17:35:50 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ for acmetech.com (Timed Out) removed from firewall blacklist.
+Mon May 20 17:35:50 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ for acmetech.com (Timed Out) removed from firewall blacklist.
+Mon May 20 17:35:50 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ for acmetech.com (Timed Out) removed from firewall blacklist.
+Mon May 20 17:40:51 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ for acmetech.com (Timed Out) removed from firewall greylist.
+Mon May 20 17:40:53 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:3352 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Mon May 20 17:40:53 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:35302 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Mon May 20 17:40:55 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:3356 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Mon May 20 17:40:55 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:35309 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Mon May 20 17:40:57 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:3360 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Mon May 20 17:40:57 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:35321 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Mon May 20 17:40:58 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ discovered for DDDDDDDD (DDDDDDDD) added to firewall blacklist.
+Tue May 21 10:33:20 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ for acmetech.com (Timed Out) removed from firewall blacklist.
+Tue May 21 10:33:20 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ for acmetech.com (Timed Out) removed from firewall blacklist.
+Tue May 21 10:33:20 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ for acmetech.com (Timed Out) removed from firewall blacklist.
+Tue May 21 11:51:53 2013 Info: Firewall noted ICMP:11.0 data from YYY.YYY.YYY.YYY to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com).
+Mon May 20 20:28:21 2013 Info: Firewall noted ICMP:11.0 data from YYY.YYY.YYY.YYY to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com).
+Mon May 20 20:28:22 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:63621 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):80.
+Mon May 20 20:28:22 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:32798 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):80.
+Mon May 20 23:13:52 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ for acmetech.com (acmetech.com) removed from firewall blacklist.
+Mon May 20 23:13:52 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ discovered for acmetech.com (acmetech.com) added to firewall greylist.
+Mon May 20 23:19:29 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:33534 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):80.
+Mon May 20 23:19:29 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:33535 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):80.
+Mon May 20 23:19:29 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:38510 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):80.
+Mon May 20 23:19:29 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:38511 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):80.
+Tue May 21 03:13:53 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ for acmetech.com (Timed Out) removed from firewall greylist.
+Tue May 21 03:13:53 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ discovered for DDDDDDDD (Timed Out) added to firewall blacklist.
+Tue May 21 11:11:11 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:1401 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Tue May 21 11:11:12 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:55002 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):80.
+Tue May 21 11:11:12 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:56879 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):80.
+Tue May 21 11:11:27 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ for acmetech.com (Timed Out) removed from firewall blacklist.
+Tue May 21 11:11:27 2013 Info: Address ZZZ.ZZZ.ZZZ.ZZZ for acmetech.com (Timed Out) removed from firewall blacklist.
+Tue May 21 11:11:27 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:8218 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):443.
+Tue May 21 11:11:27 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:56891 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):443.
+Tue May 21 11:11:27 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:37286 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):443.
+Tue May 21 11:11:27 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:56892 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):443.
+Tue May 21 11:11:30 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:2524 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Tue May 21 11:11:33 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:1402 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Tue May 21 11:11:36 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:38231 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):443.
+Tue May 21 11:11:36 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:56918 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):443.
+Tue May 21 11:11:38 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:2578 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Tue May 21 11:11:38 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:32909 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Tue May 21 11:11:39 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:64107 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):80.
+Tue May 21 11:11:39 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:56927 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):80.
+Tue May 21 00:06:12 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:54668 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):443.
+Tue May 21 00:06:13 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:53523 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):80.
+Tue May 21 00:06:13 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:54669 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Tue May 21 00:06:13 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:54670 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):80.
+Tue May 21 00:08:10 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:54096 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):80.
+Tue May 21 00:08:10 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:54097 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):80.
+Tue May 21 00:08:10 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:55231 to ZZZ.ZZZ.ZZZ.ZZZ(acmetech.com):80.
+Mon May 20 12:07:57 2013 Info: Firewall noted UDP data from YYY.YYY.YYY.YYY:52453 to ZZZ.ZZZ.ZZZ.ZZZ:6881.
+Mon May 20 12:09:49 2013 Info: Firewall noted UDP data from YYY.YYY.YYY.YYY:28186 to ZZZ.ZZZ.ZZZ.ZZZ:6881.
+Mon May 20 12:09:49 2013 Info: Firewall noted UDP data from YYY.YYY.YYY.YYY:28186 to ZZZ.ZZZ.ZZZ.ZZZ:6881.
+Mon May 20 12:14:49 2013 Info: Firewall noted UDP data from YYY.YYY.YYY.YYY:28186 to ZZZ.ZZZ.ZZZ.ZZZ:6881.
+Mon May 20 12:14:49 2013 Info: Firewall noted UDP data from YYY.YYY.YYY.YYY:28186 to ZZZ.ZZZ.ZZZ.ZZZ:6881.
+Mon May 20 12:47:58 2013 Info: Firewall noted UDP data from YYY.YYY.YYY.YYY:52453 to ZZZ.ZZZ.ZZZ.ZZZ:6881.
+Mon May 20 12:47:58 2013 Info: Firewall noted UDP data from YYY.YYY.YYY.YYY:52453 to ZZZ.ZZZ.ZZZ.ZZZ:6881.
+Mon May 20 13:07:56 2013 Info: Firewall noted TCP data from YYY.YYY.YYY.YYY:39239 to ZZZ.ZZZ.ZZZ.ZZZ:443.
+Mon May 20 13:07:57 2013 Info: Firewall noted UDP data from YYY.YYY.YYY.YYY:52453 to ZZZ.ZZZ.ZZZ.ZZZ:6881.
+Mon May 20 13:07:57 2013 Info: Firewall noted UDP data from YYY.YYY.YYY.YYY:52453 to ZZZ.ZZZ.ZZZ.ZZZ:6881.

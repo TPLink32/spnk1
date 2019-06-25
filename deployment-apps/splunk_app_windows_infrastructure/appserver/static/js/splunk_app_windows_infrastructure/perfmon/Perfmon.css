@@ -1,0 +1,97 @@
+.exchange-header {
+    color: #666;
+    font-weight: 200;
+    font-size: 24px;
+    display: inline-block;
+}
+
+#action-buttons {
+    display: inline-block;
+    margin-left: 30px;
+}
+
+#share-modal-text-field{
+    width: 90%;
+}
+
+.action-icon {
+    font-size: 12px;
+    margin-right: 2px;
+}
+
+.panel-head h1 {
+    font-size: 24px;
+    color: #666;
+    font-weight: 200;
+    padding: 25px;
+}
+
+.panel-body h4 {
+    font-size: 14px;
+    color: #666;
+    margin-left: 20px;
+    font-weight: 200;
+}
+
+.splunk-timerange {
+    margin-bottom: 10px;
+}
+
+#chart-div{
+    margin-top: 20px;
+}
+
+.splunk-perfmon-button.btn{
+    margin-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.compare-control{
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.compare-control .compare-control-checkbox{
+    display: inline-block;
+}
+
+.compare-control p{
+    display: inline-block;
+}
+
+.compare-control-svg{
+    display: inline-block;
+}
+
+.compare-control-svg{
+    height: 11px;
+    width: 40px;
+    margin-bottom: 3px;
+}
+
+.compare-control-svg line{
+    stroke: black;
+    stroke-width: 2px;
+}
+
+.compare-control-dropdown-arrow {
+    margin-left: 3px;
+    cursor: pointer;
+}
+
+.deep-dive-twin-time-picker{
+    margin-left: 10px;
+}
+
+#compare-controls-div {
+    margin-bottom: 10px;
+}
+
+#compare-avg-container {
+    margin-left: 10px;
+}
+
+.modal {
+    display: none;
+}

@@ -1,0 +1,74 @@
+<form script="customized_chart_preload.js,audit_report.js">
+  <label>Group Audit</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="dropdown" token="ldaprecord.nt_domain" searchWhenChanged="true">
+      <label>Account Domain</label>
+      <search>
+        <query>| inputlookup DomainSelector | eval nt_domain=DomainNetBIOSName | dedup nt_domain | search nt_domain !="" | table nt_domain</query>
+      </search>
+      <fieldForLabel>nt_domain</fieldForLabel>
+      <fieldForValue>nt_domain</fieldForValue>
+      <selectFirstChoice>true</selectFirstChoice>
+    </input>
+    <input type="text" token="ldaprecord.groupName" searchWhenChanged="true">
+      <label>Group Name</label>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="time" token="Time">
+      <label></label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <search id="audit_query">
+        <query>| ldapsearch domain="$ldaprecord.nt_domain$" search="(&amp;(objectclass=group)(cn=$ldaprecord.groupName$))"|fields *</query>
+        <latest>$Time.latest$</latest>
+      </search>
+      <html>
+        <div id="audit_report"/>
+      </html>
+    </panel>
+    <panel>
+      <table>
+        <title>Full Group Membership</title>
+        <search>
+          <query>| ldapsearch domain="$ldaprecord.nt_domain$" search="(&amp;(objectclass=group)(cn=$ldaprecord.groupName$))"|fields * |ldapgroup|`split-ldapgroup`|table member_name,member_domain,member_type|sort member_name|rename member_name as "Username",member_domain as "Domain",member_type as "Membership Type" | search (Username !="" OR member_domain !="" OR Domain !="")</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">cell</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/ad_audit_user?form.ldaprecord.nt_domain=$row.Domain$&form.ldaprecord.user=$row.Username$
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Recent Membership Changes</title>
+        <search>
+          <query>`group-changes-for-group("$ldaprecord.nt_domain$","$ldaprecord.groupName$")`</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+      </table>
+    </panel>
+  </row>
+</form>

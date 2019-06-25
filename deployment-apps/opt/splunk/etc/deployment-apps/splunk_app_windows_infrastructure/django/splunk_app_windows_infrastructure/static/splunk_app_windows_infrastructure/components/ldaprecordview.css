@@ -1,0 +1,31 @@
+.splunk-app-microsoft-ldaprecordview {
+	width: 			100%;
+	overflow-x:		scroll;
+}
+
+.splunk-app-microsoft-ldaprecordview div.oc {
+	width: 			100%;
+}
+
+.splunk-app-microsoft-ldaprecordview div.oc h3.title {
+	padding:		6px;
+	background:		#C7DBB9;
+	font:			italic bold 8pt/14pt Helvetica,sans-serif;
+}
+
+.splunk-app-microsoft-ldaprecordview div.oc div.content {
+	padding-left:	10px;
+	padding-right:	10px;
+	font:			black 10pt Arial,Helvetica,sans-serif;
+}
+
+.splunk-app-microsoft-ldaprecordview div.oc div.content div.attr div.attrname {
+	float:			left;
+	width:			30%;
+}
+
+.splunk-app-microsoft-ldaprecordview div.oc div.content div.attr div.attrval {
+	width:			70%;
+	white-space:	nowrap;
+	display:		inline-block;
+}

@@ -1,0 +1,97 @@
+<form script="runPageScript.js">
+
+  <label>Predict Numeric Fields</label>
+  <description>Predict the value of a numeric field using a weighted combination of the values of other fields in that event.</description>
+
+  <fieldset autoRun="false" submitButton="false">
+    <html>
+      <ul id="dashboard-form-tabs">
+        <li>
+          <a class="tab-title-text" data-tab="newModel">Create New Model</a>
+        </li>
+        <li>
+          <a class="tab-title-text" data-tab="existingModel">Load Existing Settings</a>
+        </li>
+      </ul>
+      <div id="dashboard-form-controls">
+        <div id="inputControls" data-tab="newModel">
+          <label>1: Enter a search</label>
+          <div class="app-search-controls-wrapper">
+            <div id="searchBarControl"></div>
+            <div id="searchControlsControl"></div>
+          </div>
+          <br />
+          <div>
+            <div class="input input-dropdown splunk-view">
+              <label>2: Field to predict</label>
+              <div id="targetVariableControl"></div>
+            </div>
+            <div class="input input-multiselect splunk-view">
+              <label>3: Fields to use for predicting</label>
+              <div id="featuresVariableControl"></div>
+            </div>
+            <div class="input splunk-view">
+              <label>4: Split for training / test: <span id="trainingSetFractionSliderValue"></span></label>
+              <div id="trainingSetFractionSlider">
+              </div>
+            </div>
+            <div class="input input-text splunk-view">
+              <label>5: Save the model as</label>
+              <div id="modelNameInputControl"></div>
+            </div>
+          </div>
+          <div id="assistantControlsFooter"></div>
+          <div id="errorDisplay" class="alerts shared-flashmessages app-error-messages"></div>
+        </div>
+        <div id="queryHistoryPanel" data-tab="existingModel"></div>
+      </div>
+    </html>
+  </fieldset>
+
+  <row depends="$searchBarSearchJobIdToken$" rejects="$showResultPanelsToken$">
+    <panel id="datasetPreviewPanel">
+      <html>
+        <h3>Raw Data Preview</h3>
+        <div id="datasetPreviewTable"></div>
+      </html>
+    </panel>
+  </row>
+
+  <row depends="$showResultPanelsToken$">
+    <panel id="dataAndPredictionsPanel">
+      <html></html>
+    </panel>
+  </row>
+
+  <row depends="$showResultPanelsToken$">
+    <panel id="actualVsPredictedLinesPanel">
+      <html></html>
+    </panel>
+    <panel id="actualVsPredictedScatterLinePanel">
+      <html></html>
+    </panel>
+  </row>
+
+  <row depends="$showResultPanelsToken$">
+    <panel id="residualsLinePanel">
+      <html></html>
+    </panel>
+    <panel id="residualsHistogramPanel">
+      <html></html>
+    </panel>
+  </row>
+
+  <row depends="$showResultPanelsToken$">
+    <panel id="regressionStatisticsPanel">
+      <html>
+        <div class="stats-panel">
+          <div id="r2StatisticPanel"></div>
+          <div id="rootMeanSquaredErrorStatisticPanel"></div>
+        </div>
+      </html>
+    </panel>
+    <panel id="fitModelSummaryPanel">
+      <html></html>
+    </panel>
+  </row>
+</form>

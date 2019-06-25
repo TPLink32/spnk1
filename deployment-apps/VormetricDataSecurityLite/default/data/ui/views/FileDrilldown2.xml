@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<form>
+ <label>File Accesses</label>
+
+  <fieldset>
+	<input token="host"><label>Host Name</label></input>
+	<input token="gp"><label>Guard Point</label></input>
+	<input token="filePath"><label>File Path</label></input>
+	<input token="iotype"><label>I/O Type</label></input>
+	<input token="uinfo"><label>User Info</label></input>
+  </fieldset>
+
+  <row> 
+	<table>
+	<title>File Accesses - Details</title>
+	<searchString>sourcetype="rfc5424_syslog" filePath="$filePath$" gp="$gp$" uinfo="$uinfo$" host="$host$" sdid="CGP@21513" | lookup iotype act | search iotype="$iotype$" | table _time,iotype,sproc,pol,denyStr</searchString>
+     <option name="count">20</option>
+     <option name="displayRowNumbers">false</option>
+     <option name="showPager">true</option>
+
+   </table>
+ </row>
+
+</form>

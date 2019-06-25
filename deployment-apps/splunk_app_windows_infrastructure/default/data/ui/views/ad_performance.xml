@@ -1,0 +1,52 @@
+<form>
+  <label>Performance</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="dropdown" token="select232" searchWhenChanged="true">
+      <label>Server</label>
+      <search>
+        <query>eventtype=perfmon|stats count by host,object,counter |dedup host|sort host</query>
+      </search>
+      <fieldForLabel>host</fieldForLabel>
+      <fieldForValue>host</fieldForValue>
+      <selectFirstChoice>true</selectFirstChoice>
+    </input>
+    <input type="dropdown" token="select234" searchWhenChanged="true">
+      <label>Object</label>
+      <search>
+        <query>eventtype=perfmon|stats count by host,object,counter | search host="$select232$"|dedup object|sort object</query>
+      </search>
+      <fieldForLabel>object</fieldForLabel>
+      <fieldForValue>object</fieldForValue>
+      <selectFirstChoice>true</selectFirstChoice>
+    </input>
+    <input type="dropdown" token="select236" searchWhenChanged="true">
+      <label>Counter</label>
+      <search>
+        <query>eventtype=perfmon|stats count by host,object,counter | search host="$select232$" object="$select234$"|dedup counter|sort counter</query>
+      </search>
+      <fieldForLabel>counter</fieldForLabel>
+      <fieldForValue>counter</fieldForValue>
+      <selectFirstChoice>true</selectFirstChoice>
+    </input>
+    <input type="time" token="Time" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <chart>
+        <title>Directory Performance Metrics</title>
+        <search>
+          <query>eventtype=perfmon host="$select232$" object="$select234$" counter="$select236$"|fillnull value="Total" instance|timechart avg(Value) by instance</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="charting.chart">column</option>
+      </chart>
+    </panel>
+  </row>
+</form>

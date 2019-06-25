@@ -1,0 +1,126 @@
+<form>
+  <label>Application</label>
+  <init>
+    <set token="source_ip_address">*</set>
+    <set token="destination_ip_address">*</set>
+    <set token="user_name">*</set>
+    <set token="service_name">*</set>
+    <set token="application"></set>
+    <set token="srx_host">*</set>
+  </init>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="application_time">
+      <label>Time Period</label>
+      <default>
+        <earliest>rt-5m</earliest>
+        <latest>rt</latest>
+      </default>
+    </input>
+    <input type="text" token="srx_host" searchWhenChanged="true">
+      <label>SRX</label>
+    </input>
+    <input type="text" token="source_ip_address" searchWhenChanged="true">
+      <label>Source IP Address</label>
+      <prefix>source_address ="</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="user_name" searchWhenChanged="true">
+      <label>User Name</label>
+      <prefix>username="</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="destination_ip_address">
+      <label>Destination IP Address</label>
+      <prefix>destination_address="</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="service_name" searchWhenChanged="true">
+      <label>Service Name</label>
+      <prefix>service_name="</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="radio" token="app_search_criteria" searchWhenChanged="true">
+      <label>Application Search Criteria</label>
+      <choice value="contains">Contains</choice>
+      <choice value="doesnt_contain">Does Not Contain</choice>
+      <choice value="match_exactly">Match Exactly</choice>
+      <default>contains</default>
+      <initialValue>contains</initialValue>
+    </input>
+    <input type="text" token="application" searchWhenChanged="true">
+      <label>Application</label>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <chart>
+        <title>Top Applications by Most Sessions</title>
+        <search>
+          <query>source="jnpr-syslog" "APPTRACK_SESSION_CLOSE"  $srx_host$ $source_ip_address$  $destination_ip_address$ $service_name$  $user_name$ | eval nested_application = if(nested_application = "UNKNOWN", application, nested_application) | 
+eval application_new = if ("$application$" = "",nested_application,if("$app_search_criteria$"="contains" and  match(lower(nested_application),lower("\w*$application$\w*")),nested_application, if("$app_search_criteria$"="match_exactly" and lower(nested_application)=lower("$application$"),nested_application,if("$app_search_criteria$"="doesnt_contain" and (not match(lower(nested_application),lower("\w*$application$\w*"))),nested_application,"-")))) 
+|  search application_new != "-" | top 5 nested_application</query>
+          <earliest>$application_time.earliest$</earliest>
+          <latest>$application_time.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">Application</option>
+        <option name="charting.axisTitleY.text">Session Count</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.legend.placement">none</option>
+        <option name="height">240</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Top Applications by Volume</title>
+        <search>
+          <query>source="jnpr-syslog" "APPTRACK_SESSION_VOL_UPDATE" $srx_host$ $source_ip_address$  $destination_ip_address$ $service_name$ $user_name$ | eval nested_application = if(nested_application = "UNKNOWN", application, nested_application)
+| eval application_new = if ("$application$" = "",nested_application,if("$app_search_criteria$"="contains" and  match(lower(nested_application),lower("\w*$application$\w*")),nested_application, if("$app_search_criteria$"="match_exactly" and lower(nested_application)=lower("$application$"),nested_application,if("$app_search_criteria$"="doesnt_contain" and (not match(lower(nested_application),lower("\w*$application$\w*"))),nested_application,"-")))) 
+| search application_new != "-" | chart sum(eval( (bytes_from_client + bytes_from_server) /1048576))  as volume by nested_application | sort -volume | head 5</query>
+          <earliest>$application_time.earliest$</earliest>
+          <latest>$application_time.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">Application</option>
+        <option name="charting.axisTitleY.text">Volume (MB)</option>
+        <option name="charting.chart">bar</option>
+        <option name="charting.legend.placement">none</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Top Nested Applications</title>
+        <search>
+          <query>source="Jnpr-syslog"  "APPTRACK_SESSION_CLOSE" $srx_host$ $source_ip_address$ $user_name$ $destination_ip_address$ $service_name$  $user_name$  nested_application != "UNKNOWN" 
+| 
+eval application_new = if ("$application$" = "",nested_application,if("$app_search_criteria$"="contains" and  match(lower(nested_application),lower("\w*$application$\w*")),nested_application, if("$app_search_criteria$"="match_exactly" and lower(nested_application)=lower("$application$"),nested_application,if("$app_search_criteria$"="doesnt_contain" and (not match(lower(nested_application),lower("\w*$application$\w*"))),nested_application,"-")))) 
+| search application_new != "-" | top 5 nested_application</query>
+          <earliest>$application_time.earliest$</earliest>
+          <latest>$application_time.latest$</latest>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">-90</option>
+        <option name="charting.axisTitleX.text">Nested Application</option>
+        <option name="charting.axisTitleY.text">Event Count</option>
+        <option name="charting.chart">pie</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Top Sources Utilizing Applications that are Unidentified</title>
+        <search>
+          <query>source="jnpr-syslog" "APPTRACK_SESSION_CLOSE" $srx_host$ $source_ip_address$  $destination_ip_address$ $service_name$ $user_name$ (nested_application = "UNKNOWN" OR nested_application="ENCRYPTED" OR nested_application = "UNSPECIFIED") | eval application_new = if ("$application$" = "",nested_application,if("$app_search_criteria$"="contains" and  match(lower(nested_application),lower("\w*$application$\w*")),nested_application, if("$app_search_criteria$"="match_exactly" and lower(nested_application)=lower("$application$"),nested_application,if("$app_search_criteria$"="doesnt_contain" and (not match(lower(nested_application),lower("\w*$application$\w*"))),nested_application,"-")))) 
+| search application_new != "-" | chart count(eval(nested_application = "UNKNOWN")) as UNKNOWN,count(eval(nested_application = "ENCRYPTED")) as ENCRYPTED,count(eval(nested_application = "UNSPECIFIED")) as UNSPECIFIED by source_address | sort UNKNOWN desc | head 5</query>
+          <earliest>$application_time.earliest$</earliest>
+          <latest>$application_time.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">Source IP Address</option>
+        <option name="charting.axisTitleY.text">Event Count</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.legend.placement">bottom</option>
+        <option name="refresh.display">progressbar</option>
+      </chart>
+    </panel>
+  </row>
+</form>

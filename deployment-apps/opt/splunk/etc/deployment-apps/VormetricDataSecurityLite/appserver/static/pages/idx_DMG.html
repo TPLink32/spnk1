@@ -1,0 +1,63 @@
+<DOCTYPE html>
+	<html>
+	<head>
+	<title>Thales Data Security Message Catalog: DMG Index</title>
+	</head>
+	
+	<script language="javascript" type="text/javascript" >
+	function jumpto(x,y){
+		if (y != "") {
+			var t = "";
+			if (x != "") {
+				t = x + "_";
+			}
+			t = t + y + ".html";
+			location.replace (t);
+		}
+	}
+	</script>
+	<body style="position:absolute;top:0px;bottom:0px;left:0px;right:0px">
+
+	<div id="menu" 
+	 style="background-color:#3fbedb;padding:10px;width:auto;height:92%;float:left;">
+
+	<h2>Navigation</h2><div id="buttons" style="text-align:center">
+	<p><button type="button" onClick="jumpto('','index')">(up)</button>
+
+	<p/>
+	
+	<form name="form">
+	<select name="jumpmenu" 
+			onChange="jumpto('msg',document.form.jumpmenu.options[document.form.jumpmenu.options.selectedIndex].value)">
+	<option value="">Message ID</option>
+	<option value="DMG0550E">DMG0550E</option>
+<option value="DMG0551E">DMG0551E</option>
+<option value="DMG0552E">DMG0552E</option>
+<option value="DMG0553E">DMG0553E</option>
+<option value="DMG0554E">DMG0554E</option>
+<option value="DMG0575I">DMG0575I</option>
+
+	</select>
+	</form>
+	<form name="form2">
+	or enter ID<br>
+	<input type="text" size="8" maxlength="8" name="msgid"><br>
+	<input type="text" style="display:none;">
+	<button type="button" onclick="jumpto('msg',document.form2.msgid.value)">
+	Lookup</button>
+	</form>
+	</div>
+	</div>
+	<div id="content" style="width:75%;padding:10px;color:#094e6c;float:left;">
+
+	<h1>Message Identifiers</h1>
+	<ul>
+	<b>Select required message ID from pulldown list on the left,
+	<br>or enter the required messaged ID if known.</b>
+	</div>
+	<div id="footer" style="clear:both;text-align:center;">
+	Copyright &copy; 2017
+ Thales e-Security Inc.
+	</div>
+	</body>
+	</html> 

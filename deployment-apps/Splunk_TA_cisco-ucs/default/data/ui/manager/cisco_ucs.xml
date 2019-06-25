@@ -1,0 +1,12 @@
+<endpoint name="data/inputs/cisco_ucs" redirect="false" hideEnabledColumn="true" hidePermissionsColumn="true" hideActionsColumn="true">
+  <header>Manage Cisco UCS Inputs</header>
+
+  <introText> View and manage your Cisco UCS inputs in the Splunk Add-on for Cisco UCS configuration page. Click "New" to be redirected. </introText>
+
+  <elements>
+    <element name="spl-crtl_script" type="ciscoucstaskredirect">
+        <view name="create"/>
+        <view name="edit"/>
+    </element>
+  </elements>
+</endpoint>

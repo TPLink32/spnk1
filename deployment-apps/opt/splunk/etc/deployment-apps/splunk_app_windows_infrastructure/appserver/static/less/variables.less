@@ -1,0 +1,268 @@
+// Splunk: Variables
+// ==================================================
+// Variables to customize the look and feel of Bootstrap (splunk version)
+
+
+// STATIC PATHS
+// -------------------------
+@staticPath:        "/static";
+@staticImagePath:   "@{staticPath}/img";
+@staticFontPath:    "@{staticPath}/fonts";
+
+
+// COLOR PALETTE
+// -------------------------
+
+// Enterprise
+@splunkGray: 	         #97999B;
+@splunkGreen:            #65A637;
+
+// Light
+@splunkLiteOrange:       #F58220;
+
+// Grayscale - DO NOT USE DIRECTLY WHENEVER POSSIBLE!!! Use text, border or table variables instead.
+@black:                 #000;
+@grayDarker:            #222;
+@grayDark:              #333;
+@gray:                  #555;
+@grayLight:             #999;
+@grayLightMedium:       #ccc;
+@grayLighter:           #eee;
+@offWhite:              #f5f5f5;
+@white:                 #fff;
+
+// Accent colors
+@blue:                  #1e93c6; //sky
+@blueDark:              #3863a0;
+@green:                 #a2cc3e;
+@red:                   #d6563c;
+@yellow:                #f2b827;
+@yellowLight:           lighten(@yellow, 28%);
+@yellowLighter:         lighten(@yellow, 38%);
+@orange:                #ed8440;
+@pink:                  #cc5068;
+@purple:                #6a5c9e;
+@teal:                  #11a88b;
+
+@focusColor:            #52A8EC;
+
+
+// TYPOGRAPHY
+// -------------------------
+@baseFontSizeLarge:     16px;
+@baseFontSize:          12px;
+@baseFontSizeSmall:     11px;
+@baseLineHeight:        16px; // 18px;
+
+@baseFontFamily:        "Roboto", "Droid", "Helvetica Neue", Helvetica, Arial, sans-serif;
+@monoFontFamily:        'Droid Sans Mono', 'Consolas', 'Monaco', 'Courier New', Courier, monospace;
+
+@textColor:             #333;
+@textGrayDark:          #666;
+@textGray:              #999;
+@textDisabledColor:     #bbb;
+@placeholderText:       @textGray;
+
+@headingsFontFamily:    inherit; // empty to use BS default, @baseFontFamily
+@headingsFontWeight:    bold;    // instead of browser default, bold
+@headingsColor:         inherit; // empty to use BS default, @textColor
+
+@linkColor:             @blue ; // #08c;
+@linkColorHover:        @blueDark;
+
+
+// SCAFFOLDING
+// -------------------------
+@borderDarkColor: 		#999;
+@borderColor: 			#ccc;  
+@borderLightColor: 	    #d5d5d5; // aliases: @tableBorderColor @tableBorderColorVertical
+// also see: @interactiveBorderColor
+
+@baseBorderRadius:           4px;
+@containerBorderRadius:      2px;      //For containers without a wrapper
+@containerOuterBorderRadius: 3px;  //For for containers with a wrapper, like popdown
+@containerInnerBorderRadius: 3px;
+
+@bodyBackgroundColor:              #eee;
+@containerBackgroundColor:         @offWhite;
+@containerBackgroundGradientStart: #e0e0e0;
+
+@sideNavWidth: 300px;
+
+
+// Z-INDEX
+// -------------------------
+// If a variable does not suit your purpose, set a value relatively such as, @zindexModal +1
+@zindexHeaderTable:       406;
+@zindexDropdown:          1000;
+@zindexPopover:           1010;
+@zindexTooltip:           1020;
+@zindexFixedNavbar:       1030;
+@zindexSideNavBackdrop:   1032; // Splunk Lite
+@zindexSideNav:           1034; // Splunk Lite
+@zindexSideBarBackdrop:   1036; // Sidebar Component
+@zindexSideBar:           1038; // Sidebar Component
+@zindexModalBackdrop:     1040;
+@zindexModal:             1050;
+@zindexPopdown:           1060; // timerange popdown needs to be above modal + backdrop
+@zindexTooltip:           1070; // top interactive element
+@zindexDatePicker:        1070; // top interactive element
+@zindexModalNoConnection: 1080; // top uninteractive
+@zindexModalDisconnect:   1090; // top uninteractive
+
+
+// TABLES
+// -------------------------
+@tableBackground:                   transparent; // overall background-color
+@tableBackgroundHover:              #e4e4e4; // for hover
+@tableBackgroundAccent:             #f5f5f5; // for striping
+@tableBackgroundAccentHover:        #ebebeb; // for striping
+@tableBackgroundFocus:              saturate(fade(@focusColor, 12%), 100%);;
+@tableBorder:                       @borderLightColor; // table and cell border
+@tableBorderVertical:               @borderLightColor; // table and cell border
+@tableSortIconColor:                #bbb; // table and cell border
+@tableTextDisabledColor:            #7C7C7C;
+
+
+// BUTTONS
+// -------------------------
+@btnBoxShadowFocus:					0 0 8px fade(@focusColor, 60%);
+
+
+// FORMS
+// -------------------------
+@inputBackground:               @white;
+@inputBorder:                   @borderColor;
+@inputDisabledBackground:       @grayLighter;
+
+@warningText:             		darken(@yellow, 10%);
+@warningBackground:       		@yellowLighter;
+@warningBorder:           		darken(@yellow, 10%);
+
+@errorText:               		@red;
+@errorBackground:         		lighten(@red, 40%);
+@errorBorder:             		@red;
+
+@successText:             		@green;
+@successBackground:       		lighten(@green, 40%);
+@successBorder:           		@green;
+
+@infoText:                		#3a87ad;
+@infoBackground:          		#d9edf7;
+@infoBorder:              		darken(spin(@infoBackground, -10), 7%);
+
+
+// NAV BAR
+// -------------------------
+@navbarHeight:                    25px;
+@navbarBackground:                @black;
+
+
+// BASE INTERACTIVE
+// --------------------------
+// text
+@interactiveColor:                  #eee;
+// background
+@interactiveBackgroundColor:        @interactiveColor;
+@interactiveDisabledBackgroundColor:#e6e6e6;
+@interactiveGradientStartColor:     lighten(@interactiveBackgroundColor, 4%);
+@interactiveGradientEndColor:       @interactiveBackgroundColor;
+@interactiveBackgroundColorHover:   #f8f8f8;
+@interactiveGradientStartColorHover:@interactiveBackgroundColorHover;
+@interactiveGradientEndColorHover:  @interactiveBackgroundColorHover;
+// borders
+@interactiveBorderColor:            #bfbfbf;
+@interactiveBorderTopColor:         @interactiveBorderColor;
+@interactiveBorderBottomColor:      @interactiveBorderColor;
+@interactiveBorderColorHover:       lighten(@interactiveBorderColor, 3%);
+@interactiveBorderTopColorHover:    @interactiveBorderColorHover;
+@interactiveBorderBottomColorHover: @interactiveBorderColorHover;
+@interactiveBorderRadius:           @baseBorderRadius;
+// shadow
+@interactiveBoxShadow:              inset 0px 1px 0 lighten(@interactiveGradientStartColor, 2%);
+@interactiveBoxShadowHover:         0px 1px 1px rgba(0,0,0,0.08);
+@interactiveBoxShadowActive:        inset 0px 2px 2px rgba(0, 0, 0, 0.125);
+
+
+// BASE INTERACTIVE ERROR
+// --------------------------
+// text
+@interactiveErrorTextColor:              @errorText;
+// background
+@interactiveErrorBackgroundColor:        mix(@errorBackground, @red, 80%);
+@interactiveErrorGradientStartColor:     @interactiveErrorBackgroundColor;
+@interactiveErrorGradientEndColor:       mix(@errorBackground, @red, 60%);
+@interactiveErrorBackgroundColorHover:   mix(@errorBackground, @red, 90%);
+@interactiveErrorGradientStartColorHover:@interactiveErrorBackgroundColorHover;
+@interactiveErrorGradientEndColorHover:  mix(@errorBackground, @red, 70%);
+// borders
+@interactiveErrorBorderColor:            desaturate(mix(@errorBackground, @red, 20%), 30%);
+@interactiveErrorBorderTopColor:         @interactiveErrorBorderColor;
+@interactiveErrorBorderBottomColor:      @interactiveErrorBorderColor;
+@interactiveErrorBorderColorHover:       desaturate(mix(@errorBackground, @red, 25%), 30%);
+@interactiveErrorBorderTopColorHover:    @interactiveErrorBorderColorHover;
+@interactiveErrorBorderBottomColorHover: @interactiveErrorBorderColorHover;
+
+
+// PRIMARY BUTTONS
+// --------------------------
+// text
+@primaryTextColor:                  @white;
+// background
+@primaryBackgroundColor:            @splunkGreen;
+@primaryGradientStartColor:         @splunkGreen;
+@primaryGradientEndColor:           darken(@splunkGreen, 4%);
+@primaryBackgroundColorHover:       lighten(@splunkGreen, 10%);
+@primaryGradientStartColorHover:    spin(lighten(@splunkGreen, 5%), -5);
+@primaryGradientEndColorHover:      @splunkGreen;
+// borders
+@primaryBorderColor:                darken(@splunkGreen, 10%);
+@primaryBorderTopColor:             darken(@splunkGreen, 10%);
+@primaryBorderBottomColor:          darken(@splunkGreen, 10%);
+@primaryBorderColorHover:           spin(darken(@splunkGreen, 10%), -5);
+@primaryBorderTopColorHover:        spin(darken(@splunkGreen, 10%), -5);
+@primaryBorderBottomColorHover:     spin(darken(@splunkGreen, 10%), -5);
+// shadow
+@primaryBoxShadow:              inset 0px 1px 0 lighten(@primaryGradientStartColor, 2%);
+@primaryBoxShadowHover:         @interactiveBoxShadowHover;
+@primaryBoxShadowActive:        inset 0px 2px 2px rgba(0, 0, 0, 0.125);
+
+
+// PILL BUTTONS
+// --------------------------
+// text
+@pillTextColor:                     @linkColor;
+@pillTextColorHover:                @linkColorHover;
+// background
+@pillBackgroundColorHover:          fade(@black, 5%);
+@pillBackgroundColorFocus:          saturate(fade(@focusColor, 12%), 100%);
+
+
+// GRID
+// --------------------------
+// Default 940px grid
+@gridColumns:             12;
+@gridColumnWidth:         60px;
+@gridGutterWidth:         20px;
+@gridRowWidth:            (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
+// Fluid grid
+@fluidGridColumnWidth:    6.382978723%;
+@fluidGridGutterWidth:    2.127659574%;
+// Responsive Variables
+@responsive-screen-height: 700px;
+
+
+// SELECTORS FOR CUSTOMIZING SPECIFIC LOCALES
+// --------------------------
+@wideTextLocaleSelector: ~'body.locale-de';
+
+
+// BUILD COMMENT
+// --------------------------
+// Hide the Build Comment. The make file sets this to true.
+@buildComment: false; 
+
+// LEGACY BUILD
+// --------------------------
+// This is set to true when building the less for splunk components.
+@version5AndEarlier: false; 

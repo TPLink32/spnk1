@@ -1,0 +1,1 @@
+TTTTTTTT 10.66.128.63 ,f5_irule=Splunk-iRule-DNS_REQUEST,src_ip=10.66.128.62,dns_server_ip=10.66.128.63,src_geo_info=,question_name=bigip.splunk.com,question_class=IN,question_type=A,data_center=/Common/Data-Center-02,gtm_server=/Common/GTM-02,wideip=/Common/bigip.splunk.com,dns_len=34

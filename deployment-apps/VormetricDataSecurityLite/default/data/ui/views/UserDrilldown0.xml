@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<form>
+ <label>User Accesses</label>
+
+  <fieldset>
+	<input token="host"><label>Host Name</label></input>
+	<input token="uinfo"><label>User Info</label></input>
+  </fieldset>
+
+  <row> 
+	<table>
+	  <title>Select Guard Point and File Path</title>
+	  <searchString>sourcetype="rfc5424_syslog" host="$host$" uinfo="$uinfo$" sdid="CGP@21513" | lookup iotype act | top showperc=0 limit=0 uinfo,gp,filePath,iotype,sproc</searchString>
+	  <option name="count">20</option>
+	  <option name="displayRowNumbers">false</option>
+	  <option name="showPager">true</option>
+	  <drilldown>
+		<link>
+		  <![CDATA[
+			/app/VormetricDataSecurityLite/UserDrilldown1?form.host=$form.host$&form.uinfo=$row.uinfo$&form.iotype=$row.iotype$&form.gp=$row.gp$&form.filePath=$row.filePath$&earliest=$earliest$&latest=$latest$
+		  ]]>
+       </link>
+     </drilldown>   
+
+   </table>
+ </row>
+
+</form>

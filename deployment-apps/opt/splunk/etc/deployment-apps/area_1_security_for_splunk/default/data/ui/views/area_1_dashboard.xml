@@ -1,0 +1,184 @@
+<form>
+  <label>Area 1 Dashboard</label>
+  <description>Testing purposes dashboard</description>
+  <fieldset submitButton="false">
+	<input type="time" token="field5">
+  	<label></label>
+  	<default>
+    	<earliest>-24h@h</earliest>
+    	<latest>now</latest>
+  	</default>
+	</input>
+  </fieldset>
+  <row>
+	<panel>
+  	<title>Total Malicious Email</title>
+  	<single>
+    	<search>
+      	<query>index="area1_alerts" final_disposition=MALICIOUS | stats count</query>
+      	<earliest>$field5.earliest$</earliest>
+      	<latest>$field5.latest$</latest>
+    	</search>
+    	<option name="drilldown">all</option>
+    	<option name="height">108</option>
+    	<option name="refresh.display">progressbar</option>
+  	</single>
+	</panel>
+	<panel>
+  	<title>Total Malicious-BEC</title>
+  	<single>
+    	<search>
+      	<query>index="area1_alerts" final_disposition=Malicious-BEC | stats count</query>
+      	<earliest>$field5.earliest$</earliest>
+      	<latest>$field5.latest$</latest>
+    	</search>
+    	<option name="drilldown">none</option>
+    	<option name="refresh.display">progressbar</option>
+  	</single>
+	</panel>
+	<panel>
+  	<title>Total Spoof Email</title>
+  	<single>
+    	<search>
+      	<query>index="area1_alerts" final_disposition= SPOOF | stats count</query>
+      	<earliest>$field5.earliest$</earliest>
+      	<latest>$field5.latest$</latest>
+    	</search>
+    	<option name="drilldown">all</option>
+    	<option name="refresh.display">progressbar</option>
+  	</single>
+	</panel>
+	<panel>
+  	<title>Total Suspicious Email</title>
+  	<single>
+    	<search>
+      	<query>index="area1_alerts" final_disposition=SUSPICIOUS | stats count</query>
+      	<earliest>$field5.earliest$</earliest>
+      	<latest>$field5.latest$</latest>
+    	</search>
+    	<option name="drilldown">all</option>
+    	<option name="refresh.display">progressbar</option>
+  	</single>
+	</panel>
+  </row>
+  <row>
+	<panel>
+  	<chart>
+    	<search>
+      	<query>index="area1_alerts" | timechart count by final_disposition</query>
+      	<earliest>$field5.earliest$</earliest>
+      	<latest>$field5.latest$</latest>
+    	</search>
+    	<option name="charting.chart">area</option>
+    	<option name="charting.chart.showDataLabels">minmax</option>
+    	<option name="charting.chart.stackMode">stacked</option>
+    	<option name="charting.drilldown">all</option>
+    	<option name="refresh.display">progressbar</option>
+  	</chart>
+	</panel>
+  </row>
+  <row>
+	<panel>
+  	<title>Detected Email Breakdown</title>
+  	<chart>
+    	<search>
+      	<query>index="area1_alerts" | chart count over final_disposition</query>
+      	<earliest>$field5.earliest$</earliest>
+      	<latest>$field5.latest$</latest>
+    	</search>
+    	<option name="charting.chart">pie</option>
+    	<option name="charting.drilldown">all</option>
+    	<option name="refresh.display">progressbar</option>
+  	</chart>
+	</panel>
+	<panel>
+  	<title>Top Malicious Subjects</title>
+  	<chart>
+    	<search>
+      	<query>index="area1_alerts" final_disposition=MALICIOUS | chart count over subject</query>
+      	<earliest>$field5.earliest$</earliest>
+      	<latest>$field5.latest$</latest>
+    	</search>
+    	<option name="charting.axisTitleX.visibility">visible</option>
+    	<option name="charting.axisTitleY.visibility">visible</option>
+    	<option name="charting.axisTitleY2.visibility">visible</option>
+    	<option name="charting.chart">pie</option>
+    	<option name="charting.drilldown">all</option>
+    	<option name="charting.legend.placement">right</option>
+    	<option name="refresh.display">progressbar</option>
+    	<option name="trellis.enabled">0</option>
+  	</chart>
+	</panel>
+	<panel>
+  	<title>Top Malicious Reasons</title>
+  	<chart>
+    	<search>
+      	<query>index="area1_alerts" final_disposition=MALICIOUS | chart count over alert_reasons{}</query>
+      	<earliest>-24h@h</earliest>
+      	<latest>now</latest>
+    	</search>
+    	<option name="charting.chart">pie</option>
+    	<option name="charting.drilldown">none</option>
+  	</chart>
+	</panel>
+  </row>
+  <row>
+	<panel>
+  	<title>Malicious and Malicious-BEC Emails</title>
+  	<table>
+    	<search>
+      	<query>index="area1_alerts" AND (final_disposition=MALICIOUS OR final_disposition=MALICIOUS-BEC) | eval epochtime=strptime(ts, "%Y-%m-%dT%H:%M:%S")| eval Time=strftime(epochtime, "%d/%m/%Y - %H:%M:%S")| rename from as "From:" , "to{}" as "To:", subject as "Subject", "alert_reasons{}" as "Alert Reasons"|table Time, From:, To:, Subject, "Alert Reasons"</query>
+      	<earliest>$field5.earliest$</earliest>
+      	<latest>$field5.latest$</latest>
+    	</search>
+    	<option name="count">10</option>
+    	<option name="drilldown">row</option>
+    	<option name="refresh.display">progressbar</option>
+  	</table>
+	</panel>
+  </row>
+  <row>
+	<panel>
+  	<title>Attachment Type</title>
+  	<chart>
+    	<search>
+      	<query>index="area1_alerts" final_disposition="MALICIOUS" | chart count over attachments{}.content_type_computed</query>
+      	<earliest>$field5.earliest$</earliest>
+      	<latest>$field5.latest$</latest>
+    	</search>
+    	<option name="charting.chart">column</option>
+    	<option name="charting.drilldown">all</option>
+    	<option name="refresh.display">progressbar</option>
+  	</chart>
+	</panel>
+  </row>
+  <row>
+	<panel>
+  	<title>Events by Type and IP</title>
+  	<map>
+    	<search>
+      	<query>index="area1_alerts" | iplocation smtp_helo_server_ip | geostats count by final_disposition</query>
+      	<earliest>$field5.earliest$</earliest>
+      	<latest>$field5.latest$</latest>
+    	</search>
+    	<option name="drilldown">none</option>
+    	<option name="mapping.type">marker</option>
+    	<option name="refresh.display">progressbar</option>
+  	</map>
+	</panel>
+  </row>
+  <row>
+	<panel>
+  	<title>Events by Country</title>
+  	<map>
+    	<search>
+      	<query>index="area1_alerts" | iplocation smtp_helo_server_ip |stats count by Country | geom geo_countries featureIdField="Country"</query>
+      	<earliest>$field5.earliest$</earliest>
+      	<latest>$field5.latest$</latest>
+    	</search>
+    	<option name="drilldown">none</option>
+    	<option name="mapping.type">choropleth</option>
+  	</map>
+	</panel>
+  </row>
+</form>

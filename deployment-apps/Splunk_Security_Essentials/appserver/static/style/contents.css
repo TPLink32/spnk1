@@ -1,0 +1,96 @@
+.dashboard-row .dashboard-panel {
+    background: inherit;
+}
+
+.welcome-header {
+    width: 70%;
+    min-width: 371px;
+    font-size: 14px;
+}
+
+#rolePickerRow {
+    display: none;
+}
+
+#rolePickerControl {
+    margin: 0;
+}
+
+.showcase-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.showcase-list h3 {
+    margin-top: 0;
+}
+
+.showcase-list li {
+    padding: 10px;
+    margin: 10px;
+    width: 500px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.showcase-list-item-image {
+    height: 150px;
+    width: 150px;
+    border: 1px solid black;
+}
+
+.showcase-list-item-content {
+    display: inline-block;
+    width: 335px;
+    vertical-align: top;
+    margin-left: 10px;
+}
+
+.showcase-list-item-content p {
+    color: black;
+}
+
+.example-list li {
+    display: list-item;
+    padding: 0;
+    margin: 0;
+}
+
+.example-list ul {
+    list-style: initial;
+    margin: initial;
+}
+
+
+
+#rolePickerControl ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: inline;
+    background-color: #e6e6e6;
+}
+
+#rolePickerControl li {
+    float: left;
+}
+
+#rolePickerControl li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+#rolePickerControl li a:hover {
+    background-color: #cecece;
+}
+
+#rolePickerControl .activeshowcase {
+    background-color: #eeeeee;
+    font-weight: bold;
+}

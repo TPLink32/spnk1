@@ -1,0 +1,278 @@
+<form script="table_cell_highlighting.js,table_data_bar.js" stylesheet="table_cell_highlighting.css,table_data_bar.css">
+  <label>License Overview</label>
+  <description/>
+  <fieldset autoRun="true" submitButton="false">
+    <input type="dropdown" token="type" searchWhenChanged="true">
+      <label>Split-by</label>
+      <default>Internal_Log_Events.idx</default>
+      <choice value="Internal_Log_Events.idx">Index</choice>
+      <choice value="Internal_Log_Events.st">Sourcetype</choice>
+      <choice value="Internal_Log_Events.h">Host</choice>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <html>
+      <div id="usage_help">
+        <p/>This dashboard is intended to show the overall status of license utilization across the different  Splunk servers and data types.<p/>The dashboard provides a high level overview of overall license used today, by index, and trending over time by index/environment option. To gain deeper insights into Splunk's license and data volume consumption reference either<b>FireBrigade</b>or<b>S.o.S Splunk on Splunk</b>.</div>
+    </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Todays Overall License Usage (GB)</title>
+        <searchString>| tstats summariesonly=false sum(Internal_Log_Events.b) AS bytes from datamodel="Internal_Events" GROUPBY Internal_Log_Events.idx | eval gb=round(bytes/1024/1024/1024,2) | stats sum(gb) AS "Total GB"</searchString>
+        <earliestTime>@d</earliestTime>
+        <latestTime>now</latestTime>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.chart">fillerGauge</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.chart.rangeValues">["0","2","6","10"]</option>
+        <option name="charting.gaugeColors">[0x84E900,0xFFE800,0xBF3030]</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+      </chart>
+    </panel>
+    <panel>
+      <table>
+        <title>Total GB Ingested Today</title>
+        <searchString>| tstats summariesonly=false sum(Internal_Log_Events.b) AS bytes from datamodel="Internal_Events" WHERE [inputlookup all_servers.csv | search role=indexer | rename guid AS "Internal_Log_Events.i"| fields Internal_Log_Events.i]  GROUPBY $type$  | eval gb=round(bytes/1024/1024/1024,2) | stats sum(gb) AS "Total GB" by $type$ | rename Internal_Log_Events.idx AS Index  Internal_Log_Events.st AS "Source Type" Internal_Log_Events.h AS Host | sort - "Total GB"</searchString>
+        <earliestTime>@d</earliestTime>
+        <latestTime>now</latestTime>
+        <option name="list.drilldown">full</option>
+        <option name="list.wrap">1</option>
+        <option name="maxLines">5</option>
+        <option name="raw.drilldown">full</option>
+        <option name="rowNumbers">false</option>
+        <option name="table.drilldown">1</option>
+        <option name="table.wrap">1</option>
+        <option name="type">list</option>
+        <option name="wrap">true</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+    <panel>
+      <chart>
+        <title>Week on Week Usage - Current Day is Partial</title>
+        <searchString>| tstats summariesonly=true sum(Internal_Log_Events.b) AS bytes from datamodel="Internal_Events" WHERE [inputlookup all_servers.csv | search role=indexer | rename guid AS "Internal_Log_Events.i"| fields Internal_Log_Events.i] GROUPBY _time | eval marker=case( _time &lt; relative_time(now(), "-1w@w"), "Two Weeks Ago",     _time &lt; relative_time(now(), "@w"), "Last Week",     true(), "This Week")   | eval _time=case( _time &lt; relative_time(now(), "-1w@w"), _time+2*7*86400,      _time &lt; relative_time(now(), "@w"), _time+7*86400,      true(), _time)   | eval gb=bytes / 1024 / 1024 / 1024  | chart sum(gb) AS gbytes OVER _time BY marker  | fieldformat _time=strftime(_time, "%A")</searchString>
+        <earliestTime>-2w@w</earliestTime>
+        <latestTime>now</latestTime>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.chart">line</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">bottom</option>
+        <option name="charting.axisTitleY.text">GB Indexed</option>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <input type="time" searchWhenChanged="true">
+        <label/>
+        <default>
+          <earliestTime>@d</earliestTime>
+          <latestTime>now</latestTime>
+        </default>
+      </input>
+      <chart>
+        <title>License Usage (GB)</title>
+        <searchString>| tstats summariesonly=false sum(Internal_Log_Events.b) AS bytes from datamodel="Internal_Events" WHERE [inputlookup all_servers.csv | search role=indexer | rename guid AS "Internal_Log_Events.i"| fields Internal_Log_Events.i] GROUPBY _time $type$ span=auto | eval gb=bytes/1024/1024/1024 | timechart sum(gb) by $type$</searchString>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Todays Overall Ingestion by Index/Indexer (GB)</title>
+        <searchString>|tstats summariesonly=false sum(Internal_Log_Events.b) AS bytes from datamodel="Internal_Events" WHERE [inputlookup all_servers.csv | search role=indexer | rename guid AS "Internal_Log_Events.i"| fields Internal_Log_Events.i] GROUPBY _time $type$ Internal_Log_Events.i span=auto | eval gb=round(bytes/1024/1024/1024,2) | lookup all_servers.csv guid AS "Internal_Log_Events.i" OUTPUTNEW host | chart sum(gb) over host by $type$</searchString>
+        <earliestTime>@d</earliestTime>
+        <latestTime>now</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">-90</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.text">GB</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">log</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.axisTitleY2.text">Splunk Indexing Limit</option>
+        <option name="charting.axisY2.maximumNumber">250</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <input type="time" token="field1" searchWhenChanged="true">
+        <label/>
+        <default>
+          <earliestTime>-7d@h</earliestTime>
+          <latestTime>now</latestTime>
+        </default>
+      </input>
+      <chart>
+        <title>Data Distribution by Indexer</title>
+        <searchString>| tstats prestats=t count WHERE index=* [|inputlookup all_servers.csv | search role=*indexer* | rename host AS splunk_server | fields splunk_server ] BY splunk_server, _time span=1d | timechart limit=100 span=1d count by splunk_server</searchString>
+        <earliestTime>$field1.earliest$</earliestTime>
+        <latestTime>$field1.latest$</latestTime>
+        <earliest>$field1.earliest$</earliest>
+        <latest>$field1.latest$</latest>
+        <earliest>$field1.earliest$</earliest>
+        <latest>$field1.latest$</latest>
+        <option name="charting.chart">column</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.text">Events</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Event Count Ingested by Indexing Delay(s) - Today</title>
+        <searchString>| tstats count max(_time) as t max(_indextime) as it where index=* by _time | eval delay=it-t | timechart sum(count) avg(delay) as delay(s)</searchString>
+        <earliest>@d</earliest>
+        <latest>now</latest>
+        <option name="charting.chart">column</option>
+        <option name="charting.axisY2.enabled">true</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.overlayFields">delay(s)</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisTitleY.text">Events</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table id="highlight">
+        <title>Matrix Overview - Index Capacity/Usage</title>
+        <searchString>| rest /services/data/indexes search="totalEventCount!=0" | eval coldPath.maxDataSizeMB=if('coldPath.maxDataSizeMB' = 0, null(), 'coldPath.maxDataSizeMB') | eval homePath.maxDataSizeMB=if('homePath.maxDataSizeMB' = 0, null(), 'homePath.maxDataSizeMB') | eval roof=min((coalesce('homePath.maxDataSizeMB', 4294967295) +                  coalesce('coldPath.maxDataSizeMB', 4294967295)),                 maxTotalDataSizeMB) | eval span=tostring(currentDBSizeMB) + " / " +     tostring(roof) + " MB" | eval Percent=tostring(round(currentDBSizeMB * 100 / roof)) + "%"|  search [inputlookup all_servers.csv | search role=indexer | rename host AS splunk_server | fields splunk_server] | stats first(span) AS "Capacity vs Limit" by splunk_server title minTime maxTime Percent | rename splunk_server AS Indexer title AS Index minTime AS "Oldest Event" maxTime AS "Newest Event" | table Indexer Index "Capacity vs Limit" "Oldest Event" "Newest Event" Percent | sort - Percent</searchString>
+        <earliestTime>0</earliestTime>
+        <latestTime>now</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">none</option>
+        <option name="count">100</option>
+        <option name="dataOverlayMode">none</option>
+      </table>
+    </panel>
+    <panel>
+      <table id="df">
+        <title>Disk Usage</title>
+        <searchString>| tstats max(Introspection.Disk_Objects.Capacity) AS Capacity max(Introspection.Disk_Objects.Avail) AS Avail max(Introspection.Disk_Objects.Used) AS Used max(Introspection.Disk_Objects.UsedPct) AS UsedPct FROM datamodel=Introspection_Usage WHERE nodename=Introspection.Disk_Objects [inputlookup all_servers.csv | fields host] GROUPBY _time host Introspection.data.mount_point | eventstats max(_time) AS latest by host | where _time=latest | lookup all_servers.csv host OUTPUT role | rename Introspection.data.mount_point AS Mount role AS Role |table host Role Mount Capacity Avail Used UsedPct | sort - UsedPct</searchString>
+        <earliestTime>@d</earliestTime>
+        <latestTime>now</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="count">100</option>
+      </table>
+    </panel>
+  </row>
+</form>

@@ -1,0 +1,55 @@
+<form>
+  <label>Debug</label>
+  <description></description>
+  <fieldset autoRun="true" submitButton="false">
+    <input type="time" searchWhenChanged="true">
+      <default/>
+    </input>
+  </fieldset>
+
+  <row>
+    <table>
+      <title>Debug logs (Knowledgebase)</title>
+      <searchString>index=qualys "QualysSplunkPopulator" sourcetype=qualys_knowledgebase</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <fields>_time,_raw</fields>
+      <option name="linkView">search</option>
+      <option name="wrap">true</option>
+      <option name="rowNumbers">false</option>
+      <option name="dataOverlayMode">none</option>
+      <option name="drilldown">row</option>
+      <option name="count">50</option>
+    </table>
+      <table>
+      <title>Debug logs(Detection)</title>
+      <searchString>index=qualys "QualysSplunkPopulator" source=qualys_detection_api</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <fields>_time,_raw</fields>
+      <option name="linkView">search</option>
+      <option name="wrap">true</option>
+      <option name="rowNumbers">false</option>
+      <option name="dataOverlayMode">none</option>
+      <option name="drilldown">row</option>
+      <option name="count">50</option>
+    </table>
+  </row>
+    <row>
+    <table>
+      <title>Errors</title>
+      <searchString>index=_internal qualyssplunkpopulator AND "ERROR" sourcetype=splunkd</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <fields>_time,_raw</fields>
+      <option name="linkView">search</option>
+      <option name="wrap">true</option>
+      <option name="rowNumbers">false</option>
+      <option name="dataOverlayMode">none</option>
+      <option name="drilldown">row</option>
+      <option name="count">50</option>
+    </table>
+  </row>
+</form>
+
+

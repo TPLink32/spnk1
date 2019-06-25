@@ -1,0 +1,17 @@
+<nav search_view="search" color="#666699">
+  <view name="health_status" default='true'/>
+  <view name="license_usage" />
+  <view name="resource_usage" />
+  <collection label="Searches" >
+  <view name="search_activity" />
+  <view name="search_detail" />
+  <view name="scheduler_activity" />
+  <view name="saved_search_detail" />
+  </collection>
+  <view name="user_activity" />
+  <view name="indexes" />
+  <view name="indexes_and_fields" />
+  <view name="deployment_status" />
+  <view name="search"/>
+  <view name="pivot"/>
+</nav>

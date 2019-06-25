@@ -1,0 +1,75 @@
+<form>
+  <label>Disk Information</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="dropdown" token="HostMonitoringHost" searchWhenChanged="true">
+      <label>Host</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_hostmon_system  | dedup Host | sort Host</query>
+      </search>
+      <fieldForLabel>Host</fieldForLabel>
+      <fieldForValue>Host</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="FileSystem" searchWhenChanged="true">
+      <label>File System</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_hostmon_fs_details  | dedup FileSystem | sort FileSystem</query>
+      </search>
+      <fieldForLabel>FileSystem</fieldForLabel>
+      <fieldForValue>FileSystem</fieldForValue>
+      <default>*</default>
+    </input>
+    <input type="dropdown" token="DriveType" searchWhenChanged="true">
+      <label>Type</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_hostmon_fs_details  | search FileSystem="$FileSystem$" | dedup DriveType | sort DriveType</query>
+      </search>
+      <fieldForLabel>DriveType</fieldForLabel>
+      <fieldForValue>DriveType</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="FreeSpacePct" searchWhenChanged="true">
+      <label>Free Space %</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_hostmon_fs_details  | search FileSystem="$FileSystem$" DriveType="$DriveType$" | dedup FreeSpacePct | sort FreeSpacePct</query>
+      </search>
+      <fieldForLabel>FreeSpacePct</fieldForLabel>
+      <fieldForValue>FreeSpacePct</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="TotalSpaceGB" searchWhenChanged="true">
+      <label>Total Space (GB)</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_hostmon_fs_details  | search FileSystem="$FileSystem$" DriveType="$DriveType$" FreeSpacePct="$FreeSpacePct$" | dedup TotalSpaceGB | sort TotalSpaceGB</query>
+      </search>
+      <fieldForLabel>TotalSpaceGB</fieldForLabel>
+      <fieldForValue>TotalSpaceGB</fieldForValue>
+      <initialValue>*</initialValue>
+      <default>*</default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Disk Information</title>
+        <search>
+          <query>eventtype=hostmon_windows Type=Disk host="$HostMonitoringHost$" FileSystem="$FileSystem$" DriveType="$DriveType$" | dedup host, Name | eval FreeSpacePct=round(FreeSpaceKB/TotalSpaceKB*100) | eval TotalSpaceGB=round(TotalSpaceKB/1024/1024) | eval FreeSpaceGB=round(FreeSpaceKB/1024/1024) | search FreeSpacePct="$FreeSpacePct$" TotalSpaceGB="$TotalSpaceGB$" | dedup host, Name, DriveType, TotalSpaceGB, FreeSpaceGB, FreeSpacePct | table host, Name, DriveType, TotalSpaceGB, FreeSpaceGB, FreeSpacePct</query>
+          <earliest>0</earliest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>

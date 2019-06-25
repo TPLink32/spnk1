@@ -1,0 +1,55 @@
+/* remove blue backgrounds */
+#dashboard-main .blue-bg {
+	background: none;
+
+}
+
+#dashboard-main.content-padding {
+	padding-left: inherit;
+}
+
+#dashboard-sub, .content-padding .row {
+	border: none;
+	border-left-color: transparent;
+	border-width: 0;
+}
+
+#dashboard-title-row .pull-right {
+	display: none;
+}
+
+#dashboard-sub .nav-pills > li {
+	border-left: none;
+	margin-left: 3px;
+	margin-top: 3px;
+}
+
+#dashboard-main div.stripe-bg {
+	border-width: 0;
+	background-color: transparent;
+	background-size: 0;
+	background-image: none;
+}
+
+#dashboard-main .panel-menu, #dashboard-main .panel-menu > .btn {
+	cursor: inherit;
+
+}
+
+.btn-draggable::before {
+	position: relative;
+	width: 0;
+	background: none;
+	top: 0;
+	left: 0;
+	opacity: inherit;
+}
+
+i.icon-chart-pie {
+	display: none;
+}
+
+.select2-container-multi .select2-choices {
+	max-height: 200px;
+	overflow-y: scroll;
+}

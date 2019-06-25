@@ -1,0 +1,29 @@
+<form>
+  <label>Subnet Affinity Problems</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="Time" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Subnet Affinity Problems</title>
+        <search>
+          <query>eventtype=msad-subnet-affinity|stats count by host,src_domain,src_host,src_ip|sort -count|table host,src_domain,src_host,src_ip|rename host as "Reporting Host", src_domain as "Reporting Domain", src_host as "Problem Host", src_ip as "Problem IP"</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">cell</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>

@@ -1,0 +1,28 @@
+vendor_action,action
+Message done,delivered
+Bounced,blocked
+Double bounce,blocked
+Quarantined,quarantined
+Message aborted,blocked
+Delayed,unknown
+Release,delivered
+Connection Error,blocked
+tls_failed,unknown
+tls_success,unknown
+DNS Error,unknown
+DNS Temporary Failure,unknown
+DNS failure,unknown
+ACCEPT,unknown
+REJECT,unknown
+RELAY,unknown
+Dropping connection,blocked
+sender rejected,blocked
+receive_failed,blocked
+recipient_rejected,blocked
+released,unknown
+file_scan_error,unknown
+done,delivered
+aborted,blocked
+mid_rewritten,unknown
+mid_generated,unknown
+mid_split,unknown

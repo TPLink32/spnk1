@@ -1,0 +1,143 @@
+<nav color="#94B6E1">
+    <view name="default" default="true"/>
+    <a name="home" href="/dj/splunk_app_windows_infrastructure/home">Overview</a>
+    <collection label="Windows">
+        <a name="home" href="/dj/splunk_app_windows_infrastructure/windows/home">Windows Overview</a>
+        <divider/>
+        <a name="event" href="/dj/splunk_app_windows_infrastructure/windows/event">Event Monitoring</a>
+        <a name="performance" href="/dj/splunk_app_windows_infrastructure/windows/performance">Performance Monitoring</a>
+        <collection label="Applications and Updates">
+            <a name="applicationcrashes" href="/dj/splunk_app_windows_infrastructure/windows/applicationcrashes">Application Crashes</a>
+            <a name="applicationinstalls" href="/dj/splunk_app_windows_infrastructure/windows/applicationinstalls">Application Installs</a>
+            <a name="windowsupdate" href="/dj/splunk_app_windows_infrastructure/windows/windowsupdate">Windows Update</a>
+        </collection>
+        <collection label="Host Monitoring">
+            <a name="hostmonitoringoverview" href="/dj/splunk_app_windows_infrastructure/windows/hostmonitoring">Hosts Overview</a>
+            <a name="hostinventory" href="/dj/splunk_app_windows_infrastructure/windows/HostInventory">Host Inventory</a>
+            <a name="hostmonitoringoperations" href="/dj/splunk_app_windows_infrastructure/windows/operationsdashboard">Host Monitoring Operations</a>
+            <a name="hostmonitoringdisk" href="/dj/splunk_app_windows_infrastructure/windows/diskinformation">Disk Information</a>
+            <a name="hostmonitoringprocesses" href="/dj/splunk_app_windows_infrastructure/windows/processes">Processes</a>
+            <a name="hostmonitoringservices" href="/dj/splunk_app_windows_infrastructure/windows/services">Services</a>
+        </collection>
+        <collection label="Network Monitoring">
+            <a name="networkmonitoringoverview" href="/dj/splunk_app_windows_infrastructure/windows/networkmonitoring">Network Activity</a>
+            <a name="networkmonitoringoperations" href="/dj/splunk_app_windows_infrastructure/windows/networkmonitoringoperations">Top Hosts and Processes</a>
+        </collection>
+        <collection label="Print Monitoring">
+            <a name="printmonitoringinformation" href="/dj/splunk_app_windows_infrastructure/windows/printmonitoring">Printers Overview</a>
+            <a name="printmonitoringoperations" href="/dj/splunk_app_windows_infrastructure/windows/printmonitoringoperations">Top Printers and Users</a>
+            <a name="printmonitoringjobbrowser" href="/dj/splunk_app_windows_infrastructure/windows/printmonitoringjobbrowser">Print Job Viewer</a>
+        </collection>
+    </collection>
+    <collection label="Active Directory">
+        <a name="ops_topology" href="/dj/splunk_app_windows_infrastructure/ad/ops_topology">Active Directory Overview</a>
+        <divider/>
+        <collection label="Domains">
+            <a name="ops_healthissues" href="/dj/splunk_app_windows_infrastructure/ad/ops_healthissues">Health Issues</a>
+            <a name="ops_subnet_affinity" href="/dj/splunk_app_windows_infrastructure/ad/ops_subnet_affinity">Subnet Affinity Problems</a>
+            <a name="ops_replication" href="/dj/splunk_app_windows_infrastructure/ad/ops_replication">Replication Issues</a>
+            <a name="performance" href="/dj/splunk_app_windows_infrastructure/ad/performance">Performance</a>
+        </collection>
+        <collection label="Domain Controllers">
+            <a name="ops_domain_status" href="/dj/splunk_app_windows_infrastructure/ad/ops_domain_status">Domain Status</a>
+            <a name="ops_site_status" href="/dj/splunk_app_windows_infrastructure/ad/ops_site_status">Site Status</a>
+            <a name="ops_dc_status" href="/dj/splunk_app_windows_infrastructure/ad/ops_dc_status">DC Status</a>
+        </collection>
+        <collection label="DNS">
+            <a name="ops_dns_status" href="/dj/splunk_app_windows_infrastructure/ad/ops_dns_status">DNS Status</a>
+            <a name="ops_dns_server_status" href="/dj/splunk_app_windows_infrastructure/ad/ops_dns_server_status">DNS Server Status</a>
+            <a name="ops_dns_zoneinfo" href="/dj/splunk_app_windows_infrastructure/ad/ops_dns_zoneinfo">DNS Zone Information</a>
+            <a name="ops_dns_performance" href="/dj/splunk_app_windows_infrastructure/ad/ops_dns_performance">DNS Performance</a>
+            <collection label="Reports">
+                <saved source="unclassified" match="DNS:"/>
+            </collection>
+        </collection>
+        <divider/>
+        <collection label="Users">
+            <a name="sec_user_utilization" href="/dj/splunk_app_windows_infrastructure/ad/sec_user_utilization">User Overview</a>
+            <a name="audit_user" href="/dj/splunk_app_windows_infrastructure/ad/audit_user">User Audit</a>
+            <a name="sec_admin_audit" href="/dj/splunk_app_windows_infrastructure/ad/sec_admin_audit">Administrator Audit</a>
+            <a name="chg_users" href="/dj/splunk_app_windows_infrastructure/ad/chg_users">User Record Changes</a>
+            <a name="sec_logon_fail" href="/dj/splunk_app_windows_infrastructure/ad/sec_logon_fail">Failed Logons</a>
+            <a name="sec_logon_anomalies" href="/dj/splunk_app_windows_infrastructure/ad/sec_logon_anomalies">Anomalous Logons</a>
+            <collection label="User Reports">
+                <a name="secrpt_account_all" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_account_all">All</a>
+                <a name="secrpt_account_new" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_account_new">New</a>
+                <a name="secrpt_account_deleted" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_account_deleted">Deleted</a>
+                <a name="secrpt_account_active" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_account_active">Active</a>
+                <a name="secrpt_account_inactive" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_account_inactive">Inactive</a>
+                <a name="secrpt_account_unused" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_account_unused">Unused</a>
+                <a name="secrpt_account_disabled" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_account_disabled">Disabled</a>
+                <a name="secrpt_account_noexpiry" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_account_noexpiry">Non-expiring</a>
+                <a name="secrpt_account_nopasswd" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_account_nopasswd">Password Not Required</a>
+                <a name="secrpt_account_nopasswdexpiry" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_account_nopasswdexpiry">No Password Expiry</a>
+                <a name="secrpt_account_smartcard_notreq" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_account_smartcard_notreq">Smartcard Not Required</a>
+                <a name="secrpt_account_smartcard_req" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_account_smartcard_req">Smartcard Required</a>
+                <a name="secrpt_account_passwdtooold" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_account_passwdtooold">Password Too Old</a>
+                <a name="secrpt_account_nomanager" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_account_nomanager">No Manager</a>
+                <a name="secrpt_account_sensitive" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_account_sensitive">Sensitive</a>
+            </collection>
+        </collection>
+        <collection label="Computers">
+            <a name="audit_computer" href="/dj/splunk_app_windows_infrastructure/ad/audit_computer">Computer Audit</a>
+            <a name="chg_assets" href="/dj/splunk_app_windows_infrastructure/ad/chg_assets">Computer Changes</a>
+             <collection label="Computer Reports">
+                <a name="secrpt_computer_all" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_computer_all">All</a>
+                <a name="secrpt_computer_alldc" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_computer_alldc">All Domain Controllers</a>
+                <a name="secrpt_computer_new" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_computer_new">New</a>
+                <a name="secrpt_computer_deleted" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_computer_deleted">Deleted</a>
+                <a name="secrpt_computer_active" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_computer_active">Active</a>
+                <a name="secrpt_computer_inactive" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_computer_inactive">Inactive</a>
+                <a name="secrpt_computer_unused" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_computer_unused">Unused</a>
+                <a name="secrpt_computer_disabled" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_computer_disabled">Disabled</a>
+                <a name="secrpt_computer_trusted" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_computer_trusted">Trusted</a>
+                <a name="secrpt_computer_nomanager" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_computer_nomanager">No Manager</a>
+            </collection>
+        </collection>
+        <collection label="Groups">
+            <a name="audit_group" href="/dj/splunk_app_windows_infrastructure/ad/audit_group">Group Audit</a>
+            <a name="chg_groupchange" href="/dj/splunk_app_windows_infrastructure/ad/chg_groupchange">Group Changes</a>
+            <collection label="Security Group Reports">
+                <a name="secrpt_group_all" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_group_all">All</a>
+                <a name="secrpt_group_new" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_group_new">New</a>
+                <a name="secrpt_group_deleted" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_group_deleted">Deleted</a>
+                <a name="secrpt_group_changed" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_group_changed">Changed</a>
+                <a name="secrpt_group_empty" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_group_empty">Empty</a>
+                <a name="secrpt_group_large" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_group_large">Large</a>
+                <a name="secrpt_group_nested" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_group_nested">Nested</a>
+                <a name="secrpt_group_nomanager" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_group_nomanager">No Manager</a>
+            </collection>
+        </collection>
+        <collection label="Group Policy">
+            <a name="audit_gpo" href="/dj/splunk_app_windows_infrastructure/ad/audit_gpo">Group Policy Audit</a>
+            <a name="chg_gpo" href="/dj/splunk_app_windows_infrastructure/ad/chg_gpo">Group Policy Changes</a>
+            <collection label="Group Policy Object Reports">
+                <a name="secrpt_gpo_all" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_gpo_all">All</a>
+                <a name="secrpt_gpo_new" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_gpo_new">New</a>
+                <a name="secrpt_gpo_deleted" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_gpo_deleted">Deleted</a>
+                <a name="secrpt_gpo_disabled" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_gpo_disabled">Disabled</a>
+            </collection>
+        </collection>
+        <collection label="Organizational Units">
+            <a name="audit_ou" href="/dj/splunk_app_windows_infrastructure/ad/audit_ou">Organizational Unit Audit</a>
+            <collection label="Organizational Unit Reports">
+                <a name="secrpt_ou_all" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_ou_all">All</a>
+                <a name="secrpt_ou_new" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_ou_new">New</a>
+                <a name="secrpt_ou_deleted" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_ou_deleted">Deleted</a>
+                <a name="secrpt_ou_nomanager" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_ou_nomanager">No Manager</a>
+                <a name="secrpt_ou_gpolink" href="/dj/splunk_app_windows_infrastructure/ad/secrpt_ou_gpolink">GPO Linked</a>
+            </collection>
+        </collection>
+    </collection>
+    <collection label="Dashboards">
+        <a name="palettedashboards" href="/dj/splunk_app_windows_infrastructure/palette/">View Dashboards</a>
+        <divider/>
+        <a name="palettebuilder" href="/dj/splunk_app_windows_infrastructure/palette/_new/">Create New Dashboard</a>
+    </collection>
+    <a name="search" href="/app/splunk_app_windows_infrastructure/search">Search</a>
+    <collection label="Tools and Settings">
+        <view name="setup"/>
+        <a name="lookupbuilder" href="/dj/splunk_app_windows_infrastructure/lookupbuilder">Build Lookups</a>
+        <a name="lookupmigrator" href="/dj/splunk_app_windows_infrastructure/lookupmigrator">Migrate Lookups to KVStore</a>
+    </collection>
+</nav>

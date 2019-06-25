@@ -1,0 +1,65 @@
+<form>
+    <label>Search for Vulnerabilities</label>
+    <description>Enter QID or Vulnerability Title text to search for affected Hosts</description>
+    <fieldset submitButton="true">
+        <input type="text" token="vuln_token">
+            <label>QID or Vuln Name</label>
+
+        </input>
+        <input type="dropdown" token="type">
+            <label>Status</label>
+            <choice value="*">All</choice>
+            <choice value="ACTIVE">Active</choice>
+            <choice value="FIXED">Fixed</choice>
+            <choice value="NEW">New</choice>
+            <choice value="RE-OPENED">Re-opened</choice>
+            <choice value="CLOSED">Closed</choice>
+            <prefix>STATUS=</prefix>
+            <selectFirstChoice>true</selectFirstChoice>
+
+        </input>
+        <input type="radio" token="patch">
+            <label>Patchable</label>
+            <choice value="">Either</choice>
+            <choice value="| where PATCHABLE=&quot;YES&quot;">Yes</choice>
+            <choice value="| where PATCHABLE=&quot;NO&quot;">No</choice>
+            <selectFirstChoice>true</selectFirstChoice>
+        </input>
+        <input type="radio" token="t_type">
+            <label>Type</label>
+            <choice value="">All</choice>
+            <choice value="TYPE=&quot;CONFIRMED&quot;">Confirmed</choice>
+            <choice value="TYPE=&quot;POTENTIAL&quot;">Potential</choice>
+            <selectFirstChoice>true</selectFirstChoice>
+        </input>
+        <input type="time" searchWhenChanged="true" token="time_tok">
+            <label>Select time range</label>
+            <default>
+                <earliest>-7d@h</earliest>
+                <latest>now</latest>
+            </default>
+        </input>
+    </fieldset>
+    <row>
+        <panel>
+            <table>
+                <title>Details on Affected Devices</title>
+                <search>
+                    <query>index=qualys HOSTVULN $type$ $t_type$ | dedup HOST_ID, QID | lookup qualys_kb_lookup QID
+                        $patch$ | search
+                        TITLE="*$vuln_token$*" OR QID="$vuln_token$" | eval
+                        Found=strftime(strptime(FIRST_FOUND_DATETIME,"%Y-%m-%d"),"%m/%d/%Y") | stats list(TITLE) as
+                        Title, by QID, IP, DNS, OS, Found, STATUS
+                    </query>
+                    <earliest>$time_tok.earliest$</earliest>
+                    <latest>$time_tok.latest$</latest>
+                </search>
+                <option name="wrap">true</option>
+                <option name="rowNumbers">false</option>
+                <option name="drilldown">cell</option>
+                <option name="dataOverlayMode">none</option>
+                <option name="count">25</option>
+            </table>
+        </panel>
+    </row>
+</form>

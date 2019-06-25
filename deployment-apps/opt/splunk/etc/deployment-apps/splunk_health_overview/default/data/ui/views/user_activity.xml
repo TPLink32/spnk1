@@ -1,0 +1,169 @@
+<form>
+  <label>User Activity</label>
+  <description></description>
+  <fieldset submitButton="false">
+    <input type="dropdown" token="host" searchWhenChanged="true">
+      <label>Search Head</label>
+      <selectFirstChoice>true</selectFirstChoice>
+      <populatingSearch fieldForLabel="host" fieldForValue="host">|inputlookup all_servers.csv | search role=*search* | dedup host| fields host  | sort + host</populatingSearch>
+      <fieldForLabel>host</fieldForLabel>
+      <fieldForValue>host</fieldForValue>
+    </input>
+    <input type="time" token="time" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliestTime>@d</earliestTime>
+        <latestTime>now</latestTime>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <html>
+      <div id="usage_help">
+        <p/>This dashboard is intended to illustrate user activity and usage across your Splunk Search Head(s).
+        <p/>Use the input to choose the Search Heads you would like to include results from and the timerange picker to select the dates.
+        
+        
+        </div>
+        </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Users Currently Logged In</title>
+        
+          <searchString>| rest splunk_server=* /services/authentication/httpauth-tokens | search userName!=splunk-system-user |stats max(updated) AS "Last Activity" values(splunk_server) AS Host by userName | rename userName AS User</searchString>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+   
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Unique User Activity Per Search Head</title>
+        <searchString>index=_internal host=$host$ sourcetype=splunkd_access "/services/search/jobs" | kv access-extractions | search uri=/services/search/jobs/* user!="-"| timechart dc(user) by host</searchString>
+        <earliestTime>$time.earliest$</earliestTime>
+        <latestTime>$time.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.text">Count</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">line</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">bottom</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Search Activity Run-Time by Host</title>
+        <searchString>index=_internal host=$host$ sourcetype=splunkd_access "/services/search/jobs" | kv access-extractions | search uri=/services/search/jobs/* user!="-"| rex "(?&lt;run_time&gt;\d+)ms" | timechart eval(sum(run_time)/1000) by host</searchString>
+        <earliestTime>$time.earliest$</earliestTime>
+        <latestTime>$time.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisTitleY.text">Seconds</option>
+      </chart>
+    </panel>
+    <panel>
+      <input type="time" token="field3" searchWhenChanged="true">
+        <label></label>
+        <default>
+          <earliestTime>@mon</earliestTime>
+          <latestTime>now</latestTime>
+        </default>
+      </input>
+      <table>
+        <title>Total Unique Users Active in Splunk</title>
+        <searchString>index=_internal sourcetype=splunkd_access "/services/search/jobs" user!=splunk-system-user | kv access-extractions |search uri=/services/search/jobs/* user!="-"| stats dc(user) AS "Unique Users" by host  | rename host AS "Search Head" | addcoltotals | sort - "Unique Users" | fillnull value=Total</searchString>
+        <earliestTime>$field3.earliest$</earliestTime>
+        <latestTime>$field3.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>View Hits Over Time</title>
+        <searchString>index=_internal host=$host$ source=*web_access.log* /app/  | rex "GET /[^/]+/app/(?&lt;app_view&gt;[^/ ?]+/[^/ ?]+) " | timechart limit=15 usenull=f count by app_view</searchString>
+        <earliestTime>$time.earliest$</earliestTime>
+        <latestTime>$time.latest$</latestTime>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisStart</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+    <panel>
+      <table>
+        <title>Top Visited Views</title>
+        <searchString>index=_internal host=$host$ source=*web_access.log* /app/ | rex "GET /[^/]+/app/(?&lt;app_view&gt;[^/ ?]+/[^/ ?]+) " | rename app_view AS "App View" | top limit=20 host   "App View"</searchString>
+        <earliestTime>$time.earliest$</earliestTime>
+        <latestTime>$time.latest$</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>

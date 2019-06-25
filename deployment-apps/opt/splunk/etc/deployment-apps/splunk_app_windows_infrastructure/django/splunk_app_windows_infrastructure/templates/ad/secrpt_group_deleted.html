@@ -1,0 +1,31 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Security Groups: Deleted | Splunk{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+
+{% endblock css %}
+
+{% block content %}
+   <div>
+        <div class="dashboard-body container-fluid main-section-body" id="splunk-app-microsoft-panel-container">
+            <div class="dashboard-row">
+                <div class="dashboard-cell span-full" id="splunk-app-microsoft-inputs">
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content%}
+
+{% block js %}    
+    <script>
+        requirejs.config({ urlArgs: "bust=267225" });
+require(['jquery', 'splunk_app_windows_infrastructure/paletterenderer'], function($, renderer) {
+            renderer.render($('#splunk-app-microsoft-panel-container'), "ActiveDirectory.SecurityGroups:Deleted810");
+        });
+    </script>
+{% endblock js %}

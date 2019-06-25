@@ -1,0 +1,29 @@
+<nav search_view="search" color="#65A637">
+  <view name="home" default="true" />
+  <collection label="Inventory">
+     <view name="inventory" />
+     <view name="resource_summary" />
+     <view name="default"/>
+     <a href="/dj/cisco-app-Nexus-9k/networktopology">Network Topology</a>
+  </collection>
+  <view name="nexus9k_power_details" />
+  <collection label="Performance">
+     <view name="interfaces" />
+     <view name="single_interface"/>
+  </collection>
+  <collection label="Switching">
+     <view name="cdp_neighbor" />
+  </collection>
+  <view name="temperature" />
+  <view name="auditing" />
+  <view name="search" />
+    <collection label="Custom Reports">
+     <view source="unclassified" match="report" />
+  </collection>
+  <collection label="Help">
+  <a href="/dj/cisco-app-Nexus-9k/setup_guide">Setup Guide</a>
+  <a href="/dj/cisco-app-Nexus-9k/howtocustom">NX-API collector</a>
+
+  </collection>
+  
+</nav>

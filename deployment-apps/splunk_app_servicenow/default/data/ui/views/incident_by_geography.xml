@@ -1,0 +1,90 @@
+<form script="dashboard_entry.js" stylesheet="single_decorations.css">
+  <label>Open Incidents by Geography</label>
+  <fieldset autoRun="true" submitButton="false">
+    <input id="time" type="time" searchWhenChanged="true">
+      <default>
+        <earliestTime>-30d@d</earliestTime>
+        <latestTime>now</latestTime>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <single>
+        <title>Current Average Incident Resolution Time (h)</title>
+        <search>
+          <query>eventtype=snow_incident | dedup sys_id  | search state=7  | eval closureTime=(strptime(closed_at,"%Y-%m-%d %H:%M:%S")-strptime(sys_created_on,"%Y-%m-%d %H:%M:%S"))/3600 | stats avg(closureTime) | rename avg(closureTime) AS "value" |  rangemap field=value  low=0-24 high=24-72 default=severe</query>
+        </search>
+        <option name="field">value</option>
+        <option name="drilldown">all</option>
+        <option name="linkView">search</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>Open Incident Count</title>
+        <search>
+          <query>eventtype=snow_incident| dedup sys_id | search state!=7  | stats count(sys_id) as value |  rangemap field=value  low=0-100 high=100-500 default=severe</query>
+        </search>
+        <option name="field">value</option>
+        <option name="drilldown">all</option>
+        <option name="linkView">search</option>
+      </single>
+    </panel>
+    <panel>
+      <chart>
+        <title>Incident Resolution SLA</title>
+        <search>
+          <query>eventtype=snow_incident| dedup sys_id | search state=7  | eval closureTime=(strptime(closed_at,"%Y-%m-%d %H:%M:%S")-strptime(sys_created_on,"%Y-%m-%d %H:%M:%S"))/3600 | stats avg(closureTime) | rename avg(closureTime) AS "Current Closure Time (h)"</query>
+        </search>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.chart">radialGauge</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.chart.rangeValues">[0,"1","24","48"]</option>
+        <option name="charting.gaugeColors">[0x84E900,0xFFE800,0xBF3030]</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <map>
+        <title>Incident Count by Location</title>
+        <search>
+          <query>eventtype=snow_incident location!="" longitude!="" latitude!=""| dedup sys_id | search incident_state &lt; 7 |stats count by location | lookup cmn_location_list_lookup  sys_id AS location OUTPUTNEW latitude longitude full_name AS location_name| table latitude, longitude, count, location_name</query>
+        </search>
+        <option name="mapping.data.maxClusters">500</option>
+        <option name="mapping.markerLayer.markerMaxSize">20</option>
+        <option name="mapping.seriesColors">[0x0060DD]</option>
+        <option name="mapping.map.zoom">2</option>
+        <option name="mapping.map.center">(0,0)</option>
+        <option name="mapping.markerLayer.markerMinSize">10</option>
+        <option name="mapping.markerLayer.markerOpacity">0.8</option>
+        <option name="mapping.tileLayer.maxZoom">7</option>
+        <option name="mapping.tileLayer.minZoom">0</option>
+        <option name="drilldown">all</option>
+      </map>
+      <table>
+        <title>Incident Count over Location by Priority</title>
+        <searchString>eventtype=snow_incident location!="" longitude!="" latitude!=""| dedup sys_id| search incident_state &lt; 7  |chart count over location_name by priority | sort -count|rename location_name as Location, 1 as Critical, 2 as High, 3 as Moderate, 4 as Low, 5 as Planning</searchString>
+      </table>
+    </panel>
+  </row>
+</form>

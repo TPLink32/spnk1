@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<meta charset='utf-8'>
+<script src='http://d3js.org/d3.v2.js?2.9.1' charset='utf-8'></script>
+<style>
+.link { fill: none; stroke: #003468; stroke-width: 1.5px; }
+.node circle { fill: #003468; stroke: #fff; stroke-width: 1.5px; }
+text { font: 9px sans-serif; }
+</style>
+</head><body><html><script>var topology = [
+  {source: 'EOSPlus-7280SE-2.aristanetworks.com', target: 'lab-oob-core.nh.arista.com.aristanetworks.com'},
+  {source: 'EOSPlus-7280SE-2.aristanetworks.com', target: 'EOSPlus-7280SE-2.aristanetworks.com'},
+  {source: 'EOSPlus-7280SE-2.aristanetworks.com', target: 'EOSPlus-7280SE-2.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'ztps.ztps-test.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'jere-vEOS-p1.nh.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'eosplus-bs1.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'splunk-testing-3'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'localhost'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'jere-veos-t1.nh.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'eosplus-bs2.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'localhost.arista.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'localhost'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'splunk-testing-3'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'eosplus-bs1.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'jere-vEOS-t3.nh.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'jere-vEOS-t3.nh.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'localhost'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'jere-veos-t1.nh.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'jere-veos-s1.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'ztps.ztps-test.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'eosplus-bs2.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'lab-oob-core.nh.arista.com.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'splunk-testing-3'},
+  {source: 'EOSPlus-7124S-1.aristanetworks.com', target: 'eosplus-bs1.nh.arista.com'},
+  {source: 'EOSPlus-7124S-1.aristanetworks.com', target: 'eosplus-bs2.nh.arista.com'},
+  {source: 'EOSPlus-7124S-1.aristanetworks.com', target: 'vlan402'},
+  {source: 'EOSPlus-7124S-1.aristanetworks.com', target: 'lab-oob-core.nh.arista.com.aristanetworks.com'},
+  {source: 'EOSPlus-7124S-1.aristanetworks.com', target: 'nh-tac-rack1-tor.aristanetworks.com'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: '(none).(none)'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'jere-veos-s1.nh.arista.com'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'localhost'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'EOSPlus-7124S-1.aristanetworks.com'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'eosplus-ss1'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'EOSPlus-7050T-1.aristanetworks.com'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'DANZ-7150S-1.aristanetworks.com'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'DANZ-7150S-2.aristanetworks.com'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'DANZ-7280SE-1.aristanetworks.com'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'EOSPlus-7280SE-2.aristanetworks.com'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'lab-oob-core.nh.arista.com.aristanetworks.com'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: '(none).(none)'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'lab-oob-core.nh.arista.com.aristanetworks.com'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'nh-tac-rack1-tor.aristanetworks.com'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'DANZ-7150S-1.aristanetworks.com'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'DANZ-7150S-2.aristanetworks.com'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'US-NH01-SW7050-01'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'splunk-testing-1'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'splunk-testing-3'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: '(none).(none)'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: '(none).(none)'},
+  {source: 'DANZ-7150S-2.aristanetworks.com', target: 'lab-oob-core.nh.arista.com.aristanetworks.com'},
+  {source: 'DANZ-7150S-2.aristanetworks.com', target: 'DANZ-7150S-1.aristanetworks.com'},
+  {source: 'DANZ-7150S-2.aristanetworks.com', target: 'lab-oob-core.nh.arista.com.aristanetworks.com'},
+  {source: 'DANZ-7150S-2.aristanetworks.com', target: 'DANZ-7150S-1.aristanetworks.com'},
+  {source: 'DANZ-7150S-2.aristanetworks.com', target: 'DANZ-7150S-1.aristanetworks.com'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'localhost'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'foo.aristanetworks.com'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: '(none).(none)'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'eosplus-bs2.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'jere-veos-t1.nh.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'eosplus-bs1.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'ztps.ztps-test.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'splunk-testing-3'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'eosplus-bs2.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'ztps.ztps-test.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'jere-vEOS-t3.nh.aristanetworks.com'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'EOSPlus-7280SE-2.aristanetworks.com'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'EOSPlus-7280SE-1.aristanetworks.com'},
+  {source: 'tm207.sjc.aristanetworks.com', target: 'tm207.sjc.aristanetworks.com'},
+  {source: 'tm207.sjc.aristanetworks.com', target: 'tm207.sjc.aristanetworks.com'},
+  {source: 'tm207.sjc.aristanetworks.com', target: 'tm207.sjc.aristanetworks.com'},
+  {source: 'tm207.sjc.aristanetworks.com', target: 'tm207.sjc.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1', target: 'localhost'},
+  {source: 'EOSPlus-7050T-1', target: 'eosplus-bs1.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'localhost'},
+  {source: 'EOSPlus-7050T-1', target: 'splunk-testing-3'},
+  {source: 'EOSPlus-7050T-1', target: 'localhost.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'eosplus-bs2.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'ztps.ztps-test.com'},
+  {source: 'EOSPlus-7050T-1', target: 'localhost'},
+  {source: 'EOSPlus-7050T-1', target: 'localhost'},
+  {source: 'EOSPlus-7050T-1', target: 'splunk-testing-3'},
+  {source: 'EOSPlus-7050T-1', target: 'splunk-testing-3'},
+  {source: 'EOSPlus-7050T-1', target: 'ztps.ztps-test.com'},
+  {source: 'EOSPlus-7050T-1', target: 'eosplus-bs2.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'lab-oob-core.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'eosplus-bs1.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'eosplus-bs2.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'localhost'},
+  {source: 'EOSPlus-7050T-1', target: 'eosplus-bs1.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'localhost'},
+  {source: 'EOSPlus-7050T-1', target: 'eosplus-bs1.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'localhost.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'ztps.ztps-test.com'},
+  {source: 'EOSPlus-7050T-1', target: 'jere-veos-s1.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'jere-veos-t1.nh.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1', target: 'jere-vEOS-t2.nh.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1', target: 'jere-veos-s1.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'jere-veos-t1'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'jere-veos-t1.nh.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'jere-vEOS-t2.nh.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'localhost.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'jere-vEOS-t2.nh.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1', target: 'lab-oob-core.nh.arista.com.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1', target: 'jere-vEOS-t2.nh.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'eosplus-bs1.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'jere-vEOS-t2.nh.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'localhost'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'jere-vEOS-t2.nh.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'splunk-testing-3'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'splunk-testing-3'},
+  {source: 'yo615', target: 'yo615'},
+  {source: 'yo615', target: 'yo615'},
+  {source: 'yo615', target: 'yo615'},
+  {source: 'yo615', target: 'yo615'},
+  {source: 'yo615', target: 'yo615'},
+  {source: 'yo615', target: 'yo615'},
+  {source: 'yo615', target: 'r160-rack28-tor1'},
+  {source: 'yo615', target: 'r160-rack28-tor1'},
+  {source: 'yo615', target: 'r160-rack28-tor1'},
+  {source: 'yo615', target: 'r160-rack28-tor1'},
+  {source: 'yo615', target: 'r160-rack28-tor1'},
+  {source: 'yo615', target: 'r160-rack28-tor1'},
+  {source: 'yo615', target: 'r160-rack28-tor1'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'jere-vEOS-p1.nh.aristanetworks.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'jere-vEOS-t2.nh.aristanetworks.com'},
+  {source: 'DANZ-7150S-2.aristanetworks.com', target: 'DANZ-7150S-1.aristanetworks.com'},
+  {source: 'DANZ-7150S-2.aristanetworks.com', target: 'DANZ-7150S-1.aristanetworks.com'},
+  {source: 'DANZ-7150S-2.aristanetworks.com', target: 'DANZ-7150S-1.aristanetworks.com'},
+  {source: 'yo615', target: 'yo615'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'jere-vEOS-t2.nh.aristanetworks.com'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'jere-veos-s1.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'jere-vEOS-t3'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'jere-vEOS-t3'},
+  {source: 'EOSPlus-7050T-1.aristanetworks.com', target: 'localhost'},
+  {source: 'lab-oob-core.nh.arista.com.aristanetworks.com', target: 'eosplus-ss1'}];
+var nodes = {};
+
+  // Compute the distinct nodes from the links.
+  topology.forEach(function(link) {
+    link.source = nodes[link.source] || (nodes[link.source] = {name: link.source});
+    link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
+  });
+
+  var width = 600,
+      height = 650;
+
+  var force = d3.layout.force()
+    .nodes(d3.values(nodes))
+    .links(topology)
+    .size([1024, height])
+    .linkDistance(200)
+    .charge(-600)
+    .on('tick', topologytick)
+    .start();
+
+  var svg = d3.select('body').append('svg')
+    .attr('width', '100%')
+    .attr('height', '650')
+
+  var link = svg.selectAll('.link')
+    .data(force.links())
+    .enter().append('line')
+    .attr('class', 'link');
+
+  var node = svg.selectAll('.node')
+    .data(force.nodes())
+    .enter().append('g')
+    .attr('class', 'node')
+    .on('mouseover', topologymouseover)
+    .on('mouseout', topologymouseout)
+    .call(force.drag);
+
+  node.append('circle')
+    .attr('r', 8);
+
+  node.append('text')
+    .attr('x', 12)
+    .attr('dy', '.35em')
+    .text(function(d) { return d.name; });
+
+function topologytick() {
+  link
+      .attr('x1', function(d) { return d.source.x; })
+      .attr('y1', function(d) { return d.source.y; })
+      .attr('x2', function(d) { return d.target.x; })
+      .attr('y2', function(d) { return d.target.y; });
+
+  node
+      .attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y + ')'; });
+}
+
+function topologymouseover() {
+  d3.select(this).select('circle').transition()
+      .duration(750)
+      .attr('r', 20);
+  d3.select(this).select('text').transition()
+      .duration(750)
+      .attr('fill', '#003468')
+      .attr('x', 20);
+}
+
+function topologymouseout() {
+  d3.select(this).select('circle').transition()
+      .duration(750)
+      .attr('r', 8);
+  d3.select(this).select('text').transition()
+      .duration(750)
+      .attr('fill', '#000000')
+      .attr('x', 12);
+}
+
+function topologyclick(d) {
+  alert(d.name);
+}
+</script>
+</body>
+</html>

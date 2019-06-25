@@ -1,0 +1,7 @@
+## EDM PROD ##
+
+[monitor://C:\inetpub\wwwroot\Logs\EPCLogs\*\EPC*.txt]
+disabled = false
+index = epc_dev
+sourcetype = epc:logs
+blacklist = PIILog

@@ -1,0 +1,82 @@
+<form script="customized_chart_preload.js,audit_report.js">
+  <label>Computer Audit</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="dropdown" token="ldaprecord.nt_domain" searchWhenChanged="true">
+      <label>Account Domain</label>
+      <search>
+        <query>| inputlookup DomainSelector | eval nt_domain=DomainNetBIOSName | dedup nt_domain | search nt_domain !="" | table nt_domain</query>
+      </search>
+      <fieldForLabel>nt_domain</fieldForLabel>
+      <fieldForValue>nt_domain</fieldForValue>
+      <selectFirstChoice>true</selectFirstChoice>
+    </input>
+    <input type="text" token="ldaprecord.computer" searchWhenChanged="true">
+      <label>Computer Account</label>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="time" token="Time">
+      <label></label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <search id="audit_query">
+        <query>| ldapsearch domain=$ldaprecord.nt_domain$ search="(&amp;(objectclass=computer)(|(cn=$ldaprecord.computer$)(sAMAccountName=$ldaprecord.computer$)))" |fields *</query>
+        <latest>$Time.latest$</latest>
+      </search>
+      <html>
+        <div id="audit_report"/>
+      </html>
+    </panel>
+    <panel>
+      <table>
+        <title>Group Membership - Computer</title>
+        <search>
+          <query>|ldapsearch domain=$ldaprecord.nt_domain$ search="(objectclass=group)" attrs="cn,description,primaryGroupToken"|eval joiner=mvappend(dn,primaryGroupToken)|rename dn as groupDN,cn as groupName,primaryGroupToken as primaryGroupID|table groupDN,groupName,primaryGroupID,joiner|mvexpand joiner|join type=inner joiner [ldapsearch domain=$ldaprecord.nt_domain$ search="(&amp;(objectclass=computer)(|(cn=$ldaprecord.computer$)(sAMAccountName=$ldaprecord.computer$)))" attrs="memberOf,primaryGroupID"|eval joiner=mvappend(memberOf,primaryGroupID)|table joiner|mvexpand joiner]|dedup groupDN|table groupDN,groupName,primaryGroupID|sort primaryGroupID</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>IP Address History</title>
+        <search>
+          <query>eventtype=msad-successful-computer-logons user="$ldaprecord.computer$" dest_nt_domain="$ldaprecord.nt_domain$"|table _time,host,src_ip|dedup consecutive=T src_ip|lookup SiteInfo host|table _time,src_ip,Site</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">cell</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Failed Logon Activity - Computer</title>
+        <search>
+          <query>eventtype=msad-failed-computer-logons|rename User_ID as userSid|join type=inner userSid [ldapsearch domain=$ldaprecord.nt_domain$ search="(&amp;(objectclass=computer)(|(cn=$ldaprecord.computer$)(sAMAccountName=$ldaprecord.computer$)))" attrs="objectSid"|eval userSid="%{"+objectSid+"}"|fields userSid]|stats min(_time) as mintime,max(_time) as maxtime,count by src_ip,signature|`ip-to-host`|`fix-localhost`|eval mintime=strftime(mintime,"%F %T")|eval maxtime=strftime(maxtime,"%F %T")|rename mintime as "Earliest",maxtime as "Latest",src_host as Workstation,src_ip as "IP Address", signature as "Reason"</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">cell</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>

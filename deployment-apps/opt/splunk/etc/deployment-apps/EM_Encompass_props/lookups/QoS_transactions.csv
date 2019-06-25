@@ -1,0 +1,9 @@
+api_call,transaction_name
+LoanManager.OpenPipeline,Open Pipeline
+LoginManager.Login,Login
+LoanManager.CreateLoan,Create Loan
+LoanManager.OpenLoan,Loan Open
+LoanProxy.Save,Loan Save
+LoanProxy.GetSupportingData,Loan Document Download
+LoanProxy.SaveSupportingData,Loan Document Upload
+LoanProxy.Close,Close Loan

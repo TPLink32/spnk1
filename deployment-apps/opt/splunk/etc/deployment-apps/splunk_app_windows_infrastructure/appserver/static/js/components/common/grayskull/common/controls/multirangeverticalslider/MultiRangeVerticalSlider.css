@@ -1,0 +1,55 @@
+.slider-main {
+    position: relative;
+	margin-left: 15px;
+	height: 250px;
+	width: 11px;
+	float: left;
+	background-image: none;
+}
+
+.ui-slider-handle {
+    height: 14px;
+    width: 21px;
+    border-radius: 3px;
+    position: absolute;
+    background-image: none;
+    left: -5px;
+    z-index: 11;
+}
+
+.ui-slider-handle:focus {
+    border: none;
+}
+
+
+.slider-range {
+    position: absolute;
+    width: 11px;
+}
+
+.slider-values-pane {
+    float: left;
+    width: 80%;
+    height: 220px;
+    padding-top: 30px;
+}
+
+div.slider-value {
+    width: 30px;
+    height: 50px;
+}
+
+div.slider-value label {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+div.slider-value label span{
+    display: inline-block;
+    white-space: nowrap;
+    width: 60px;
+}
+
+div.slider-value input {
+    width: 60px;
+}

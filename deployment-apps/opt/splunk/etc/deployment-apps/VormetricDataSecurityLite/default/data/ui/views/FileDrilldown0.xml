@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<form>
+ <label>File Accesses</label>
+
+  <fieldset>
+	<input token="host"><label>Host Name</label></input>
+	<input token="gp"><label>Guard Point</label></input>
+  </fieldset>
+
+  <row> 
+	<table>
+	  <title>Select File Path</title>
+	  <searchString>sourcetype="rfc5424_syslog" host="$host$" gp="$gp$" sdid="CGP@21513" | lookup iotype act | top showperc=0 limit=0 filePath,iotype</searchString>
+	  <option name="count">20</option>
+	  <option name="displayRowNumbers">false</option>
+	  <option name="showPager">true</option>
+	  <drilldown>
+		<link>
+		  <![CDATA[
+			/app/VormetricDataSecurityLite/FileDrilldown1?form.host=$form.host$&form.iotype=$row.iotype$&form.gp=$form.gp$&form.filePath=$row.filePath$&earliest=$earliest$&latest=$latest$
+		  ]]>
+       </link>
+     </drilldown>   
+
+   </table>
+ </row>
+
+</form>

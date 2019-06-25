@@ -1,0 +1,17 @@
+<nav>
+    <collection label="Main">
+        <view name="FrontPage" default="true"/>
+    </collection>
+    <collection label="Dashboards">
+        <view name="lite_dashboard"/>
+        <view name="demo_dashboard"/>
+    </collection>
+    <collection label="Searches">
+		<view name="MessageTypesByHost"/>
+        <view name="FileDrilldown"/>
+        <view name="UserDrilldown"/>
+    </collection>
+    <collection label="Reference">
+		<view name="MessageLookup"/>
+    </collection>
+</nav>

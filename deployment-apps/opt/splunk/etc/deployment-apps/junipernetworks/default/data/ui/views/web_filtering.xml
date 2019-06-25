@@ -1,0 +1,110 @@
+<form>
+  <label>Web Filtering</label>
+  <init>
+    <set token="source_ip_address">*</set>
+    <set token="destination_ip_address">*</set>
+    <set token="username">*</set>
+    <set token="srx_host">*</set>
+  </init>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="web_filtering_time">
+      <label>Time Period</label>
+      <default>
+        <earliest>rt-5m</earliest>
+        <latest>rt</latest>
+      </default>
+    </input>
+    <input type="text" token="srx_host" searchWhenChanged="true">
+      <label>SRX</label>
+    </input>
+    <input type="text" token="source_ip_address" searchWhenChanged="true">
+      <label>Source IP Address</label>
+      <prefix>source_address="</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="username" searchWhenChanged="true">
+      <label>User Name</label>
+      <prefix>username="</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="destination_ip_address" searchWhenChanged="true">
+      <label>Destination IP Address</label>
+      <prefix>destination_address="</prefix>
+      <suffix>"</suffix>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <chart>
+        <title>Top URLs</title>
+        <search>
+          <query>source="jnpr-syslog" ("WEBFILTER_URL_BLOCKED" OR "WEBFILTER_URL_PERMITTED"  OR "WEBFILTER_URL_REDIRECTED") $srx_host$ $source_ip_address$  $destination_ip_address$ $username$  | top 5 url</query>
+          <earliest>$web_filtering_time.earliest$</earliest>
+          <latest>$web_filtering_time.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">URL</option>
+        <option name="charting.axisTitleY.text">Event Count</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.legend.placement">none</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Top URL Categories</title>
+        <search>
+          <query>source="Jnpr-syslog" ("WEBFILTER_URL_BLOCKED" OR "WEBFILTER_URL_PERMITTED"  OR "WEBFILTER_URL_REDIRECTED") $srx_host$ $source_ip_address$ $username$ $destination_ip_address$  |  top 5 category</query>
+          <earliest>$web_filtering_time.earliest$</earliest>
+          <latest>$web_filtering_time.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">Category</option>
+        <option name="charting.axisTitleY.text">Event Count</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.legend.placement">none</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Top Users Utilizing Denied URLs</title>
+        <search>
+          <query>source="jnpr-syslog" ("WEBFILTER_URL_BLOCKED") $srx_host$ $source_ip_address$  $destination_ip_address$ $username$ | top 5 username</query>
+          <earliest>$web_filtering_time.earliest$</earliest>
+          <latest>$web_filtering_time.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">User Name</option>
+        <option name="charting.axisTitleY.text">Event Count</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.legend.placement">none</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Top URLs Permitted</title>
+        <search>
+          <query>source="jnpr-syslog" "WEBFILTER_URL_PERMITTED" $srx_host$ $source_ip_address$  $destination_ip_address$  $username$| top 5 url</query>
+          <earliest>$web_filtering_time.earliest$</earliest>
+          <latest>$web_filtering_time.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">URL</option>
+        <option name="charting.axisTitleY.text">Event Count</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.legend.placement">none</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Top URLs Denied</title>
+        <search>
+          <query>source="jnpr-syslog" ("WEBFILTER_URL_BLOCKED") $srx_host$ $source_ip_address$  $destination_ip_address$  $username$ | top 5 url</query>
+          <earliest>$web_filtering_time.earliest$</earliest>
+          <latest>$web_filtering_time.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">URL</option>
+        <option name="charting.axisTitleY.text">Event Count</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.legend.placement">none</option>
+      </chart>
+    </panel>
+  </row>
+</form>

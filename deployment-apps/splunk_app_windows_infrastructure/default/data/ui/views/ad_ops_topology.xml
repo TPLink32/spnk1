@@ -1,0 +1,103 @@
+<form script="table_decoration.js" stylesheet="table_decoration.css">
+  <label>Active Directory Overview</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="multiselect" token="multidropdown_forest" searchWhenChanged="true">
+      <label>Forest</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector`  |dedup ForestName | sort ForestName</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+      <fieldForLabel>ForestName</fieldForLabel>
+      <fieldForValue>ForestName</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>ForestName="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="multiselect" token="multidropdown_site" searchWhenChanged="true">
+      <label>Site</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector` | search $multidropdown_forest$|dedup Site|sort Site</query>
+      </search>
+      <fieldForLabel>Site</fieldForLabel>
+      <fieldForValue>Site</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>Site="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="multiselect" token="multidropdown_domaindnsname" searchWhenChanged="true">
+      <label>Domain</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector` | search $multidropdown_forest$ $multidropdown_site$|dedup DomainDNSName|sort DomainDNSName</query>
+      </search>
+      <fieldForLabel>DomainDNSName</fieldForLabel>
+      <fieldForValue>DomainDNSName</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>DomainDNSName="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="multiselect" token="multidropdown_host" searchWhenChanged="true">
+      <label>Server</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector` | search $multidropdown_forest$ $multidropdown_site$ $multidropdown_domaindnsname$|dedup host|sort host</query>
+      </search>
+      <fieldForLabel>host</fieldForLabel>
+      <fieldForValue>host</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>host="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="time" token="Time" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row></row>
+  <row>
+    <panel>
+      <table id="topology_table">
+        <title>Topology Report</title>
+        <search>
+          <query> eventtype=msad-dc-health|eval DomainNetBIOSName=upper(DomainNetBIOSName)|eval DomainDNSName=lower(DomainDNSName)|dedup host,DomainDNSName|sort ForestName,Site,DomainDNSName,host|eval DomainTitle="Forest: ".ForestName." (".ForestLevel."), Domain: ".DomainNetBIOSName."\\\\".DomainDNSName." (".DomainLevel.")", "Master Roles"=split(FSMORoles," "), Host=host, "Operating System"=OperatingSystem, Version=OSVersion, "Global Catalog"=GlobalCatalog, Services=ProcsOK, "DNS Registration"=DNSRegister, "SYSVOL Shared"=SYSVOLShare| dedup Host | table Host, Enabled, Site, "Operating System", Version, "Master Roles", "Global Catalog", RODC, Services, "DNS Registration", "SYSVOL Shared"</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="list.drilldown">full</option>
+        <option name="list.wrap">1</option>
+        <option name="maxLines">5</option>
+        <option name="raw.drilldown">full</option>
+        <option name="table.drilldown">all</option>
+        <option name="table.wrap">1</option>
+        <option name="type">list</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>

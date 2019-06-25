@@ -1,0 +1,167 @@
+/*
+ * MSADServerStatus CSS File
+ */
+ 
+.splunk-app-microsoft-msadserverstatusview table {
+ 	width: 			100%;
+}
+ 
+.splunk-app-microsoft-msadserverstatusview table tr.divider {
+ 	line-height: 	8px;
+ 	height: 		8px;
+}
+
+.splunk-app-microsoft-msadserverstatusview table tr.hline {
+	line-height:	1px;
+	height:			1px;
+	border-top:		1px solid #333;
+}
+
+.splunk-app-microsoft-msadserverstatusview table tr {
+ 	line-height: 	20px;
+ 	height: 		20px;
+ 	vertical-align:	middle;
+}
+
+.splunk-app-microsoft-msadserverstatusview table tr td.col1 {
+ 	font-family:	Tahoma, Geneva, sans-serif;
+ 	font-size:		14px;
+ 	color:			black;
+	width: 			50%;
+ 	font-weight:	bold;
+ 	color:			#333333;
+}
+
+.splunk-app-microsoft-msadserverstatusview table tr td.services {
+ 	font-family:	Tahoma, Geneva, sans-serif;
+ 	font-size:		14px;
+ 	color:			black;
+	width: 			50%;
+ 	font-weight:	bold;
+ 	color:			#333333;
+ 	vertical-align:	top;
+}
+
+table.svc_table tr td.svc_name {
+	width: 			60%;
+	font-family:	Tahoma, Geneva, sans-serif;
+	font-size:		12px;
+	height:			24px;
+	vertical-align:	middle;
+}
+
+table.svc_table tr td.svc_status {
+	width:			40%;
+	font-family:	Tahoma, Geneva, sans-serif;
+	font-size:		12px;
+	height:			24px;
+}
+ 
+.splunk-app-microsoft-msadserverstatusview table tr td.col2 {
+ 	font-family:	Tahoma, Geneva, sans-serif;
+ 	font-size:		14px;
+ 	color:			black;
+	width:			50%;
+}
+
+.splunk-app-microsoft-msadserverstatusview table tr td.col2 a:link,
+.splunk-app-microsoft-msadserverstatusview table tr td.col2 a:visited {
+ 	font-family:	Tahoma, Geneva, sans-serif;
+ 	font-size:		14px;
+ 	color:			black;
+	width:			50%;
+}
+
+.splunk-app-microsoft-msadserverstatusview table tr td.col2 a:hover,
+.splunk-app-microsoft-msadserverstatusview table tr td.col2 a:active {
+ 	font-family:	Tahoma, Geneva, sans-serif;
+ 	font-size:		14px;
+ 	color:			#2B9969;
+	width:			50%;
+}
+
+.splunk-app-microsoft-msadserverstatusview span.imageTrue {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/tick.png');
+	float:			left;
+	display:		block;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadserverstatusview span.imageFalse {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/cross.png');
+	float:			left;
+	display:		block;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadserverstatusview span.imageRODC {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/lock.png');
+	display:		block;
+	float:			left;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadserverstatusview span.imageGlobalCatalog {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/globe.png');
+	display:		block;
+	float:			left;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadserverstatusview span.imageSchema {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/schema.jpg');
+	display:		block;
+	float:			left;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadserverstatusview span.imageDomainNaming {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/domainnaming.jpg');
+	display:		block;
+	float:			left;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadserverstatusview span.imagePDCEmulator {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/pdcemulator.jpg');
+	display:		block;
+	float:			left;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadserverstatusview span.imageRIDMaster {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/ridmaster.jpg');
+	display:		block;
+	float:			left;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadserverstatusview span.imageInfrastructure {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/infrastructure.jpg');
+	display:		block;
+	float:			left;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadserverstatusview span.imageServiceUp {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/tick.png');
+	display:		block;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadserverstatusview span.imageServiceDown {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/cross.png');
+	display:		block;
+	width: 			16px;
+	height: 		16px;
+}

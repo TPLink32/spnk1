@@ -1,0 +1,86 @@
+<form script="runPageScript.js">
+    <label>Forecast Time Series</label>
+    <description>Forecast future values given past values of a metric (numeric time series).</description>
+    <fieldset autoRun="false" submitButton="false">
+        <html>
+            <ul id="dashboard-form-tabs">
+                <li>
+                    <a class="tab-title-text" data-tab="newForecast">Create New Forecast</a>
+                </li>
+                <li>
+                    <a class="tab-title-text" data-tab="existingForecast">Load Existing Settings</a>
+                </li>
+            </ul>
+            <div id="dashboard-form-controls">
+                <div id="inputControls" data-tab="newForecast">
+                    <p>Enter a search (should contain "_time" field with UNIX timestamp values)</p>
+                    <div class="app-search-controls-wrapper">
+                        <div id="searchBarControl"></div>
+                        <div id="searchControlsControl"></div>
+                    </div>
+                    <div class="dashboard-row">
+                        <div class="input input-dropdown splunk-view">
+                            <label>Field to forecast</label>
+                            <div id="predictFieldsControl"></div>
+                        </div>
+                        <div class="input input-dropdown splunk-view">
+                            <label>Forecasting method</label>
+                            <div id="predictAlgorithmControl"></div>
+                        </div>
+                        <div class="input input-text splunk-view">
+                            <label>Withhold latest k values</label>
+                            <div id="holdbackControl"></div>
+                        </div>
+                        <div class="input input-text splunk-view">
+                            <label>Forecast next k values</label>
+                            <div id="futureTimespanControl"></div>
+                        </div>
+                        <div class="input input-text splunk-view">
+                            <label>Confidence interval (%)</label>
+                            <div id="confidenceIntervalControl"></div>
+                        </div>
+                        <div class="input input-text splunk-view">
+                            <div class="checkbox">
+                                <label><div id="periodCheckboxControl"></div>Period (optional)</label>
+                            </div>
+                            <div id="periodValueControl"></div>
+                        </div>
+                        <div id="errorDisplay" class="alerts shared-flashmessages app-error-messages"></div>
+                    </div>
+                    <div id="assistantControlsFooter"></div>
+                </div>
+                <div id="queryHistoryPanel" data-tab="existingForecast"></div>
+            </div>
+        </html>
+    </fieldset>
+
+    <row depends="$searchBarSearchJobIdToken$">
+        <panel>
+            <html>
+                <h3>Raw Data Preview</h3>
+                <div id="datasetPreviewPanel"></div>
+            </html>
+        </panel>
+    </row>
+
+    <row depends="$showResultPanelsToken$">
+        <panel id="forecastPanel">
+            <html></html>
+        </panel>
+    </row>
+
+    <row depends="$showResultPanelsToken$">
+        <panel id="regressionStatisticsPanel">
+            <html>
+                <div class="stats-panel">
+                    <div id="r2StatisticPanel"></div>
+                    <div id="rootMeanSquaredErrorStatisticPanel"></div>
+                </div>
+            </html>
+        </panel>
+        <panel id="predictionOutliersStatisticPanel">
+            <html></html>
+        </panel>
+    </row>
+
+</form>

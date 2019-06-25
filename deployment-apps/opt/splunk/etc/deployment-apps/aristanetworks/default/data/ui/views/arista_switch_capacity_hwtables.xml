@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form>
+  <label>Switch hardware capacity</label>
+  <searchTemplate>
+sourcetype="arista_switch_inventory" AristaSwitchCapacity | stats 
+latest(platform_capacity_ipv4_host_routes) as ipv4_host_routes,
+latest(platform_capacity_ipv6_host_routes) as ipv6_host_routes,
+latest(platform_capacity_ipv4_lpm_routes) as ipv4_lpm_routes,
+latest(platform_capacity_ipv6_lpm_routes) as ipv6_lpm_routes,
+latest(platform_lpm_used) as platform_lpm_capacity(%),
+sparkline(max(eval(rtrim(platform_lpm_used,"%")))) as platform_lpm_used_history,
+latest(platform_capacity_acl_used) as platform_acl_capacity(%),
+sparkline(max(eval(rtrim(platform_capacity_acl_used,"%")))) as platform_acl_used_history,
+latest(platform_capacity_l2_mac) as platform_mac_capacity(%)
+sparkline(max(eval(rtrim(platform_capacity_l2_mac,"%")))) as platform_mac_used_history
+by switchname | table
+switchname,
+platform_lpm_capacity(%), platform_lpm_used_history, 
+platform_acl_capacity(%), platform_acl_used_history, 
+platform_mac_capacity(%), platform_mac_used_history,
+ipv4_host_routes, ipv6_host_routes, ipv4_lpm_routes, ipv6_lpm_routes
+  </searchTemplate>
+
+  <fieldset autoRun="true">
+      <html>
+        <p>Filter using any field [ switchname=* ]</p>
+      </html>
+      <input type="text" token="filter">
+      </input>
+
+      <!-- Add default TimePicker -->
+      <input type="time" />
+      
+  </fieldset>
+  
+  <row>
+      <table>
+          <title>Matching events</title>
+          <option name="count">50</option>
+
+          <format field="platform_lpm_used_history" type="sparkline">
+            <option name="type">bar</option>
+            <option name="barColor">green</option>
+            <option name="chartRangeMax">100</option>
+            <option name="chartRangeMin">0</option>
+            <option name="colorMap">
+              <option name="70:80">yellow</option>
+              <option name="81:87">orange</option>
+              <option name="88:">red</option>
+            </option>
+          </format>
+          <format field="platform_acl_used_history" type="sparkline">
+            <option name="type">bar</option>
+            <option name="barColor">green</option>
+            <option name="chartRangeMax">100</option>
+            <option name="chartRangeMin">0</option>
+            <option name="colorMap">
+              <option name="70:80">yellow</option>
+              <option name="81:87">orange</option>
+              <option name="88:">red</option>
+            </option>
+          </format>
+          <format field="platform_mac_used_history" type="sparkline">
+            <option name="type">bar</option>
+            <option name="barColor">green</option>
+            <option name="chartRangeMax">100</option>
+            <option name="chartRangeMin">0</option>
+            <option name="colorMap">
+              <option name="70:80">yellow</option>
+              <option name="81:87">orange</option>
+              <option name="88:">red</option>
+            </option>
+          </format>
+
+      </table>
+    </row>
+
+</form>

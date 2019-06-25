@@ -1,0 +1,53 @@
+<form>
+  <label>Printers Overview</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="dropdown" token="PrintMonitoring.Host" searchWhenChanged="true">
+      <label>Host</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_printmon | dedup Host | sort Host</query>
+      </search>
+      <fieldForLabel>Host</fieldForLabel>
+      <fieldForValue>Host</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="PrintMonitoring.Printer" searchWhenChanged="true">
+      <label>Printer</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_printmon | search Host="$PrintMonitoring.Host$" | dedup printer | sort printer</query>
+      </search>
+      <fieldForLabel>printer</fieldForLabel>
+      <fieldForValue>printer</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="PrintMonitoring.Operation" searchWhenChanged="true">
+      <label>Operation</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_printmon | search Host="$PrintMonitoring.Host$" printer="$PrintMonitoring.Printer$" | dedup operation | sort operation</query>
+      </search>
+      <fieldForLabel>operation</fieldForLabel>
+      <fieldForValue>operation</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Print Monitoring Browser</title>
+        <search>
+          <query>eventtype=printmon_windows host="$PrintMonitoring.Host$" printer="$PrintMonitoring.Printer$" operation="$PrintMonitoring.Operation$" | table host, printer, status, operation, driver, print_processor, priority, port</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+      </table>
+    </panel>
+  </row>
+</form>

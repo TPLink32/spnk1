@@ -1,0 +1,85 @@
+<DOCTYPE html>
+<html>
+<head>
+<title>Thales Data Security Message Catalog: Index</title>
+</head>
+
+	<script language="javascript" type="text/javascript" >
+	function jumpto(x,y){
+		if (y != "") {
+			var t = "";
+			if (x != "") {
+				t = x + "_";
+			}
+			t = t + y + ".html";
+			location.replace (t);
+		}
+	}
+	</script>
+	<body style="position:absolute;top:0px;bottom:0px;left:0px;right:0px">
+
+<div id="menu" 
+	 style="background-color:#3fbedb;padding:10px;width:auto;height:92%;float:left;">
+<h2>Navigation</h2><div id="buttons" style="text-align:center">
+
+<form name="form1">
+<select name="jumpmenu" 
+        onChange="jumpto('idx', document.form1.jumpmenu.options[document.form1.jumpmenu.options.selectedIndex].value)">
+<option value="">Logger ... </option>
+<option value="CA0">CA0</option>
+<option value="CFG">CFG</option>
+<option value="CGA">CGA</option>
+<option value="CGP">CGP</option>
+<option value="CGS">CGS</option>
+<option value="CMG">CMG</option>
+<option value="COM">COM</option>
+<option value="CXM">CXM</option>
+<option value="DA0">DA0</option>
+<option value="DAO">DAO</option>
+<option value="DB2">DB2</option>
+<option value="DMG">DMG</option>
+<option value="DXF">DXF</option>
+<option value="FIP">FIP</option>
+<option value="GEN">GEN</option>
+<option value="IDS">IDS</option>
+<option value="IEP">IEP</option>
+<option value="KMG">KMG</option>
+<option value="LIC">LIC</option>
+<option value="LOG">LOG</option>
+<option value="LUP">LUP</option>
+<option value="MG0">MG0</option>
+<option value="P11">P11</option>
+<option value="POL">POL</option>
+<option value="SDK">SDK</option>
+<option value="SIN">SIN</option>
+<option value="USR">USR</option>
+<option value="VDE">VDE</option>
+<option value="VMD">VMD</option>
+<option value="XFM">XFM</option>
+
+</select>
+</form>
+
+<form name="form2">
+or enter ID<br>
+<input type="text" size="8" maxlength="8" name="msgid"><br>
+<input type="text" style="display:none;">
+<button type="button" onclick="jumpto('msg', document.form2.msgid.value)">
+Lookup</button>
+</form>
+</div>
+</div>
+
+<div id="content" style="width:75%;padding:10px;color:#094e6c;float:left;">
+<h1>Logger Identifiers</h1>
+<ul>
+<b>Select required logger identifier from pulldown list on the left,
+<br>or enter the required messaged ID if known.</b>
+</ul>
+</div>
+<div id="footer" style="clear:both;text-align:center;">
+Copyright &copy; 2017
+ Thales e-Security Inc.
+</div>
+</body>
+</html> 

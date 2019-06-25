@@ -1,0 +1,21 @@
+.deep-dive-twin-time-picker-content {
+	background-color: #FFFFFF;
+	padding: 10px;
+}
+
+.twin-time-presets-list {
+	list-style: none;
+}
+
+.deep-dive-twin-time-picker-body {
+	padding: 10px;
+}
+
+.deep-dive-twin-time-picker-checkbox-container {
+	cursor: pointer;
+}
+
+.deep-dive-twin-time-picker-anchor-wrapper {
+	min-width: 265px;
+	min-height: 40px;
+}

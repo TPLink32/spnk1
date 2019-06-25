@@ -1,0 +1,505 @@
+@import 'srcviewer.css';
+@import 'prettify.css';
+
+/* Messages.coffee */
+.textinput-with-message input[type="text"] {
+  margin-bottom: 5px;
+}
+
+.textinput-with-message .textinput-message {
+  color: gray;
+  font-size: 11px;
+}
+
+/* Modal */
+
+.mlts-modal {
+    display: none;
+}
+
+.mlts-modal-no-padding {
+    width: 80%;
+    left: 10%;
+    margin: auto;
+}
+
+.mlts-modal-no-padding .modal-body {
+    padding: 0;
+}
+
+.mlts-modal-form-inline > * {
+    display: inline-block;
+}
+
+.mlts-modal-form-inline > *:not(:first-child) {
+    margin-left: 5px;
+}
+
+.mlts-modal-form-inline > p {
+    vertical-align: middle;
+}
+
+.mlts-modal-form-inline > .splunk-textinput input[type="text"] {
+    width: 75px;
+}
+
+/* forces the alert to be displayed on its own line even when modal-form-inline is present */
+.mlts-modal .mlts-modal-alert {
+    display: block;
+}
+
+/* ScheduledSearchModal */
+
+.components-splunk-scheduledsearchmodal-save .mlts-time-label-icon {
+    padding-left: 5px;
+}
+
+/* Dashboard Panels */
+
+.mlts-panel-footer {
+    text-align: center;
+}
+
+.mlts-panel-footer .btn:not(:first-child) {
+    margin-left: 5px;
+}
+
+/* slider */
+.ui-slider {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+/* SourceViewer */
+
+.source-viewer-wrapper {
+    display: none;
+}
+
+/* stats-panel */
+
+.stats-panel {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.stats-panel > div {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.stats-panel div {
+    position: relative;
+}
+
+/* Tabs */
+
+.dashboard-tabs {
+    margin-left: 15px;
+    border-right: 1px solid #ddd;
+}
+
+.dashboard-tab-content {
+    background: white;
+    border-style: solid;
+    border-color: #ddd;
+    border-width: 0 1px 1px 1px;
+    padding: 10px;
+    overflow: inherit; /* prevents issues with Splunk's search mode dropdown causing the entire tab to scroll */
+}
+
+/* EnhancedMultiDropDownView */
+.enhanced-multidropdown-view-controls {
+    border-top: 1px solid #bfbfbf;
+    padding: 5px;
+}
+
+.enhanced-multidropdown-view-controls button{
+    margin-right: 5px;
+}
+
+/* QueryHistoryTable */
+
+.dashboard-history-controls button:not(:last-child) {
+    margin-right: 5px;
+}
+
+.dashboard-history-table tbody tr td.highlighted,
+.dashboard-history-table tbody tr.highlighted > td.highlighted,
+.dashboard-history-table tr div.multivalue-subcell.highlighted {
+    background-color: white !important;
+    cursor: default;
+}
+
+.dashboard-history-table tbody tr.even td.highlighted,
+.dashboard-history-table tbody tr.even.highlighted > td.highlighted,
+.dashboard-history-table tr.even div.multivalue-subcell.highlighted {
+    background-color: #f5f5f5 !important;
+    cursor: default;
+}
+
+.dashboard-history-table .table-drilldown > tbody > tr > td,
+.dashboard-history-table .table-drilldown-cell > tbody > tr > td:hover .multivalue-subcell {
+    color: black !important;
+}
+
+/* style fixes for SearchControlsView */
+.app-search-controls-wrapper .shared-jobstatus {
+    padding: 0 0 0 0;
+}
+
+.app-search-controls-wrapper .progress-bar {
+    top: 23px;
+}
+
+/* generic styles for text/dropdown inputs */
+.fieldset div.input-multiselect {
+    width: 400px;
+}
+
+.fieldset input[type="range"] {
+    height: 26px;
+}
+
+.fieldset .ui-slider {
+    margin-top: 12px;
+}
+
+.app-error-messages {
+    clear: both;
+    padding-top: 0;
+    display: none;
+}
+
+/* hide the "Edit" and "More Info" dropdowns. Not using the hideEdit="true" option because that hides the "Print" button too */
+.dashboard-view-controls a.more-info-btn {
+    display: none;
+}
+
+.dashboard-view-controls a.edit-btn {
+    display: none;
+}
+
+/* hide pdf button and fix styling for print button */
+.dashboard-view-controls a.generate-pdf {
+    display: none;
+}
+
+.dashboard-view-controls a.print-dashboard {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+/* dependency checker error wrapper */
+.dependency-checker-wrapper {
+    padding: 10px;
+}
+
+.dependency-checker-error {
+    text-align: center;
+}
+
+.dependency-checker-info {
+    width: 700px;
+    margin: auto;
+    font-size: 14px;
+}
+
+/* Assistant controls footer */
+
+.mlts-assistant-controls-footer {
+    padding-top: 10px;
+}
+
+.mlts-assistant-controls-footer .form-submit {
+    padding-top: 0 !important;
+}
+
+.mlts-assistant-controls-footer > *:not(:last-child) {
+    margin-right: 5px;
+}
+
+/* Dashboard error display */
+
+#errorDisplay {
+    margin-top: 10px;
+}
+
+#errorDisplay .alert {
+    margin-bottom: 0;
+}
+
+/* errors on form inputs */
+
+.splunk-textinput.error input[type="text"] {
+    border-color: #d6563c;
+}
+
+.splunk-multidropdown.error ul.select2-choices {
+    border-color: #d6563c;
+}
+
+/* SearchStringDisplay */
+.mlts-search-string-display-table td {
+    width: 50%;
+}
+
+.mlts-search-string-display-table td.mlts-no-select {
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+@-moz-document url-prefix() {
+    .splunk-choice-input .splunk-choice-input-message {
+        margin-top: 0px;
+    }
+}
+
+/* additional styles used by AlertModal, copied from Splunk */
+
+.alert-save-as .trigger-actions .trigger-actions-controls,
+.alert-edit .trigger-actions .trigger-actions-controls {
+    position: relative;
+}
+.alert-save-as .trigger-actions .trigger-actions-control-heading,
+.alert-edit .trigger-actions .trigger-actions-control-heading {
+    padding-top: 5px;
+    text-align: right;
+    width: 160px;
+    font-weight: bold;
+}
+
+.alert-save-as .trigger-actions .trigger-actions-control-label,
+.alert-edit .trigger-actions .trigger-actions-control-label {
+    float: left;
+    width: 160px;
+    padding-top: 5px;
+    text-align: right;
+}
+.alert-save-as .trigger-actions .trigger-actions-controls,
+.alert-edit .trigger-actions .trigger-actions-controls {
+    *display: inline-block;
+    *padding-left: 20px;
+    margin-left: 180px;
+    *margin-left: 0;
+}
+.alert-save-as .modal-body-scrolling,
+.alert-edit .modal-body-scrolling {
+    padding-bottom: 0px;
+}
+.alert-save-as .earliest-timepicker,
+.alert-edit .earliest-timepicker,
+.alert-save-as .latest-timepicker,
+.alert-edit .latest-timepicker {
+    position: relative;
+}
+.alert-save-as .earliest-timepicker input,
+.alert-edit .earliest-timepicker input,
+.alert-save-as .latest-timepicker input,
+.alert-edit .latest-timepicker input {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    min-height: 26px;
+}
+.alert-save-as .help-block-timestamp,
+.alert-edit .help-block-timestamp {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: auto;
+    margin: auto !important;
+}
+.alert-save-as .controls .schedule_hourly .btn,
+.alert-edit .controls .schedule_hourly .btn {
+    width: 50px;
+}
+.alert-save-as .controls .pre_label,
+.alert-edit .controls .pre_label {
+    margin-right: 20px;
+}
+.alert-save-as .controls .hour_post_label,
+.alert-edit .controls .hour_post_label {
+    margin-left: 20px;
+}
+.alert-save-as .controls .weekly_pre_label,
+.alert-edit .controls .weekly_pre_label {
+    margin-right: 10px;
+}
+.alert-save-as .controls .daily_pre_label,
+.alert-edit .controls .daily_pre_label {
+    margin-right: 10px;
+    margin-left: 10px;
+}
+.alert-save-as .controls .monthly_pre_label,
+.alert-edit .controls .monthly_pre_label {
+    margin-right: 10px;
+}
+.alert-save-as .controls .uneditable-search span.uneditable-input,
+.alert-edit .controls .uneditable-search span.uneditable-input {
+    width: 246px;
+}
+.alert-save-as .trigger-actions,
+.alert-edit .trigger-actions {
+    padding-bottom: 20px;
+}
+.alert-save-as .trigger-actions .add-action-btn,
+.alert-edit .trigger-actions .add-action-btn {
+    margin-bottom: 10px;
+}
+.alert-save-as .trigger-actions .table-row-expanding > tbody > tr > td.expands a,
+.alert-edit .trigger-actions .table-row-expanding > tbody > tr > td.expands a {
+    padding: 4px 4px 4px 16px;
+}
+.alert-save-as .trigger-actions .table-row-expanding td.expands,
+.alert-edit .trigger-actions .table-row-expanding td.expands {
+    width: 35px;
+}
+.alert-save-as .trigger-actions .table-row-expanding td.expands.disabled:hover,
+.alert-edit .trigger-actions .table-row-expanding td.expands.disabled:hover {
+    border-right-color: transparent !important;
+}
+.alert-save-as .trigger-actions .table-row-expanding td.expands.disabled a,
+.alert-edit .trigger-actions .table-row-expanding td.expands.disabled a {
+    opacity: 0.1;
+    cursor: default;
+}
+.alert-save-as .trigger-actions .table-row-expanding td.expands:focus,
+.alert-edit .trigger-actions .table-row-expanding td.expands:focus {
+    background: rgba(63, 170, 255, 0.12);
+}
+.alert-save-as .trigger-actions .table-row-expanding .expandable td.action-title,
+.alert-edit .trigger-actions .table-row-expanding .expandable td.action-title {
+    cursor: pointer;
+}
+.alert-save-as .trigger-actions .alert-actions-control-group,
+.alert-edit .trigger-actions .alert-actions-control-group {
+    width: inherit;
+}
+.alert-save-as .trigger-actions .alert-actions-control-group table > tbody > tr > td,
+.alert-edit .trigger-actions .alert-actions-control-group table > tbody > tr > td {
+    border-left: none;
+    border-right: none;
+    background: none;
+}
+.alert-save-as .trigger-actions .alert-actions-control-group .active-action td,
+.alert-edit .trigger-actions .alert-actions-control-group .active-action td {
+    line-height: 24px;
+}
+.alert-save-as .trigger-actions .alert-actions-control-group .active-action td img,
+.alert-edit .trigger-actions .alert-actions-control-group .active-action td img {
+    width: 24px;
+    height: 24px;
+    padding: 0 5px 0 0;
+}
+.alert-save-as .trigger-actions .alert-actions-control-group .more-info .control-group,
+.alert-edit .trigger-actions .alert-actions-control-group .more-info .control-group {
+    width: 330px;
+    clear: both;
+}
+.alert-save-as .trigger-actions .alert-actions-control-group .more-info .control-label,
+.alert-edit .trigger-actions .alert-actions-control-group .more-info .control-label {
+    width: 50px;
+}
+.alert-save-as .trigger-actions .alert-actions-control-group .more-info .controls,
+.alert-edit .trigger-actions .alert-actions-control-group .more-info .controls {
+    margin-left: 70px;
+}
+.alert-save-as .trigger-actions .alert-actions-control-group .more-info .help-block,
+.alert-edit .trigger-actions .alert-actions-control-group .more-info .help-block {
+    width: 170px;
+}
+.alert-save-as .add-alert-action-dropdown li > a.unselected-action,
+.alert-edit .add-alert-action-dropdown li > a.unselected-action {
+    padding-left: 34px;
+    min-height: 25px;
+}
+.alert-save-as .add-alert-action-dropdown li > a.unselected-action > img,
+.alert-edit .add-alert-action-dropdown li > a.unselected-action > img {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 24px;
+    height: 24px;
+}
+.email-include > .shared-controls-syntheticcheckboxcontrol {
+    display: inline-block;
+    width: 130px;
+    vertical-align: top;
+    word-break: break-word;
+}
+.email-include > .shared-controls-syntheticcheckboxcontrol.include-inline {
+    width: inherit;
+    padding: 0 5px 0 0;
+    max-width: 62px;
+}
+.email-include > .shared-controls-syntheticselectcontrol.include-inline-format {
+    margin-top: 6px;
+    max-width: 62px;
+    word-break: break-word;
+    vertical-align: top;
+    white-space: normal;
+}
+.email-include > .shared-controls-syntheticselectcontrol.include-inline-format > a.dropdown-toggle {
+    display: inline-block;
+}
+.email-include > .shared-controls-syntheticcheckboxcontrol > label {
+    overflow: visible;
+}
+.modal-wide textarea.messagearea {
+    resize: both;
+    max-width: 575px;
+    min-width: 100%;
+    height: 100px;
+}
+.custom_time .time-advanced > .control-label {
+    max-width: none;
+}
+
+/* Override Splunk print styles */
+
+@media print {
+    a[href]:after {
+        content: ""
+    }
+
+    .app-search-controls-wrapper .search-field-background {
+        display: block !important;
+    }
+
+    .app-search-controls-wrapper .search-bar td, .app-search-controls-wrapper .search-bar th {
+        width: 100% !important;
+        display: table-cell;
+    }
+
+    .app-search-controls-wrapper .search-button {
+        display: table-cell !important;
+    }
+
+    .app-search-controls-wrapper .shadowTextarea {
+        border: 1px solid #bfbfbf !important;
+        border-top-left-radius: 4px;
+        border-bottom-left-radius: 4px;
+        min-height: 38px;
+    }
+
+    .app-search-controls-wrapper .btn {
+        border: 1px solid #bfbfbf !important;
+        background: transparent !important;
+        padding: 4px 12px !important;
+    }
+
+    .dashboard-body .input.input-text input, .dashboard-body .select2-container .select2-choice, .dashboard-body .select2-container .select2-choices, .dashboard-body  .select2-container .select2-search-choice {
+        border: 1px solid #bfbfbf !important;
+    }
+}
+
+.dvbanner{
+    font-size: 15px;
+}

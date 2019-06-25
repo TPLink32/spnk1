@@ -1,0 +1,134 @@
+<form script="inventory_inpage_drilldown.js" stylesheet="table_decoration.css">
+  <label>Physical Inventory</label>
+   <search id="baseSearch">
+     <query>| `phy_inventory_details`</query> 
+     <earliest>$earliest$</earliest>
+     <latest>$latest$</latest>
+   </search>
+  <fieldset autoRun="true" submitButton="false">
+   
+    <input type="time" searchWhenChanged="true">
+      <default>
+        <earliest>-60m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+    <input type="multiselect" token="multiTokenQuery" searchWhenChanged="true">
+      <choice value="*">ALL</choice>
+      <label>Device</label>
+      
+      <delimiter> OR Device=</delimiter>
+      <default>*</default>
+      <search>
+         <query>`nexus_index` sourcetype=cisco:nexus:json | lookup nexus_hostname_lookup device AS device OUTPUT hostname AS hostname  | eval hostAndHostname = hostname."(".device.")" | stats values(device) as Device by hostAndHostname | fields hostAndHostname Device | sort hostAndHostname</query>
+       </search>
+        <earliest>$earliest</earliest>
+        <latest>$latest$</latest>
+        <fieldForLabel>hostAndHostname</fieldForLabel>
+        <fieldForValue>Device</fieldForValue>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+     <html id="overview">
+      <h1>Dashboard Overview</h1>
+      <p>This dashboard gives visibility into overall inventory of nexus switches. It lets user drill down into specific inventory and display its details by clicking on a device ip or hostname.</p>
+     </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table id="master">
+        <title>Switches</title>
+        <search base="baseSearch">
+          <query>| search Device=$multiTokenQuery$ | where like(name,"%Chassis%") | table hostname,Device,serialnum,productid,platform,uptime | rename hostname as Hostname serialnum AS "Serial Number"  productid AS "Prodroduct ID" platform as Platform uptime as Uptime</query>
+          <earliest>$earliest</earliest>
+          <latest>$latest$</latest>
+        </search>
+        <option name="count">5</option>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table id="detail">
+        <title>Line Cards</title>
+         <search base="baseSearch">
+           <query>| search hostname=$hostnametoken$ | where like(desc,"%Ethernet%Module%") | table hostname,Device,name,n,desc,serialnum,productid,"Hardware Version","Software Version",Status | rename hostname as Hostname desc AS Description serialnum AS "Serial Number"  productid AS "Prodroduct ID" name AS Name | fields - n</query>
+           <earliest>$earliest$</earliest>
+           <latest>$latest$</latest>
+        </search>
+         <option name="count">4</option>
+         <option name="drilldown">none</option>
+      </table>
+    </panel>
+    <panel>
+      <table id="detail1">
+        <title>Fabric Module</title>
+         <search base="baseSearch">
+          <query>| search hostname=$hostnametoken$ | where like(productid,"%-FM%") |eval n=replace(name,"([\w]+)\s([\d]+)","\2")| table hostname,Device,name,n,desc,serialnum,productid,"Hardware Version","Software Version",Status | rename hostname as Hostname desc AS Description serialnum AS "Serial Number"  productid AS "Prodroduct ID" name AS Name | fields - n</query>
+          <earliest>$earliest$</earliest>
+          <latest>$latest$</latest>
+        </search>
+         <option name="count">4</option>
+         <option name="drilldown">none</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table id="detail2">
+        <title>Power Supply</title>
+         <search base="baseSearch">
+            <query>|search hostname=$hostnametoken$ | where like(productid,"%-PAC%") | table hostname,Device,name,desc,serialnum,productid| rename hostname as Hostname desc AS Description serialnum AS "Serial Number"  productid AS "Prodroduct ID"  name AS Name</query>
+            <earliest>$earliest$</earliest>
+            <latest>$latest$</latest>
+        </search>
+        <option name="count">4</option>
+         <option name="drilldown">none</option>
+      </table>
+    </panel>
+    <panel>
+      <table id="detail3">
+        <title>Fan Module</title>
+        <search base="baseSearch">
+          <query>| search hostname=$hostnametoken$ |where like(desc,"%Fan Module%") | table hostname,Device,name,desc,serialnum,productid | rename hostname as Hostname desc AS Description serialnum AS "Serial Number"  productid AS "Prodroduct ID" name AS Name</query>
+          <earliest>$earliest$</earliest>
+          <latest>$latest$</latest>
+        </search>
+        <option name="count">4</option>
+         <option name="drilldown">none</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table id="detail4">
+        <title>Supervisor Module</title>
+         <search base="baseSearch">
+           <query>| search hostname=$hostnametoken$ | where like(productid,"%-SUP-%") | table hostname,Device,name,n,desc,serialnum,productid, "Hardware Version","Software Version",Status | rename hostname as Hostname desc AS Description serialnum AS "Serial Number"  productid AS "Prodroduct ID" name AS Name</query>
+           <earliest>$earliest$</earliest>
+           <latest>$latest$</latest>
+        </search>
+         <option name="count">4</option>
+         <option name="drilldown">none</option>   
+      </table>
+    </panel>
+    <panel>
+      <table id="detail5">
+        <title>System Controllers</title>
+        <search base="baseSearch">
+          <query>| search hostname=$hostnametoken$ | where like(productid,"%-SC-%") | table hostname,Device,name,n,desc,serialnum,productid,"Hardware Version","Software Version",Status | rename hostname as Hostname desc AS Description  serialnum AS "Serial Number"  productid AS "Prodroduct ID" name AS Name</query>
+          <earliest>$earliest$</earliest>
+          <latest>$latest$</latest>
+        </search>
+        <option name="count">4</option>
+        <option name="drilldown">none</option>
+      </table>
+    </panel>
+  </row>
+</form>

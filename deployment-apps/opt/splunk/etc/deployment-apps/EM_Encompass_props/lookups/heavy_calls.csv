@@ -1,0 +1,14 @@
+api_call,heavy
+LoginManager.Login,1
+LoanManager.GetLoanConfigurationInfo,1
+LoanProxy.Save,1
+LoanManager.OpenPipeline,1
+LoanProxy.GetSupportingData,1
+LoanProxy.SaveSupportingData,1
+LoanManager.OpenQuery,1
+LoanManager.QueryPipeline,1
+LoanManager.SubmitBatch,1
+LoanProxy.SelectFields,1
+LoanManager.CreateLoan,1
+QueryDataForDashboardReport,1
+ReportManager.QueryLoansForReport,1

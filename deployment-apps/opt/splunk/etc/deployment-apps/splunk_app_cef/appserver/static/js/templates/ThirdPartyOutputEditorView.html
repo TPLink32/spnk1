@@ -1,0 +1,175 @@
+
+<div class="wizard-steps">
+            <div class="step step-0">
+                <span class="step-number">1.</span>
+                <span class="step-description">Select Data</span>
+            </div>
+
+            <div class="step step-1 inactive">
+                <span class="step-number">2.</span>
+                <span class="step-description">Map Fields</span>
+            </div>
+            
+            <div class="step step-2 inactive">
+                <span class="step-number">3.</span>
+                <span class="step-description">Create Static Fields</span>
+            </div>
+
+            <div class="step step-3 inactive">
+                <span class="step-number">4.</span>
+                <span class="step-description">Define Outputs</span>
+            </div>
+            
+            <div class="step step-4 inactive">
+                <span class="step-number">5.</span>
+                <span class="step-description">Save Search</span>
+            </div>
+</div>
+
+        <div class="warning-message-container">
+            <div id="warning-message" class="hide alert alert-error">
+              <i class="icon-alert"></i><span id="warning-message-text"></span>
+            </div>
+        </div>
+
+<div style="overflow: hidden;" id="data_source_step">
+	<h2>Data Source</h2>
+	<div class="help-text">Select the data-model from which to retrieve the data. If you have not done so, <a href="../../manager/search/data_model_manager">define a data-model</a> for the data you want to export.</div>
+	
+	<div class="input input-dropdown" style="width:50%;" id="models-dropdown">
+	    <label>Data Model</label>
+	</div>
+	            
+	<div class="input input-dropdown" style="width:50%;" id="objects-dropdown">
+	    <label>Object</label>
+	</div>
+</div>
+
+<div class="hide" style="overflow: visible;" id="field_mapping_step">
+    <h2>Field Mappings</h2>
+    <div class="help-text">Identify which fields that the attributes from the data-model ought to be mapped to. Any fields that are not mapped will not be included in the output.</div>
+    
+    <div id="field_mappings_select_data_model_first">
+        <i class="icon-info-circle icon-large"></i>Select data-model and object before mapping fields
+    </div>
+    
+	<div class="fields-missing-warning-message-container">
+	    <div class="fields-missing-warning-message hide alert alert-error">
+	        <i class="icon-alert"></i><span class="missing-fields-message-text"></span>
+	    </div>
+	</div>
+    
+	<div>
+		<table class="hide table table-condensed" id="field_mappings">
+		    <thead>
+		        <tr>
+		            <th>
+		                Output Field (Common Event Format)
+		            </th>
+		            <th>
+                        Data-model Attribute
+                    </th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		    </tbody>
+		</table>
+	</div>
+</div>
+
+<div class="hide" style="overflow: visible;" id="field_creation_step">
+    <h2>Field Creation</h2>
+    <div class="help-text">Define static values for fields.</div>
+    
+    <div class="fields-missing-warning-message-container">
+        <div class="fields-missing-warning-message hide alert alert-error">
+            <i class="icon-alert"></i><span class="missing-fields-message-text"></span>
+        </div>
+    </div>
+    
+    <div class="no_static_fields">No static fields exist yet; <a class="new_static_field" href="#">Create a new static field</a>. </div>
+    
+    <div>
+        <table class="hide table table-condensed" id="static_field_mappings">
+            <thead>
+                <tr>
+                    <th>
+                        Output Field  (Common Event Format)
+                    </th>
+                    <th>
+                        Field Value
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        
+        <div class="extra_options">
+            <a class="new_static_field" href="#"> <i class="icon-plus-circle"></i>Add new static field</a>
+        </div>
+    </div>
+</div>
+
+<div class="hide" style="overflow: hidden;" id="outputs_step" >
+    <h2>Outputs</h2>
+    <div class="help-text">Identify or create an output group to define where to send the data to.</div>
+    
+    <div id="outputs_list">
+        <table class="hide table table-condensed" >
+            <thead>
+                <tr>
+                    <th colspan="2">
+                        Group Name
+                    </th>
+                    <th>
+                        Hosts
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+<div class="hide" style="overflow: hidden;" id="finalize_step">
+    <h2>Search Information</h2>
+    <div class="help-text">Provide information about the search.</div>
+    
+    <div class="input input-text" style="width:50%;" id="search-name-input">
+        <label>Search Name</label>
+    </div>
+    
+    <label>Search Description (optional)</label>
+    <textarea class="input-large" rows="5" id="search-description"></textarea>
+    
+    <div id="search-preview"></div>
+    
+</div>
+
+<div class="actions">
+    <a href="#" id="prev" class="btn pull-left disabled" style="display: inline;">Previous</a>
+    <a href="#" id="next" class="btn btn-primary pull-right" style="display: inline;">Next</a>
+    <a href="#" id="save" class="btn btn-primary pull-right" style="display: none;">Save</a>
+</div>
+
+<script type="text/x-template" id="search-description-template">
+    <% if( parses ){ %>
+    <div id="search-parse-status" class="alert alert-info hide search-preview">
+        <i class="icon-alert"></i>Search parses successfully
+    </div>
+    <% } else{ %>
+    <div id="search-parse-status" class="alert alert-error hide search-preview">
+        <i class="icon-alert"></i>Search does not parse
+    </div>
+    <% } %>
+
+    <pre class="hide search-preview"><%- search_string %></pre>
+    <a id="show-search" href="#">Show search</a>
+
+    <div>
+    <a target="_blank" href="search?q=<%- encodeURIComponent(search_string) %>">Preview CEF events <i class="icon-external"></i></a>
+    </div>
+</script>

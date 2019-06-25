@@ -1,0 +1,43 @@
+<dashboard script="uba_use_case.js">
+  <label>UBA Use Case</label>
+  <row>
+    <panel>
+      <html>
+        <h3>UBA Use Case</h3>
+        <p>Splunk UBA provides advanced analytics capabilities, outstripping what is possible in Splunk Enterprise or in other analytical solutions. Just as importantly, UBA provides all of this out of the box.</p>
+        <p>Find out more about Splunk UBA <a href="https://www.splunk.com/en_us/products/premium-solutions/user-behavior-analytics.html">here</a>!</p>
+      </html>
+    </panel>
+  </row>
+    <row>
+    <panel depends="$DetectingDataExfil$">
+      <html>
+        <h3>Data Exfiltration</h3>
+        
+        <p>Data exfiltration is a great example of a use case where, for most organizations, you need a higher level of data science. Assuming your organization is one of the 99.9% where the firewall logs don't list the username -- in order to track a user exfiltrating data, you would need to look up every single IP address to the actual user. That's something super hard, but there are some things in Splunk Enterprise and ES that could potentially make it happen, but it's still not enough, because you also need to create that database in the first place by pulling the IP / user / device associations from DHCP logs, AD logs, VPN logs, etc.</p>
+        <p>Fortunately, we have a great platform for these higher order data science use cases. <a href="https://www.splunk.com/en_us/products/premium-solutions/user-behavior-analytics.html">Splunk UBA</a> has all these capabilities out of the box! Even better, we've also got really advanced visualizations for responding to data exfil situations.</p>
+        <h3>Screenshot(s)</h3>
+        <div style="float:left; width:49%"><img style="border: gray 1px solid;" src="/static/app/Splunk_Security_Essentials/images/uba_images/dataexfil1.png" /></div><div style="float:right; width:49%"><img style="border: gray 1px solid;" src="/static/app/Splunk_Security_Essentials/images/uba_images/dataexfil2.png" /></div>
+      </html>
+    </panel>
+  </row>
+    <row>
+    <panel depends="$UnusualDataMovement$">
+      <html>
+        <h3>Unusual Data Movement</h3>
+        <p>Suspicious Data Movement -- Need to Add</p>
+      </html>
+    </panel>
+  </row>
+    <row>
+    <panel depends="$AGD$">
+      <html>
+        <h3>Algorithmically Generated Domains</h3>
+        <p>Algorithmically Generated Domain Names (AGDs) are commonly used by malware that utilizes command and control (C2) infrastructure to download additional malware, send commands, or exfiltrate data. DGAs are used to generate domains for use that would not be blacklisted by threat intelligence feeds and firewalls thereby decreasing the risk of detection and blocking by automated systems. Some security tools will use Shannon Entropy algorithms to detect some algorithmically generated domains, and this can also be done within Splunk Enterprise (visit <a href="/app/Splunk_Security_Essentials/showcase_simple_search?ml_toolkit.dataset=Processes%20With%20High%20Entropy%20Names%20in%20Users%20Directory%20-%20Demo">High Entropy Process Name</a> for an example). However, sophisticated malware authors have developed methods to circumvent these detection methods by generating domains with lower levels of entropy. Fortunately, Splunk UBA is smarter than these attackers. While we do use Shannon entropy in some parts of the product, we also leverage a bigram machine learning algorithm trained on the english language. What this allows us to do is take each pair of letters in the domain name, (go, oo, og, gl, le) and predict with greater accuracy the probability that we would encounter those in the real world. That gives better detection, that is more accurate than traditional entropy checking.</p>
+
+        <h3>Screenshot(s)</h3>
+        <div style="float:left; width:60%"><img style="border: gray 1px solid;" src="/static/app/Splunk_Security_Essentials/images/uba_images/agd.png" /></div>
+      </html>
+    </panel>
+  </row>
+</dashboard>

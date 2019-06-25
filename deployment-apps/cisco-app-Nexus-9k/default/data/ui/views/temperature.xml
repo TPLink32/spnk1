@@ -1,0 +1,50 @@
+<form>
+  <label>Temperature</label>
+  <search id="baseSearch">
+    <query>| `temperature_details` </query>
+    <earliest>-60m</earliest>
+    <latest>now</latest>
+  </search>
+  <description/>
+  <fieldset autoRun="true" submitButton="false">
+    <input type="time" searchWhenChanged="true">
+      <default>
+        <earliest>-60m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+    <input type="multiselect" token="multiTokenQuery" searchWhenChanged="true">
+        <default>*</default>
+        <label>Device</label>
+        <delimiter> OR Device=</delimiter>
+        <choice value="*">ALL</choice>
+         <search>
+         <query>`nexus_index` sourcetype=cisco:nexus:json | lookup nexus_hostname_lookup device AS device OUTPUT hostname AS hostname  | eval hostAndHostname = hostname."(".device.")" | stats values(device) as Device by hostAndHostname | fields hostAndHostname Device | sort hostAndHostname</query>
+        </search>
+         <earliest>$earliest</earliest>
+         <latest>$latest$</latest>
+         <fieldForLabel>hostAndHostname</fieldForLabel>
+         <fieldForValue>Device</fieldForValue>  
+      </input>
+  </fieldset>
+
+  <row>
+    <panel>
+    <table>
+      <search base="baseSearch">
+        <query>| search Device=$multiTokenQuery$ | rename sensor as Sensor tempmod as Module | stats  latest(Model) as Model latest(ModuleType) as ModuleType latest("Current Temperature(Celsius)") as "Current Temperature(Celsius)", , values(Sensor) as SensorS, latest("Major Threshold(Celsius)") as "Major Threshold(Celsius)", latest("Minor Threshold(Celsius)") as "Minor Threshold(Celsius)", latest(Status) as Status, sparkline(avg(Current Temperature(Celsius))) as "Current Temperature History" by Hostname,Device,Module,Sensor  | sort Module | sort Device  | fields Hostname Device Module Model ModuleType Sensor "Current Temperature(Celsius)" "Current Temperature History" "Major Threshold(Celsius)" "Minor Threshold(Celsius)" Status</query>
+        <earliest>$earliest$</earliest>
+        <latest>$latest$</latest>
+      </search>
+      <format type="sparkline" field="Current Temperature History">
+        <option name="height">25px</option>
+        <option name="width">150px</option>
+      </format>
+      <option name="wrap">true</option>
+      <option name="rowNumbers">false</option>
+      <option name="dataOverlayMode">none</option>
+      <option name="count">10</option>
+    </table>
+    </panel>
+  </row>
+</form>

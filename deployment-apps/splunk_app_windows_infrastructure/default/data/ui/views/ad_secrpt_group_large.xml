@@ -1,0 +1,43 @@
+<form>
+  <label>Security Groups: Large</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="dropdown" token="select321" searchWhenChanged="true">
+      <label>Domain</label>
+      <search>
+        <query>|`ad-domains` |dedup src_nt_domain|sort src_nt_domain</query>
+      </search>
+      <fieldForLabel>src_nt_domain</fieldForLabel>
+      <fieldForValue>src_nt_domain</fieldForValue>
+      <selectFirstChoice>true</selectFirstChoice>
+    </input>
+    <input type="text" token="textbox496" searchWhenChanged="true">
+      <label>Minimum Size</label>
+      <default>0</default>
+      <initialValue>0</initialValue>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Security Groups: Empty</title>
+        <search>
+          <query>|`secrpt-large-groups($select321$,$textbox496$)`</query>
+          <earliest>-15m</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">50</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/ad_audit_group?form.ldaprecord.nt_domain=$select321$&form.ldaprecord.groupName=$row.cn$
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+</form>

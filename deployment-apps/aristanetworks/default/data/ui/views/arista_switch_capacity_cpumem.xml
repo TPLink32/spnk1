@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?><form>
+  <label>Switch CPU/Memory</label>
+  <searchTemplate>sourcetype="arista_switch_inventory" AristaSwitchCapacity | stats 
+latest(ports_used) as ports_used,
+latest(ports_unused) as ports_unused,
+latest(memtotal) as mem_total,
+latest(memused) as mem_used(%),
+sparkline(max(eval(rtrim(memused,"%")))) as mem_used_history,
+latest(cpu_idle) as cpu_idle(%),
+latest(cpu_user) as cpu_user(%),
+latest(cpu_system) as cpu_system(%),
+sparkline(max(eval(100-cpu_idle))) as cpu_used_history
+by switchname | table
+switchname, ports_used, ports_unused, 
+mem_total, mem_used(%), mem_used_history, 
+cpu_idle(%), cpu_user(%), cpu_system(%), cpu_used_history,</searchTemplate>
+  <fieldset autoRun="true">
+    <html>
+        <p>Filter using any field [ switchname=* ]</p>
+      </html>
+    <input type="text" token="filter">
+      <default>switchname=*</default>
+    </input>
+    <!-- Add default TimePicker -->
+    <input type="time"/>
+  </fieldset>
+  <row>
+    <table>
+      <title>Matching events</title>
+      <option name="count">50</option>
+      <format field="mem_used_history" type="sparkline">
+        <option name="type">bar</option>
+        <option name="barColor">green</option>
+        <option name="chartRangeMax">100</option>
+        <option name="chartRangeMin">0</option>
+        <option name="colorMap">
+          <option name="70:80">yellow</option>
+          <option name="81:87">orange</option>
+          <option name="88:">red</option>
+        </option>
+      </format>
+      <format field="cpu_used_history" type="sparkline">
+        <option name="type">bar</option>
+        <option name="barColor">green</option>
+        <option name="chartRangeMax">100</option>
+        <option name="chartRangeMin">0</option>
+        <option name="colorMap">
+          <option name="60:79">yellow</option>
+          <option name="80:89">orange</option>
+          <option name="90:">red</option>
+        </option>
+      </format>
+    </table>
+  </row>
+</form>

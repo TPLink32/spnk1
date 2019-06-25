@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form>
+  <label>Physical ports</label>
+  <searchTemplate>
+sourcetype="arista_switch_inventory" AristaSwitchCapacity | stats 
+earliest(ports_used) as ports_used_earliest,
+latest(ports_used) as ports_used_latest,
+earliest(ports_unused) as ports_unused_earliest,
+latest(ports_unused) as ports_unused_latest
+by switchname | table switchname, ports_used_earliest, ports_used_latest, ports_unused_earliest, ports_unused_latest
+  </searchTemplate>
+
+  <fieldset autoRun="true">
+      <html>
+        <p>Filter using any field [ switchname=* ]</p>
+      </html>
+      <input type="text" token="filter">
+      </input>
+
+      <!-- Add default TimePicker -->
+      <input type="time" />
+      
+  </fieldset>
+  
+  <row>
+      <table>
+          <title>Matching events</title>
+          <option name="count">50</option>
+      </table>
+    </row>
+
+</form>
+

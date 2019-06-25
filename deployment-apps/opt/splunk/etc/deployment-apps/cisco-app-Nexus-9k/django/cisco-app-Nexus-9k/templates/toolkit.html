@@ -1,0 +1,86 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+{% block title %}Toolkit Component Sample{% endblock title %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css">
+<link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+<link rel="stylesheet" href="{{STATIC_URL}}cisco-app-Nexus-9k/contrib/prettify.css"/>
+{% endblock css %}
+
+{% block content %}
+<div class="dashboard-body container-fluid main-section-body html">
+    <div class="row">
+        <div class="span12 dashboard-header clearfix">
+            <h2> {% block heading %}Toolkit Component Sample{% endblock heading %} </h2>
+        </div>
+    </div>
+
+    <div class="dashboard-row">
+        <div class="dashboard-cell1" style="width: 80%;margin-left: 10%;">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head" style="margin-top: 1%;margin-left: 2%;">
+                         <div class="dashboard-header clearfix">
+                           <h3>Dashboard Overview</h3>
+                         </div>
+
+                        <p>This dashboard contains topology of entire network consists of nexus switches. Each node represents a nexus switch and a link represents a connection between source switch and destination switch. CDP nieghboring information is represented in a graphical way. </p>
+                        <p>Mouse hover/click on a link will give information about Source IP address, Source Interface, Destination IP address, Destination Interface. Mouse hover/click on a node will give information about Switch IP address. </p>
+                        <p>Graph can be dragged and adjusted for better viewing.</p>
+                        
+                    </div>
+
+                    <div class="panel-body">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-cell" style="width: 80%;margin-left: 10%;margin-top: 1%">
+            <div class="dashboard-panel">
+                <div class="dashboard-element">
+                    <div class="panel-head">
+                    </div>
+
+                    <div class="panel-body">
+                        {% block example %}<p>Something should be here</p>{% endblock example %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+{% endblock content%}
+
+{% block managers %}
+
+{% endblock managers %}
+
+{% block _js %}
+{{block.super}}
+
+<script type="text/javascript">
+
+require.config({
+    waitSeconds: 400
+})
+require.config({
+    shim: {
+        "cisco-app-Nexus-9k/contrib/prettify": {
+            deps: [],
+            exports: "prettyPrint"
+        } 
+    }
+});
+
+
+require(["cisco-app-Nexus-9k/contrib/prettify"], function(prettyPrint) {
+    //formats code samples
+    prettyPrint();
+});    
+</script>
+
+{% endblock _js %}

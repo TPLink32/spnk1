@@ -1,0 +1,48 @@
+<form>
+  <label>Infoblox Lookup</label>
+  <fieldset submitButton="true" autoRun="true">
+    <!--
+    <input type="text" token="return_fields">
+      <label>return fields</label>
+      <seed>bootfile,bootserver,configure_for_dhcp,deny_bootp,discovered_data,enable_pxe_lease_time,host,ignore_client_requested_options,ipv4addr,last_queried,mac,match_client,network,nextserver,options,pxe_lease_time,use_bootfile,use_bootserver,use_deny_bootp,use_for_ea_inheritance,use_ignore_client_requested_options,use_nextserver,use_options,use_pxe_lease_time</seed>
+    </input>
+    -->
+    <input type="dropdown" token="api">
+      <label>Object</label>
+      <default>ipv4address</default>
+      <search>
+        <query>| inputlookup infoblox_objects | sort description</query>
+      </search>
+      <fieldForLabel>description</fieldForLabel>
+      <fieldForValue>object</fieldForValue>
+    </input>
+    <input type="multiselect" token="return_fields">
+      <search>
+        <query>| inputlookup infoblox_api_fieldlist | search object="$api$"</query>
+      </search>
+      <fieldForLabel>fields</fieldForLabel>
+      <fieldForValue>fields</fieldForValue>
+      <delimiter>,</delimiter>
+    </input>
+    <input type="text" token="max_results">
+      <label>Max results</label>
+      <default>10</default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <search>
+          <query>|infobloxws api="$api$"  max_results="$max_results$" return_fields="$return_fields$" | table $return_fields$</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>

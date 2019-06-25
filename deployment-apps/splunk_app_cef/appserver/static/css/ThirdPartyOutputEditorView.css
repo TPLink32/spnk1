@@ -1,0 +1,89 @@
+#field_mappings th, #static_field_mappings th{
+	font-weight: bold;
+}
+
+#field_mappings tr td:first-child{
+	width:50%;
+}
+
+#field_mappings, #static_field_mappings{
+	margin-top: 22px;
+}
+
+#field_mappings_select_data_model_first{
+	margin-top: 22px;
+	margin-bottom: 22px;
+}
+
+i.icon-large#field_mappings_select_data_model_first{
+	margin-right: 6px;
+    margin-left: 16px;
+}
+
+.help-text{
+	margin-bottom: 24px;
+}
+
+.actions{
+	margin-top: 24px;
+}
+
+.no_static_fields{
+    background-color: #EEE;
+    padding: 8px 8px 8px 8px;
+}
+
+#search-description{
+    margin-left: 10px;
+}
+
+/*
+ * Styling for each step page.
+ */
+#outputs_step{
+	min-height: 250px;
+}
+
+#field_mapping_step{
+    margin-top: 22px;
+    clear:both;
+    margin-bottom: 120px;
+}
+
+#field_creation_step{
+	min-height: 500px;
+	margin-bottom: 120px;
+}
+
+#finalize_step{
+    min-height: 495px;
+}
+
+#data_source_step{
+    min-height: 250px;
+}
+
+#search-parse-status {
+    margin-bottom: 0px;
+}
+
+/*
+ * The wizard step information.
+ */
+.wizard-steps{
+    border-bottom: 1px solid #B0B1B3;
+    margin-bottom: 12px;
+}
+
+.step-number{
+    font-size: large;
+}
+
+.step.inactive{
+    color: #B0B1B3;
+}
+
+.step{
+    display:inline;
+    margin-right: 18px;
+}

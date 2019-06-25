@@ -1,0 +1,78 @@
+<form>
+  <label>DNS Status</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="Time" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>DNS Servers - Status</title>
+        <search>
+          <query>eventtype=perfmon-dns counter="Total Query Received/sec"|stats sparkline(avg(Value),1m) as "Average Queries/sec" by host|join host [search eventtype=msad-dns-zoneinfo|stats values(Zone) as zz by host|eval zz=mvjoin(zz,";")|table host,zz]|join host [search eventtype=msad-dns-health|stats last(OperatingSystem) as "Operating System",last(ServicePack) as "Service Pack",last(ProcsOK) as ProcsOK by host]|eval Zones=split(zz,";")|table host,ProcsOK,Zones,"Operating System","Service Pack","Average Queries/sec"|sort -ProcsOK</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/ad_ops_dns_server_status?form.select135=$row.host$
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>DNS Zones</title>
+        <search>
+          <query>eventtype=msad-dns-zoneinfo|eval Breakdown="A:".A.", AAAA:".AAAA.", CNAME:".CNAME.", HINFO:".HINFO.", MX:".MX.", NS:".NS.", SOA:".SOA.", SRV:".SRV.", TXT:".TXT|dedup host,Zone|stats values(host) as "DNS Servers",values(TotalRecords) as "Total Records",values(Breakdown) as Breakdown by Zone</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/ad_ops_dns_zoneinfo?form.select152=$row.Zone$
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Anomalous Events - DNS Status</title>
+        <search>
+          <query>eventtype=msad-dns-events|lookup EventCodes EventCode,LogName OUTPUTNEW desc|eval desc=if(isnull(desc),"Unknown EventCode",desc)|stats count by host,Type,EventCode,LogName,desc</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/search?q=eventtype=msad-dns-events host="$row.host$" Type="$row.Type$" EventCode="$row.EventCode$" LogName="$row.LogName$"
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+</form>

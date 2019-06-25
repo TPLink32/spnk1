@@ -1,0 +1,79 @@
+x_webcat_code_full,x_webcat_code_abbr,x_webcat_code
+Adult,IW_adlt,1006
+Advertisements,IW_adv,1027
+Alcohol,IW_alc,1077
+Arts,IW_art,1002
+Astrology,IW_astr,1074
+Auctions,IW_auct,1088
+"Business and Industry",IW_busi,1019
+"Chat and Instant Messaging",IW_chat,1040
+"Cheating and Plagiarism",IW_plag,1051
+"Child Abuse Content",IW_cprn,1064
+"Computer Security",IW_csec,1065
+"Computers and Internet",IW_comp,1003
+Dating,IW_date,1055
+"Digital Postcards",IW_card,1082
+"Dining and Drinking",IW_food,1061
+"Dynamic and Residential",IW_dyn,1091
+Education,IW_edu,1001
+Entertainment,IW_ent,1093
+Extreme,IW_extr,1075
+Fashion,IW_fash,1076
+"File Transfer Services",IW_fts,1071
+"Filter Avoidance",IW_filt,1025
+"Finance",IW_fnnc,1015
+"Freeware and Shareware",IW_free,1068
+Gambling,IW_gamb,1049
+Games,IW_game,1007
+"Government and Law",IW_gov,1011
+Hacking,IW_hack,1050
+"Hate Speech",IW_hate,1016
+"Health and Nutrition",IW_hlth,1009
+Humor,IW_lol,1079
+"Illegal Activities",IW_ilac,1022
+"Illegal Downloads",IW_ildl,1084
+"Illegal Drugs",IW_drug,1047
+"Infrastructure and Content Delivery Networks",IW_infr,1018
+"Internet Telephony",IW_voip,1067
+"Job Search",IW_job,1004
+"Lingerie and Swimsuits",IW_ling,1031
+Lotteries,IW_lotr,1034
+"Mobile Phones",IW_cell,1070
+Nature,IW_natr,1013
+News,IW_news,1058
+"Non-Governmental Organizations",IW_ngo,1087
+"Non-Sexual Nudity",IW_nsn,1060
+"Online Communities",IW_comm,1024
+"Online Storage and Backup",IW_osb,1066
+"Online Trading",IW_trad,1028
+"Organizational Email",IW_pem,1085
+"Parked Domains",IW_park,1092
+"Peer File Transfer",IW_p2p,1056
+"Personal Sites",IW_pers,1081
+"Photo Searches and Images",IW_img,1090
+Politics,IW_pol,1083
+Pornography,IW_porn,1054
+"Professional Networking",IW_pnet,1089
+"Real Estate",IW_rest,1045
+Reference,IW_ref,1017
+Religion,IW_rel,1086
+"SaaS and B2B",IW_saas,1080
+"Safe for Kids",IW_kids,1057
+"Science and Technology",IW_sci,1012
+"Search Engines and Portals",IW_srch,1020
+"Sex Education",IW_sxed,1052
+Shopping,IW_shop,1005
+"Social Networking",IW_snet,1069
+"Social Science",IW_socs,1014
+"Society and Culture",IW_scty,1010
+"Software Updates",IW_swup,1053
+"Sports and Recreation",IW_sprt,1008
+"Streaming Audio",IW_aud,1073
+"Streaming Video",IW_vid,1072
+Tobacco,IW_tob,1078
+Transportation,IW_trns,1044
+Travel,IW_trvl,1046
+Weapons,IW_weap,1036
+"Web Hosting",IW_whst,1037
+"Web Page Translation",IW_tran,1063
+"Web-Based Email",IW_mail,1038

@@ -1,0 +1,52 @@
+{
+  "schemaVersion": "1.0.0",
+  "info": {
+    "title": "Splunk App for Windows Infrastructure",
+    "id": {
+      "group": null,
+      "name": "splunk_app_windows_infrastructure",
+      "version": "1.4.3"
+    },
+    "author": [
+      {
+        "name": "Splunk, Inc.",
+        "email": "support@splunk.com",
+        "company": "Splunk, Inc."
+      }
+    ],
+    "releaseDate": null,
+    "description": "The Splunk App for Windows Infrastructure provides searches and dashboards that can be used to monitor and troubleshoot Windows operating systems and Active Directory from one place.",
+    "classification": {
+      "intendedAudience": "IT",
+      "categories": [
+        "IT Operations"
+      ],
+      "developmentStatus": "Production/Stable"
+    },
+    "commonInformationModels": null,
+    "license": {
+      "name": "Splunk Software License Agreement",
+      "text": "license-eula.txt",
+      "uri": "http://www.splunk.com/en_us/legal/splunk-software-license-agreement.html"
+    },
+    "releaseNotes": {
+      "name": "README",
+      "text": "README.txt",
+      "uri": "http://docs.splunk.com/Documentation/MSApp/latest/MSInfra/Releasenotes"
+    }
+  },
+  "dependencies": {
+    "SA-ldapsearch": {
+      "version": ">=2.1.4"
+    },
+    "Splunk_TA_microsoft_ad": {
+      "version": ">=1.0.0"
+    },
+    "Splunk_TA_microsoft_dns": {
+      "version": ">=1.0.1"
+    },
+    "Splunk_TA_windows": {
+      "version": ">=4.8.3"
+    }
+  }
+}

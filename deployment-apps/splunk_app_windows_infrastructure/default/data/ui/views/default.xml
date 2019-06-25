@@ -1,0 +1,1 @@
+<view isVisible="false" template="splunk_app_windows_infrastructure:/templates/redirect.tmpl" />

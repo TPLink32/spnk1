@@ -1,0 +1,30 @@
+<dashboard script="runPageScript.js">
+  <label>Use Cases</label>
+
+  <row>
+    <panel>
+      <html>
+        <div class="welcome-header">
+          <p>Welcome to the Use Case Overview in Splunk Security Essentials. This app provides generic search builders for doing time series analysis and first time analysis, which you can apply to any data you have in Splunk, for any use case you might desire. To help illustrate how this works, and also provide you with easy out of the box analytics you can use today, the app also includes many pre-built reports based on Common Information Model data, or anonymized demo data from Splunk Inc. or volunteer customers. There are also several normal Splunk searches that customers have used for Anomaly Detection, and that you will find in many UEBA products in the marketplace.</p>
+          <p>To get started, click on the name of any use case to view the demo data. Once you understand what the analytic is doing, you can try looking at the live data or accelerated data views. The app will try to help guide you toward making sure you have the right data in Splunk to do the analysis, but remember you can always click Open in Search to explore it on your own. Once you've got the search running how you want, you can schedule that alert to run regularly, and feed the results into Splunk User Behavior Analytics (UBA), Splunk ES's Risk Framework, or any other upstream ticketing system.</p>
+          <p>Each use case also includes the expected alert volume -- for "low" you can expect the alert to fire rarely, probably only every few weeks if that, whereas high volume alerts are likely to fire multiple times per day and should be sent into some upstream processing such as Splunk ES Risk, or Splunk UBA.</p>
+          
+        </div>
+      </html>
+    </panel>
+  </row>
+
+  <row id="rolePickerRow">
+    <panel>
+      <html>
+        <div class="welcome-header" style="padding:0px; padding-bottom: 0px; margin-bottom:0px;">
+          <p>To make the examples easy to follow, they are organized into Security Domain, and several are showcased as highlights at the top. Select a Security Domain you're interested in (or just select All Examples) below. </p>
+        </div>
+        <div class="input input-dropdown splunk-view">
+          <div id="rolePickerControl"></div>
+        </div>
+      </html>
+    </panel>
+  </row>
+
+</dashboard>

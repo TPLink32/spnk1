@@ -1,0 +1,476 @@
+<view autoCancelInterval="90" isVisible="true" objectMode="SimpleDashboard" 
+      onunloadCancelJobs="true" refresh="-1" template="dashboard.html">
+  <label>Protected Data Access Reports</label>
+  <module name="AccountBar" layoutPanel="appHeader"/>
+  <module name="AppBar" layoutPanel="navigationHeader"/>
+  <module name="Message" layoutPanel="messaging">
+    <param name="filter">*</param>
+    <param name="maxSize">1</param>
+    <param name="clearOnJobDispatch">False</param>
+  </module>
+  <module name="DashboardTitleBar" layoutPanel="viewHeader"/>
+  <module name="Message" layoutPanel="navigationHeader">
+    <param name="filter">splunk.search.job</param>
+    <param name="maxSize">1</param>
+    <param name="clearOnJobDispatch">True</param>
+    <param name="level">warn</param>
+  </module>
+
+  <module name="TimeRangePicker" layoutPanel="viewHeader">
+	<param name="searchWhenChanged">True</param>
+	<param name="selected">Last 7 days</param>
+
+	<module name="HiddenSavedSearch" layoutPanel="panel_row1_col1" 
+			group="Vormetric: All Events by User" autoRun="True">
+	  <param name="savedSearch">All Events by User</param>
+	  <param name="groupLabel">Vormetric: All Events by User</param>
+	  <module name="ViewstateAdapter">
+		<param name="suppressionList">
+		  <item>charting.primaryAxisTitle.text</item>
+		  <item>charting.axisY.scale</item>
+		  <item>charting.secondaryAxis.scale</item>
+		  <item>charting.secondaryAxis.maximumNumber</item>
+		  <item>charting.axisY.maximumNumber</item>
+		  <item>charting.chart</item>
+		  <item>charting.axisTitleX.text</item>
+		  <item>charting.secondaryAxisTitle.text</item>
+		  <item>charting.axisTitleY.text</item>
+		  <item>charting.layout.splitSeries</item>
+		  <item>charting.chart.nullValueMode</item>
+		  <item>count</item>
+		  <item>displayRowNumbers</item>
+		  <item>charting.legend.placement</item>
+		  <item>charting.chart.stackMode</item>
+		</param>
+		<module name="HiddenFieldPicker">
+		  <param name="strictMode">True</param>
+		  <module name="JobProgressIndicator">
+			<module name="EnablePreview">
+			  <param name="display">False</param>
+			  <param name="enable">True</param>
+			  <module name="HiddenChartFormatter">
+				<param name="charting.axisY.scale">log</param>
+				<param name="charting.secondaryAxis.scale">log</param>
+				<param name="charting.chart.stackMode">stacked</param>
+				<param name="charting.chart">column</param>
+				<param name="charting.axisTitleX.text">Time</param>
+				<param name="charting.axisTitleY.text">Number of Events</param>
+				<param name="charting.layout.splitSeries">false</param>
+				<param name="charting.chart.nullValueMode">zero</param>
+				<param name="charting.legend.placement">right</param>
+				<module name="JSChart">
+				  <param name="width">100%</param>
+				  <module name="Gimp"/>
+				  <module name="ConvertToDrilldownSearch">
+					<module name="ViewRedirector">
+					  <param name="viewTarget">flashtimeline</param>
+					</module>
+				  </module>
+				</module>
+				<module name="ViewRedirectorLink">
+				  <param name="viewTarget">flashtimeline</param>
+				</module>
+			  </module>
+			</module>
+		  </module>
+		</module>
+	  </module>
+	</module>
+	<module name="HiddenSavedSearch" layoutPanel="panel_row1_col2" 
+			group="Vormetric: All Denied Events by User" autoRun="True">
+	  <param name="savedSearch">All Denied Events by User</param>
+	  <param name="groupLabel">Vormetric: All Denied Events by User</param>
+	  <module name="ViewstateAdapter">
+		<param name="suppressionList">
+		  <item>charting.primaryAxisTitle.text</item>
+		  <item>charting.secondaryAxisTitle.text</item>
+		  <item>charting.chart.stackMode</item>
+		  <item>charting.chart</item>
+		  <item>charting.axisTitleX.text</item>
+		  <item>charting.axisTitleY.text</item>
+		  <item>charting.layout.splitSeries</item>
+		  <item>charting.chart.nullValueMode</item>
+		  <item>charting.legend.placement</item>
+		</param>
+		<module name="HiddenFieldPicker">
+		  <param name="strictMode">True</param>
+		  <module name="JobProgressIndicator">
+			<module name="EnablePreview">
+			  <param name="display">False</param>
+			  <param name="enable">True</param>
+			  <module name="HiddenChartFormatter">
+				<param name="charting.chart.stackMode">stacked</param>
+				<param name="charting.chart">column</param>
+				<param name="charting.axisTitleX.text">Time</param>
+				<param name="charting.axisTitleY.text">Number of Events</param>
+				<param name="charting.layout.splitSeries">false</param>
+				<param name="charting.chart.nullValueMode">gaps</param>
+				<param name="charting.legend.placement">right</param>
+				<module name="JSChart">
+				  <param name="width">100%</param>
+				  <module name="Gimp"/>
+				  <module name="ConvertToDrilldownSearch">
+					<module name="ViewRedirector">
+					  <param name="viewTarget">flashtimeline</param>
+					</module>
+				  </module>
+				</module>
+				<module name="ViewRedirectorLink">
+				  <param name="viewTarget">flashtimeline</param>
+				</module>
+			  </module>
+			</module>
+		  </module>
+		</module>
+	  </module>
+	</module>
+	<module name="HiddenSavedSearch" layoutPanel="panel_row2_col1" 
+			group="Vormetric: Type of Action Performed" autoRun="True">
+	  <param name="savedSearch">Action by Time</param>
+	  <param name="groupLabel">Vormetric: Type of Action Performed</param>
+	  <module name="ViewstateAdapter">
+		<param name="suppressionList">
+		  <item>charting.primaryAxisTitle.text</item>
+		  <item>charting.secondaryAxisTitle.text</item>
+		  <item>charting.chart.stackMode</item>
+		  <item>charting.chart</item>
+		  <item>charting.axisTitleX.text</item>
+		  <item>charting.axisTitleY.text</item>
+		  <item>charting.layout.splitSeries</item>
+		  <item>charting.chart.nullValueMode</item>
+		  <item>charting.legend.placement</item>
+		</param>
+		<module name="HiddenFieldPicker">
+		  <param name="strictMode">True</param>
+		  <module name="JobProgressIndicator">
+			<module name="EnablePreview">
+			  <param name="display">False</param>
+			  <param name="enable">True</param>
+			  <module name="HiddenChartFormatter">
+				<param name="charting.chart.stackMode">stacked</param>
+				<param name="charting.chart">column</param>
+				<param name="charting.axisTitleX.text">Time</param>
+				<param name="charting.axisTitleY.text">Number of Events</param>
+				<param name="charting.layout.splitSeries">false</param>
+				<param name="charting.chart.nullValueMode">gaps</param>
+				<param name="charting.legend.placement">top</param>
+				<module name="JSChart">
+				  <param name="width">100%</param>
+				  <module name="Gimp"/>
+				  <module name="ConvertToDrilldownSearch">
+					<module name="ViewRedirector">
+					  <param name="viewTarget">flashtimeline</param>
+					</module>
+				  </module>
+				</module>
+				<module name="ViewRedirectorLink">
+				  <param name="viewTarget">flashtimeline</param>
+				</module>
+			  </module>
+			</module>
+		  </module>
+		</module>
+	  </module>
+	</module>
+	<module name="HiddenSavedSearch" layoutPanel="panel_row3_col1" 
+			group="Vormetric: All Denied Read Events" autoRun="True">
+	  <param name="savedSearch">All Denied Read Events</param>
+	  <param name="groupLabel">Vormetric: All Denied Read Events</param>
+	  <module name="ViewstateAdapter">
+		<param name="suppressionList">
+		  <item>charting.primaryAxisTitle.text</item>
+		  <item>charting.secondaryAxisTitle.text</item>
+		  <item>charting.chart.stackMode</item>
+		  <item>charting.chart</item>
+		  <item>charting.axisTitleX.text</item>
+		  <item>charting.axisTitleY.text</item>
+		  <item>charting.layout.splitSeries</item>
+		  <item>charting.chart.nullValueMode</item>
+		  <item>charting.legend.placement</item>
+		</param>
+		<module name="HiddenFieldPicker">
+		  <param name="strictMode">True</param>
+		  <module name="JobProgressIndicator">
+			<module name="EnablePreview">
+			  <param name="display">False</param>
+			  <param name="enable">True</param>
+			  <module name="HiddenChartFormatter">
+				<param name="charting.chart.stackMode">default</param>
+				<param name="charting.chart">column</param>
+				<param name="charting.axisTitleX.text">Time</param>
+				<param name="charting.axisTitleY.text">Number of Events</param>
+				<param name="charting.layout.splitSeries">false</param>
+				<param name="charting.chart.nullValueMode">gaps</param>
+				<param name="charting.legend.placement">right</param>
+				<module name="JSChart">
+				  <param name="width">100%</param>
+				  <module name="Gimp"/>
+				  <module name="ConvertToDrilldownSearch">
+					<module name="ViewRedirector">
+					  <param name="viewTarget">flashtimeline</param>
+					</module>
+				  </module>
+				</module>
+				<module name="ViewRedirectorLink">
+				  <param name="viewTarget">flashtimeline</param>
+				</module>
+			  </module>
+			</module>
+		  </module>
+		</module>
+	  </module>
+	</module>
+	<module name="HiddenSavedSearch" layoutPanel="panel_row3_col2" 
+			group="Vormetric: All Events by Host &amp; Type" autoRun="True">
+	  <param name="savedSearch">All Events by Host &amp; Type</param>
+	  <param name="groupLabel">Vormetric: All Events by Host &amp; Type</param>
+	  <module name="ViewstateAdapter">
+		<param name="suppressionList">
+		  <item>charting.primaryAxisTitle.text</item>
+		  <item>charting.axisY.scale</item>
+		  <item>charting.secondaryAxis.scale</item>
+		  <item>charting.chart.stackMode</item>
+		  <item>charting.chart</item>
+		  <item>charting.axisTitleX.text</item>
+		  <item>charting.secondaryAxisTitle.text</item>
+		  <item>dataOverlayMode</item>
+		  <item>charting.axisTitleY.text</item>
+		  <item>charting.layout.splitSeries</item>
+		  <item>charting.chart.nullValueMode</item>
+		  <item>count</item>
+		  <item>displayRowNumbers</item>
+		  <item>charting.legend.placement</item>
+		</param>
+		<module name="HiddenFieldPicker">
+		  <param name="strictMode">True</param>
+		  <module name="JobProgressIndicator">
+			<module name="EnablePreview">
+			  <param name="display">False</param>
+			  <param name="enable">True</param>
+			  <module name="HiddenChartFormatter">
+				<param name="charting.axisY.scale">log</param>
+				<param name="charting.secondaryAxis.scale">log</param>
+				<param name="charting.chart.stackMode">default</param>
+				<param name="charting.chart">bar</param>
+				<param name="charting.axisTitleX.text">Host</param>
+				<param name="charting.axisTitleY.text">Number of Events</param>
+				<param name="charting.layout.splitSeries">false</param>
+				<param name="charting.chart.nullValueMode">gaps</param>
+				<param name="charting.legend.placement">right</param>
+				<module name="JSChart">
+				  <param name="width">100%</param>
+				  <module name="Gimp"/>
+				  <module name="ConvertToDrilldownSearch">
+					<module name="ViewRedirector">
+					  <param name="viewTarget">flashtimeline</param>
+					</module>
+				  </module>
+				</module>
+				<module name="ViewRedirectorLink">
+				  <param name="viewTarget">flashtimeline</param>
+				</module>
+			  </module>
+			</module>
+		  </module>
+		</module>
+	  </module>
+	</module>
+	<module name="HiddenSavedSearch" layoutPanel="panel_row4_col1" 
+			group="Vormetric: All Data Access by Data Source" autoRun="True">
+	  <param name="savedSearch">All Data Accessed by Data Source</param>
+	  <param name="groupLabel">Vormetric: All Data Access by Data Source</param>
+	  <module name="ViewstateAdapter">
+		<param name="suppressionList">
+		  <item>charting.primaryAxisTitle.text</item>
+		  <item>charting.secondaryAxisTitle.text</item>
+		  <item>charting.chart.stackMode</item>
+		  <item>charting.chart</item>
+		  <item>charting.axisTitleX.text</item>
+		  <item>charting.axisTitleY.text</item>
+		  <item>charting.layout.splitSeries</item>
+		  <item>charting.chart.nullValueMode</item>
+		  <item>count</item>
+		  <item>displayRowNumbers</item>
+		  <item>charting.legend.placement</item>
+		</param>
+		<module name="HiddenFieldPicker">
+		  <param name="strictMode">True</param>
+		  <module name="JobProgressIndicator">
+			<module name="EnablePreview">
+			  <param name="display">False</param>
+			  <param name="enable">True</param>
+			  <module name="HiddenChartFormatter">
+				<param name="charting.chart.stackMode">stacked</param>
+				<param name="charting.chart">column</param>
+				<param name="charting.axisTitleX.text">Time</param>
+				<param name="charting.axisTitleY.text">Number of Events</param>
+				<param name="charting.layout.splitSeries">false</param>
+				<param name="charting.chart.nullValueMode">gaps</param>
+				<param name="charting.legend.placement">right</param>
+				<module name="JSChart">
+				  <param name="width">100%</param>
+				  <module name="Gimp"/>
+				  <module name="ConvertToDrilldownSearch">
+					<module name="ViewRedirector">
+					  <param name="viewTarget">flashtimeline</param>
+					</module>
+				  </module>
+				</module>
+				<module name="ViewRedirectorLink">
+				  <param name="viewTarget">flashtimeline</param>
+				</module>
+			  </module>
+			</module>
+		  </module>
+		</module>
+	  </module>
+	</module>
+	<module name="HiddenSavedSearch" layoutPanel="panel_row5_col1" 
+			group="Vormetric: All Denied Data Access by Data Source" 
+			autoRun="True">
+	  <param name="savedSearch">All Denied Access by Data Source</param>
+	  <param name="groupLabel">Vormetric: All Denied Data Access by Data Source</param>
+	  <module name="ViewstateAdapter">
+		<param name="suppressionList">
+		  <item>charting.primaryAxisTitle.text</item>
+		  <item>charting.secondaryAxisTitle.text</item>
+		  <item>charting.chart.stackMode</item>
+		  <item>charting.chart</item>
+		  <item>charting.axisTitleX.text</item>
+		  <item>charting.axisTitleY.text</item>
+		  <item>charting.layout.splitSeries</item>
+		  <item>charting.chart.nullValueMode</item>
+		  <item>count</item>
+		  <item>displayRowNumbers</item>
+		  <item>charting.legend.placement</item>
+		</param>
+		<module name="HiddenFieldPicker">
+		  <param name="strictMode">True</param>
+		  <module name="JobProgressIndicator">
+			<module name="EnablePreview">
+			  <param name="display">False</param>
+			  <param name="enable">True</param>
+			  <module name="HiddenChartFormatter">
+				<param name="charting.chart.stackMode">stacked</param>
+				<param name="charting.chart">column</param>
+				<param name="charting.axisTitleX.text">Time</param>
+				<param name="charting.axisTitleY.text">Number of Events</param>
+				<param name="charting.layout.splitSeries">false</param>
+				<param name="charting.chart.nullValueMode">gaps</param>
+				<param name="charting.legend.placement">right</param>
+				<module name="JSChart">
+				  <param name="width">100%</param>
+				  <module name="Gimp"/>
+				  <module name="ConvertToDrilldownSearch">
+					<module name="ViewRedirector">
+					  <param name="viewTarget">flashtimeline</param>
+					</module>
+				  </module>
+				</module>
+				<module name="ViewRedirectorLink">
+				  <param name="viewTarget">flashtimeline</param>
+				</module>
+			  </module>
+			</module>
+		  </module>
+		</module>
+	  </module>
+	</module>
+	<module name="HiddenSavedSearch" layoutPanel="panel_row6_col1" 
+			group="Vormetric: All Events by Data Location" autoRun="True">
+	  <param name="savedSearch">All Events by Protected Data</param>
+	  <param name="groupLabel">Vormetric: All Events by Data Location</param>
+	  <module name="ViewstateAdapter">
+		<param name="suppressionList">
+		  <item>charting.primaryAxisTitle.text</item>
+		  <item>charting.secondaryAxisTitle.text</item>
+		  <item>charting.chart.stackMode</item>
+		  <item>charting.chart</item>
+		  <item>charting.axisTitleX.text</item>
+		  <item>charting.axisTitleY.text</item>
+		  <item>charting.layout.splitSeries</item>
+		  <item>charting.chart.nullValueMode</item>
+		  <item>charting.legend.placement</item>
+		</param>
+		<module name="HiddenFieldPicker">
+		  <param name="strictMode">True</param>
+		  <module name="JobProgressIndicator">
+			<module name="EnablePreview">
+			  <param name="display">False</param>
+			  <param name="enable">True</param>
+			  <module name="HiddenChartFormatter">
+				<param name="charting.chart.stackMode">stacked</param>
+				<param name="charting.chart">column</param>
+				<param name="charting.axisTitleX.text">By Day</param>
+				<param name="charting.axisTitleY.text">Number of Events</param>
+				<param name="charting.layout.splitSeries">false</param>
+				<param name="charting.chart.nullValueMode">gaps</param>
+				<param name="charting.legend.placement">right</param>
+				<module name="JSChart">
+				  <param name="width">100%</param>
+				  <module name="Gimp"/>
+				  <module name="ConvertToDrilldownSearch">
+					<module name="ViewRedirector">
+					  <param name="viewTarget">flashtimeline</param>
+					</module>
+				  </module>
+				</module>
+				<module name="ViewRedirectorLink">
+				  <param name="viewTarget">flashtimeline</param>
+				</module>
+			  </module>
+			</module>
+		  </module>
+		</module>
+	  </module>
+	</module>
+	<module name="HiddenSavedSearch" layoutPanel="panel_row7_col1" 
+			group="Vormetric: All Denied Events by Data Location" autoRun="True">
+	  <param name="savedSearch">All Denied Events by Protected Data</param>
+	  <param name="groupLabel">Vormetric: All Denied Events by Data Location</param>
+	  <module name="ViewstateAdapter">
+		<param name="suppressionList">
+		  <item>charting.primaryAxisTitle.text</item>
+		  <item>charting.secondaryAxisTitle.text</item>
+		  <item>charting.chart.stackMode</item>
+		  <item>charting.chart</item>
+		  <item>charting.axisTitleX.text</item>
+		  <item>charting.axisTitleY.text</item>
+		  <item>charting.layout.splitSeries</item>
+		  <item>charting.chart.nullValueMode</item>
+		  <item>charting.legend.placement</item>
+		</param>
+		<module name="HiddenFieldPicker">
+		  <param name="strictMode">True</param>
+		  <module name="JobProgressIndicator">
+			<module name="EnablePreview">
+			  <param name="display">False</param>
+			  <param name="enable">True</param>
+			  <module name="HiddenChartFormatter">
+				<param name="charting.chart.stackMode">stacked</param>
+				<param name="charting.chart">column</param>
+				<param name="charting.axisTitleX.text">By Day</param>
+				<param name="charting.axisTitleY.text">Number of Events</param>
+				<param name="charting.layout.splitSeries">false</param>
+				<param name="charting.chart.nullValueMode">gaps</param>
+				<param name="charting.legend.placement">right</param>
+				<module name="JSChart">
+				  <param name="width">100%</param>
+				  <module name="Gimp"/>
+				  <module name="ConvertToDrilldownSearch">
+					<module name="ViewRedirector">
+					  <param name="viewTarget">flashtimeline</param>
+					</module>
+				  </module>
+				</module>
+				<module name="ViewRedirectorLink">
+				  <param name="viewTarget">flashtimeline</param>
+				</module>
+			  </module>
+			</module>
+		  </module>
+		</module>
+	  </module>
+	</module>
+  </module>
+</view>

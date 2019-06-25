@@ -1,0 +1,1150 @@
+{
+    "modelName": "Introspection_Usage",
+    "displayName": "Introspection Usage",
+    "description": "Introspection Data Model for Resource Usage",
+    "objectSummary": {
+        "Event-Based": 4,
+        "Transaction-Based": 0,
+        "Search-Based": 0
+    },
+    "objects": [
+        {
+            "objectName": "Introspection",
+            "displayName": "Introspection",
+            "parentName": "BaseEvent",
+            "fields": [
+                {
+                    "fieldName": "data.args",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data_args",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.cpu_idle_pct",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "cpu_idle_pct",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.cpu_system_pct",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "cpu_system_pct",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.cpu_user_pct",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "cpu_user_pct",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.fd_used",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "fd_used",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.mem_used",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "mem_used",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.normalized_load_avg_1min",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "normalized_load_avg_1min",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.pct_cpu",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "pct_cpu",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.pct_memory",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "pct_memory",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.process",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "process",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.search_props.app",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "app",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.search_props.args",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "search_args",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.search_props.mode",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "mode",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.search_props.user",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "user",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.swap_used",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "swap_used",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.mount_point",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "mount",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "_time",
+                    "owner": "BaseEvent",
+                    "type": "timestamp",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "_time",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "host",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "host",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "source",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "source",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "sourcetype",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "sourcetype",
+                    "comment": "",
+                    "fieldSearch": ""
+                }
+            ],
+            "calculations": [],
+            "constraints": [
+                {
+                    "search": "index=_introspection",
+                    "owner": "Introspection"
+                }
+            ],
+            "lineage": "Introspection"
+        },
+        {
+            "objectName": "Disk_Objects",
+            "displayName": "Disk Objects",
+            "parentName": "Introspection",
+            "fields": [
+                {
+                    "fieldName": "data.args",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data_args",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.cpu_idle_pct",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "cpu_idle_pct",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.cpu_system_pct",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "cpu_system_pct",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.cpu_user_pct",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "cpu_user_pct",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.fd_used",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "fd_used",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.mem_used",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "mem_used",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.normalized_load_avg_1min",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "normalized_load_avg_1min",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.pct_cpu",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "pct_cpu",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.pct_memory",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "pct_memory",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.process",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "process",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.search_props.app",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "app",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.search_props.args",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "search_args",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.search_props.mode",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "mode",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.search_props.user",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "user",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.swap_used",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "swap_used",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.mount_point",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "mount",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "_time",
+                    "owner": "BaseEvent",
+                    "type": "timestamp",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "_time",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "host",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "host",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "source",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "source",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "sourcetype",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "sourcetype",
+                    "comment": "",
+                    "fieldSearch": ""
+                }
+            ],
+            "calculations": [
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "Capacity",
+                            "owner": "Introspection.Disk_Objects",
+                            "type": "number",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "Capacity",
+                            "comment": "",
+                            "fieldSearch": ""
+                        }
+                    ],
+                    "calculationID": "ap8ojhsynvj",
+                    "owner": "Introspection.Disk_Objects",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "round('data.capacity'/1024,2)"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "Avail",
+                            "owner": "Introspection.Disk_Objects",
+                            "type": "number",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "Avail",
+                            "comment": "",
+                            "fieldSearch": ""
+                        }
+                    ],
+                    "calculationID": "hvv0j0v4aw",
+                    "owner": "Introspection.Disk_Objects",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "round('data.free'/1024,2)"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "Used",
+                            "owner": "Introspection.Disk_Objects",
+                            "type": "number",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "Used",
+                            "comment": "",
+                            "fieldSearch": ""
+                        }
+                    ],
+                    "calculationID": "e74nw43q038",
+                    "owner": "Introspection.Disk_Objects",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "round((Capacity-Avail),2)"
+                },
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "UsedPct",
+                            "owner": "Introspection.Disk_Objects",
+                            "type": "number",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "UsedPct",
+                            "comment": "",
+                            "fieldSearch": ""
+                        }
+                    ],
+                    "calculationID": "7fbamd5whnf",
+                    "owner": "Introspection.Disk_Objects",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "round((Used/Capacity)*100,2)"
+                }
+            ],
+            "constraints": [
+                {
+                    "search": "sourcetype=splunk_disk_objects component=Partitions",
+                    "owner": "Introspection.Disk_Objects"
+                }
+            ],
+            "lineage": "Introspection.Disk_Objects"
+        },
+        {
+            "objectName": "Hostwide_Resource_Usage",
+            "displayName": "Hostwide Resource Usage",
+            "parentName": "Introspection",
+            "fields": [
+                {
+                    "fieldName": "data.args",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data_args",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.cpu_idle_pct",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "cpu_idle_pct",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.cpu_system_pct",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "cpu_system_pct",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.cpu_user_pct",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "cpu_user_pct",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.fd_used",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "fd_used",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.mem_used",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "mem_used",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.normalized_load_avg_1min",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "normalized_load_avg_1min",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.pct_cpu",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "pct_cpu",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.pct_memory",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "pct_memory",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.process",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "process",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.search_props.app",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "app",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.search_props.args",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "search_args",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.search_props.mode",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "mode",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.search_props.user",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "user",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.swap_used",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "swap_used",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.mount_point",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "mount",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "_time",
+                    "owner": "BaseEvent",
+                    "type": "timestamp",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "_time",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "host",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "host",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "source",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "source",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "sourcetype",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "sourcetype",
+                    "comment": "",
+                    "fieldSearch": ""
+                }
+            ],
+            "calculations": [
+                {
+                    "outputFields": [
+                        {
+                            "fieldName": "pct_cpu_used",
+                            "owner": "Introspection.Hostwide_Resource_Usage",
+                            "type": "number",
+                            "required": false,
+                            "multivalue": false,
+                            "hidden": false,
+                            "editable": true,
+                            "displayName": "pct_cpu_used",
+                            "comment": "",
+                            "fieldSearch": ""
+                        }
+                    ],
+                    "calculationID": "ztotitvz5t7",
+                    "owner": "Introspection.Hostwide_Resource_Usage",
+                    "editable": true,
+                    "comment": "",
+                    "calculationType": "Eval",
+                    "expression": "round(100-'data.cpu_idle_pct',2)"
+                }
+            ],
+            "constraints": [
+                {
+                    "search": "sourcetype=splunk_resource_usage component=Hostwide",
+                    "owner": "Introspection.Hostwide_Resource_Usage"
+                }
+            ],
+            "lineage": "Introspection.Hostwide_Resource_Usage"
+        },
+        {
+            "objectName": "PerProcess_Resource_Usage",
+            "displayName": "PerProcess Resource Usage",
+            "parentName": "Introspection",
+            "fields": [
+                {
+                    "fieldName": "data.args",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "data_args",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.cpu_idle_pct",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "cpu_idle_pct",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.cpu_system_pct",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "cpu_system_pct",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.cpu_user_pct",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "cpu_user_pct",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.fd_used",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "fd_used",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.mem_used",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "mem_used",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.normalized_load_avg_1min",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "normalized_load_avg_1min",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.pct_cpu",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "pct_cpu",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.pct_memory",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "pct_memory",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.process",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "process",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.search_props.app",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "app",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.search_props.args",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "search_args",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.search_props.mode",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "mode",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.search_props.user",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "user",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.swap_used",
+                    "owner": "Introspection",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "swap_used",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "data.mount_point",
+                    "owner": "Introspection",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "mount",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "_time",
+                    "owner": "BaseEvent",
+                    "type": "timestamp",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "_time",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "host",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "host",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "source",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "source",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "sourcetype",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "sourcetype",
+                    "comment": "",
+                    "fieldSearch": ""
+                }
+            ],
+            "calculations": [],
+            "constraints": [
+                {
+                    "search": "sourcetype=splunk_resource_usage component=PerProcess",
+                    "owner": "Introspection.PerProcess_Resource_Usage"
+                }
+            ],
+            "lineage": "Introspection.PerProcess_Resource_Usage"
+        }
+    ],
+    "objectNameList": [
+        "Introspection",
+        "Disk_Objects",
+        "Hostwide_Resource_Usage",
+        "PerProcess_Resource_Usage"
+    ]
+}

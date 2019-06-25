@@ -1,0 +1,96 @@
+<form>
+  <label>Host Monitoring - Operations</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="dropdown" token="HostMonitoringHost" searchWhenChanged="true">
+      <label>Host</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_hostmon_system  | dedup Host | sort Host</query>
+      </search>
+      <fieldForLabel>Host</fieldForLabel>
+      <fieldForValue>Host</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <chart>
+        <title>Peak CPU Utilization &gt; 50% in the last 24 hours</title>
+        <search>
+          <query>eventtype=perfmon_windows earliest_time=-1d object=Processor counter="% Processor Time" host="$HostMonitoringHost$" | sort -Value | dedup host | eval Value=round(Value) | where Value&gt;50 | rangemap field=Value "50 - 60%"=50-59 "60 - 80%"=60-79 "&gt; 80%"=80-100 | chart count(host), list(host) by range</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/windows_hostmonitoring?form.HostMonitoringMultiHost=$HostMonitoringHost$
+      ]]>
+          </link>
+        </drilldown>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Peak Memory Utilization &gt; 50% in the last 24 hours</title>
+        <search>
+          <query>eventtype=perfmon_windows earliest_time=-1d object=Memory counter="% Committed Bytes In Use" host="$HostMonitoringHost$" | sort -Value| dedup host | eval Value=round(Value) | where Value&gt;50 | rangemap field=Value "50 - 60%"=50-59 "60 - 80%"=60-79 "&gt; 80%"=80-100 | chart count(host), list(host) by range</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/windows_hostmonitoring?form.HostMonitoringMultiHost=$HostMonitoringHost$
+      ]]>
+          </link>
+        </drilldown>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Disk Free Space Distribution</title>
+        <search>
+          <query>eventtype=hostmon_windows Type=Disk FreeSpaceKB=* TotalSpaceKB=* host="$HostMonitoringHost$" | dedup Name, host | stats sum(TotalSpaceKB) as TotalSpace, sum(FreeSpaceKB) as FreeSpace by host | eval FreeSpacePct=round(FreeSpace/TotalSpace*100) | rangemap field=FreeSpacePct "&lt;20%"=0-19 "20 - 50%"=20-49 "&gt;50%"=50-100 | chart count(host), list(host) by range</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="charting.chart">pie</option>
+    <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/windows_hostmonitoring?form.HostMonitoringMultiHost=$HostMonitoringHost$
+      ]]>
+          </link>
+        </drilldown>
+      </chart>
+    </panel>
+  </row>
+</form>

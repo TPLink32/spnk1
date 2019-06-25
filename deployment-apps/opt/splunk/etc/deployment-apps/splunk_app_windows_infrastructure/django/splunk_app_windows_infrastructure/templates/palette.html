@@ -1,0 +1,102 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Dashboard Builder | Splunk{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/palette.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/jqueryui/jquery.ui.menu.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}css/jqueryui/jquery.ui.autocomplete.css" />
+</style>
+
+{% endblock css %}
+
+{% block content %}
+<div class="container-full-width" id="palette-editor-view">
+    <div id="dashboard-main" data-apptitle="{{app_label}}"></div>
+</div>
+
+<script type="text/x-underscore-tmpl" id="palette-delete-dialog-tmpl">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3><%- _('Delete This App Dashboard').t() %></h3>
+    </div>
+    <div class="modal-body modal-body-scrolling">
+    <span><%- _('Are you sure you want to delete ').t() %><%= _.escape(title) %> ?</span>
+    </div>
+    <div class="modal-footer">
+    <%= cancel %> <a href="#" class="btn btn-primary"><%- _("Delete").t() %></a>
+    </div>
+</script>
+
+<script type="text/x-underscore-tmpl" id="palette-edit-description-tmpl">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3><%- _('Edit App Dashboard Details').t() %></h3>
+    </div>
+    <div class="modal-body modal-body-scrolling">
+      <div class="form form-horizontal">
+      </div>
+    </div>
+    <div class="modal-footer">
+    <%= cancel %> 
+    <%= save %>
+    </div>
+</script>
+
+
+<script type="text/x-underscore-tmpl" id="palette-clone-palette-tmpl">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3><%- _('Clone App Dashboard').t() %></h3>
+    </div>
+    <div class="modal-body modal-body-scrolling">
+      <div class="form form-horizontal">
+      </div>
+    </div>
+    <div class="modal-footer">
+    <%= cancel %> 
+    <%= save %>
+    </div>
+</script>
+
+<script type="text/x-underscore-tmpl" id="palette-edit-permissions-tmpl">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3><%- _('Edit Palette Permissions Page').t() %></h3>
+    </div>
+    <div class="modal-body modal-body-scrolling">
+      <div class="form form-horizontal">
+      </div>
+    </div>
+    <div class="modal-footer">
+    <%= cancel %> 
+    <%= save %>
+    </div>
+</script>
+
+<script type="text/x-underscore-tmpl" id="palette-save-description-tmpl">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3><%- _('Save As...').t() %></h3>
+    </div>
+    <div class="modal-body">
+      <div class="flashmessage"></div>
+      <div class="form form-horizontal">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <%= cancel %> 
+      <%= save %>
+    </div>
+  </div>
+</script>  
+{% endblock content%}
+
+{% block js %}    
+    <script>
+    requirejs.config({ urlArgs: "bust=267225" });
+    require(['splunk_app_windows_infrastructure/palette']);</script>
+{% endblock js %}

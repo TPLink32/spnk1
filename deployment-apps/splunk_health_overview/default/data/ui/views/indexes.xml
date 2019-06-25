@@ -1,0 +1,112 @@
+<form>
+  <label>Available Indexes</label>
+  <description></description>
+  <row>
+    <panel>
+      <table>
+        <title>Indexes Available to Search</title>
+      <searchString>|inputlookup avail_indexes.csv | join type=left sourcetype [|metadata type=sourcetypes index=* | convert ctime(*Time)] | eval totalCount = tostring(totalCount, "commas") | stats list(sourcetype) AS Sourcetype values(retention) AS "Retention Periond (Days)" list(lastTime) AS "Latest Event" list(totalCount) AS "Total Count" by Index</searchString>
+        <earliestTime>0</earliestTime>
+        <latestTime></latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">100</option>
+        <drilldown target="search">
+          <link field="Index">/app/search/search/?q=search index%3D$row.Index$</link>
+          <link field="Sourcetype">/app/search/search/?q=search index%3D$row.Index$ sourcetype%3D$click.value2$</link>
+          <link field="Description">/app/search/search/?q=search index%3D$row.Index$</link>
+          <link field="Retention Periond (Days)">/app/search/search/?q=search index%3D$row.Index$</link>
+          <link field="Latest Event">/app/search/search/?q=search index%3D$row.Index$</link>
+          <link field="Total Events">/app/search/search/?q=search index%3D$row.Index$</link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <input type="time" token="time">
+        <label></label>
+        <default>
+          <earliestTime>-30d@d</earliestTime>
+          <latestTime>now</latestTime>
+        </default>
+      </input>
+      <input type="dropdown" token="index_name">
+        <label>Index</label>
+        
+        <populatingSearch fieldForLabel="Index" fieldForValue="Index">|inputlookup avail_indexes.csv | dedup Index | sort + Index</populatingSearch>
+
+        <fieldForLabel>Index</fieldForLabel>
+        <fieldForValue>Index</fieldForValue>
+              <selectFirstChoice>true</selectFirstChoice>
+      </input>
+      <chart>
+        <title>Event Count Distribution by Index/Sourcetype</title>
+        
+          <searchString>| tstats count WHERE index=$index_name$ GROUPBY sourcetype, _time span=1d | timechart span=1d sum(count) by sourcetype</searchString>
+          <earliestTime>$time.earliest$</earliestTime>
+          <latestTime>$time.latest$</latestTime>
+        
+        <option name="charting.chart">column</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisTitleY.text">Count</option>
+      </chart>
+    </panel>
+    <panel>
+      <input type="dropdown" token="index" searchWhenChanged="true">
+        <label>Index</label>
+        <populatingSearch earliest="$earliest$" latest="$latest$" fieldForLabel="Index" fieldForValue="Index">|inputlookup avail_indexes.csv | dedup Index | sort + Index</populatingSearch>
+        <choice value="*">All</choice>
+        <default>*</default>
+      </input>
+      <table>
+        <title>Host Statistics in Index: $index$</title>
+        
+          <searchString>|metadata type=hosts index=$index$ | convert ctime(*Time) | eval totalCount = tostring(totalCount, "commas") | rename firstTime AS "Earliest Event" lastTime AS "Latest Event" totalCount AS "Event Count" | fields host "Earliest Event" "Latest Event" "Event Count" | sort - "Latest Event"</searchString>
+          <earliestTime>-30d@d</earliestTime>
+          <latestTime>now</latestTime>
+        
+        <option name="list.drilldown">full</option>
+        <option name="list.wrap">1</option>
+        <option name="maxLines">5</option>
+        <option name="raw.drilldown">full</option>
+        <option name="rowNumbers">false</option>
+        <option name="table.drilldown">all</option>
+        <option name="table.wrap">1</option>
+        <option name="type">list</option>
+        <option name="wrap">true</option>
+        <option name="dataOverlayMode">none</option>
+        <drilldown target="search">
+          <link field="host">/app/search/search/?q=search index%3D$index$%20host=$row.host$</link>
+          <link field="Earliest Event">/app/search/search/?q=search index%3D$index$%20host=$row.host$</link>
+          <link field="Total Events">/app/search/search/?q=search index%3D$index$%20host=$row.host$</link>
+          <link field="Latest Event">/app/search/search/?q=search index%3D$index$%20host=$row.host$</link>
+        </drilldown>
+        <option name="drilldown">cell</option>
+        <option name="count">25</option>
+      </table>
+    </panel>
+  </row>
+</form>

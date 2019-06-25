@@ -1,0 +1,9 @@
+[monitor:///osb_logs/osb*.log]
+index = osb
+sourcetype = weblogic_stdout
+disabled = 0
+
+[monitor:///osb_logs/access.log]
+index = osb
+sourcetype = osb:access
+disabled = 0

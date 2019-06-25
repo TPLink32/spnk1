@@ -1,0 +1,404 @@
+.splunk-app-microsoft-msadtopologyreportview
+{
+	width:			100%;
+	overflow-x:		scroll;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .MSADTopology_DataTable
+{
+	width:			100%;
+	overflow-x:		scroll;
+}
+
+.splunk-app-microsoft-msadtopologyreportview h2.title
+{
+	color:			#73A550;
+	font-size:		14px;
+	font-weight:	bold;
+	margin:			16px 0 10px;
+	display:		block;
+	clear:			both;
+}
+
+.splunk-app-microsoft-msadtopologyreportview td.fsmoroles, 
+.splunk-app-microsoft-msadtopologyreportview td.dsaoptions,
+.splunk-app-microsoft-msadtopologyreportview td.truefalse {
+	width:			128px;
+}
+
+div.fsmoroles, div.dsaoptions {
+	display:		inline-block;
+}
+
+.splunk-app-microsoft-msadtopologyreportview span.imageSep {
+	display:		block;
+	float:			left;
+	width:			8px;
+	height:			8px;
+}
+
+.splunk-app-microsoft-msadtopologyreportview span.imageStatusTrue {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/tick.png');
+	display:		block;
+	float:			left;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadtopologyreportview span.imageStatusFalse {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/cross.png');
+	display:		block;
+	float:			left;
+	width: 			16px;
+	height: 		16px;
+}
+.splunk-app-microsoft-msadtopologyreportview span.imageRODC {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/lock.png');
+	display:		block;
+	float:			left;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadtopologyreportview span.imageGlobalCatalog {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/globe.png');
+	display:		block;
+	float:			left;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadtopologyreportview span.imageSchema {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/schema.jpg');
+	display:		block;
+	float:			left;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadtopologyreportview span.imageDomainNaming {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/domainnaming.jpg');
+	display:		block;
+	float:			left;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadtopologyreportview span.imagePDCEmulator {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/pdcemulator.jpg');
+	display:		block;
+	float:			left;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadtopologyreportview span.imageRIDMaster {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/ridmaster.jpg');
+	display:		block;
+	float:			left;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadtopologyreportview span.imageInfrastructure {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/infrastructure.jpg');
+	display:		block;
+	float:			left;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadtopologyreportview span.hostTrue {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/tick.png');
+	display:		block;
+	float:			left;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadtopologyreportview span.hostFalse {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/cross.png');
+	display:		block;
+	float:			left;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadtopologyreportview span.host {
+	vertical-align:	middle;
+	height:			16px;
+	margin-left:	12px;
+}
+
+.splunk-app-microsoft-msadtopologyreportview div.imageTrue {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/tick.png');
+	display:		block;
+	margin:			0 auto;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadtopologyreportview div.imageFalse {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/cross.png');
+	display:		block;
+	margin:			0 auto;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .dataTables_wrapper {
+	position: 		relative;
+	clear: 			both;
+	zoom: 			1; /* Feeling sorry for IE */
+}
+
+.splunk-app-microsoft-msadtopologyreportview .dataTables_processing {
+	position: 		absolute;
+	top: 			50%;
+	left: 			50%;
+	width: 			250px;
+	height: 		30px;
+	margin-left: 	-125px;
+	margin-top: 	-15px;
+	padding: 		14px 0 2px 0;
+	border: 		1px solid #ddd;
+	text-align: 	center;
+	color: 			#999;
+	font-size: 		14px;
+	background-color: white;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .dataTables_length {
+	width: 			40%;
+	float: 			left;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .dataTables_filter {
+	width: 			50%;
+	float: 			right;
+	text-align: 	right;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .dataTables_info {
+	width: 			60%;
+	float: 			left;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .dataTables_paginate {
+	float: 			right;
+	text-align: 	right;
+	width:			44px;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .paginate_disabled_previous, 
+.splunk-app-microsoft-msadtopologyreportview .paginate_enabled_previous, 
+.splunk-app-microsoft-msadtopologyreportview .paginate_disabled_next, 
+.splunk-app-microsoft-msadtopologyreportview .paginate_enabled_next {
+	height: 		19px;
+	width: 			19px;
+	margin-left: 	1px;
+	margin-right:	1px;
+	padding:		0px;
+	float: 			left;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .paginate_disabled_previous {
+	background-image: url('/dj/static/splunk_app_windows_infrastructure/images/back_disabled.jpg');
+}
+
+.splunk-app-microsoft-msadtopologyreportview .paginate_enabled_previous {
+	background-image: url('/dj/static/splunk_app_windows_infrastructure/images/back_enabled.jpg');
+}
+
+.splunk-app-microsoft-msadtopologyreportview .paginate_disabled_next {
+	background-image: url('/dj/static/splunk_app_windows_infrastructure/images/forward_disabled.jpg');
+}
+
+.splunk-app-microsoft-msadtopologyreportview .paginate_enabled_next {
+	background-image: url('/dj/static/splunk_app_windows_infrastructure/images/forward_enabled.jpg');
+}
+
+.splunk-app-microsoft-msadtopologyreportview table.MSADTopology_DataTable {
+	margin: 		0 auto;
+	clear: 			both;
+	width: 			100%;
+}
+
+.splunk-app-microsoft-msadtopologyreportview table.MSADTopology_DataTable thead th {
+	padding: 		3px 18px 3px 10px;
+	border-bottom: 	1px solid black;
+	font-weight: 	bold;
+	cursor: 		pointer;
+	* cursor: 		hand;
+}
+
+.splunk-app-microsoft-msadtopologyreportview table.MSADTopology_DataTable tfoot th {
+	padding: 		3px 18px 3px 10px;
+	border-top: 	1px solid black;
+	font-weight: 	bold;
+}
+
+.splunk-app-microsoft-msadtopologyreportview table.MSADTopology_DataTable tr.heading2 td {
+	border-bottom: 	1px solid #aaa;
+}
+
+.splunk-app-microsoft-msadtopologyreportview table.MSADTopology_DataTable td {
+	padding: 		3px 10px;
+}
+
+.splunk-app-microsoft-msadtopologyreportview table.MSADTopology_DataTable td.center {
+	text-align: 	center;
+	margin:			0 auto;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .sorting_asc {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/sort_asc.png') no-repeat center right;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .sorting_desc {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/sort_desc.png') no-repeat center right;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .sorting {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/sort_both.png') no-repeat center right;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .sorting_asc_disabled {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/sort_asc_disabled.png') no-repeat center right;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .sorting_desc_disabled {
+	background: 	url('/dj/static/splunk_app_windows_infrastructure/images/sort_desc_disabled.png') no-repeat center right;
+}
+
+.splunk-app-microsoft-msadtopologyreportview tr.odd {
+	background-color: #E2E4FF;
+}
+
+.splunk-app-microsoft-msadtopologyreportview tr.even {
+	background-color: white;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .dataTables_scroll {
+	clear: 			both;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .dataTables_scrollBody {
+	*margin-top: 	-1px;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .top, .bottom {
+	padding: 		15px;
+	background-color: #F5F5F5;
+	border: 		1px solid #CCCCCC;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .top .dataTables_info {
+	float: 			none;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .clear {
+	clear: 			both;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .dataTables_empty {
+	text-align: 	center;
+}
+
+.splunk-app-microsoft-msadtopologyreportview tfoot input {
+	margin: 		0.5em 0;
+	width: 			100%;
+	color: 			#444;
+}
+
+.splunk-app-microsoft-msadtopologyreportview tfoot input.search_init {
+	color: 			#999;
+}
+
+.splunk-app-microsoft-msadtopologyreportview td.group {
+	background-color: #d1cfd0;
+	border-bottom: 	2px solid #A19B9E;
+	border-top: 	2px solid #A19B9E;
+}
+
+.splunk-app-microsoft-msadtopologyreportview td.details {
+	background-color: #d1cfd0;
+	border: 		2px solid #A19B9E;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .paging_full_numbers {
+	width: 			400px;
+	height: 		22px;
+	line-height: 	22px;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .paging_full_numbers span.paginate_button,
+.splunk-app-microsoft-msadtopologyreportview .paging_full_numbers span.paginate_active {
+	border: 		1px solid #aaa;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	padding: 		2px 5px;
+	margin: 		0 3px;
+	cursor: 		pointer;
+	*cursor: 		hand;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .paging_full_numbers span.paginate_button {
+	background-color: #ddd;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .paging_full_numbers span.paginate_button:hover {
+	background-color: #ccc;
+}
+
+.splunk-app-microsoft-msadtopologyreportview .paging_full_numbers span.paginate_active {
+	background-color: #99B3FF;
+}
+
+.splunk-app-microsoft-msadtopologyreportview table.MSADTopology_DataTable tr.even.row_selected td {
+	background-color: #B0BED9;
+}
+
+.splunk-app-microsoft-msadtopologyreportview table.MSADTopology_DataTable tr td {
+	cursor: 		pointer;
+}
+
+.splunk-app-microsoft-msadtopologyreportview table.MSADTopology_DataTable tr.odd.row_selected td {
+	background-color: #9FAFD1;
+}
+
+.splunk-app-microsoft-msadtopologyreportview tr.odd td.sorting_1 {
+	background-color: #D3D6FF;
+}
+
+.splunk-app-microsoft-msadtopologyreportview tr.odd td.sorting_2 {
+	background-color: #DADCFF;
+}
+
+.splunk-app-microsoft-msadtopologyreportview tr.odd td.sorting_3 {
+	background-color: #E0E2FF;
+}
+
+.splunk-app-microsoft-msadtopologyreportview tr.even td.sorting_1 {
+	background-color: #EAEBFF;
+}
+
+.splunk-app-microsoft-msadtopologyreportview tr.even td.sorting_2 {
+	background-color: #F2F3FF;
+}
+
+.splunk-app-microsoft-msadtopologyreportview tr.even td.sorting_3 {
+	background-color: #F9F9FF;
+}
+
+.splunk-app-microsoft-msadtopologyreportview table.KeyTable td {
+	border: 3px solid transparent;
+}
+
+.splunk-app-microsoft-msadtopologyreportview div.box {
+	height: 		100px;
+	padding: 		10px;
+	overflow: 		auto;
+	border: 		1px solid #8080FF;
+	background-color: #E5E5FF;
+}

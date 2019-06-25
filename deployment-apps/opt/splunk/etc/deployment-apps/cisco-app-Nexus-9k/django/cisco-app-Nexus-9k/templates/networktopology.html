@@ -1,0 +1,37 @@
+{% extends "toolkit.html" %}
+
+{% load splunkmvc %}
+{% load networktopology %}
+
+ {% block title %}Network Topology{% endblock title %}
+
+{% block css %}
+{{block.super}}
+<style type="text/css">
+#force-directed{
+    height: 500px;
+}
+.splunk-textinput input{
+    width: 100px;
+}
+</style>
+{% endblock css %}
+	
+
+    {% block heading %}Network Topology{% endblock heading %}
+    {% block example %}
+        {% networktopology id="force-directed" managerid="search1" %}
+    {% endblock example %}
+
+     
+
+{% block managers %}
+
+    {%  searchmanager id="search1"
+        search='`nexus_index` sourcetype=cisco:nexus:json component=nxneighbor | lookup nexus_hostname_lookup device AS device OUTPUT hostname AS hostname  | lookup nexus_hostname_lookup device AS v4mgmtaddr OUTPUT hostname AS hostnamedest | stats values(component) as component values(v4mgmtaddr) as v4mgmtaddr  values(port_id) as port_id by device, hostname, hostnamedest, intf_id |   stats values(component) as component, values(device) as device,values(port_id) as "Local Interface" by v4mgmtaddr, intf_id, hostname, hostnamedest | rename intf_id as "Remote Interface" | rename device as "Local Device" | rename v4mgmtaddr as "Remote Device" | stats count by "Local Device","Remote Device","Local Interface","Remote Interface",component, hostname, hostnamedest' 
+        cache=True
+        earliest_time="-24h@h"
+        latest_time="now"
+    %}
+
+{% endblock managers %}

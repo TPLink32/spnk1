@@ -1,0 +1,88 @@
+<form class="form-horizontal form-complex">
+    <div class="control-group">
+        <label class="control-label" for="hipchat_room">Room</label>
+
+        <div class="controls">
+            <input type="text" name="action.hipchat.param.room" id="hipchat_room" />
+            <span class="help-block">Enter the name of the HipChat room to send the notification to</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="hipchat_message">Message</label>
+
+        <div class="controls">
+            <textarea name="action.hipchat.param.message" id="hipchat_message" style="height: 120px;"></textarea>
+            <span class="help-block">
+                Enter the chat message to send to the HipChat room.
+                The message can include tokens that insert text based on the results of the search.
+                <a href="{{SPLUNKWEB_URL_PREFIX}}/help?location=learnmore.alert.action.tokens" target="_blank"
+                   title="Splunk help">Learn More <i class="icon-external"></i></a>
+            </span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="hipchat_notification_type">Notification Style</label>
+
+        <div class="controls">
+            <select id="hipchat_notification_type" name="action.hipchat.param.notification_type">
+                <option value="message">Message</option>
+                <option value="card">Application Card</option>
+            </select>
+            <span class="help-block">Choose style of HipChat notification.</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="hipchat_card_attributes">Card Attributes</label>
+
+        <div class="controls">
+            <input type="text" name="action.hipchat.param.card_attributes" id="hipchat_card_attributes" />
+            <span class="help-block">Choose fields from search result to show in card notification (comma-separated list, supports wildcards).</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Message Format</label>
+
+        <div class="controls">
+            <label class="radio" for="hipchat_message_format_plain">
+                <input id="hipchat_message_format_plain" type="radio" name="action.hipchat.param.message_format" value="plain" />
+                Plain Text
+            </label>
+            <label class="radio" for="hipchat_message_format_html">
+                <input id="hipchat_message_format_html" type="radio" name="action.hipchat.param.message_format" value="html" />
+                HTML
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="hipchat_color">Message Color</label>
+
+        <div class="controls">
+            <select id="hipchat_color" name="action.hipchat.param.color">
+                <option value="">None</option>
+                <option value="red">Red</option>
+                <option value="purple">Purple</option>
+                <option value="yellow">Yellow</option>
+                <option value="green">Green</option>
+                <option value="gray">Gray</option> 
+                <option value="random">Random</option>
+            </select>
+            <span class="help-block">Change the background of the hipchat message.</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <label class="checkbox" for="hipchat_notify">
+                <input type="checkbox" name="action.hipchat.param.notify" id="hipchat_notify" value="1"/>
+                Notify users in the room
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="hipchat_auth_token">Auth Token</label>
+
+        <div class="controls">
+            <input type="text" name="action.hipchat.param.auth_token_override" id="hipchat_auth_token" placeholder="Optional"/>
+            <span class="help-block">Override the globally configured HipChat Auth Token for this alert (optional).</span>
+        </div>
+    </div>
+</form>

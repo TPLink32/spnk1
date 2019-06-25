@@ -1,0 +1,11 @@
+<panel>
+    <title>Okta - Groups with Empty Members in Last 30 Days</title>
+      <table>
+        <search>
+          <query>source="okta:group" NOT members{}=* earliest=-30d|dedup id|table id, profile.name, profile.groupType,
+              profile.description, lastUpdated|rename id as "Group ID"|rename profile.groupType as "Group Type"|rename profile.name as "Group Name"|rename profile.description as Description|rename lastUpdated as "LastUpdated Time"</query>
+          <earliest></earliest>
+          <latest></latest>
+        </search>
+      </table>
+</panel>

@@ -1,0 +1,56 @@
+<form script="runPageScript.js">
+    <label>Detect Categorical Outliers</label>
+    <description>Find events that contain unusual combinations of values.</description>
+    <fieldset autoRun="false" submitButton="false">
+        <html>
+            <ul id="dashboard-form-tabs">
+                <li>
+                    <a class="tab-title-text" data-tab="newOutliers">Detect Outliers</a>
+                </li>
+                <li>
+                    <a class="tab-title-text" data-tab="existingOutliers">Load Existing Settings</a>
+                </li>
+            </ul>
+            <div id="dashboard-form-controls">
+                <div id="inputControls" data-tab="newOutliers">
+                    <label>Enter a search</label>
+                    <div class="app-search-controls-wrapper">
+                        <div id="searchBarControl"></div>
+                        <div id="searchControlsControl"></div>
+                    </div>
+                    <div class="input input-multiselect splunk-view">
+                        <label>Field(s) to analyze</label>
+                        <div id="anomalyFieldsControl"></div>
+                    </div>
+                    <div class="alerts shared-flashmessages app-error-messages" id="errorDisplay" ></div>
+                    <div id="assistantControlsFooter"></div>
+                </div>
+                <div id="queryHistoryPanel" data-tab="existingOutliers"></div>
+            </div>
+        </html>
+    </fieldset>
+
+    <row depends="$searchBarSearchJobIdToken$" rejects="$showResultPanelsToken$">
+        <panel>
+            <html>
+                <h3>Raw Data Preview</h3>
+                <div id="datasetPreviewPanel"></div>
+            </html>
+        </panel>
+    </row>
+
+    <row depends="$showResultPanelsToken$">
+        <panel id="singleOutliersPanel">
+            <html></html>
+        </panel>
+        <panel id="singleResultsPanel">
+            <html></html>
+        </panel>
+    </row>
+
+    <row depends="$showResultPanelsToken$">
+        <panel id="outliersTablePanel">
+            <html></html>
+        </panel>
+    </row>
+</form>

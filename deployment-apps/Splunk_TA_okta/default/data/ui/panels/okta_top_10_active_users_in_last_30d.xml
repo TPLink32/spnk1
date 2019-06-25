@@ -1,0 +1,10 @@
+<panel>
+	<title>Okta - Top 10 Active Users in Last 30 Days</title>
+	<table>
+		<search>
+		  <query>sourcetype="okta:im"  earliest =-30d action.objectType="core.user_auth*"OR action.objectType="core.user.sms.message_sent.verify" | rename action.objectType as object_type  | eval login_status=case(object_type=="core.user_auth.login_success", "Successful Okta Login", object_type=="core.user_auth.login_failed", "Failed Okta Login", object_type=="core.user_auth.logout_success", "Successful Okta Logout", object_type=="core.user_auth.account_locked", "Account Locked", object_type=="core.user_auth.mfa_bypass_attempted", "MFA Bypass", object_type=="core.user.sms.message_sent.verify", "MFA",  object_type=="core.user_auth.radius.login.failed", "Radius Login Failed",  object_type=="core.user_auth.radius.login.success", "Radius Login Successful" )| rename targets{}.login as "User Email"  | chart count over "User Email" by login_status usenull=f | eval Total=if(isnull(MFA),0,MFA)+if(isnull('Successful Okta Logout'),0,'Successful Okta Logout')+if(isnull('Successful Okta Login'),0,'Successful Okta Login')+if(isnull('Failed Okta Login'),0,'Failed Okta Login')+if(isnull('Radius Login Failed'),0,'Radius Login Failed')+if(isnull('Account Locked'),0,'Account Locked')+if(isnull('MFA Bypass'),0,'MFA Bypass')+if(isnull('Radius Login Failed'),0,'Radius Login Failed')| sort -Total | head 10</query>
+		  <earliest></earliest>
+		  <latest></latest>
+		</search>
+	</table>
+</panel>

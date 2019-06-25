@@ -1,0 +1,15 @@
+.perfmon-visible-button{
+    padding: 0px;
+    width: 20px;
+    cursor: pointer;
+    text-align: left;
+    font-size: large;
+}
+
+.perfmon-visible-button.icon-hidden{
+    color: gray;
+}
+
+.splunk-perfmon-counter-table-view tr.selected{
+    background-color: #B1D8FF;
+}

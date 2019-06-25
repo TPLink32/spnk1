@@ -1,0 +1,53 @@
+{% extends "splunkdj:base_with_account_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Setup | Splunk{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/setup/setup.css" />
+{% endblock css %}
+
+{% block content %}
+    <form id="setup-form" class="splunkdj-setup-form" method="post" action="" hidden>
+        <h3>
+        {% if is_first_run %}
+        Based on the information gathered in your environment, we've automatically selected the dashboards that meet your needs. 
+        You can change the selections to best suit your needs.
+        {% else %}
+        Customize the dashboards that you want available in the Splunk App for Windows Infrastructure.
+        {% endif %}
+        </h3>
+
+        <ol id="main-container"></ol>
+
+        <div style="clear:both;"></div>
+       
+        {{ form.as_p }}
+        {% csrf_token %}
+        {% if not is_first_run %}
+            <input id="save-button" class="btn btn-primary" type="button" value="Save" />
+            <input id="detect-button" class="btn btn-secondary" type="button" value="Detect" />
+            <a class="btn" href="{% url 'splunk_app_windows_infrastructure:home' %}">Cancel</a>
+        {% else %}
+            <input id="save-button" class="btn btn-primary" type="button" value="Finish and Save" />
+            <a class="btn btn-secondary" href="javascript:window.location.reload();">Detect</a>
+        {% endif %}
+    </form>
+{% endblock content%}
+
+{% block js %}
+    <script>
+    // This implementation is also used by exchange app which has a different setup
+    if ('{{app_name}}' === 'splunk_app_microsoft_exchange') {
+        // Redirect to new location for setup
+        window.location.replace("/dj/{{app_name}}/app_setup/");
+    } else {
+        requirejs.config({ urlArgs: "bust=267225" });
+        require(['jquery', '{{app_name}}/setup/setup'], function($, setup) {
+            $('#setup-form').show();
+            setup.runSetup("{{is_first_run}}" === "True", true);
+        });   
+    }
+    </script>
+{% endblock js %}

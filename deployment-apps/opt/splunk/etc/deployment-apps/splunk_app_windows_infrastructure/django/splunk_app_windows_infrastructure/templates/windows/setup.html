@@ -1,0 +1,56 @@
+{% extends "splunkdj:base_with_account_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Windows Input Configuration | Splunk{% endblock title %}
+
+{% block css %}
+    <style>
+        .left-right-select-multiple select {
+            height: 150px;
+        }
+    </style>
+{% endblock css %}
+
+{% block content %}
+    <form class="splunkdj-setup-form" method="post" action="">
+        <h1>Welcome to the Splunk App for Windows Infrastructure</h1>
+        {% if is_windows %}
+        <h2>Overview</h2>
+            <p>You are running this app on a non-Windows search head. This settings page is only available for local Windows search head configuration</p>
+        {% else %}
+        <h2>Overview</h2>
+            <p>
+            Use this page to enable data inputs for your Windows search head.
+            </p>
+        <h2>Event monitoring</h2>
+            <p>
+                To enable the collection of an event log in the Disabled group, simply click on the event log name. 
+                Use the filters located above the Enabled and Disabled groups
+                to help locate specific event logs.
+                Clicking "Disable All" will disable all unfiltered event logs in the Enabled group, while
+                clicking "Enable All" will enable all unfiltered event logs in the Disabled group.
+            </p>
+        <h2>Performance monitoring</h2>
+             <p>
+                To enable the collection of a perfmon object in the Disabled group, simply click on the perfmon object name. 
+                Use the filters located above the Enabled and Disabled groups
+                to help locate specific perfmon objects.
+                Clicking "Disable All" will disable all unfiltered perfmon objects in the Enabled group, while
+                clicking "Enable All" will enable all unfiltered perfmon objects in the Disabled group.
+            </p>
+        <h2>File and directory inputs</h2>
+            <p>
+                To enable or disable the collection of Windows DHCP or Update logs, toggle the radio buttons below to the appropriate setting.
+            </p>
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input class="btn btn-primary" type="submit" value="Save" />
+        {% endif %}
+    </form>
+{% endblock content%}
+
+{% block js %}
+    <script>requirejs.config({ urlArgs: "bust=267225" });
+require(['splunk_app_windows_infrastructure/widgets']);</script>
+{% endblock js %}

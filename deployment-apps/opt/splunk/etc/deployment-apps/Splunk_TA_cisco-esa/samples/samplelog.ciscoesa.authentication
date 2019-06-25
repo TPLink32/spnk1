@@ -1,0 +1,10 @@
+Nov 29 16:33:33 171.22.21.140 testmaillog: Info: Begin Logfile
+Sat Jun  8 11:15:43 2013 Info: Begin Logfile
+Sat Jun  8 11:15:43 2013 Info: Version: ###VERSION### SN: ###SN###
+Sat Jun  8 11:15:43 2013 Info: Time offset from UTC: 19800 seconds
+Tue Jul  9 23:44:52 2013 Info: User ###USER_NAME### from ###IP### was authenticated successfully.
+Tue Jul  9 01:18:52 2013 Info: logout:###IP### user:###USER_NAME### session:Q71xIwohfqyqdim1ETcv
+Wed Jun 12 06:45:28 2013 Info: logout:###IP### user:###USER_NAME### session:12LR0iCaP0b2klQpmowJ
+Sun Jun  9 23:45:16 2013 Info: logout:###IP### user:- session:0tnTelu1DTjGvvYmrN6o
+Mon Jun 10 19:21:46 2013 Info: logout:###IP### user:- session:TfKAunKDPes8egDSaNuq
+Fri Jun 28 13:45:58 2013 Info: User ###USER_NAME### from ###IP### failed authentication.

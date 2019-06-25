@@ -1,0 +1,87 @@
+<div tabindex="-1" id="search-operation-modal" class="modal fade in hide">
+    <div class="modal-header">
+        <h3 class="text-dialog-title">Enable Searches</h3>
+    </div>
+    <div class="modal-body form form-horizontal modal-body-scrolling">
+        <div id="operation-description">Enabling search</div>
+        <div class="hide" id="operation-completion-message">Searches successfully enabled</div>
+        
+        <div id="progress-bar">
+            <div class="progress progress-striped active">
+                <div class="bar" style="width: 0%;"></div>
+            </div>
+        </div>
+        
+    </div>
+    <div class="modal-footer">
+        <a href="#" id="cancel-operation" class="btn pull-right" style="display: inline;">Cancel</a>
+        <a href="#" id="close-operation" class="hide btn pull-right btn-dialog-cancel" style="display: inline;">Close</a>
+    </div>
+</div>
+
+<div tabindex="-1" id="no-searches-selected-modal" class="modal fade in hide">
+    <div class="modal-header">
+        <button type="button" class="close btn-dialog-close" data-dismiss="modal">x</button>
+        <h3 class="text-dialog-title">No Searches Selected</h3>
+    </div>
+    <div class="modal-body form form-horizontal modal-body-scrolling">
+        No searches were selected, please select at least one search and try again.
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn btn-dialog-cancel label_from_data" data-dismiss="modal" style="display: inline;">Close</a>
+    </div>
+</div>
+
+<div id="success_message" class="hide alert alert-info">
+  <i class="icon-alert"></i><span id="success_text">The changes were successfully saved</span>
+</div>
+
+<div id="failure_message" class="hide alert alert-error">
+  <i class="icon-alert"></i><span id="error_text">Changes could not be saved</span>
+</div>
+
+<a id="new-output" class="btn btn-primary pull-left" style="display: inline;">New</a>
+
+<script type="text/x-template" id="search-list-template">
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped display dataTable" id="table">
+    <thead>
+        <tr role="row">
+            <th><input type="checkbox" id="checkall" /></th>
+            <th>Name</th>
+            <th>Output Group</th>
+            <th>Next Scheduled Time</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for (var i = 0; i < searches.length; i++) { %>
+        <tr data-search="<%- searches[i].name %>">
+            <td><input type="checkbox" class="search_checkbox" /></td>
+            <td><a href="<%- output_edit_view %>?search=<%- searches[i].name %>"><%- searches[i].name %></a></td>
+            <td><%- searches[i].content['action.cefout._ROUTING'] %></td>
+            <td><%- searches[i].content.next_scheduled_time %></td>
+            <td>
+            <% if(searches[i].content.disabled) {%>Disabled
+                <% if(can_edit_searches){%>| <a href="#" data-app="<%- searches[i].acl["app"] %>" data-owner="<%- searches[i].acl["owner"] %>" data-search="<%- searches[i].name %>" class="change_to_enabled">Enable</a><% } %>
+            <% } %>
+            <% if(!searches[i].content.disabled) {%>Enabled
+                <% if(can_edit_searches){%>| <a href="#" data-app="<%- searches[i].acl["app"] %>" data-owner="<%- searches[i].acl["owner"] %>" data-search="<%- searches[i].name %>" class="change_to_disabled">Disable</a><% } %>
+            <% } %>
+            </td>
+        </tr>
+        <% } %>
+        
+    </tbody>
+</table>
+
+<div class="bottom_controls">
+    <a href="#" id="enable-selected-searches" class="btn btn-primary pull-left" style="display: inline;">Enable</a>
+    <a href="#" id="disable-selected-searches" class="btn btn-primary pull-left" style="display: inline;">Disable</a>
+</div>
+</script>
+
+<div id="content">
+    <div class="loading-placeholder">
+        Retrieving searches...
+    </div>
+</div>

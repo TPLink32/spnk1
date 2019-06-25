@@ -1,0 +1,137 @@
+// Splunk: Mixins
+// ==================
+// Snippets of reusable CSS to develop faster and keep code readable
+
+@import "mixins-shared.less";
+
+// Interactive
+// --------------------------------------------------
+// These are by any element that can be clicked, such as buttons, menus and table headings.
+.interactive() {
+	#gradient.vertical(@interactiveGradientStartColor, @interactiveGradientEndColor);
+	background-color: @interactiveBackgroundColor;
+	border: 1px solid @interactiveBorderColor;
+	border-top-color: @interactiveBorderTopColor;
+	border-bottom-color: @interactiveBorderBottomColor;
+
+	color: @textColor;
+	.box-shadow(@interactiveBoxShadow);
+	background-position: 0;  // bootstrap tries to animate this on hover & focus
+	text-shadow: none;
+}
+
+// Hover state
+.interactive-hover() {
+	#gradient.vertical(@interactiveGradientStartColorHover, @interactiveGradientEndColorHover);
+	background-color: @interactiveBackgroundColorHover;
+	border-color: @interactiveBorderColorHover;
+	border-top-color: @interactiveBorderTopColorHover;
+	border-bottom-color: @interactiveBorderBottomColorHover;
+	background-position: 0 0;
+	.box-shadow(@interactiveBoxShadowHover);
+	background-position: 0;  // bootstrap tries to animate this on hover & focus
+	text-shadow: none;
+}
+
+// Interactive Error
+// These are by any interactive element that is is in an error state
+.interactive-error() {
+	//#gradient.vertical(@interactiveErrorGradientStartColor, @interactiveErrorGradientEndColor);
+	background-color: @interactiveErrorBackgroundColor;
+	border-color: @interactiveErrorBorderColor;
+	color: @interactiveErrorTextColor;
+	text-shadow: none;
+}
+.interactive-error-hover() {
+	//#gradient.vertical(@interactiveErrorGradientStartColorHover, @interactiveErrorGradientEndColorHover);
+	background-color: @interactiveErrorBackgroundColorHover;
+	border-color: @interactiveErrorBorderColorHover;
+	color: @interactiveErrorTextColor;
+	text-shadow: none;
+}
+
+
+// primary
+.interactive-primary() {
+	#gradient.vertical(@primaryGradientStartColor, @primaryGradientEndColor);
+	background-color: @splunkGreen;
+	border: 1px solid @primaryBorderColor;
+	border-bottom-color: @primaryBorderBottomColor;
+	border-top-color: @primaryBorderTopColor;
+
+	color: @primaryTextColor;
+	.box-shadow(@primaryBoxShadow);
+	text-shadow: none;
+}
+
+// primary hover state
+.interactive-primary-hover() {
+	#gradient.vertical(@primaryGradientStartColorHover, @primaryGradientEndColorHover);
+	background-color: @primaryBackgroundColorHover;
+	border-color: @primaryBorderColorHover;
+	border-bottom-color: @primaryBorderBottomColorHover;
+	border-top-color: @primaryBorderTopColorHover;
+	background-position: 0 0;
+	.box-shadow(@primaryBoxShadowHover);
+	text-shadow: none;
+}
+
+//Overlays (Modal, Popdown, Search Assistant)
+.overlay-box-shadow() {
+	box-shadow: 0 3px 7px rgba(0,0,0,0.3);
+}
+
+
+// Focus States
+// -----------------------------
+
+// Text entry boxes change their border color and glow
+.focus-field() {
+	border-color: fade(@focusColor, 80%);
+	outline: 0;
+	border-collapse: separate; /* Fix IE9 Issue with box-shadow */
+	box-shadow: 0 0 8px fade(@focusColor, 60%);
+}
+
+// Clickable buttons change their border color and glow
+.focus-button() {
+	.focus-field();
+	background-position: 0;  // bootstrap tries to animate this on hover & focus
+}
+
+// Block elements change the background color
+.focus-pill() {
+	outline: 0;
+	text-decoration: none;
+	background: @pillBackgroundColorFocus;
+	box-shadow: none; //override default focus-link()
+}
+// Block elements change the background color and spread via box-shadow
+.focus-link() {
+	box-shadow: 0 0 0 2px @pillBackgroundColorFocus;
+	background-color: @pillBackgroundColorFocus;
+	outline: 0;
+}
+
+// Docking Elements
+// ------------------
+.affix-top-shadow()  {
+	box-shadow: 0 4px 8px rgba(0,0,0,0.2)
+}
+
+// Webkit-style focus
+// ------------------
+.tab-focus() {
+	// Default
+	outline: thin dotted @grayDark;
+	// Webkit
+	outline: 3px auto -webkit-focus-ring-color;
+	outline-offset: -2px;
+}
+
+// Draggable Handle
+.draggable-handle-background() {
+	background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAG0lEQVQIW2M0Njb+f/bsWUYYzciABuAyOFUAAKKMEAXhn6ySAAAAAElFTkSuQmCC) repeat;
+	opacity: 0.5;
+	cursor: move;
+}

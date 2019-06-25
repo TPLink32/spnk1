@@ -1,0 +1,152 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Overview | Splunk{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+    <style>
+      .launchpad {
+        padding-left: 10px;
+        padding-bottom: 30px;
+        font-size: 20px;
+        padding-top: 30px;
+      }
+      .launchpad a {
+        font-size: 16px;
+        color: #666;
+        display: inline-block;
+        position: relative;
+        top: -1px;
+      }
+      .dashboard-element {
+        padding-left: 8px;
+      }
+      .dashboard-element h1 {
+        font-size: 24px;
+        font-weight: 200;
+        margin: 0;
+        padding: 5px 10px;
+      }
+      .dashboard-element.help {
+        display: inline-block;
+        float: left;
+        width: 33%;
+        font-size: 14px;
+        line-height: 24px;
+      }
+      .dashboard-element.help a {
+        color: #527AB4;
+      }
+      .dashboard-cell {
+        margin-top: 10px;
+      }
+
+      .panel-head h3 {
+      padding-top: 16px;
+      }
+
+      .panel-body {
+      padding: 0 18px 15px 18px;
+      }
+
+      .launchpad {
+      padding-left: 0px;
+      padding-bottom: 5px;
+      color: #666;
+      }
+
+      .panel-head h1 {
+        font-size: 24px;
+        color: #666;
+        font-weight: 200;
+        padding-top: 15px;
+      }
+
+      .chartlabel h5 {
+        font-size: 13px;
+        margin: 4px 8px 0 9px;
+        color: #555;
+      }
+      div.chartlabel.left  {
+        float: left;
+      }
+
+      div.chartlabel.right  {
+        float: right;
+      }
+
+      .no-padding {
+        padding:0;
+      }
+
+      #sankey-user-accesses {
+        height: 300px;
+      }
+    </style>
+{% endblock css %}
+
+{% block content %}
+   <div class="dashboard-body container-fluid main-section-body">
+      
+      <div class="dashboard-row">
+        <div class="dashboard-cell" style="display:none;" id="windows-container">
+          <div class="dashboard-panel">
+                    <div class="dashboard-element">
+              <div class="panel-head">
+                <h1>Windows</h1>
+              </div>
+              <div class="panel-body">
+                <div class="launchpad icon-gauge-filler"> <a href="/dj/en-us/splunk_app_windows_infrastructure/windows/operationsdashboard/">Health</a></div>
+                <div class="launchpad icon-gauge-radial"> <a href="/dj/en-us/splunk_app_windows_infrastructure/windows/performance/">Resource Utilization</a></div>
+                <div class="launchpad icon-alert-circle"> <a href="/dj/en-us/splunk_app_windows_infrastructure/windows/windowsupdate/">Updates</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="dashboard-cell" style="display:none;" id="ad-container">
+          <div class="dashboard-panel">
+                    <div class="dashboard-element">
+              <div class="panel-head">
+                <h1>Active Directory</h1>
+              </div>
+              <div class="panel-body">
+                <div class="launchpad icon-gauge-filler"> <a href="/dj/en-us/splunk_app_windows_infrastructure/ad/ops_topology/">Health</a></div>
+                <div class="launchpad icon-lock"> <a href="/dj/en-us/splunk_app_windows_infrastructure/ad/sec_logon_fail/?earliest_time=-1d&amp;latest_time=now">Security</a></div>
+                <div class="launchpad icon-two-arrows-cycle"> <a href="/dj/en-us/splunk_app_windows_infrastructure/ad/chg_users/">Change Management</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+     
+      </div>
+     
+      <div class="dashboard-row">
+        <div class="dashboard-cell" style="width:100%;">
+          <div class="dashboard-panel">
+            <div class="dashboard-element help">
+              <div class="panel-head">
+                <h1>Additional Resources</h1>
+              </div>
+              <div class="panel-body">
+                <div><a href="/help?location=[MSApp:1.1.3]app.splunk_app_windows_infrastructure.home" target="_blank">Documentation</a></div>
+                <div><a href="/help?location=[MSApp:1.1.3]app.splunk_app_windows_infrastructure.palette" target="_blank">Learn more about building custom app dashboards</a></div>
+              </div>
+            </div>
+            <div style="clear:both;"></div>
+          </div>
+        </div>
+
+
+      </div>
+   </div>
+{% endblock content%}
+
+{% block js %}    
+    <script>
+    requirejs.config({ urlArgs: "bust=267225" });
+    require(['splunk_app_windows_infrastructure/landing']);</script>
+{% endblock js %}

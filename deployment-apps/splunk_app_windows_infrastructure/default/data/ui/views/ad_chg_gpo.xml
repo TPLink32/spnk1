@@ -1,0 +1,65 @@
+<form>
+  <label>Group Policy Changes</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="dropdown" token="select73" searchWhenChanged="true">
+      <label>Account Domain</label>
+      <search>
+        <query>eventtype=msad-ad-access Object_Type=groupPolicyContainer | dedup src_nt_domain | sort src_nt_domain</query>
+        <earliest>$Time.earliest$</earliest>
+        <latest>$Time.latest$</latest>
+      </search>
+      <fieldForLabel>src_nt_domain</fieldForLabel>
+      <fieldForValue>src_nt_domain</fieldForValue>
+      <selectFirstChoice>true</selectFirstChoice>
+    </input>
+    <input type="dropdown" token="select72" searchWhenChanged="true">
+      <label>Administrator</label>
+      <search>
+        <query>eventtype=msad-ad-access Object_Type=groupPolicyContainer src_nt_domain="$select73$" | dedup src_user | sort src_user</query>
+        <earliest>$Time.earliest$</earliest>
+        <latest>$Time.latest$</latest>
+      </search>
+      <fieldForLabel>src_user</fieldForLabel>
+      <fieldForValue>src_user</fieldForValue>
+      <selectFirstChoice>true</selectFirstChoice>
+    </input>
+    <input type="dropdown" token="select74" searchWhenChanged="true">
+      <label>Group Policy Name</label>
+      <search>
+        <query>eventtype=msad-ad-access Object_Type=groupPolicyContainer src_nt_domain="$select73$" src_user="$select72$" | eval cn="{".Object_Name_Guid."}" | join cn [ | ldapsearch domain="$select73$" search="(&amp;(objectclass=groupPolicyContainer)(CN=*))" attrs="displayName,cn" ] | dedup displayName | sort displayName</query>
+        <earliest>$Time.earliest$</earliest>
+        <latest>$Time.latest$</latest>
+      </search>
+      <fieldForLabel>displayName</fieldForLabel>
+      <fieldForValue>displayName</fieldForValue>
+      <selectFirstChoice>true</selectFirstChoice>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="time" token="Time">
+      <label></label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Group Policy Edits</title>
+        <search>
+          <query>eventtype=msad-ad-access Object_Type=groupPolicyContainer src_nt_domain="$select73$" src_user="$select72$" | stats latest(_time) as _time by src_nt_domain,src_user,host,session_id,Object_Name_Guid | eval cn="{".Object_Name_Guid."}" | join cn [| ldapsearch domain="$select73$" search="(&amp;(objectclass=groupPolicyContainer)(CN=*))" attrs="displayName,cn" ] | search displayName="$select74$" | `session-to-host` | table _time,src_nt_domain,src_user,login_host,displayName|rename src_nt_domain as "Domain",src_user as "Administrator",login_host as "Workstation", displayName as "Group Policy Name"</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>

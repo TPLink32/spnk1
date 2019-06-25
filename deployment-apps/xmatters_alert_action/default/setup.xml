@@ -1,0 +1,18 @@
+<setup>
+    <block title="xMatters Alerts" endpoint="admin/alert_actions" entity="xmatters">
+        <text>xMatters Configuration Settings</text>
+        <input field="param.endpoint_url">
+            <label>Inbound Integration URL (required)</label>
+            <type>text</type>
+        </input>
+        <text>xMatters Credentials</text>
+        <input field="param.xMuser">
+           <label>Username</label>
+           <type>text</type>
+        </input>
+        <input endpoint="storage/passwords" entity=":xmatters_password:" field="password">
+            <label>Password</label>
+            <type>password</type>
+        </input>
+    </block>
+</setup>

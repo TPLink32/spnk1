@@ -1,0 +1,88 @@
+<form script="dashboard_entry.js">
+  <label>Incidents Inspector</label>
+  <fieldset submitButton="false">
+    <input id="time" type="time" token="field1">
+      <label></label>
+      <default>
+        <earliest>-7d@h</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+    <input type="multiselect" token="assignment_group" searchWhenChanged="true">
+      <label>Assignment Group</label>
+      <search>
+        <query>eventtype=snow_incident | stats count by assignment_group_name | sort -count  | eval label=assignment_group_name." (".count.")" | eval assignment_group_name="assignment_group_name=\"".assignment_group_name."\""</query>
+        <earliest>-30d@d</earliest>
+        <latest>now</latest>
+      </search>
+      <fieldForLabel>label</fieldForLabel>
+      <fieldForValue>assignment_group_name</fieldForValue>
+      <choice value="*">All</choice>
+      <delimiter> OR </delimiter>
+      <default>*</default>
+    </input>
+    <input type="dropdown" token="caller_name" searchWhenChanged="true">
+      <label>Select the Caller name</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>eventtype=snow_incident | stats count by name | sort -count  | eval label=name." (".count.")" | eval name="name=\"".name."\""</query>
+        <earliest>-30d@d</earliest>
+        <latest>now</latest>
+      </search>
+      <fieldForLabel>label</fieldForLabel>
+      <fieldForValue>name</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="priority">
+      <label>Select Incident Priority</label>
+      <choice value="=1">Equals 1</choice>
+      <choice value="=2">Equals 2</choice>
+      <choice value="=3">Equals 3</choice>
+      <choice value="=4">Equals 4</choice>
+      <choice value="&gt;1">Greater than 1</choice>
+      <choice value="&gt;2">Greater than 2</choice>
+      <choice value="&lt;3">Less than 3</choice>
+      <choice value="&lt;4">Less than 4</choice>
+      <choice value="=*">All</choice>
+      <default>=*</default>
+    </input>
+    <input type="dropdown" token="incident_state_name" searchWhenChanged="true">
+      <label>Select Incident State</label>
+      <choice value="*">All</choice>
+      <default>*</default>
+      <search>
+        <query>
+            <![CDATA[
+                [| inputlookup incident_state_checkpoint.csv
+                | rename latestTimestamp as _index_earliest | return _index_earliest]
+                eventtype=snow_sys_choice_list name="incident" element="state"
+                | append [ search index=`snow_incident_state_index` ]
+                | table label, value
+                | dedup label, value
+                | eval value="incident_state_name=".label
+            ]]>
+        </query>
+      </search>
+      <fieldForLabel>label</fieldForLabel>
+      <fieldForValue>value</fieldForValue>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Incidents Table</title>
+        <search>
+          <query>eventtype=snow_incident $caller_name$ priority$priority$ $assignment_group$ $incident_state_name$ | dedup sys_id   | eval tnow = now()   | eval opened_for=(tnow-strptime(opened_at,"%Y-%m-%d %H:%M:%S"))/3600 | sort -opened_for | table number, opened_for, category, name, user, assignment_user_username, assignment_user_name, assignment_group_name, priority, incident_state_name, short_description|rename number as "Number", opened_for as "Opened for (h)", category as "Category",name as "User", user as "Username", assignment_user_name as "Assigned User", assignment_user_username as "Assigned Username", assignment_group_name as "Assignment Group", priority as "Priority", incident_state_name as "State", short_description as "Short Description"</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>

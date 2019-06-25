@@ -1,0 +1,14 @@
+api_call,api_heavy_call
+LoginManager.Login,LoginManager.Login
+LoanManager.GetLoanConfigurationInfo,LoanManager.GetLoanConfigurationInfo
+LoanProxy.Save,LoanProxy.Save
+LoanManager.OpenPipeline,LoanManager.OpenPipeline
+LoanProxy.GetSupportingData,LoanProxy.GetSupportingData
+LoanProxy.SaveSupportingData,LoanProxy.SaveSupportingData
+LoanManager.OpenQuery,LoanManager.OpenQuery
+LoanManager.QueryPipeline,LoanManager.QueryPipeline
+LoanManager.SubmitBatch,LoanManager.SubmitBatch
+LoanProxy.SelectFields,LoanProxy.SelectFields
+LoanManager.CreateLoan,LoanManager.CreateLoan
+QueryDataForDashboardReport,QueryDataForDashboardReport
+ReportManager.QueryLoansForReport,ReportManager.QueryLoansForReport

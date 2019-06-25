@@ -1,0 +1,82 @@
+{
+  "schemaVersion": "1.0",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["predict_numeric_fields", "predict_categorical_fields", "detect_numeric_outliers",
+        "detect_categorical_outliers", "forecast_time_series", "cluster_numeric_events"]
+    },
+    "scheduledTrainingId": {
+      "type": "string"
+    },
+    "alertIds": {
+      "type": "array"
+    },
+    "description": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "dataSource": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "searchString": {
+          "type": "string"
+        },
+        "earliestTime": {
+          "type": "string"
+        },
+        "latestTime": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false,
+      "required": ["type", "searchString", "earliestTime", "latestTime"]
+    },
+    "searchStages": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {"type": "string"},
+          "settings": {
+            "type": "object",
+            "properties": {
+              "algorithm": {
+                "type": "string"
+              },
+              "params": {
+                "type": "array"
+              },
+              "targetVariable": {
+                "type": "string"
+              },
+              "featureVariables": {
+                "type": "array"
+              },
+              "modelName": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false,
+            "required": ["algorithm", "params", "featureVariables", "modelName"]
+          }
+        },
+        "additionalProperties": false,
+        "required": ["type", "settings"]
+      }
+    }
+  },
+  "additionalProperties": false,
+  "required": ["title", "id", "type", "alertIds", "notes", "dataSource", "searchStages"]
+}

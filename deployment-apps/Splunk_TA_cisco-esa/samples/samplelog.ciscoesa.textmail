@@ -1,0 +1,330 @@
+Fri Jul 12 17:41:12 2013 Info: MID ###XID### matched all recipients for per-recipient policy Incoming_Mail_Restrictions in the inbound table
+Fri Jul 12 17:41:10 2013 Info: ICID ###XID### ACCEPT SG UNKNOWNLIST match sbrs[-2.0:10.0] SBRS -0.9
+Tue Jul 16 10:46:42 2013 Info: ICID ###XID### ACCEPT SG UNKNOWNLIST match sbrs[-2.0:10.0] SBRS 0.6
+Fri Jul 12 17:27:37 2013 Info: Message done DCID ###XID### MID ###XID### to RID [0, 1]
+Tue Jul 16 10:46:46 2013 Info: Delivery start DCID ###XID### MID ###XID### to RID [0]
+Fri Jul 12 17:41:14 2013 Info: RPC Delivery start RCID ###XID### MID ###XID### to local IronPort Spam Quarantine
+Fri Jul 12 18:17:20 2013 Info: ICID ###XID### RELAY SG RELAYLIST match ###DOMAIN### SBRS rfc1918
+Fri Jul 12 18:17:20 2013 Info: ICID ###XID### close
+Tue Jul 16 10:46:46 2013 Info: New SMTP DCID ###XID### interface ###IP### address ###IP### port 25
+Tue Jul 16 10:46:42 2013 Info: New SMTP ICID ###XID### interface Data 1 (###IP###) address ###IP### reverse dns host ###DOMAIN### verified yes
+Fri Jul 12 17:41:14 2013 Info: RPC Message done RCID ###XID### MID ###XID###
+Fri Jul 12 18:17:20 2013 Info: MID ###XID### ICID ###XID### From: <>
+Fri Jul 12 18:17:20 2013 Info: MID ###XID### ICID ###XID### From: <###EMAIL###>
+Fri Jul 12 18:17:20 2013 Info: MID ###XID### ready 2763 bytes from <>
+Tue Jul 16 10:46:45 2013 Info: MID ###XID### ICID ###XID### RID ###RID### To: <###EMAIL###>
+Fri Jul 12 18:17:20 2013 Info: DNS Error ###DOMAIN### MX - NXDomain
+Fri Jul 12 18:17:20 2013 Info: MID ###XID### was generated for bounce of MID ###XID###
+Tue Jul 16 10:46:46 2013 Info: MID ###XID### RID [0] Response '2.6.0  <###EMAIL###> Queued mail for delivery'
+Tue Jul 16 10:46:46 2013 Info: Message finished MID ###XID### done
+Tue Jul 16 10:46:44 2013 Info: ICID ###XID### TLS success protocol TLSv1 cipher RC4-SHA
+Fri Jul 12 18:17:20 2013 Info: MID ###XID### rewritten to MID ###XID### by add-footer filter 'Footer Stamping'
+Fri Jul 12 18:17:20 2013 Info: MID ###XID### attachment '###ATTACHMENT###'
+Tue Jul 16 10:46:45 2013 Info: MID ###XID### Subject '###SUBJECT###'
+Fri Jul 12 17:27:33 2013 Info: ICID ###XID### ACCEPT SG WHITELIST match BBBBBBBBBB SBRS 5.6
+Tue Jul 16 10:46:46 2013 Info: MID ###XID### interim AV verdict using Sophos CLEAN
+Fri Jul 12 17:27:36 2013 Info: Begin Logfile
+Tue Jul 16 10:46:46 2013 Info: MID ###XID### Outbreak Filters: verdict negative
+Tue Jul 16 10:46:45 2013 Info: MID ###XID### ready 16932 bytes from <###EMAIL###>
+Tue Jul 16 10:46:46 2013 Info: MID ###XID### using engine: CASE spam negative
+Tue Jul 16 10:46:46 2013 Info: MID ###XID### interim verdict using engine: CASE spam negative
+Fri Jul 12 17:41:14 2013 Info: ISQ: Quarantined MID ###XID###
+Tue Jul 16 10:46:45 2013 Info: MID ###XID### matched all recipients for per-recipient policy Incoming Mail policy for Splunktel from Client Domains_Test in the inbound table
+Fri Jul 12 17:27:37 2013 Info: MID ###XID### RID [0, 1] Response 'OK A6/22-29800-B84FFD15'
+Fri Jul 12 17:27:31 2013 Info: MID ###XID### Message-ID '<7436c832-4f04-4385-a6a1-980350db5a51>'
+Tue Jul 16 10:46:45 2013 Info: MID ###XID### Message-ID '<###EMAIL###>'
+Fri Jul 12 18:17:20 2013 Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by destination server with response: 5.1.2 - Bad destination host ('000', ['DNS Hard Error looking up ###DOMAIN### (MX):  NXDomain'])
+Fri Jul 12 17:27:36 2013 Info: Version: ###VERSION### SN: ###SN###
+Fri Jul 12 18:17:20 2013 Info: MID ###XID### matched all recipients for per-recipient policy Exception1-20MB-limit in the outbound table
+Fri Jul 12 17:27:37 2013 Info: MID ###XID### matched all recipients for per-recipient policy Default Allow-Security Group in the outbound table
+Sep 29 15:52:13 ###SOURCE_DOMAIN### mail_logs: Info: SLBL: Database watcher updated from snapshot 20140929T225150-slbl.db.
+Sep 29 15:46:39 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### was too big (10046882/262144) for scanning by Outbreak Filters
+Sep 29 15:46:39 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### was too big (10046882/2097152) for scanning by CASE
+Sep 29 15:21:31 ###SOURCE_DOMAIN### mail_logs: Info: Double bounce: MID ###XID### to 0 - 5.1.1 - Bad destination email address 'invalid domain "": no dot found'
+Sep 29 15:59:57 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### RELAY SG O365_RELAYLIST match ###IP###/24 SBRS 5.5
+Sep 29 15:59:37 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### RELAY SG O365_RELAYLIST match ###IP###/24 SBRS 5.6
+Sep 29 15:59:56 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### RELAY SG RELAYLIST match ###IP###-26 SBRS rfc1918
+Sep 29 15:32:06 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### ACCEPT SG SBRS_Bypass_2 match ###DOMAIN### SBRS 5.3
+Sep 29 15:53:26 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### ACCEPT SG SBRS_Bypass_2 match ###DOMAIN### SBRS 5.5
+Sep 29 15:01:10 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### ACCEPT SG SBRS_Bypass_2 match ###IP### SBRS -1.6
+Sep 29 15:59:31 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### REJECT SG BLACKLIST match .bluestatedigital.com SBRS 5.5
+Sep 29 15:59:52 ###SOURCE_DOMAIN### mail_logs: Warning: MID ###XID###: scanning error (###FILE_TYPE###): no filter available for this file type
+Sep 29 15:59:54 ###SOURCE_DOMAIN### mail_logs: Warning: MID ###XID###: ###FILE_TYPE###): no filter available for this file type
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: DCID ###XID### close
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### lost
+Sep 29 15:59:57 ###SOURCE_DOMAIN### mail_logs: Info: Message finished MID ###XID### aborted
+Sep 29 15:52:09 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### DKIM: ###EMAIL###
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: Start MID ###XID### ICID ###XID###
+Sep 29 15:16:38 ###SOURCE_DOMAIN### mail_logs: Info: Done scanning resultsweyland-yutani.
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: DCID ###XID### STARTTLS command not supported
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### antivirus negative
+Sep 29 15:53:21 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### deleted from quarantine "Executive_Profanity" (manual) t=25911
+Sep 29 15:54:09 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### deleted from quarantine "Bounced_Messages" (expired) t=345841
+Sep 29 15:53:29 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### released from quarantine "Executive_Profanity" (manual) t=278795
+Sep 29 15:05:11 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### released from quarantine "Outbreak" (rescanned) t=1964
+Sep 29 15:59:11 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### released from quarantine "Outbreak" (expired) t=3238
+Sep 29 15:34:03 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### quarantined to "Outbreak" (Outbreak rule:Scam: Dating)
+Sep 29 15:53:37 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### quarantined to "Profanity" (content filter:Profanity_Filter_Body)
+Sep 29 15:47:51 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### quarantined to "Outbreak" (Outbreak rule:Scam: Money Mule)
+Sep 29 15:58:41 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### quarantined to "Bounced_Messages" (content filter:Bounce_Verification_Quarantine)
+Sep 29 15:16:43 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### quarantined to "Profanity" (content filter:Profanity_Filter_Subject)
+Sep 29 15:59:44 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### quarantined to "Outbreak" (Outbreak rule:Phish: Phish)
+Sep 29 15:55:45 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### quarantined to "Outbreak" (Outbreak rule:OUTBREAK_0010277)
+Sep 29 15:32:13 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### interim AV verdict using Sophos ENCRYPTED
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### interim AV verdict using Sophos CLEAN
+Sep 29 15:00:51 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### interim AV verdict using Sophos VIRAL
+Sep 29 15:59:44 ###SOURCE_DOMAIN### mail_logs: Info: Delayed: DCID ###XID### MID ###XID### to RID ###RID### - 4.1.0 - Unknown address error ('451', ['4.1.8 Client IP address ###IP### does not resolve']) []
+Sep 29 15:58:57 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by destination server with response: 5.3.0 - Other mail system problem ('550', ['5.7.0 (COL004-MC3F28) Message could not be delivered. Please ensure the message is RFC 5322 compliant.'])
+Sep 29 15:09:27 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### DomainKeys: cannot sign - already signed
+Sep 29 15:27:08 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### ACCEPT SG DMZ_Servers match 192.212.253. SBRS -1.4
+Sep 29 15:59:12 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### Virus Threat Level=5
+Sep 29 15:59:44 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### Virus Threat Level=4
+Sep 29 15:55:45 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### Virus Threat Level=3
+Sep 29 15:32:12 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### ACCEPT SG None match ALL SBRS unable to retrieve
+Sep 29 15:59:57 ###SOURCE_DOMAIN### mail_logs: Info: Message aborted MID ###XID### Receiving aborted by sender
+Sep 29 15:00:51 ###SOURCE_DOMAIN### mail_logs: Info: Message aborted MID ###XID### Dropped by antivirus
+Sep 29 15:59:52 ###SOURCE_DOMAIN### mail_logs: Info: Message aborted MID ###XID### Receiving aborted
+Sep 29 15:00:53 ###SOURCE_DOMAIN### mail_logs: Info: DNS Error ###DOMAIN### MX - domain has no A record
+Sep 29 15:47:58 ###SOURCE_DOMAIN### mail_logs: Info: DNS Error ###DOMAIN### MX -
+Sep 29 15:56:35 ###SOURCE_DOMAIN### mail_logs: Info: DNS Error ###DOMAIN### MX - NXDomain
+Sep 29 15:59:57 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### DomainKeys: signing with ACMEWEBSERVICES_Domainkeys - matches ###EMAIL###
+Sep 29 15:50:41 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### DomainKeys: signing with ACME_Domainkeys - matches ###DOMAIN###
+Sep 29 15:39:52 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### DKIM: signing with ACME_DKIM - matches ###EMAIL###
+Sep 29 15:59:57 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### DKIM: signing with ACMEWEBSERVICES_DKIM - matches ###EMAIL###
+Sep 29 15:59:15 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### DomainKeys: ###EMAIL###
+Sep 29 15:59:44 ###SOURCE_DOMAIN### mail_logs: Info: Start MID ###XID### ICID ###XID###
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### queued for delivery
+Sep 29 15:55:45 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### attachment types zip
+Sep 29 15:59:44 ###SOURCE_DOMAIN### mail_logs: Info: ISQ: Tagging MID ###XID### for quarantine
+Sep 29 15:59:15 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### DKIM: ###EMAIL###
+Sep 29 15:59:44 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### ICID ###XID### From: <>
+Sep 29 15:54:57 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by destination server with response: 5.1.0 - Unknown address error ('550', ['#5.1.0 Rejected by bounce verification.'])
+Sep 29 15:50:15 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### Message-ID "<###EMAIL###>"
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### Message-ID '<###EMAIL###>'
+Sep 29 15:47:51 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### Threat Level=4 Category=Scam Type=Money Mule
+Sep 29 15:34:03 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### Threat Level=5 Category=Scam Type=Dating
+Sep 29 15:54:29 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### Threat Level=2 Category=Scam Type=Bank Transfer
+Sep 29 15:59:44 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### Threat Level=4 Category=Phish Type=Phish
+Sep 29 15:55:45 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### Threat Level=3 Category=Virus Type=Viral Attachment
+Sep 29 15:59:47 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### to RID [0] pending till TIMESTAMP 16:28:30 2014 [ACMEWEBSERVICES]
+Sep 29 15:59:44 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### to RID [0, 1, 2] pending till TIMESTAMP 16:59:44 2014 [Default]
+Sep 29 15:21:31 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by destination server with response: 5.1.1 - Bad destination email address ('000', ['invalid domain "": no dot found'])
+Sep 29 15:57:41 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by destination server with response: 5.1.2 - Bad destination host ('000', ['DNS Hard Error looking up ###DOMAIN### (MX):  NXDomain'])
+Sep 29 15:56:23 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'kundenserver.de (mxeue103) Nemesis ESMTP Service not available\nRequested action aborted: local error in processing' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:30:36 ###SOURCE_DOMAIN### mail_logs: Info: Version: ###VERSION### SN: ###SN###
+Sep 29 15:59:47 ###SOURCE_DOMAIN### mail_logs: Info: Outbreak Rule: OUTBREAK_0002969 has threat level 3
+Sep 29 15:28:00 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by destination server with response: 5.1.0 - Unknown address error ('550', ['Your message was rejected by this system and was not delivered.', 'Reason: This system will not accept messages from servers/devices with no reverse DNS. IP=[###IP###]', 'Protection provided by: MagicSpam ###IP###-4 (###URL###)', 'For more information, please visit the URL:', '###URL###', 'or contact your ISP or mail server operator.'])
+Sep 29 15:06:39 ###SOURCE_DOMAIN### mail_logs: Warning: Received an invalid DNS Response: rcode=ServFail data='###DATA###' to IP ###IP### looking up ###IP###.in-addr.arpa
+Sep 29 15:34:50 ###SOURCE_DOMAIN### mail_logs: Warning: Received an invalid DNS Response: rcode=ServFail data="###DATA###" to IP ###IP### looking up ###DOMAIN###
+Sep 29 15:46:33 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'[0A4E90D5-0927-4AF2-9B17-92A0F6D9D47C] [###IP###] DNS check timed out.' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:28:00 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details:  interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:54:55 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 554-'###DOMAIN### ESMTP not accepting messages' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:51:25 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 554-'impin004 ###DOMAIN### The sending IP ###IP### does not have a valid rDNS' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:53:17 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'###DOMAIN### comcast Reverse DNS failure : Try again later' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:37:02 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'###DOMAIN### bizsmtp Reverse DNS failure: Try again later' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:00:09 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: [Errno 54] Connection reset by peer interface: ###IP### reason: network error
+Sep 29 15:10:24 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: [Errno 60] Operation timed out interface: ###IP### reason: network error
+Sep 29 15:17:16 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: [Errno 65] No route to host interface: ###IP### reason: network error
+Sep 29 15:59:15 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: [Errno 61] Connection refused interface: ###IP### reason: network error
+Sep 29 15:45:52 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'Service not available, closing transmission channel' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:59:08 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'Temporary resolution failure' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:30:40 ###SOURCE_DOMAIN### mail_logs: Warning: Internal SMTP Error: Failed to connect to remote host ###IP###:25 sending message to ###EMAIL###: [Errno 61] Connection refused.
+Sep 29 15:51:54 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### TLS success protocol TLSv1 cipher ADH-AES256-SHA
+Sep 29 15:38:57 ###SOURCE_DOMAIN### mail_logs: Info: DCID ###XID### TLS success protocol TLSv1 cipher DHE-RSA-CAMELLIA256-SHA
+Sep 29 15:59:53 ###SOURCE_DOMAIN### mail_logs: Info: DCID ###XID### TLS success protocol TLSv1 cipher AES256-SHA
+Sep 29 15:44:09 ###SOURCE_DOMAIN### mail_logs: Info: DCID ###XID### TLS success protocol TLSv1 cipher RC4-MD5
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: DCID ###XID### TLS success protocol TLSv1 cipher RC4-SHA
+Sep 29 15:59:57 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### TLS success protocol TLSv1 cipher AES256-SHA
+Sep 29 15:53:04 ###SOURCE_DOMAIN### mail_logs: Info: DCID ###XID### TLS success protocol TLSv1 cipher DHE-RSA-AES256-SHA
+Sep 29 15:59:37 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### TLS success protocol TLSv1 cipher DHE-RSA-AES256-SHA
+Sep 29 15:58:37 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### TLS success protocol TLSv1 cipher AES128-SHA
+Sep 29 15:59:11 ###SOURCE_DOMAIN### mail_logs: Info: DCID ###XID### TLS success protocol TLSv1 cipher AES128-SHA
+Sep 29 15:59:40 ###SOURCE_DOMAIN### mail_logs: Info: DCID ###XID### TLS success protocol TLSv1 cipher CAMELLIA256-SHA
+Sep 29 15:53:06 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### TLS success protocol TLSv1 cipher ADH-CAMELLIA256-SHA
+Sep 29 15:48:17 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### TLS success protocol TLSv1 cipher RC4-SHA
+Sep 29 15:59:49 ###SOURCE_DOMAIN### mail_logs: Info: Done scanning ###DOMAIN###,  6 msgs remain in queue.
+Sep 29 15:59:34 ###SOURCE_DOMAIN### mail_logs: Info: Done scanning ###DOMAIN###, 1 msgs remain in queue.
+Sep 29 15:51:37 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'4.7.1 Client host rejected: cannot find your reverse hostname, [###IP###]' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:50:44 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'4.7.0 ###DOMAIN### Error: too many errors' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:37:48 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'4.7.1 - Connection refused.  Cannot resolve PTR record for ###IP###' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:45:40 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'4.1.8 DNS-T2 ###URL### Domain lookup failed' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:41:49 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'#4.x.2 Too many messages for this session' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:50:14 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 554-'5.7.1 [C14] Missing reverse DNS for ###IP###' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:58:38 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'4.4.0 Temporary resolution failure of rDNS entry for ###IP###' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:31:55 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'###DOMAIN### Service not available: closing transmission channel' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:51:40 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'Error: too many messages in one session' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:51:54 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'4.4.0 Unable to connect to DNS - try again later' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:07:37 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'Exceeded allowable connection time, disconnecting.' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:53:51 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'###DOMAIN### bizsmtp Temporarily rejected. Reverse DNS for ###IP### failed.' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:59:47 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'4.2.1 :  (DNS:NR) ###URL###' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:55:58 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'4.4.2 Temporary DNS error looking up IP address/name (###IP###)' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:25:38 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 450-'4.7.1 Client host rejected: cannot find your hostname, [###IP###]' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:45:54 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'###DOMAIN### Service not available - no PTR record for ###IP###' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:44:49 ###SOURCE_DOMAIN### mail_logs: Info: DCID ###XID### TLS failed: (336142451, 'error:14092073:SSL routines:SSL3_GET_SERVER_HELLO:bad packet length')
+Sep 29 15:49:22 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'eastrmimpi109 cox ###IP### DNS check failure - try again later - Refer to Error Codes section at ###URL### for more information.' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:56:28 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### DKIM: cannot sign - no profile matches MAILER-DAEMON
+Sep 29 15:30:54 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### DomainKeys: cannot sign - no profile matches HOSTBATCH-PROD
+Sep 29 15:30:54 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### DKIM: cannot sign - no profile matches HOSTBATCH-PROD
+Sep 29 15:56:28 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### DomainKeys: cannot sign - no profile matches MAILER-DAEMON
+Sep 29 15:35:00 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### Unknown command:
+Sep 29 15:35:00 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### Unknown command: To:
+Sep 29 15:35:00 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### Unknown command: Subject:
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### RID [0] Response 'Message accepted for delivery'
+Sep 29 15:27:30 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: hous.craigslist.org IP: ###IP### port: 25 details: 554-'[EF9D87A2-A4AB-419E-9670-C5E3D83E2D8A] Sorry we could not find address for ###IP###. Please setup a reverse DNS record: ###URL###' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:30:41 ###SOURCE_DOMAIN### mail_logs: Info: Time offset from UTC: -25200 seconds
+Sep 29 15:25:51 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### reason: network error
+Sep 29 15:41:52 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### reason: connection timed out
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: Message finished MID ###XID### done
+Sep 29 15:41:06 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### Bad syntax for command: 'RCPT TO:<###EMAIL###>'
+Sep 29 15:59:49 ###SOURCE_DOMAIN### mail_logs: Info: Scanning ###DOMAIN### with 6 msgs for expiration candidates.
+Sep 29 15:07:59 ###SOURCE_DOMAIN### mail_logs: Info: Scanning ###DOMAIN### with 5 msgs for expiration candidates.
+Sep 29 15:58:34 ###SOURCE_DOMAIN### mail_logs: Warning: DNS failure for SMTP route destination go2cntdomc01.acmetech.com
+Sep 29 15:58:50 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: timeout interface: ###IP### reason: connection timed out
+Sep 29 15:56:26 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: EOF interface: ###IP### reason: network error
+Sep 29 15:22:28 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID: 31100754 domain: ###DOMAIN### IP: ###IP### port: 25 details: [Errno 48] Address already in use interface: ###IP### reason: network error
+Sep 29 15:59:54 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### ICID ###XID### LDAPACCEPT bypass applied to <###EMAIL###>
+Sep 29 15:59:44 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### ICID ###XID### RID ###RID### To: <###EMAIL###>
+Sep 29 15:59:53 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### ready 6983215 bytes from <###EMAIL###>
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### ICID ###XID### RID ###RID### To: <###EMAIL###>
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### ready 5548 bytes from <###EMAIL###>
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### ICID ###XID### From: <###EMAIL###>
+Sep 29 15:59:44 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### Outbreak Filters: verdict positive
+Sep 29 15:59:11 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### released from all quarantines
+Sep 29 15:54:09 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### deleted from all quarantines
+Sep 29 15:59:44 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### using engine: CASE spam suspect
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### Outbreak Filters: verdict negative
+Sep 29 15:59:34 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### using engine: CASE spam positive
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### using engine: CASE spam negative
+Sep 29 15:17:29 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### was generated based on MID ###XID### by PXE encryption filter 'Send_ACME_Encrypted'
+Sep 29 15:54:57 ###SOURCE_DOMAIN### mail_logs: Info: Double bounce: MID ###XID### to 0 - 5.1.0 - Unknown address error 550-'#5.1.0 Rejected by bounce verification.'
+Sep 29 15:25:51 ###SOURCE_DOMAIN### mail_logs: Info: Done scanning ###DOMAIN###.
+Sep 29 15:25:51 ###SOURCE_DOMAIN### mail_logs: Info: Scanning ###DOMAIN###.
+Sep 29 15:59:28 ###SOURCE_DOMAIN### mail_logs: Info: Message aborted MID ###XID### Dropped by content filter 'Drop_Internal' in the inbound table
+Sep 29 15:59:52 ###SOURCE_DOMAIN### mail_logs: Info: Message aborted MID ###XID### Dropped by content filter 'Drop_Autoforwarding' in the outbound table
+Sep 29 15:12:32 ###SOURCE_DOMAIN### mail_logs: Warning: MID ###XID###: scanning error (###FILE_TYPE###): file is corrupt
+Sep 29 15:59:11 ###SOURCE_DOMAIN### mail_logs: Warning: MID ###XID###: scanning error (###FILE_TYPE###): decoder timeout
+Sep 29 15:57:00 ###SOURCE_DOMAIN### mail_logs: Warning: MID ###XID###: scanning error (###FILE_TYPE###): Size Limit Exceeded
+Sep 29 15:04:22 ###SOURCE_DOMAIN### mail_logs: Warning: Potential Directory Harvest Attack detected.  See the system mail logs for more information about this attack.
+Sep 29 15:23:46 ###SOURCE_DOMAIN### mail_logs: Info: Delayed: DCID ###XID### MID ###XID### to RID ###RID### - 4.1.0 - Unknown address error ('450', ['4.7.1 Client host rejected: cannot find your reverse hostname, [###IP###]', '4.7.1 Please see ###URL### for explanation of the problem.']) []
+Sep 29 15:59:44 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by destination server with response: 5.1.0 - Unknown address error ('550', ['5.1.1 The email account that you tried to reach does not exist. Please try', "5.1.1 double-checking the recipient's email address for typos or", '5.1.1 unnecessary spaces. Learn more at', '5.1.1 ###URL### - gsmtp'])
+Sep 29 15:59:44 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### was generated for bounce of MID ###XID###
+Sep 29 15:17:29 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### enqueued for PXE encryption
+Sep 29 15:56:35 ###SOURCE_DOMAIN### mail_logs: Info: DNS Error ###DOMAIN###, MX - NXDomain
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### Subject '###SUBJECT###'
+Sep 29 15:32:58 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### MID ###XID### Invalid recipient address: Invalid character in address: '!'
+Sep 29 15:40:01 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by ###EMAIL###>) with the subject of (###SUBJECT###) matches a profile the Internet community may consider spam. Please revise your message before resending.'])
+Sep 29 15:59:42 ###SOURCE_DOMAIN### mail_logs: Info: Delivery start DCID ###XID### MID ###XID### to RID [0] to offbox IronPort Spam Quarantine
+Sep 29 15:59:42 ###SOURCE_DOMAIN### mail_logs: Info: Message done DCID ###XID### MID ###XID### to RID [0] (external quarantine)
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: Delivery start DCID ###XID### MID ###XID### to RID [0]
+Sep 29 15:59:45 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### ICID ###XID### Receiving Failed: No recipients specified
+Sep 29 15:42:43 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### Receiving Failed: Too Many Recipients
+Sep 29 15:58:38 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### ICID ###XID### invalid bounce, tagging
+Sep 29 15:57:11 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### Receiving Failed: Connection limit exceeded
+Sep 29 15:59:45 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### Receiving Failed: Too Many Messages
+Sep 29 15:14:02 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### ICID ###XID### Receiving Failed: Message header too big
+Sep 29 15:59:45 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### ICID ###XID### Receiving Failed: Message size exceeds limit
+Sep 29 15:14:56 ###SOURCE_DOMAIN### mail_logs: Info: Delayed: DCID ###XID### MID ###XID### to RID ###RID### - 4.1.0 - Unknown address error ('450', ["4.7.1 <###EMAIL###>: Recipient address rejected: SPF-Result=###DOMAIN###: 'SERVFAIL' error on DNS 'TXT' lookup of '###DOMAIN###'"]) []
+Sep 29 15:59:26 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### rewritten to MID ###XID### by alt-rcpt-to-filter filter 'Apropos'
+Sep 29 15:59:44 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### rewritten to MID ###XID### by url-threat-protection filter 'Threat Protection'
+Sep 29 15:05:49 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### was split creating MID ###XID### due to a per-recipient policy Business_Partner_List in the inbound table
+Sep 29 15:05:49 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### was split creating MID ###XID### due to a per-recipient policy Profanity_Bypass in the inbound table
+Sep 29 15:59:54 ###SOURCE_DOMAIN### mail_logs: Warning: MID ###XID### CASE could not be reached for SenderBase Network Participation processing
+Sep 29 15:53:40 ###SOURCE_DOMAIN### mail_logs: Info: DNS Temporary Failure ###DOMAIN### MX - unable to reach nameserver on any valid IP
+Sep 29 15:59:08 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### Address: <###EMAIL###> sender rejected, envelope sender domain could not be resolved
+Sep 29 15:56:50 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### Address: <###EMAIL###> sender rejected, envelope sender domain does not exist
+Sep 29 15:52:54 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 554-'"Refused. You have no reverse DNS entry. Contact ###EMAIL### for details."' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:55:45 ###SOURCE_DOMAIN### mail_logs: Info: Double bounce: MID ###XID### to 0 - 5.4.7 - Delivery expired (message too old) '[Errno 61] Connection refused'
+Sep 29 15:58:03 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'###DOMAIN### has refused your connection because your server did not have a PTR record.' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:30:36 ###SOURCE_DOMAIN### mail_logs: Critical: Error while sending alert: Unable to send System/Critical alert to ###EMAIL### with subject "###SUBJECT###".
+Sep 29 15:59:29 ###SOURCE_DOMAIN### mail_logs: Warning: MID ###XID###, Message Scanning Problem: Size Limit Exceeded
+Sep 29 15:30:40 ###SOURCE_DOMAIN### mail_logs: Info: Internal SMTP system attempting to send a message to ###EMAIL### with subject '###SUBJECT###' (attempt #0).
+Sep 29 15:08:59 ###SOURCE_DOMAIN### mail_logs: Info: Double bounce: MID ###XID### to 0 - 5.1.2 - Bad destination host 'DNS Hard Error looking up ###DOMAIN### (MX):  NXDomain'
+Sep 29 15:56:35 ###SOURCE_DOMAIN### mail_logs: Info: Double bounce: MID ###XID### to 0 - 5.1.2 - Bad destination host 'DNS Hard Error looking up ###DOMAIN###, (MX):  NXDomain'
+Sep 29 15:49:22 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### ICID ###XID### RID ###RID### recipient prvs=342831840=###EMAIL### signature verified and rewritten to ###EMAIL###
+Sep 29 15:57:08 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by destination server with response: 5.4.7 - Delivery expired (message too old) [ACMEWEBSERVICES] ('421', ['4.2.1 :  (DNS:NR) ###URL###'])
+Sep 29 15:59:47 ###SOURCE_DOMAIN### mail_logs: Info: Delayed: DCID ###XID### MID ###XID### to RID ###RID### - 4.3.2 - Not accepting messages at this time ('421', ['4.2.1 : (DNS:NR)  ###URL###']) []
+Sep 29 15:16:07 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by destination server with response: 5.3.0 - Other mail system problem ('550', ['5.7.1 Unauthenticated email from ###DOMAIN### is not accepted due to', "5.7.1 domain's DMARC policy. Please contact administrator of ###DOMAIN###", '5.7.1 om domain if this was a legitimate mail. Please visit', '5.7.1 ###URL### to learn about DMARC', '5.7.1 initiative. di2si24981003pbc.134 - gsmtp'])
+Sep 29 15:37:47 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by destination server with response: 5.3.0 - Other mail system problem ('550', ["5.7.1 Unauthenticated email from ###DOMAIN### is not accepted due to domain's", '5.7.1 DMARC policy. Please contact administrator of ###DOMAIN### domain if', '5.7.1 this was a legitimate mail. Please visit', '5.7.1 ###URL### to learn about DMARC', '5.7.1 initiative. fq5si24902078pdb.257 - gsmtp'])
+Sep 29 15:00:51 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### antivirus positive 'Troj/Weelsof-HJ'
+Sep 29 15:59:26 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### DomainKeys: ###EMAIL###
+Sep 29 15:57:12 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### attachment '###ATTACHMENT###'
+Sep 29 15:35:39 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### attachment '###ATTACHMENT###'
+Sep 29 15:42:39 ###SOURCE_DOMAIN### mail_logs: Info: Delayed: DCID ###XID### MID ###XID### to RID ###RID### - 4.3.0 - Other mail system problem ('451', ['Sprobuj ponownie / Please try again later']) []
+Sep 29 15:30:36 ###SOURCE_DOMAIN### mail_logs: Warning: Internal SMTP Error: Failed to send message to host ###IP###:25 for recipient ###EMAIL### rejected for policy reasons.'].
+Sep 29 15:59:15 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### antivirus negative (released from Outbreak)
+Sep 29 15:04:54 ###SOURCE_DOMAIN### mail_logs: Info: A Directory Harvest Attack Prevention/Warning alert was sent to ###DOMAIN### with subject "###SUBJECT###".
+Sep 29 15:31:10 ###SOURCE_DOMAIN### mail_logs: Info: A System/Critical alert was sent to ###EMAIL### with subject "###SUBJECT###".
+Sep 29 15:57:11 ###SOURCE_DOMAIN### mail_logs: Warning: System limit reached: connection limit for IP ###IP### on listener IncomingMail ICID ###XID###: max: 1
+Sep 29 15:59:42 ###SOURCE_DOMAIN### mail_logs: Info: New SMTP DCID ###XID### interface ###IP### address ###IP### port 6025
+Sep 29 15:59:23 ###SOURCE_DOMAIN### mail_logs: Info: SenderBase upload: 215 hosts totaling 12321 bytes
+Sep 29 15:58:34 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### disconnected address ###IP###, no messages injected within timeout period
+Sep 29 15:35:00 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### disconnected address ###IP###, exceeded maximum number of bad SMTP commands
+Sep 29 15:45:53 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### disconnected address ###IP###, exceeded allowable connection time
+Sep 29 15:14:18 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ihaci.org IP: ###IP### port: 25 details: 550-'This system is configured to reject mail from ###IP### [###IP###] (DNS reverse lookup failed)' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:59:57 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### IP: ###IP### port: 25 details: 421-'###DOMAIN### bizsmtp Temporarily rejected. Reverse DNS for ###IP### failed. IB108 <###URL###>' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:59:29 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### ICID ###XID### RID ###RID### recipient prvs=34268c391=###EMAIL###
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: Message done DCID ###XID### MID ###XID### to RID [0]
+Sep 29 15:55:49 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by destination server with response: 5.4.7 - Delivery expired (message too old) ('421', ['###DOMAIN### bizsmtp Temporarily rejected. Reverse DNS for ###IP### failed. IB108  <###URL###>'])
+Sep 29 15:03:22 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by destination server with response: 5.4.7 - Delivery expired (message too old) [Default] ('421', ['4.4.0 Temporary resolution failure of rDNS entry for ###IP###'])
+Sep 29 15:53:05 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by destination server with response: 5.4.7 - Delivery expired (message too old) ('421', ['###DOMAIN### (mxgmx105) Nemesis ESMTP Service not available', 'Requested action aborted: local error in processing'])
+Sep 29 15:59:52 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### using engine: CASE using cached verdict
+Sep 29 15:47:58 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### using engine: SLBL spam negative
+Sep 29 15:59:44 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### interim verdict using engine: CASE spam suspect
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### interim verdict using engine: CASE spam negative
+Sep 29 15:59:34 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### interim verdict using engine: CASE spam positive
+Sep 29 15:43:38 ###SOURCE_DOMAIN### mail_logs: Critical: LDAP: Listener Mass_Mailing does not reference a valid group query, comparison in filter will evaluate as false
+Sep 29 15:17:43 ###SOURCE_DOMAIN### mail_logs: Info: New SMTP ICID ###XID### interface Marketing_Mailings (###IP###) address ###IP### reverse dns host ###DOMAIN### verified yes
+Sep 29 15:25:09 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### MID ###XID### Invalid recipient address:  'RCPT TO:< >'
+Sep 29 15:31:56 ###SOURCE_DOMAIN### mail_logs: Info: Sender Group Changed: ICID ###XID### REJECT SG BLACKLIST match sbrs[-10.0:-2.2] SBRS -2.7
+Sep 29 15:03:45 ###SOURCE_DOMAIN### mail_logs: Info: Sender Group Changed: ICID ###XID### ACCEPT SG UNKNOWNLIST match sbrs[-1.0:10.0] SBRS 4.9
+Sep 29 15:31:59 ###SOURCE_DOMAIN### mail_logs: Info: Sender Group Changed: ICID ###XID### ACCEPT SG UNKNOWNLIST match sbrs[-1.0:10.0] SBRS 5.6
+Sep 29 15:11:49 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by ###EMAIL### cannot be delivered. This account has been disabled or discontinued [#102]. - ###DOMAIN###'])
+Sep 29 15:59:57 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### ICID ###XID### To: <###EMAIL###> Rejected by LDAPACCEPT
+Sep 29 15:59:45 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### ICID ###XID### To: <###EMAIL###> Rejected by Receiving Control
+Sep 29 15:57:55 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### Duplicate RID ###RID### To: <###EMAIL###> dropped
+Sep 29 15:57:03 ###SOURCE_DOMAIN### mail_logs: Warning: Dropping connection due to potential Directory Harvest Attack from host=('###IP###', '###DOMAIN###'), dhap_limit=20, sender_group=UNKNOWNLIST, listener=IncomingMail, reverse_dns=###IP###, ICID ###XID###
+Sep 29 15:47:58 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### interim verdict using engine: SLBL spam negative
+Sep 29 15:44:28 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### for details."' interface: ###IP### reason: unexpected SMTP response
+Sep 29 15:16:38 ###SOURCE_DOMAIN### mail_logs: Info: Connection Error: DCID ###XID### domain: ###DOMAIN### reason: unexpected SMTP response
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### matched all recipients for per-recipient policy DEFAULT in the inbound table
+Sep 29 15:59:51 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### matched all recipients for per-recipient policy Profanity_Bypass in the inbound table
+Sep 29 15:59:58 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### matched all recipients for per-recipient policy DEFAULT in the outbound table
+Sep 29 15:49:29 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### matched all recipients for per-recipient policy acmewebservices in the inbound table
+Sep 29 15:58:41 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### matched all recipients for per-recipient policy ACMEWEBSERVICES_to_Acmetech in the outbound table
+Sep 29 15:59:59 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### matched all recipients for per-recipient policy Business_Partner_List in the inbound table
+Sep 29 15:59:52 ###SOURCE_DOMAIN### mail_logs: Info: CASE cache status: hits = 195885, misses = 27971735, expires = 5, adds = 27536844, seconds saved = 24099.27, total seconds = 37837039.71
+Sep 29 15:19:05 ###SOURCE_DOMAIN### mail_logs: Info: CASE cache status: hits = 26467, misses = 4260108, expires = 0, adds = 4154838, seconds saved = 3110.13, total seconds = 2150404.52
+Sep 29 15:55:12 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### Custom Log Entry: ###IP### No hostname
+Sep 29 15:25:57 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### Custom Log Entry: ###EMAIL### ###IP### ###DOMAIN###
+Sep 29 15:59:55 ###SOURCE_DOMAIN### mail_logs: Info: MID ###XID### Custom Log Entry: attachment
+Sep 29 15:30:36 ###SOURCE_DOMAIN### mail_logs: Critical: Internal SMTP giving up on message to ###EMAIL### with subject '###SUBJECT###': Unrecoverable error.
+Sep 29 15:31:10 ###SOURCE_DOMAIN### mail_logs: Info: Internal SMTP system successfully sent a message to ###EMAIL### with subject '###SUBJECT###'.
+Sep 29 15:00:58 ###SOURCE_DOMAIN### mail_logs: Info: Delayed: DCID ###XID### MID ###XID### to RID ###RID### - 4.1.0 - Unknown address error ('552', ['5.2.2 The email account that you tried to reach is over quota. Please direct', '5.2.2 the recipient to', '5.2.2 ###URL### - gsmtp']) []
+Sep 29 15:58:24 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### ACCEPT SG SUSPECTLIST match sbrs[none] SBRS None
+Sep 29 15:57:21 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### REJECT SG BLACKLIST match sbrs[-10.0:-2.2] SBRS -8.9
+Sep 29 15:59:26 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### ACCEPT SG SUSPECTLIST match sbrs[-2.2:-1.0] SBRS -1.5
+Sep 29 15:39:41 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### ACCEPT SG UNKNOWNLIST match sbrs[-1.0:10.0] SBRS 5.2
+Sep 29 15:53:03 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### ACCEPT SG Trusted_Senders match ###DOMAIN### SBRS 5.1
+Sep 29 15:31:59 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### ACCEPT SG SUSPECTLIST match sbrs[none] SBRS unable to retrieve
+Sep 29 15:57:59 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### ACCEPT SG None match ALL SBRS 5.6
+Sep 29 15:54:59 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### ACCEPT SG TLS_Inbound_Preferred match ###DOMAIN### SBRS 5.6
+Sep 29 15:35:02 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### ACCEPT SG SUSPECTLIST match ###DOMAIN### SBRS 0.6
+Sep 29 15:59:46 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### ACCEPT SG None match ###DOMAIN### SBRS None
+Sep 29 15:59:39 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### RELAY SG RELAYLIST match ###IP### SBRS None
+Sep 29 15:52:21 ###SOURCE_DOMAIN### mail_logs: Info: ICID ###XID### ACCEPT SG UNVERIFIED match ###DOMAIN### SBRS 1.6
+Sep 29 15:49:05 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by ###EMAIL###]: Recipient address rejected: Access denied'])
+Sep 29 15:59:32 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by ###EMAIL### refused: user invalid'])
+Sep 29 15:56:34 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by ###EMAIL###,> SIZE=439" unrecognized or missing'])
+Sep 29 15:57:41 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by ###EMAIL###) [-5] - mta1400.mail.ne1.yahoo.com"])
+Sep 29 15:56:48 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by ###EMAIL###>... User unknown'])
+Sep 29 15:53:32 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by ###EMAIL###'])
+Sep 29 15:07:15 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by ###EMAIL###>: Relay access denied.'])
+Sep 29 15:38:57 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by ###EMAIL###>: Recipient address rejected: User unknown in relay recipient table'])
+Sep 29 15:52:54 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by ###EMAIL### for details."'])
+Sep 29 15:31:41 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by ###EMAIL###) [0] - mta1380.mail.ne1.yahoo.com"])
+Sep 29 15:29:21 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by ###EMAIL###>: Recipient address rejected: User unknown in virtual alias table'])
+Sep 29 15:37:55 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by ###EMAIL###>: Recipient address rejected: aol.com'])
+Sep 29 15:27:43 ###SOURCE_DOMAIN### mail_logs: Info: Bounced: DCID ###XID### MID ###XID### to RID ###RID### - Bounced by ###EMAIL###> recipient does not exist here.'])
+Sep 29 15:30:41 ###SOURCE_DOMAIN### mail_logs: Info: Begin Logfile
+Sep 29 15:52:21 ###SOURCE_DOMAIN### mail_logs: Info: Queue: Checkpoint Started
+Sep 29 15:52:21 ###SOURCE_DOMAIN### mail_logs: Info: Queue: Checkpoint Finished

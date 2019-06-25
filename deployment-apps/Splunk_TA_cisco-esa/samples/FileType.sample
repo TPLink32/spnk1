@@ -1,0 +1,10 @@
+name='testfile.html', type=text/html
+name='testfile.doc', type=text/doc
+name='testfile.xml', type=text/xml
+name='testfile.doc', type=text/doc
+name='testfile.exe', type=text/exe
+name='testfile.dmg', type=text/dmg
+name='testfile.index', type=text/index
+name='testfile.htm', type=text/htm
+name='testfile.pdf', type=text/pdf
+name='testfile.json', type=text/json

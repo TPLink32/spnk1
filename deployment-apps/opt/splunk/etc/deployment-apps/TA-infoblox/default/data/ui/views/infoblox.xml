@@ -1,0 +1,51 @@
+<form>
+  <label>Infoblox Search</label>
+  <fieldset submitButton="true">
+    <input type="dropdown" token="searchkey">
+      <label>Search Key</label>
+      <choice value="search_string">String</choice>
+      <choice value="ip_address">IP Address</choice>
+      <choice value="comment">Comment</choice>
+      <choice value="network">network</choice>
+      <default>search_string</default>
+    </input>
+    <input type="dropdown" token="searchmodifier">
+      <label>Search modifier</label>
+      <search>
+        <query>|inputlookup infoblox_searchmodifier</query>
+      </search>
+      <fieldForLabel>description</fieldForLabel>
+      <fieldForValue>searchmodifier</fieldForValue>
+      <default>~</default>
+    </input>
+    <input type="text" token="searchvalue">
+      <label>Search String</label>
+    </input>
+    <input type="dropdown" token="objtype">
+      <label>Object type (optional in search)</label>
+      <choice value="All">All</choice>
+      <default>record:a</default>
+      <search>
+        <query>|inputlookup infoblox_objects</query>
+      </search>
+      <fieldForLabel>description</fieldForLabel>
+      <fieldForValue>object</fieldForValue>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <search>
+          <query>|infobloxws api="search" searchkey="$searchkey$$searchmodifier$" searchvalue="$searchvalue$" objtype="$objtype$"</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>

@@ -1,0 +1,97 @@
+<setup>
+  <block title="Configure This App"></block>
+
+  <block title="Qualys API Server" endpoint="qualys/qualys_configure" entity="setupentity">
+    <input field="api_server">
+      <label>Qualys API Server</label>
+      <type>text</type>
+    </input>
+  </block>
+
+  <block title="Qualys Credentials" endpoint="storage/passwords" entity="_new">
+    <text> Leave username/password blank, if you have already set it up.</text>
+    <input field="name">
+        <label>Username</label>
+        <type>text</type>
+    </input>
+
+    <input field="password">
+        <label>Password</label>
+        <type>password</type>
+    </input>
+  </block>
+
+  <block title="VM Detection Settings" endpoint="qualys/qualys_configure" entity="setupentity">
+    <input field="log_host_summary">
+      <label>Log Host Summary events</label>
+      <type>bool</type>
+    </input>
+    <input field="log_extra_host_summary">
+      <label>Log extra statistics in host summary ( Breakdown of Vulnerability Count by (Severity and Type), by (Severity and Status)</label>
+      <type>bool</type>
+    </input>
+    <input field="log_detections">
+      <label>Log Individual Host Vulnerabilities</label>
+      <type>bool</type>
+    </input>
+    <input field="log_host_details_in_detections">
+      <label>Log host information with each detection ( e.g. IP, OS, DNS, NetBios)</label>
+      <type>bool</type>
+    </input>
+    <input field="detection_params">
+      <label>Extra parameters to pass to Detection API. Enter as URL Query (e.g. a=1&amp;b=string ) or as JSON (e.g. {"a":1, "b": "string"} )</label>
+      <type>text</type>
+    </input>
+    <input field="use_multi_threading">
+      <label>Load detection data using multiple threads (resource intensive)</label>
+      <type>bool</type>
+    </input>
+    <input field="num_threads">
+      <label>Number of threads to use (between 1 and 10)</label>
+      <type>text</type>
+    </input>
+  </block>
+
+  <block title="WAS Findings Settings" endpoint="qualys/qualys_configure" entity="setupentity">
+    <input field="log_individual_findings">
+      <label>Log Individual Findings</label>
+      <type>bool</type>
+    </input>
+    <input field="log_webapp_summary">
+      <label>Log Web App Summary events</label>
+      <type>bool</type>
+    </input>
+    <input field="extra_was_params">
+      <label>Extra parameters to WAS Findings API. Enter as XML. (e.g. &lt;filters&gt;&lt;Criteria field="group" operator="IN"&gt;XSS, SQL, INFO&lt;/Criteria&gt;&lt;/filters&gt;)</label>
+      <type>text</type>
+    </input>
+    <input field="use_multi_threading_for_was">
+      <label>Load WAS Findings data using multiple threads (resource intensive)</label>
+      <type>bool</type>
+    </input>
+    <input field="num_threads_for_was">
+      <label>Number of threads to use (between 1 and 10)</label>
+      <type>text</type>
+    </input>
+  </block>
+
+  <block title="Proxy Configuration" endpoint="qualys/qualys_configure" entity="setupentity">
+    <input field="use_proxy">
+      <label>Use a proxy Server for Qualys API requests</label>
+      <type>bool</type>
+    </input>
+    <input field="proxy_server">
+      <label>Proxy Server and credentials (e.g. 10.10.10.2:8080 OR username:password@10.10.10.2:8080)</label>
+      <type>text</type>
+    </input>
+  </block>
+  <block title="Debug" endpoint="qualys/qualys_configure" entity="setupentity">
+      <input field="enable_debug">
+        <label>Enable debug logs?</label>
+        <type>bool</type>
+      </input>
+
+  </block>
+
+
+</setup>

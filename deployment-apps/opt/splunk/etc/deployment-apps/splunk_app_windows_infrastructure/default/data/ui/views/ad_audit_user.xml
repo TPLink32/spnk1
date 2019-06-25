@@ -1,0 +1,83 @@
+<form script="customized_chart_preload.js,audit_report.js">
+  <label>User Audit</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="dropdown" token="ldaprecord.nt_domain" searchWhenChanged="true">
+      <label>Account Domain</label>
+      <search>
+        <query>| inputlookup DomainSelector | eval nt_domain=DomainNetBIOSName | dedup nt_domain | search nt_domain !="" | table nt_domain</query>
+      </search>
+      <fieldForLabel>nt_domain</fieldForLabel>
+      <fieldForValue>nt_domain</fieldForValue>
+      <selectFirstChoice>true</selectFirstChoice>
+    </input>
+    <input type="text" token="ldaprecord.user" searchWhenChanged="true">
+      <label>User Account</label>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="time" token="Time">
+      <label></label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+		<search id="audit_query">
+        	<query>|ldapsearch domain=$ldaprecord.nt_domain$ search="(sAMAccountName=$ldaprecord.user$)"|fields *</query>
+        	<latest>$Time.latest$</latest>
+      	</search>
+      <html>
+        <div id="audit_report"/>
+      </html>
+    </panel>
+    <panel>
+      <table>
+        <title>Group Membership - User</title>
+        <search>
+          <query>|ldapsearch domain=$ldaprecord.nt_domain$ search="(objectclass=group)" attrs="cn,description,primaryGroupToken"|eval joiner=mvappend(dn,primaryGroupToken)|rename dn as groupDN,cn as groupName,primaryGroupToken as primaryGroupID|table groupDN,groupName,primaryGroupID,joiner|mvexpand joiner|join type=inner joiner [ldapsearch domain=$ldaprecord.nt_domain$ search="(sAMAccountName=$ldaprecord.user$)" attrs="memberOf,primaryGroupID"|eval joiner=mvappend(memberOf,primaryGroupID)|table joiner|mvexpand joiner]|dedup groupDN|table groupDN,groupName,primaryGroupID|sort primaryGroupID</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/ad_audit_group?form.ldaprecord.nt_domain=$ldaprecord.nt_domain$&form.ldaprecord.groupName=$row.groupName$
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Account Lockout Activity - User</title>
+        <search>
+          <query>eventtype=msad-account-lockout user="$ldaprecord.user$" dest_nt_domain="$ldaprecord.nt_domain$" | eval src_nt_host=if(isnull(src_nt_host),host,src_nt_host) | eval lockout=if(EventCode==644 OR EventCode==4740,"Yes","No") | stats latest(_time) as time,latest(src_nt_host) as host,latest(lockout) as lockedout by dest_nt_domain,user | search lockedout="Yes" | eval ltime=strftime(time,"%c") | table ltime,dest_nt_domain,user,host | rename ltime as "Lockout Time",dest_nt_domain as "Domain",user as "Account Locked Out", host as "Workstation" </query>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Failed Logon Activity - User</title>
+        <search>
+          <query>`lockouts-for-user($ldaprecord.nt_domain$,$ldaprecord.user$)`|rename mintime as "Earliest",maxtime as "Latest",src as Workstation,src_ip as "IP Address", signature as "Reason"</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+      </table>
+    </panel>
+  </row>
+</form>

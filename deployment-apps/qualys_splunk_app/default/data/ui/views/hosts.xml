@@ -1,0 +1,52 @@
+<form>
+  <label>Hosts</label>
+  <description></description>
+  <fieldset autoRun="true" submitButton="false">
+    <input type="time" searchWhenChanged="true">
+      <default/>
+    </input>
+  </fieldset>
+  <row>
+      <single>
+      <title>Total Hosts</title>
+      <searchString>index=qualys sourcetype=qualys_vm_detection HOSTSUMMARY | stats dc(HOST_ID)</searchString>
+      <earliestTime>0</earliestTime>
+      <latestTime>now</latestTime>
+      <option name="underLabel">Active Hosts</option>
+      <option name="linkView">search</option>
+    </single>
+    <chart>
+      <title>Hosts Scanned by Operating System</title>
+      <searchString>index=qualys sourcetype=qualys_vm_detection HOSTSUMMARY | stats dc(HOST_ID) as HOSTS by OS</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">pie</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+    </chart>
+  </row>
+  <row>
+    <table>
+      <title></title>
+      <searchString>index=qualys HOSTSUMMARY| dedup 1 HOST_ID sortby -_time | rename HOST_ID as ID, LAST_SCAN_DATETIME as "Last Scanned", TOTAL_VULNS as "Total Vulns"| sort -LAST_SCAN_DATETIME | table ID,  IP, OS, DNS, NETBIOS, "Last Scanned", "Total Vulns"</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="linkView">search</option>
+      <option name="wrap">true</option>
+      <option name="rowNumbers">false</option>
+      <option name="dataOverlayMode">none</option>
+      <option name="drilldown">row</option>
+      <option name="count">10</option>
+    </table>
+  </row>
+</form>

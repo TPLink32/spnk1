@@ -1,0 +1,36 @@
+<nav color="#003368">
+    <view name="arista_status" default="true"/>
+    <view name="flashtimeline"/>
+    <view name="arista_log_alerts"/>
+    <collection label="Interface Statistics">
+        <view name="arista_interface_rates_table"/>
+        <view name="arista_interface_rates_by_switch"/>
+        <view name="arista_interface_rates_by_description"/>
+        <view name="arista_interface_rates_custom"/>
+    </collection>
+    <collection label="Switch Inventory">
+        <view name="arista_switches"/>
+        <view name="arista_switch_chart"/>
+        <view name="arista_switch_fru_items"/>
+    </collection>
+    <collection label="Transceivers">
+        <view name="arista_transceivers"/>
+        <view name="arista_transceiver_chart"/>
+        <view name="arista_transceiver_power_levels"/>
+    </collection>
+    <collection label="Capacity Planning">
+	<view name="arista_switch_capacity_ports"/>
+        <view name="arista_switch_capacity_cpumem"/>
+        <view name="arista_switch_capacity_hwtables"/>
+    </collection>
+    <collection label="Environment/Power">
+        <view name="arista_temperature"/>
+        <view name="arista_power"/>
+    </collection>
+    <view name="arista_lanz_max_q"/>
+    <collection label="sFlow">
+       <a href="/app/aristanetworks/search?q=sourcetype=arista_switch_sflow">sFlow standard</a>
+       <a href="/app/aristanetworks/search?q=sourcetype=arista_switch_sflow|iplocation%20IP_dst|geostats%20count%20by%20IP_dst">sFlow Maps</a>
+    </collection>
+
+</nav>

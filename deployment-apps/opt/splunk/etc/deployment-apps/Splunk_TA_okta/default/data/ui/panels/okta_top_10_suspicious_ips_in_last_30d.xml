@@ -1,0 +1,10 @@
+<panel>
+  <title>Okta - Top 10 Suspicious IPs in Last 30 Days</title>
+  <table> 
+    <search>
+      <query>sourcetype="okta:im" eventtype="okta_event_suspicious_activity" earliest =-30d|rename src_ip as "Source IP" |top 10 "Source IP"|rename count as Count|fields "Source IP",Count </query>
+      <earliest></earliest>
+      <latest></latest>
+    </search>
+  </table>
+</panel>

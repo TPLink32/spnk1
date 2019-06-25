@@ -1,0 +1,68 @@
+<form>
+  <label>Services</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="dropdown" token="HostMonitoringHost" searchWhenChanged="true">
+      <label>Host</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_hostmon_system  | dedup Host | sort Host</query>
+      </search>
+      <fieldForLabel>Host</fieldForLabel>
+      <fieldForValue>Host</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="multiselect" token="MultiServiceName" searchWhenChanged="true">
+      <label>Name</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_hostmon_services_details | dedup Name | sort Name</query>
+      </search>
+      <fieldForLabel>Name</fieldForLabel>
+      <fieldForValue>Name</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valuePrefix>Name="</valuePrefix>
+      <valueSuffix>"</valueSuffix>
+      <delimiter> OR  </delimiter>
+    </input>
+    <input type="dropdown" token="StartMode" searchWhenChanged="true">
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_hostmon_services_details | search $MultiServiceName$ | dedup StartMode | sort StartMode</query>
+      </search>
+      <fieldForLabel>StartMode</fieldForLabel>
+      <fieldForValue>StartMode</fieldForValue>
+      <initialValue>*</initialValue>
+      <default>*</default>
+    </input>
+    <input type="dropdown" token="ServiceState" searchWhenChanged="true">
+      <label>State</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_hostmon_services_details | search $MultiServiceName$ StartMode="$StartMode$" | dedup State | sort State</query>
+      </search>
+      <fieldForLabel>State</fieldForLabel>
+      <fieldForValue>State</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Services</title>
+        <search>
+          <query>eventtype=hostmon_windows Type=Service host="$HostMonitoringHost$" $MultiServiceName$ StartMode="$StartMode$" State="$ServiceState$" | dedup host, Name | table host, Name, StartMode, State</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+      </table>
+    </panel>
+  </row>
+</form>

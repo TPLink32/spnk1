@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form>
+  <label>Switch Power Consumption</label>
+  <searchTemplate>
+sourcetype="arista_switch_inventory" AristaPSUPowerConsumption | stats latest(totalInputPower) as inputPower, latest(totalOutputPower) as outputPower, latest(totalPowerEfficiency) as powerEfficiency(%), sparkline(max(totalInputPower)) as inputPowerHistory, sparkline(max(totalOutputPower)) as outputPowerHistory, sparkline(max(eval(rtrim(totalPowerEfficiency,"%")))) as powerEfficiencyHistory by switchname | table switchname,inputPower,inputPowerHistory,outputPower,outputPowerHistory,powerEfficiency(%),powerEfficiencyHistory
+  </searchTemplate>
+
+  <fieldset autoRun="true">
+      <html>
+        <p>Filter using any field [ switchname=* ]</p>
+      </html>
+      <input type="text" token="filter">
+      </input>
+
+      <!-- Add default TimePicker -->
+      <input type="time" />
+      
+  </fieldset>
+  
+  <row>
+      <table>
+          <title>Matching events</title>
+          <option name="count">50</option>
+      </table>
+    </row>
+
+</form>

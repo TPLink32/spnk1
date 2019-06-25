@@ -1,0 +1,40 @@
+td.icon {
+    text-align: center;
+}
+td.icon i {
+    font-size: 21px;
+    text-shadow: 1px 1px #aaa;
+}
+td.icon .False {
+    color: #E53935;
+}
+td.icon .True {
+    color: #66BB6A;
+}
+
+.icon-inline i {
+    font-size: 18px;
+    margin-left: 5px;
+}
+.icon-inline i.icon-alert-circle {
+    color: #ef392c;
+}
+.icon-inline i.icon-alert {
+    color: #ff9c1a;
+}
+.icon-inline i.icon-check {
+    color: #5fff5e;
+}
+
+div[id^='decorated_table'] table tr td {
+    text-align: left;;
+}
+
+div[id^='decorated_table'] table thead {
+    display: none;
+}
+
+div[id^='decorated_table'] table tr td:first-child{
+    font-weight: bold;
+    color: #333;
+}

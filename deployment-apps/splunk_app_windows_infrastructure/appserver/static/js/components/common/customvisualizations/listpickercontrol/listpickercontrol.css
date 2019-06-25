@@ -1,0 +1,37 @@
+.list-picker-control-container {
+    height: 300px;
+    width: 100%;
+}
+
+.list-picker-control-chosen-item {
+    background-color: #B1D8FF;
+}
+
+.list-picker-control-list-container {
+    height: 280px;
+    width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll; 
+    border: 1px solid #bfbfbf;
+}
+
+.list-picker-control-list-container ul {
+    width: 100%;
+    list-style-type: none;
+    list-style-position: outside;
+    margin: 0 0 0 0;
+}
+
+.list-picker-control-list-count-cell {
+    width: 46%;
+    text-align: left;
+    font-size: 10px;
+}
+
+.list-picker-control-direction-container {
+    width: 33%;
+}
+
+.list-picker-control-direction-container a {
+    font-size: 14px;
+}

@@ -1,0 +1,15 @@
+[app/install/state]
+version = 6.3.0
+modtime = 1445458490.365676000
+
+[nav/default]
+version = 6.3.0
+modtime = 1445623428.356674000
+
+[app/install/is_configured]
+version = 6.3.0
+modtime = 1445623428.409003000
+
+[splunk_msftapp/settings]
+version = 6.3.0
+modtime = 1445623428.432233000

@@ -1,0 +1,47 @@
+<form>
+  <label>Group Policy: New</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="dropdown" token="select467" searchWhenChanged="true">
+      <label>Domain</label>
+      <search>
+        <query>|`ad-domains` |dedup src_nt_domain|sort src_nt_domain</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+      <fieldForLabel>src_nt_domain</fieldForLabel>
+      <fieldForValue>src_nt_domain</fieldForValue>
+      <selectFirstChoice>true</selectFirstChoice>
+    </input>
+    <input type="time" token="Time" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Group Policy: New</title>
+        <search>
+          <query>`secrpt-new-group-policies($select467$)` | rename "Group Policy Name" as GroupPolicyName</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">cell</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/ad_audit_gpo?form.ldaprecord.nt_domain=$select467$&form.ldaprecord.gpobject=$row.GroupPolicyName$
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+</form>

@@ -1,0 +1,65 @@
+<form>
+  <label>Print Job Viewer</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="dropdown" token="PrintMonitoring.Host" searchWhenChanged="true">
+      <label>Host</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_printmon | dedup Host | sort Host</query>
+      </search>
+      <fieldForLabel>Host</fieldForLabel>
+      <fieldForValue>Host</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="PrintMonitoring.Printer" searchWhenChanged="true">
+      <label>Printer</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_printmon | search Host="$PrintMonitoring.Host$" | dedup printer | sort printer</query>
+      </search>
+      <fieldForLabel>printer</fieldForLabel>
+      <fieldForValue>printer</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="text" token="PrintMonitoring.Document" searchWhenChanged="true">
+      <label>Document</label>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="PrintMonitoring.User" searchWhenChanged="true">
+      <label>User</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_printmon | search Host="$PrintMonitoring.Host$" printer="$PrintMonitoring.Printer$" | dedup user | sort user</query>
+      </search>
+      <fieldForLabel>user</fieldForLabel>
+      <fieldForValue>user</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="time" token="Time" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Print Monitoring Job Browser</title>
+        <search>
+          <query>eventtype=printmon_windows host="$PrintMonitoring.Host$" printer="$PrintMonitoring.Printer$" document="$PrintMonitoring.Document$" user="$PrintMonitoring.User$" | table host, printer, status, total_pages, document, user, submitted_time, size_bytes</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+      </table>
+    </panel>
+  </row>
+</form>

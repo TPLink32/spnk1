@@ -1,0 +1,88 @@
+<DOCTYPE html>
+	<html>
+	<head>
+	<title>Thales Data Security Message Catalog: CMG1121W</title>
+	</head>
+	
+	<script language="javascript" type="text/javascript" >
+	function jumpto(x,y){
+		if (y != "") {
+			var t = "";
+			if (x != "") {
+				t = x + "_";
+			}
+			t = t + y + ".html";
+			location.replace (t);
+		}
+	}
+	</script>
+	<body style="position:absolute;top:0px;bottom:0px;left:0px;right:0px">
+
+	<div id="menu" 
+	 style="background-color:#3fbedb;padding:10px;width:auto;height:92%;float:left;">
+
+	<h2>Navigation</h2><div id="buttons" style="text-align:center">
+<p><button type="button" onClick="jumpto('idx','CMG')">(up)</button>
+<p><button type="button" onClick="jumpto('msg','CMG1120W')">Previous</button>
+<p><button type="button" onClick="jumpto('msg','CMG1150I')">Next</button>
+</dl><form name="form3">
+	<select name="jumpmenu" 
+			onChange="jumpto('msg',document.form3.jumpmenu.options[document.form3.jumpmenu.options.selectedIndex].value)">
+	<option value="">Message ID</option>
+	<option value="CMG1100W">CMG1100W</option>
+<option value="CMG1101W">CMG1101W</option>
+<option value="CMG1120W">CMG1120W</option>
+<option value="CMG1121W">CMG1121W</option>
+<option value="CMG1150I">CMG1150I</option>
+ 
+	</select>
+	</form>
+	<form name=form4>
+	<p>
+	or enter ID<br>
+	<input type="text" size="8" maxlength="8" name="msgid"><br>
+	<input type="text" style="display:none;">
+	<button type="button" onclick="jumpto('msg',document.form4.msgid.value)">
+	Lookup</button>
+	</form>
+	</div>
+	</div>
+	<div id="content" style="width:75%;padding:10px;color:#094e6c;float:left;">
+
+	<h1>Message ID</h1>
+	<ul>
+		CMG1121W
+	</ul>
+
+	<h2>Severity</h2>
+	<ul>
+		Warning
+	</ul>
+
+	<h2>Long Form</h2> <ul>{0} certificate has been expired for {1} days.</ul>
+	<h2>Short Form</h2> <ul>cert key expired
+			<h3>Parameters</h3>
+			<ul>
+			<table cellpadding="3" border="1">
+			<tr>
+			<th>Label</th>
+			<th>CEF Label</th>
+			<th>Type</th>
+			<th>Usage</th>
+			</tr>
+					<tr>
+					<td>cert</td>
+					<td>vds_cert</td>
+					<td>Text</td>
+					<td>Certificate type or name</td>
+					</tr></table></ul>
+</ul><h2>Description</h2>
+<ul>Vormetric agents use certificates to authenticate them with the Security Server. These certificates are created during the registration process after the agent is installed and are valid for one year. They automatically renew 60 days before expiration. No action is required.
+	</ul>
+	</div>
+	<div id="footer" style="clear:both;text-align:center;">
+	Copyright &copy; 2017
+ Thales e-Security Inc.
+	</div>
+	</body>
+	</html> 

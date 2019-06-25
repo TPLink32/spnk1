@@ -1,0 +1,27 @@
+
+#editOutputModal{
+	width: 600px;
+}
+
+#hosts_input{
+	margin-bottom: 4px;
+	width: 132px;
+}
+
+.output_group_assignment{
+	margin-left: 5px;
+}
+
+.extra_options{
+	margin-top: 8px;
+	margin-left: 20px;
+}
+
+.extra_options .icon-plus-circle{
+    margin-right: 4px;
+}
+
+.no_outputs{
+	background-color: #EEE;
+    padding: 8px 8px 8px 8px;
+}

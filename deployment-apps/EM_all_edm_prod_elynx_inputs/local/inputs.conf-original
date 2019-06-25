@@ -1,0 +1,8 @@
+## EDM PROD ##
+
+[monitor://\\tempsharefs\tempshare\fulfillment\logs\]
+whitelist = eLynxLog*\.txt$
+disabled = false
+index = edm_elynx
+sourcetype = edm-prod:elynx
+ignoreOlderThan = 7d

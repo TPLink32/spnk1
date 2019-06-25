@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Host Information</title>
+    <link rel="shortcut icon" href="{{SPLUNKWEB_URL_PREFIX}}/static/img/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="{{SPLUNKWEB_URL_PREFIX}}/static/css/build/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="{{SPLUNKWEB_URL_PREFIX}}/static/css/build/pages/dashboard-simple-bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="{{SPLUNKWEB_URL_PREFIX}}/static/app/splunk_app_windows_infrastructure/table_decoration.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="{{SPLUNKWEB_URL_PREFIX}}/static/app/splunk_app_windows_infrastructure/custom.css" />
+  </head>
+  <body class="simplexml preload locale-en">
+    <!-- 
+      BEGIN LAYOUT
+      This section contains the layout for the dashboard. Splunk uses proprietary
+      styles in <div> tags, similar to Bootstrap's grid system. 
+      -->
+    <a class="navSkip" href="#navSkip" tabindex="1">Screen reader users, click here to skip the navigation bar</a>
+    <div class="header splunk-header">
+      <div id="placeholder-splunk-bar">
+        <a href="{{SPLUNKWEB_URL_PREFIX}}/app/launcher/home" class="brand" title="splunk &gt; listen to your data">splunk<strong>&gt;</strong></a>
+      </div>
+      <div id="placeholder-app-bar"></div>
+    </div>
+    <a id="navSkip"></a>
+    <div class="dashboard-body container-fluid main-section-body" data-role="main">
+      <div class="dashboard-header clearfix">
+        <h2>Host Information</h2>
+      </div>
+      <div class="fieldset">
+        <div class="input input-dropdown" id="input1">
+          <label>Host</label>
+        </div>
+        <div class="input input-link">
+          <a id="link_services" target="_blank">View Services</a>
+          <a id="link_processes" target="_blank">View Processes</a>
+        </div>
+      </div>
+      <div id="row1" class="dashboard-row dashboard-row1">
+        <div id="panel1" class="dashboard-cell" style="width: 50%;">
+          <div class="dashboard-panel clearfix">
+            <div class="panel-element-row">
+              <div id="decorated_table1" class="dashboard-element table" style="width: 100%">
+                <div class="panel-head">
+                  <h3>Computer Information</h3>
+                </div>
+                <div class="panel-body"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="panel2" class="dashboard-cell" style="width: 50%;">
+          <div class="dashboard-panel clearfix">
+            <div class="panel-element-row">
+              <div id="decorated_table3" class="dashboard-element table" style="width: 100%">
+                <div class="panel-head">
+                  <h3>Processor Information</h3>
+                </div>
+                <div class="panel-body"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="row2" class="dashboard-row dashboard-row2">
+        <div id="panel3" class="dashboard-cell" style="width: 50%;">
+          <div class="dashboard-panel clearfix">
+            <div class="panel-element-row">
+              <div id="element1" class="dashboard-element table" style="width: 100%">
+                <div class="panel-head">
+                  <h3>Disk Information</h3>
+                </div>
+                <div class="panel-body"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="panel4" class="dashboard-cell" style="width: 50%;">
+          <div class="dashboard-panel clearfix">
+            <div class="panel-element-row">
+              <div id="element2" class="dashboard-element table" style="width: 100%">
+                <div class="panel-head">
+                  <h3>Network Adapter Information</h3>
+                </div>
+                <div class="panel-body"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer"></div>
+    <!-- 
+      END LAYOUT
+      -->
+    <script src="{{SPLUNKWEB_URL_PREFIX}}/config?autoload=1"></script>
+    <script src="{{SPLUNKWEB_URL_PREFIX}}/static/js/i18n.js"></script>
+    <script src="{{SPLUNKWEB_URL_PREFIX}}/i18ncatalog?autoload=1"></script>
+    <script src="{{SPLUNKWEB_URL_PREFIX}}/static/js/build/simplexml.min/config.js"></script>
+    <script type="text/javascript">
+      // <![CDATA[
+      require.config({
+          baseUrl: "{{SPLUNKWEB_URL_PREFIX}}/static/js",
+          waitSeconds: 0 // Disable require.js load timeout
+      });
+      
+      //
+      // LIBRARY REQUIREMENTS
+      //
+      // In the require function, we include the necessary libraries and modules for
+      // the HTML dashboard. Then, we pass variable names for these libraries and
+      // modules as function parameters, in order.
+      // 
+      // When you add libraries or modules, remember to retain this mapping order
+      // between the library or module and its function parameter. You can do this by
+      // adding to the end of these lists, as shown in the commented examples below.
+      
+      require([
+          "splunkjs/mvc",
+          "splunkjs/mvc/utils",
+          "splunkjs/mvc/tokenutils",
+          "underscore",
+          "jquery",
+          "splunkjs/mvc/simplexml",
+          "splunkjs/mvc/headerview",
+          "splunkjs/mvc/footerview",
+          "splunkjs/mvc/simplexml/dashboardview",
+          "splunkjs/mvc/simplexml/dashboard/panelref",
+          "splunkjs/mvc/simplexml/element/chart",
+          "splunkjs/mvc/simplexml/element/event",
+          "splunkjs/mvc/simplexml/element/html",
+          "splunkjs/mvc/simplexml/element/list",
+          "splunkjs/mvc/simplexml/element/map",
+          "splunkjs/mvc/simplexml/element/single",
+          "splunkjs/mvc/simplexml/element/table",
+          "splunkjs/mvc/simplexml/element/visualization",
+          "splunkjs/mvc/simpleform/formutils",
+          "splunkjs/mvc/simplexml/eventhandler",
+          "splunkjs/mvc/simplexml/searcheventhandler",
+          "splunkjs/mvc/simpleform/input/dropdown",
+          "splunkjs/mvc/simpleform/input/radiogroup",
+          "splunkjs/mvc/simpleform/input/linklist",
+          "splunkjs/mvc/simpleform/input/multiselect",
+          "splunkjs/mvc/simpleform/input/checkboxgroup",
+          "splunkjs/mvc/simpleform/input/text",
+          "splunkjs/mvc/simpleform/input/timerange",
+          "splunkjs/mvc/simpleform/input/submit",
+          "splunkjs/mvc/searchmanager",
+          "splunkjs/mvc/savedsearchmanager",
+          "splunkjs/mvc/postprocessmanager",
+          "splunkjs/mvc/simplexml/urltokenmodel"
+          // Add comma-separated libraries and modules manually here, for example:
+          // ..."splunkjs/mvc/simplexml/urltokenmodel",
+          // "splunkjs/mvc/tokenforwarder"
+          ],
+          function(
+              mvc,
+              utils,
+              TokenUtils,
+              _,
+              $,
+              DashboardController,
+              HeaderView,
+              FooterView,
+              Dashboard,
+              PanelRef,
+              ChartElement,
+              EventElement,
+              HtmlElement,
+              ListElement,
+              MapElement,
+              SingleElement,
+              TableElement,
+              VisualizationElement,
+              FormUtils,
+              EventHandler,
+              SearchEventHandler,
+              DropdownInput,
+              RadioGroupInput,
+              LinkListInput,
+              MultiSelectInput,
+              CheckboxGroupInput,
+              TextInput,
+              TimeRangeInput,
+              SubmitButton,
+              SearchManager,
+              SavedSearchManager,
+              PostProcessManager,
+              UrlTokenModel
+      
+              // Add comma-separated parameter names here, for example: 
+              // ...UrlTokenModel, 
+              // TokenForwarder
+              ) {
+      
+              var pageLoading = true;
+      
+      
+              // 
+              // TOKENS
+              //
+              
+              // Create token namespaces
+              var urlTokenModel = new UrlTokenModel();
+              mvc.Components.registerInstance('url', urlTokenModel);
+              var defaultTokenModel = mvc.Components.getInstance('default', {create: true});
+              var submittedTokenModel = mvc.Components.getInstance('submitted', {create: true});
+      
+              urlTokenModel.on('url:navigate', function() {
+                  defaultTokenModel.set(urlTokenModel.toJSON());
+                  if (!_.isEmpty(urlTokenModel.toJSON()) && !_.all(urlTokenModel.toJSON(), _.isUndefined)) {
+                      submitTokens();
+                  } else {
+                      submittedTokenModel.clear();
+                  }
+              });
+      
+              // Initialize tokens
+              defaultTokenModel.set(urlTokenModel.toJSON());
+      
+              function submitTokens() {
+                  // Copy the contents of the defaultTokenModel to the submittedTokenModel and urlTokenModel
+                  FormUtils.submitForm({ replaceState: pageLoading });
+              }
+      
+              function setToken(name, value) {
+                  defaultTokenModel.set(name, value);
+                  submittedTokenModel.set(name, value);
+              }
+      
+              function unsetToken(name) {
+                  defaultTokenModel.unset(name);
+                  submittedTokenModel.unset(name);
+              }
+      
+              
+              function setLink(host) {
+                $('#link_services').attr('href', 'windows_services?form.HostMonitoringHost=' + host);
+                    $('#link_processes').attr('href', 'windows_processes?form.HostMonitoringHost=' + host);
+              }
+              
+              //
+              // SEARCH MANAGERS
+              //
+      
+              var search1 = new SearchManager({
+                  "id": "search1",
+                  "search": "eventtype=hostmon_windows Type=OperatingSystem host=\"$host$\" | dedup host | join host [search eventtype=hostmon_windows Type=Computer host=\"$host$\" | dedup host] | eval \"Service Pack\"=ServicePack, \"Serial Number\"=SerialNumber, \"Install Date\"=strftime(strptime(InstallDate,\"%Y%m%d%H%M%S.%6Q%Ez\"), \"%c\"), \"Last Boot Time\"=strftime(strptime(LastBootUpTime,\"%Y%m%d%H%M%S.%6Q%Ez\"), \"%c\"), \"Total Physical Memory\"=TotalPhysicalMemoryKB + \" KB\", \"Free Physical Memory\"=FreePhysicalMemoryKB+\" KB\", \"Total Virtual Memory\"=TotalVirtualMemoryKB+\" KB\", \"Free Virtual Memory\"=FreeVirtualMemoryKB+\" KB\"|table OS, Architecture, Version, \"Service Pack\", \"Serial Number\", \"Install Date\", \"Last Boot Time\", Manufacturer, Model, Domain, \"Total Physical Memory\", \"Free Physical Memory\", \"Total Virtual Memory\",  \"Free Virtual Memory\" |transpose",
+                  "sample_ratio": null,
+                  "latest_time": "$latest$",
+                  "earliest_time": "0",
+                  "cancelOnUnload": true,
+                  "status_buckets": 0,
+                  "app": utils.getCurrentApp(),
+                  "auto_cancel": 90,
+                  "preview": true,
+                  "runWhenTimeIsUndefined": false
+              }, {tokens: true, tokenNamespace: "submitted"});
+      
+              var search2 = new SearchManager({
+                  "id": "search2",
+                  "search": "eventtype=hostmon_windows Type=Processor host=\"$host$\" | dedup host |eval Speed=ClockSpeedMHz + \" MHz\", \"Number of Cores\"=NumberOfCores, \"Number of Processors\"=NumberOfProcessors|table Name, Manufacturer, Architecture, Speed, \"Number of Cores\", \"Number of Processors\"| transpose",
+                  "sample_ratio": null,
+                  "latest_time": "$latest$",
+                  "earliest_time": "0",
+                  "cancelOnUnload": true,
+                  "status_buckets": 0,
+                  "app": utils.getCurrentApp(),
+                  "auto_cancel": 90,
+                  "preview": true,
+                  "runWhenTimeIsUndefined": false
+              }, {tokens: true, tokenNamespace: "submitted"});
+      
+              var search3 = new SearchManager({
+                  "id": "search3",
+                  "search": "eventtype=hostmon_windows Type=Disk host=\"$host$\" | dedup Name | fillnull value=\"-\" | table Name, DriveType, FileSystem, TotalSpaceKB, FreeSpaceKB | sort Name",
+                  "sample_ratio": null,
+                  "latest_time": "$latest$",
+                  "earliest_time": "0",
+                  "cancelOnUnload": true,
+                  "status_buckets": 0,
+                  "app": utils.getCurrentApp(),
+                  "auto_cancel": 90,
+                  "preview": true,
+                  "runWhenTimeIsUndefined": false
+              }, {tokens: true, tokenNamespace: "submitted"});
+      
+              var search4 = new SearchManager({
+                  "id": "search4",
+                  "search": "eventtype=hostmon_windows Type=NetworkAdapter host=\"$host$\" | dedup Name | table Name, Manufacturer, MACAddress, Status | sort Name",
+                  "sample_ratio": null,
+                  "latest_time": "$latest$",
+                  "earliest_time": "0",
+                  "cancelOnUnload": true,
+                  "status_buckets": 0,
+                  "app": utils.getCurrentApp(),
+                  "auto_cancel": 90,
+                  "preview": true,
+                  "runWhenTimeIsUndefined": false
+              }, {tokens: true, tokenNamespace: "submitted"});
+      
+              var search5 = new SearchManager({
+                  "id": "search5",
+                  "search": "| inputlookup windows_hostmon_system  | dedup Host | sort Host",
+                  "sample_ratio": null,
+                  "latest_time": "$latest$",
+                  "earliest_time": "$earliest$",
+                  "cancelOnUnload": true,
+                  "status_buckets": 0,
+                  "app": utils.getCurrentApp(),
+                  "auto_cancel": 90,
+                  "preview": true,
+                  "runWhenTimeIsUndefined": false
+              }, {tokens: true});
+      
+      
+      
+              //
+              // SPLUNK HEADER AND FOOTER
+              //
+      
+              new HeaderView({
+                  id: 'header',
+                  section: 'dashboards',
+                  el: $('.header'),
+                  acceleratedAppNav: true,
+                  useSessionStorageCache: true,
+                  splunkbar: true,
+                  appbar: true,
+                  litebar: false,
+              }, {tokens: true}).render();
+      
+              new FooterView({
+                  id: 'footer',
+                  el: $('.footer')
+              }, {tokens: true}).render();
+      
+      
+              //
+              // DASHBOARD EDITOR
+              //
+      
+              new Dashboard({
+                  id: 'dashboard',
+                  el: $('.dashboard-body'),
+                  showTitle: true,
+                  editable: true
+              }, {tokens: true}).render();
+      
+      
+              //
+              // VIEWS: VISUALIZATION ELEMENTS
+              //
+      
+              var decorated_table1 = new TableElement({
+                  "id": "decorated_table1",
+                  "count": 100,
+                  "dataOverlayMode": "none",
+                  "drilldown": "cell",
+                  "rowNumbers": "false",
+                  "wrap": "true",
+                  "managerid": "search1",
+                  "el": $('#decorated_table1')
+              }, {tokens: true, tokenNamespace: "submitted"}).render();
+      
+              var decorated_table3 = new TableElement({
+                  "id": "decorated_table3",
+                  "count": 100,
+                  "dataOverlayMode": "none",
+                  "drilldown": "row",
+                  "rowNumbers": "false",
+                  "wrap": "true",
+                  "managerid": "search2",
+                  "el": $('#decorated_table3')
+              }, {tokens: true, tokenNamespace: "submitted"}).render();
+      
+              var element1 = new TableElement({
+                  "id": "element1",
+                  "count": 10,
+                  "dataOverlayMode": "none",
+                  "drilldown": "row",
+                  "rowNumbers": "false",
+                  "wrap": "true",
+                  "managerid": "search3",
+                  "el": $('#element1')
+              }, {tokens: true, tokenNamespace: "submitted"}).render();
+      
+              var element2 = new TableElement({
+                  "id": "element2",
+                  "count": 10,
+                  "dataOverlayMode": "none",
+                  "drilldown": "row",
+                  "rowNumbers": "false",
+                  "wrap": "true",
+                  "managerid": "search4",
+                  "el": $('#element2')
+              }, {tokens: true, tokenNamespace: "submitted"}).render();
+      
+      
+              //
+              // VIEWS: FORM INPUTS
+              //
+      
+              var input1 = new DropdownInput({
+                  "id": "input1",
+                  "choices": [],
+                  "searchWhenChanged": true,
+                  "valueField": "Host",
+                  "selectFirstChoice": true,
+                  "labelField": "Host",
+                  "showClearButton": true,
+                  "value": "$form.host$",
+                  "managerid": "search5",
+                  "el": $('#input1')
+              }, {tokens: true}).render();
+      
+              input1.on("change", function(newValue) {
+                  FormUtils.handleValueChange(input1);
+      
+                  // Set new Host value for link
+                  setLink(newValue);
+              });
+              
+              DashboardController.onReady(function() {
+                  if (!submittedTokenModel.has('earliest') && !submittedTokenModel.has('latest')) {
+                      submittedTokenModel.set({ earliest: '0', latest: '' });
+                  }
+              });
+      
+              // Initialize time tokens to default
+              if (!defaultTokenModel.has('earliest') && !defaultTokenModel.has('latest')) {
+                  defaultTokenModel.set({ earliest: '0', latest: '' });
+              }
+      
+              if (!_.isEmpty(urlTokenModel.toJSON())){
+                  submitTokens();
+              }
+            
+      
+              //
+              // DASHBOARD READY
+              //
+      
+              DashboardController.ready();
+              pageLoading = false;
+      
+          }
+      );
+      // ]]>
+    </script>
+    <script src="{{SPLUNKWEB_URL_PREFIX}}/static/app/splunk_app_windows_infrastructure/table_decoration.js" type="text/javascript"></script>
+  </body>
+</html>

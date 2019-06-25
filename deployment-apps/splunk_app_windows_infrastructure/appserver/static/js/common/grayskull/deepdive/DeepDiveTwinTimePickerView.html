@@ -1,0 +1,85 @@
+<span class="deep-dive-twin-time-picker">
+	<span class="deep-dive-twin-time-picker-checkbox-container">
+		<i class="icon-box-unchecked"></i>
+	</span>
+	<a class="deep-dive-twin-time-picker-toggle">
+		<span class="deep-dive-twin-time-picker-text">
+			<%= _(label).t() %>
+		</span>
+		<span class="deep-dive-twin-time-picker-active-val">
+			<%= _("Yesterday").t() %>
+		</span>
+		<span class="caret"></span>
+
+	</a>
+</span>
+<div class="deep-dive-twin-time-picker-popdown popdown-dialog">
+	<div class="arrow"></div>
+	<div class="deep-dive-twin-time-picker-content">
+		<div class="deep-dive-twin-time-picker-header">
+			<%= _("End Date and Time").t() %>
+		</div>
+		<div class="deep-dive-twin-time-picker-body">
+			<div>
+				<table>
+					<tbody>
+						<tr>
+							<td>
+								<ul class="twin-time-presets-list">
+									<li>
+										<a class="twin-time-picker-preset" data-time-preset="Yesterday">
+											<%= _("Yesterday").t() %>
+										</a>
+									</li>
+									<li>
+										<a class="twin-time-picker-preset" data-time-preset="Last week">
+											<%= _("Last week").t() %>
+										</a>
+									</li>
+									<li>
+										<a class="twin-time-picker-preset" data-time-preset="Last Month">
+											<%= _("Last Month").t() %>
+										</a>
+									</li>
+								</ul>
+							</td>
+							<td>
+								<ul class="twin-time-presets-list">
+									<li>
+										<a class="twin-time-picker-preset" data-time-preset="60 minutes ago">
+											<%= _("60 minutes ago").t() %>
+										</a>
+									</li>
+									<li>
+										<a class="twin-time-picker-preset" data-time-preset="2 hours ago">
+											<%= _("2 hours ago").t() %>
+										</a>
+									</li>
+									<li>
+										<a class="twin-time-picker-preset" data-time-preset="6 hours ago">
+											<%= _("6 hours ago").t() %>
+										</a>
+									</li>
+									<li>
+										<a class="twin-time-picker-preset" data-time-preset="12 hours ago">
+											<%= _("12 hours ago").t() %>
+										</a>
+									</li>
+								</ul>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<hr style="margin-top:0px;margin-bottom:5px;"></hr>
+			<div class="deep-dive-twin-time-picker-anchor-wrapper">
+				<span class="deep-dive-twin-time-picker-anchor"></span>
+				<a class="btn deep-dive-twin-time-picker-anchor-apply">
+					<span>
+						<%= _("Apply").t() %>
+					</span>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>

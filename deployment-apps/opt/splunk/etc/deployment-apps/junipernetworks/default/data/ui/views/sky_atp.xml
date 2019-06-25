@@ -1,0 +1,105 @@
+<form>
+  <label>Sky ATP</label>
+  <init>
+    <set token="malware_name">*</set>
+    <set token="username">*</set>
+    <set token="hostname">*</set>
+    <set token="srx_host">*</set>
+  </init>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="skyatp_time_token">
+      <label>Time</label>
+      <default>
+        <earliest>rt-5m</earliest>
+        <latest>rt</latest>
+      </default>
+    </input>
+    <input type="text" token="srx_host" searchWhenChanged="true">
+      <label>SRX</label>
+    </input>
+    <input type="text" token="malware_name" searchWhenChanged="true">
+      <label>Malware Name</label>
+      <prefix>malware_info="</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="username" searchWhenChanged="true">
+      <label>User Name</label>
+      <prefix>username="</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="hostname" searchWhenChanged="true">
+      <label>Hostname</label>
+      <prefix>hostname="</prefix>
+      <suffix>"</suffix>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <chart>
+        <title>Top Usernames by Most Malware Events</title>
+        <search>
+          <query>source="jnpr-syslog" "AAMW_MALWARE_EVENT_LOG" $srx_host$ $malware_name$ $username$  $hostname$ | top 5 username</query>
+          <earliest>$skyatp_time_token.earliest$</earliest>
+          <latest>$skyatp_time_token.latest$</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Top Client IPs by Most Malware Events</title>
+        <search>
+          <query>source="jnpr-syslog" "AAMW_MALWARE_EVENT_LOG"  $srx_host$ $malware_name$ $username$  $hostname$ | top 5 client_ip_str</query>
+          <earliest>$skyatp_time_token.earliest$</earliest>
+          <latest>$skyatp_time_token.latest$</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Top C&amp;C Events By UserName</title>
+        <search>
+          <query>source="Jnpr-syslog"  SECINTEL_ACTION_LOG $srx_host$ $malware_name$  $username$ $hostname$  | top 5 username</query>
+          <earliest>$skyatp_time_token.earliest$</earliest>
+          <latest>$skyatp_time_token.latest$</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Top Sky ATP Malware found</title>
+        <search>
+          <query>source="jnpr-syslog" "AAMW_MALWARE_EVENT_LOG"  malware_info != "N/A" $srx_host$ $malware_name$ $username$ $hostname$ | chart sparkline count(malware_info)  AS "Malware Count" BY malware_info | sort "Malware Count" desc | rename malware_info as Malware | head 5</query>
+          <earliest>$skyatp_time_token.earliest$</earliest>
+          <latest>$skyatp_time_token.latest$</latest>
+        </search>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Top Infected hosts found by Sky ATP</title>
+        <search>
+          <query>source="jnpr-syslog" "AAMW_HOST_INFECTED_EVENT_LOG"  $srx_host$ $malware_name$ $username$  $hostname$  |  eval hostname-str = if(hostname = "N/A", client_ip_str, hostname) | chart sparkline count(hostname-str)  AS "Hostname Count" BY hostname-str | rename hostname-str as Hostname | sort  "Hostname Count"  desc  | head 5</query>
+          <earliest>$skyatp_time_token.earliest$</earliest>
+          <latest>$skyatp_time_token.latest$</latest>
+        </search>
+      </table>
+    </panel>
+    <panel>
+      <chart>
+        <title>Top C&amp;C Events By Source address</title>
+        <search>
+          <query>source="Jnpr-syslog"  SECINTEL_ACTION_LOG $srx_host$ $malware_name$  $username$ $hostname$  | top 5 source_address</query>
+          <earliest>$skyatp_time_token.earliest$</earliest>
+          <latest>$skyatp_time_token.latest$</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">none</option>
+      </chart>
+    </panel>
+  </row>
+</form>

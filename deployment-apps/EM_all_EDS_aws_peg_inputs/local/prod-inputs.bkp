@@ -1,0 +1,9 @@
+[monitor:///eds_logs/]
+disabled = false
+whitelist = \.txt$
+index = eds_prod
+sourcetype = eds:trace
+host_regex = (EP\d\w+)
+crcSalt = <SOURCE>
+igrnoreOlderThan = 30d
+blacklist = OLD

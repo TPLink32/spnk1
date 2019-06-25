@@ -1,0 +1,92 @@
+<DOCTYPE html>
+	<html>
+	<head>
+	<title>Thales Data Security Message Catalog: LOG0141I</title>
+	</head>
+	
+	<script language="javascript" type="text/javascript" >
+	function jumpto(x,y){
+		if (y != "") {
+			var t = "";
+			if (x != "") {
+				t = x + "_";
+			}
+			t = t + y + ".html";
+			location.replace (t);
+		}
+	}
+	</script>
+	<body style="position:absolute;top:0px;bottom:0px;left:0px;right:0px">
+
+	<div id="menu" 
+	 style="background-color:#3fbedb;padding:10px;width:auto;height:92%;float:left;">
+
+	<h2>Navigation</h2><div id="buttons" style="text-align:center">
+<p><button type="button" onClick="jumpto('idx','LOG')">(up)</button>
+<p><button type="button" onClick="jumpto('msg','LOG0140I')">Previous</button>
+<p><button type="button" onClick="jumpto('msg','LOG0287E')">Next</button>
+</dl><form name="form3">
+	<select name="jumpmenu" 
+			onChange="jumpto('msg',document.form3.jumpmenu.options[document.form3.jumpmenu.options.selectedIndex].value)">
+	<option value="">Message ID</option>
+	<option value="LOG0138E">LOG0138E</option>
+<option value="LOG0139E">LOG0139E</option>
+<option value="LOG0140I">LOG0140I</option>
+<option value="LOG0141I">LOG0141I</option>
+<option value="LOG0287E">LOG0287E</option>
+<option value="LOG0541I">LOG0541I</option>
+<option value="LOG0668W">LOG0668W</option>
+<option value="LOG0669I">LOG0669I</option>
+<option value="LOG1318W">LOG1318W</option>
+ 
+	</select>
+	</form>
+	<form name=form4>
+	<p>
+	or enter ID<br>
+	<input type="text" size="8" maxlength="8" name="msgid"><br>
+	<input type="text" style="display:none;">
+	<button type="button" onclick="jumpto('msg',document.form4.msgid.value)">
+	Lookup</button>
+	</form>
+	</div>
+	</div>
+	<div id="content" style="width:75%;padding:10px;color:#094e6c;float:left;">
+
+	<h1>Message ID</h1>
+	<ul>
+		LOG0141I
+	</ul>
+
+	<h2>Severity</h2>
+	<ul>
+		Information
+	</ul>
+
+	<h2>Long Form</h2> <ul>The Security Server has pruned and exported {0} log messages into file "{1}". These log messages have been deleted from the Security Server.</ul>
+	<h2>Short Form</h2> <ul>server has pruned and exported log messages into file
+			<h3>Parameters</h3>
+			<ul>
+			<table cellpadding="3" border="1">
+			<tr>
+			<th>Label</th>
+			<th>CEF Label</th>
+			<th>Type</th>
+			<th>Usage</th>
+			</tr>
+					<tr>
+					<td>filePath</td>
+					<td>filePath</td>
+					<td>Text</td>
+					<td>Full path to file</td>
+					</tr></table></ul>
+</ul><h2>Description</h2>
+<ul>None
+	</ul>
+	</div>
+	<div id="footer" style="clear:both;text-align:center;">
+	Copyright &copy; 2017
+ Thales e-Security Inc.
+	</div>
+	</body>
+	</html> 

@@ -1,0 +1,113 @@
+/*
+ * DNSServerStatus CSS File
+ */
+.splunk-app-microsoft-dnsserverstatusview {
+}
+ 
+.splunk-app-microsoft-dnsserverstatusview table {
+ 	width: 			100%;
+}
+ 
+.splunk-app-microsoft-dnsserverstatusview table tr.divider {
+ 	line-height: 	8px;
+ 	height: 		8px;
+}
+
+.splunk-app-microsoft-dnsserverstatusview table tr.hline {
+	line-height:	1px;
+	height:			1px;
+	border-top:		1px solid #333;
+}
+
+.splunk-app-microsoft-dnsserverstatusview table tr {
+ 	line-height: 	20px;
+ 	height: 		20px;
+ 	vertical-align:	middle;
+}
+
+.splunk-app-microsoft-dnsserverstatusview table tr td.col1 {
+ 	font-family:	Tahoma, Geneva, sans-serif;
+ 	font-size:		14px;
+ 	color:			black;
+	width: 			50%;
+ 	font-weight:	bold;
+ 	color:			#333333;
+}
+
+.splunk-app-microsoft-dnsserverstatusview table tr td.services {
+ 	font-family:	Tahoma, Geneva, sans-serif;
+ 	font-size:		14px;
+ 	color:			black;
+	width: 			50%;
+ 	font-weight:	bold;
+ 	color:			#333333;
+ 	vertical-align:	top;
+}
+
+table.svc_table tr td.svc_name {
+	width: 			60%;
+	font-family:	Tahoma, Geneva, sans-serif;
+	font-size:		12px;
+	height:			24px;
+	vertical-align:	middle;
+}
+
+table.svc_table tr td.svc_status {
+	width:			40%;
+	font-family:	Tahoma, Geneva, sans-serif;
+	font-size:		12px;
+	height:			24px;
+}
+ 
+.splunk-app-microsoft-dnsserverstatusview table tr td.col2 {
+ 	font-family:	Tahoma, Geneva, sans-serif;
+ 	font-size:		14px;
+ 	color:			black;
+	width:			50%;
+}
+
+.splunk-app-microsoft-dnsserverstatusview table tr td.col2 a:link,
+.splunk-app-microsoft-dnsserverstatusview table tr td.col2 a:visited {
+ 	font-family:	Tahoma, Geneva, sans-serif;
+ 	font-size:		14px;
+ 	color:			black;
+	width:			50%;
+}
+
+.splunk-app-microsoft-dnsserverstatusview table tr td.col2 a:hover,
+.splunk-app-microsoft-dnsserverstatusview table tr td.col2 a:active {
+ 	font-family:	Tahoma, Geneva, sans-serif;
+ 	font-size:		14px;
+ 	color:			#2B9969;
+	width:			50%;
+}
+
+.splunk-app-microsoft-dnsserverstatusview span.imageTrue {
+	background: 	url('../images/tick.png');
+	float:			left;
+	display:		block;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-dnsserverstatusview span.imageFalse {
+	background: 	url('../images/cross.png');
+	float:			left;
+	display:		block;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-dnsserverstatusview span.imageServiceUp {
+	background: 	url('../images/tick.png');
+	display:		block;
+	width: 			16px;
+	height: 		16px;
+}
+
+.splunk-app-microsoft-dnsserverstatusview span.imageServiceDown {
+	background: 	url('../images/cross.png');
+	display:		block;
+	width: 			16px;
+	height: 		16px;
+}

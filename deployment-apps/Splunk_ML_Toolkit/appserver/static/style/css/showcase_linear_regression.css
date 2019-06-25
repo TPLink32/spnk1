@@ -1,0 +1,38 @@
+#regressionAlgorithmParamsControlsWrapper .checkbox {
+    padding-bottom: 20px;
+}
+
+#actualVsPredictedLinesSortBy {
+    height: 40px;
+}
+
+#dataAndPredictionsPanel thead th:nth-child(1), #dataAndPredictionsPanel thead th:nth-child(2), #dataAndPredictionsPanel thead th:nth-child(3) {
+    font-weight: bold;
+}
+
+#dataAndPredictionsPanel thead th:nth-child(3), #dataAndPredictionsPanel tbody td:nth-child(3) {
+    border-right: 1px solid #000;
+}
+
+/* TableViews don't have any bottom padding so this adds space between the table and the footer buttons */
+#fitModelSummaryPanel .mlts-panel-footer {
+    margin-top: 15px;
+}
+
+#trainingSetFractionSliderValue {
+    font-weight: bold;
+}
+
+#actualVsPredictedLinesSortBy label, #actualVsPredictedLinesSortBy .splunk-dropdown {
+    display: inline-block;
+}
+
+#actualVsPredictedLinesSortBy label {
+    vertical-align: top;
+    line-height: 26px;
+    margin-right: 5px;
+}
+
+#actualVsPredictedLinesSortByControl.splunk-choice-input {
+    padding-bottom: 0;
+}

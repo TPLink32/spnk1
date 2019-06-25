@@ -1,0 +1,60 @@
+{
+  "Server Power":{
+    "label": "Server Power",
+    "value": "| inputlookup server_power.csv",
+    "targetVariable": "ac_power",
+    "featuresVariables": [
+      "total-unhalted_core_cycles",
+      "total-instructions_retired",
+      "total-last_level_cache_references",
+      "total-memory_bus_transactions",
+      "total-cpu-utilization",
+      "total-disk-accesses",
+      "total-disk-blocks",
+      "total-disk-utilization"
+    ],
+    "modelName": "example_server_power"
+  },
+  "Housing": {
+    "label": "Housing",
+    "value": "| inputlookup housing.csv",
+    "targetVariable": "median_house_value",
+    "featuresVariables": [
+      "crime_rate",
+      "land_zone",
+      "nitric_oxide_concentration",
+      "avg_rooms_per_dwelling",
+      "units_prior_1940",
+      "distance_to_employment_center",
+      "highway_accessibility_index",
+      "property_tax_rate",
+      "pupil_teacher_ratio"
+    ],
+    "modelName": "example_housing"
+  },
+  "App Usage": {
+    "label": "App Usage",
+    "value": "| inputlookup app_usage.csv",
+    "targetVariable": "RemoteAccess",
+    "featuresVariables": [
+      "CRM",
+      "HR1",
+      "Webmail",
+      "CloudDrive"
+    ],
+    "modelName": "example_app_usage"
+  },
+  "Power Plant": {
+    "label": "Power Plant",
+    "value": "| inputlookup power_plant.csv",
+    "targetVariable": "Energy_Output",
+    "featuresVariables": [
+      "Temperature",
+      "Pressure",
+      "Humidity",
+      "Vacuum"
+    ],
+    "modelName": "example_energy_output"
+  }
+
+}

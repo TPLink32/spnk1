@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form>
+  <label>Switch Inventory Chart</label>
+  <searchTemplate>
+     sourcetype="arista_switch_inventory" AristaSwitchInventory $filter$ | table switchname, make, model, description, serialnum, switchtype, systemmacaddr, mfgdate | dedup serialnum | sort switchname | stats count by model
+  </searchTemplate>
+
+  <fieldset autoRun="true">
+      <html>
+        <p>Filter using any field [ switchname=* make=* model=* description=* serialnum=* switchtype=* systemmacaddr=* mfgdate=*</p>
+      </html>
+      <input type="text" token="filter">
+        <default>switchname=*</default>
+      </input>
+
+      <!-- Add default TimePicker -->
+      <input type="time">
+        <label/>
+        <default>
+          <earliest>-7d</earliest>
+          <latest>now</latest>
+        </default>
+      </input>
+
+  </fieldset>
+
+  <row>
+      <chart>
+        <option name="charting.chart">pie</option>
+        <option name="height">400</option>
+      </chart>
+    </row>
+
+</form>
+

@@ -1,0 +1,83 @@
+<form>
+  <label>Firewall Policies</label>
+  <init>
+    <set token="source_ip_address">*</set>
+    <set token="destination_ip_address">*</set>
+    <set token="username">*</set>
+    <set token="srx_host">*</set>
+  </init>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="firewall_policies">
+      <label>Time Period</label>
+      <default>
+        <earliest>rt-5m</earliest>
+        <latest>rt</latest>
+      </default>
+    </input>
+    <input type="text" token="srx_host" searchWhenChanged="true">
+      <label>SRX</label>
+    </input>
+    <input type="text" token="source_ip_address" searchWhenChanged="true">
+      <label>Source IP Address</label>
+      <prefix>source_address="</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="username">
+      <label>User Name</label>
+      <prefix>username="</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="destination_ip_address" searchWhenChanged="true">
+      <label>Destination IP Address</label>
+      <prefix>destination_address="</prefix>
+      <suffix>"</suffix>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <chart>
+        <title>Top Firewall Policies</title>
+        <search>
+          <query>source="jnpr-syslog"  ("RT_FLOW_SESSION_CREATE" OR "RT_FLOW_SESSION_CLOSE" OR "RT_FLOW_SESSION_DENY")  $srx_host$ $source_ip_address$  $destination_ip_address$  $username$| top 5 policy_name</query>
+          <earliest>$firewall_policies.earliest$</earliest>
+          <latest>$firewall_policies.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">Poliy Name</option>
+        <option name="charting.axisTitleY.text">Event Count</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.legend.placement">none</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Top Firewall Policies Denied</title>
+        <search>
+          <query>source="jnpr-syslog"  ("RT_FLOW_SESSION_DENY")  $srx_host$ $source_ip_address$  $destination_ip_address$  $username$ | top 5 policy_name</query>
+          <earliest>$firewall_policies.earliest$</earliest>
+          <latest>$firewall_policies.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">Policy Name</option>
+        <option name="charting.axisTitleY.text">Event Count</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.legend.placement">none</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Top Firewall Policies (Bytes Transferred)</title>
+        <search>
+          <query>source="jnpr-syslog" "RT_FLOW_SESSION_CLOSE"     $srx_host$ $source_ip_address$  $destination_ip_address$ $username$ | chart sum(eval( (bytes_from_client + bytes_from_server) /1048576))  as volume by policy_name | head 5</query>
+          <earliest>$firewall_policies.earliest$</earliest>
+          <latest>$firewall_policies.latest$</latest>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.text">Policy Name</option>
+        <option name="charting.axisTitleY.text">Volume in MB</option>
+        <option name="charting.chart">bar</option>
+        <option name="charting.legend.placement">none</option>
+      </chart>
+    </panel>
+  </row>
+</form>

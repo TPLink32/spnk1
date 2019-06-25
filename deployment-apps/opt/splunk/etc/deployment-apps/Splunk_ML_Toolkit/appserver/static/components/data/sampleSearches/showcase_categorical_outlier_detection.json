@@ -1,0 +1,70 @@
+
+{
+  "Disk Failures": {
+    "label": "Disk Failures",
+    "value": "| inputlookup disk_failures.csv",
+    "anomalyFields": [
+      "Model",
+      "CapacityBytes",
+      "DiskFailure",
+      "SerialNumber"
+    ]
+  },
+  "Bitcoin Transactions": {
+    "label": "Bitcoin Transactions",
+    "value": "| inputlookup bitcoin_transactions.csv | eval from_user = \"u\".user_id_from | eval to_user = \"u\".user_id_to",
+    "anomalyFields": [
+      "from_user",
+      "to_user",
+      "value"
+    ]
+  },
+  "Mortgage Loans Data - New York": {
+    "label": "Mortgage Loans Data - New York",
+    "value": "| inputlookup mortgage_loan_ny.csv",
+    "anomalyFields": [
+      "Year",
+      "Contract_interest_rate(%)",
+      "Initial_fees_and_charges(%)",
+      "Effective_interest_rate(%)",
+      "Term_to_maturity",
+      "Purchase_price",
+      "Loan_to_price_ratio(%)",
+      "Adjustable_rate_loans(%)"
+    ]
+  },
+  "Diabetic Data": {
+    "label": "Diabetic Data",
+    "value": "| inputlookup diabetic.csv | fields num_lab_procedures num_medications num_procedures number_diagnoses number_inpatient number_outpatient number_emergency",
+    "anomalyFields": [
+      "num_lab_procedures",
+      "num_medications",
+      "num_procedures",
+      "number_diagnoses",
+      "number_inpatient",
+      "number_outpatient",
+      "number_emergency"
+    ]
+  },
+  "Supermarket Purchases": {
+    "label": "Supermarket Purchases",
+    "value": "| inputlookup supermarket.csv",
+    "anomalyFields": [
+      "customer_id",
+      "shop_id",
+      "product_id",
+      "quantity",
+      "price",
+      "distance"
+    ]
+  },
+  "Phone Usage": {
+    "label": "Phone Usage",
+    "value": "| inputlookup phone_usage.csv | eval _time=strptime(_time, \"%Y-%m-%d %H:%M:%S\") | where type=\"Voice\" | timechart count(\"duration\") span=12h by direction",
+    "anomalyFields": [
+      "Incoming",
+      "Missed call",
+      "Outgoing"
+    ]
+  }
+}

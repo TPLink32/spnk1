@@ -1,0 +1,16 @@
+<nav search_view="search" color="#00a9f8">
+	<view name="home" default='true' />
+  
+  <view name="contents"/>
+  <collection label="Assistants">
+    <view name="showcase_standard_deviation"></view>
+    <view name="showcase_first_seen_demo"></view> 
+    <view name="showcase_simple_search"></view> 
+  </collection>
+  <view name="data_source_check" />
+  <view name="search"/>
+  <view name="setup" />
+  <a target="_blank" href="https://splunkbase.splunk.com/app/3435/#/details">Docs</a>
+  <a target="_blank" href="https://answers.splunk.com/answers/ask.html?appid=3435">Support</a>
+  <!--<a href="http://docs.splunk.com/Documentation/MLApp">Docs</a>-->
+</nav>

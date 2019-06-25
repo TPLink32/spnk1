@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form>
+  <label>Transceiver Inventory Table</label>
+  <searchTemplate>
+     sourcetype="arista_switch_inventory" AristaXcvrInventory $filter$ | table switchname, interface, mfgname, model, serialnum | dedup switchname interface | sort switchname,interface
+  </searchTemplate>
+
+  <fieldset autoRun="true">
+      <html>
+         <p>Filter using any field [ switchname=* interface=* mfgname=* model=* serialnum=* ]</p>
+      </html>
+      <input type="text" token="filter">
+        <default>switchname=* model!="NotPresent"</default>
+        <seed></seed>
+        <suffix></suffix>
+      </input>
+
+      <!-- Add default TimePicker -->
+      <input type="time">
+        <label/>
+        <default>
+          <earliest>-7d</earliest>
+          <latest>now</latest>
+        </default>
+      </input>
+  </fieldset>
+
+  <row>
+      <table>
+          <title>Matching transceivers</title>
+      </table>
+    </row>
+
+</form>

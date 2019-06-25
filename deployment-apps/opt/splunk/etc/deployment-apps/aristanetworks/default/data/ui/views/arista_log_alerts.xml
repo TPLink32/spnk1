@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<view template="dashboard.html">
+  <label>Alerts/Logs</label>
+  <module name="AccountBar" layoutPanel="appHeader"/>
+  <module name="AppBar" layoutPanel="navigationHeader"/>
+  <module name="Message" layoutPanel="messaging">
+    <param name="filter">*</param>
+    <param name="clearOnJobDispatch">False</param>
+    <param name="maxSize">1</param>
+  </module>
+  <module name="HiddenSearch" layoutPanel="mainSearchControls" autoRun="True">
+    <param name="search">source="arista_switch_log" | stats count(eval(severity="0")) as Emergency, count(eval(severity="1")) as Alerts, count(eval(severity="2")) as Critical, count(eval(severity="3")) as Errors, count(eval(severity="4")) as Warnings, count(eval(severity="5")) as Notifications, count(eval(severity="6")) as Informational by host | sort host</param>
+    <module name="FlashTimeline">
+      <param name="width">100%</param>
+      <param name="height">95px</param>
+      <module name="SimpleResultsTable">
+        <param name="displayRowNumbers">off</param>
+        <param name="drilldown">all</param>
+        <param name="entityName">results</param>
+        <module name="ConvertToDrilldownSearch">
+          <module name="ConvertToIntention">
+            <param name="intention">
+              <param name="name">addterm</param>
+              <param name="arg">
+                <param name="severity_desc">$click.name2$</param>
+              </param>
+            </param>
+            <module name="SimpleResultsHeader">
+              <param name="headerFormat">$click.value$ $click.name2$ drilldown ($time$)</param>
+              <param name="entityName">events</param>
+              <module name="Paginator">
+                <param name="entityName">results</param>
+                <module name="SimpleResultsTable">
+                  <param name="displayRowNumbers">on</param>
+                  <param name="drilldown">row</param>
+                  <param name="fields">_time, severity_desc, facility, msg, message</param>
+                  <module name="ViewRedirector">
+                    <param name="viewTarget">flashtimeline</param>
+                  </module>
+                </module>
+              </module>
+            </module>
+          </module>
+        </module>
+      </module>
+    </module>
+  </module>
+  <module name="HiddenSearch" autoRun="True" layoutPanel="panel_row2_col1">
+    <param name="search">index=_audit action=alert_fired | eval ttl=expiration-now() | search ttl&gt;0 | convert ctime(trigger_time) | rename ss_name as alert_name | rename ss_app as app | table app trigger_time alert_name triggered_alerts severity</param>
+    <module name="SimpleResultsHeader" layoutPanel="panel_row2_col1">
+      <param name="headerFormat">Recently Fired Alerts</param>
+      <param name="entityName">events</param>
+      <module name="SimpleResultsTable">
+        <param name="displayRowNumbers">off</param>
+        <param name="entityName">results</param>
+        <param name="drilldown">row</param>
+        <module name="ViewRedirector">
+          <param name="viewTarget">alerts</param>
+        </module>
+      </module>
+    </module>
+  </module>
+</view>

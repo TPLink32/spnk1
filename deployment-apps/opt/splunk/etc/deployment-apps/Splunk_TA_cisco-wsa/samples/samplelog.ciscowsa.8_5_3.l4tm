@@ -1,0 +1,10 @@
+Wed Oct  7 14:37:45 2015 Info: Firewall noted TCP data from [##IP_V6##]:14274 to [##IP_V6##]:80.
+Wed Oct  7 14:44:52 2015 Info: Address ##IP_V6## discovered for ipv6.l.google.com (ipv6.google.com) added to firewall blacklist.
+Wed Oct  7 14:44:52 2015 Info: Address ##IP_V6## for ipv6.l.google.com (ipv6.l.google.com) removed from firewall blacklist.
+Wed Oct  7 14:44:52 2015 Info: Address ##IP_V6## discovered for ipv6.l.google.com (ipv6.l.google.com) added to firewall greylist.
+Wed Oct  7 14:44:52 2015 Info: Firewall blocked TCP data from [##IP_V6##]:47924 to ##IP_V6##(ipv6.google.com):80.
+Wed Oct  7 14:44:52 2015 Info: Firewall blocked TCP data from [##IP_V6##]:59518 to ##IP_V6##(ipv6.google.com):80.
+Wed Oct  7 14:45:24 2015 Info: Firewall blocked TCP data from [##IP_V6##]:8286 to ##IP_V6##(ipv6.google.com):80.
+Wed Oct  7 14:45:24 2015 Info: Firewall blocked TCP data from [##IP_V6##]:34489 to ##IP_V6##(ipv6.google.com):80.
+Wed Oct  7 14:48:19 2015 Info: Firewall blocked TCP data from [##IP_V6##]:13697 to ##IP_V6##(ipv6.google.com):80.
+Wed Oct  7 14:48:19 2015 Info: Firewall blocked TCP data from [##IP_V6##]:28067 to ##IP_V6##(ipv6.google.com):80.

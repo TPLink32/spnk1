@@ -1,0 +1,100 @@
+<form stylesheet="table_decoration.css" script="table_decoration.js">
+  <label>DNS Server Status</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="dropdown" token="select135" searchWhenChanged="true">
+      <label>DNS Server</label>
+      <search>
+        <query>eventtype=msad-dns-health|stats count by host|table host|sort host</query>
+      </search>
+      <fieldForLabel>host</fieldForLabel>
+      <fieldForValue>host</fieldForValue>
+      <selectFirstChoice>true</selectFirstChoice>
+    </input>
+    <input type="time" token="Time" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table id="decorated_table">
+        <title>DNS Server Status</title>
+        <search>
+          <query>eventtype=msad-dns-health | search source=Powershell host="$select135$" |tail 1| eval "DNS Name"=Name, "Operating System"=OperatingSystem, "Service Pack"=ServicePack, "OS Version"=OSVersion, "Directory Available"=DsAvailable, "Auto Reverse Zones"=if(DisableAutoReverseZones="False", "True", "False"), "Auto Cache Update"=AutoCacheUpdate, Recursion=if(NoRecursion="False", "True", "False"), "Round Robin"=RoundRobin, "Local Net Priority"=LocalNetPriority, "Strict File Parsing"=StrictFileParsing, "Loose Wildcards"=LooseWildcarding, "Bind Secondaries"=BindSecondaries, "Write Authoritive NS"= WriteAuthorityNS, "Secure Responses"=SecureResponses, "Allow Disjoint Networks"=DisjointNets, "Enable EDNS Probes"=EnableEDnsProbes, "Is A Slave"=IsSlave, "Services Running"=split(ServicesRunning, ","), "Services Not Running"=split(ServicesNotRunning, ",") | table Server "DNS Name" "Operating System" "Service Pack" "OS Version" "Directory Available" "Auto Reverse Zones" "Auto Cache Update" Recursion "Round Robin" "Local Net Priority" "Strict File Parsing" "Loose Wildcards" "Bind Secondaries" "Write Authoritive NS" "Secure Responses" "Allow Disjoint Networks" "Enable EDNS Probes" "Is A Slave" "Services Running" "Services Not Running" | transpose</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">100</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Query Performance</title>
+        <search>
+          <query>eventtype=perfmon-dns host="$select135$" `dns-query-perfmon-list`|stats sparkline(avg(Value),1m) as "Average", avg(Value) as "Average Value" by counter|sort counter|rename counter as "Performance Counter"</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/ad_performance?form.select232=$select135$
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Recursion Performance</title>
+        <search>
+          <query>eventtype=perfmon-dns host="$select135$" `dns-recursion-perfmon-list`|stats sparkline(avg(Value),1m) as "Average", avg(Value) as "Average Value" by counter|sort counter|rename counter as "Performance Counter"</query>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/ad_performance?form.select232=$select135$
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Anomalous Events - DNS Server Status</title>
+        <search>
+          <query>eventtype=msad-dns-events host="$select135$" | lookup EventCodes EventCode,LogName OUTPUTNEW desc | eval desc=if(isnull(desc),"Unknown EventCode",desc) | stats count as Count by Type,EventCode,LogName,desc | rename desc as Description</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/search?q=eventtype=msad-dns-events host="$select135$" Type="$row.Type$" EventCode="$row.EventCode$" LogName="$row.LogName$"
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+</form>

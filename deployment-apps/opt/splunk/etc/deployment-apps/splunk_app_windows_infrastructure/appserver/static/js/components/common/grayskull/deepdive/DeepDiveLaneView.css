@@ -1,0 +1,145 @@
+.deep-dive-lane {
+	height: 59px;
+	width: 100%;
+	border-style: solid;
+	border-color: #DDDDDD;
+	border-top-width: 0px;
+    border-bottom-width: 1px;
+    border-color: #e3e3e3;
+	border-left-width: 0px;
+	border-right-width: 0px;
+	overflow: hidden;
+}
+
+.deep-dive-lane-collapsed {
+    height: 11px;
+}
+
+.deep-dive-lane-header {
+	position: relative;
+	background-color: #F7F7F7;
+	border-style: solid;
+	border-color: #DDDDDD;
+	border-top-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-right-width: 1px;
+	height: 59px;
+	width: 259px;
+	float: left;
+}
+
+.deep-dive-lane-header:hover {
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grab;
+    cursor: -moz-grab;
+    cursor: -webkit-grab;
+}
+
+.deep-dive-lane-header:active { 
+    cursor: move; /* fallback if grab cursor is unsupported */
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+
+.deep-dive-lane-collapser {
+    position: absolute;
+    top: 0px;
+    padding-top: 0px;
+    left: 238px;
+    z-index: 1;
+    display: none;
+}
+
+.deep-dive-lane-collapser a {
+    color: #567898;
+    padding-top: 0px;
+}
+
+.deep-dive-lane-actions-container {
+	position: absolute;
+	top: 40px;
+	left: 235px;
+	z-index: 1;
+	display: none;
+}
+
+.deep-dive-lane-actions-container a {
+	color: #444444;
+}
+
+.deep-dive-lane-messages {
+	position: absolute;
+	top: 15px;
+	/* Left is lane header width */
+	left: 260px;
+	z-index: 5;
+	cursor: auto;
+}
+
+.deep-dive-lane-body {
+	float: left;
+	width: 95%;
+}
+
+.deep-dive-lane-handle {
+	/* Height is lane height - 4 */
+	height: 59px;
+	width: 11px;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	z-index: 5;
+	background-image: url("./images/drag_handle.png");
+	background-repeat:repeat-y;
+	cursor: ns-resize;
+	display: none;
+}
+
+.deep-dive-lane-title-box {
+	text-align: left;
+	margin-top: -1px;
+	margin-left: -1px;
+}
+
+.deep-dive-lane-title {
+	font-size: 13px;
+	color: #444444;
+}
+
+.deep-dive-lane-subtitle {
+    font-size: 13px;
+    color: #999999;
+    font-style: italic;
+}
+
+.deep-dive-lane-status-box {
+    width: 10px;
+    height: 59px;
+    background: gray;
+}
+
+.deep-dive-lane-footer {
+    height: 59px;
+    float: left;
+    text-align: center;
+    font-size: 10px;
+    color: #999999;
+    width: 100px;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: #F7F7F7;
+}
+
+/* Making messages not look like crap */
+
+.splunk-message-container.compact .alert {
+	text-align: left;
+}
+
+.alert-nothing {
+	/* yeah there's really lame css hacks in dashboards, so we need to important */
+	display: none !important;
+}

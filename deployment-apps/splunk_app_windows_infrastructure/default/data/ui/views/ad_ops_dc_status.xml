@@ -1,0 +1,100 @@
+<form stylesheet="table_decoration.css" script="table_decoration.js">
+  <label>DC Status</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="dropdown" token="select118" searchWhenChanged="true">
+      <label>Domain Controller</label>
+      <search>
+        <query>|inputlookup DomainSelector|stats count by host|table host|sort host</query>
+      </search>
+      <fieldForLabel>host</fieldForLabel>
+      <fieldForValue>host</fieldForValue>
+      <selectFirstChoice>true</selectFirstChoice>
+    </input>
+    <input type="time" token="Time">
+      <label></label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table id="decorated_table">
+        <title>Domain Controller Status</title>
+        <search>
+          <query>eventtype=msad-dc-health host="$select118$" |head 1|lookup SchemaVersionName SchemaVersion|fields * | eval Server=DomainNetBIOSName + "\\\\" + Server, Domain=DomainNetBIOSName + "\\\\" + DomainDNSName, Forest=ForestName, "Operating System"=OperatingSystem, "Service Pack"=ServicePack, "OS Version"=OSVersion, "Global Catalog"=GlobalCatalog, "Master Roles"=split(FSMORoles," "), "Highest USN"=HighestUSN, "Schema Version"=SchemaVersion, "Services Running"=split(ServicesRunning, ","), "Services Not Running"=split(ServicesNotRunning, ","), "SYSVOL is Shared"="SYSVOLShare", "Registered in DNS"=DNSRegister | table Server Domain Site Forest "Operating System" "Service Pack", "OS Version" "Global Catalog", RODC, "Highest USN", "Schema Version" "Services Running" "Services Not Running" "SYSVOL is Shared" "Registered in DNS" | transpose</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">cell</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">100</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Directory Services Performance</title>
+        <search>
+          <query>eventtype=perfmon-ntds host="$select118$" `dc-health-perfmon-list`|stats sparkline(avg(Value),1m) as "Average", avg(Value) as "Average Value" by counter|sort counter|rename counter as "Performance Counter"</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/ad_performance?form.select232=$select118$
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Replication Performance</title>
+        <search>
+          <query>eventtype=perfmon-ntds host="$select118$" `rep-health-perfmon-list`|stats sparkline(avg(Value),1m) as "Average", avg(Value) as "Average Value" by counter|sort counter|rename counter as "Performance Counter"</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/ad_performance?form.select232=$select118$
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Anomalous Events - DC Status</title>
+        <search>
+          <query>eventtype=msad-anomalous-events host="$select118$"|lookup EventCodes EventCode,LogName OUTPUTNEW desc|eval desc=if(isnull(desc),"Unknown EventCode",desc)|stats count as Count by Type,EventCode,LogName,desc | rename desc as Description</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/search?q=eventtype=msad-anomalous-events host="$select118$" Type="$row.Type$" EventCode="$row.EventCode$" LogName="$row.LogName$"
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+</form>

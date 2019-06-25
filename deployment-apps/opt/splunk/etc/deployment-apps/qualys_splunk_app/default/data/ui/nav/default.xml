@@ -1,0 +1,15 @@
+<nav search_view="search" color="#2162CE">
+  <view name="knowledgebase" default="true"></view>
+  <view name="default_dashboard" default='false'/>
+  <view name="hosts" ></view>
+  <collection label="Reports">
+    <view name="days_since_last_scan">List of Hosts Ordered</view>
+    <view name="most_vulnerable_hosts"></view>
+    <view name="hosts_by_vulnerability"></view>
+    <view name="vulnerabilities_by_host"></view>
+  </collection>
+  <view name="ip_lookup" default='false'>Search by IP</view>
+  <view name="vuln_lookup" default='false'>Search by Vulnerability</view>
+  <view name="qualys_search" default='false'/>
+
+</nav>

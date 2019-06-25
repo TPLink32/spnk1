@@ -1,0 +1,4 @@
+Oct 25 14:00:24 ##Host_Addr## ##Device##: 2012-10-25 14:00:24 - ##Vpn## - [##Ip_Addr##] ##Domain##\##User_Name##(##Auth_AD##)[##Users##] - ##Key_Event_Name## ##Key_Event_Num## occured for user with ##Key_Event_Host## ##Internal_Ip_Addr##
+Oct 25 13:21:21 ##Host_Addr## ##Device##: 2012-10-25 13:21:20 - ##Vpn## - [##Ip_Addr##] ##Domain##\##User_Name##(##Auth_AD##)[##Users##] - ##Net_Session_Event##
+Oct 25 12:41:58 ##Host_Addr## ##Device##: 2012-10-25 12:41:58 - ##Vpn## - [##Ip_Addr##] ##Domain##\##User_Name##(##Auth_AD##)[] - ##Login_Failed_Event## ##Auth_Server##  ##Reason_Failed##
+Oct 25 00:07:34 ##Host_Addr## ##Device##: 2012-10-25 00:07:34 - ##Vpn## - [##Ip_Addr##] ##User_Name##(##Local_Auth##)[] - ##Login_Failed_Event## ##Auth_Server_Local##  ##Reason_Failed##

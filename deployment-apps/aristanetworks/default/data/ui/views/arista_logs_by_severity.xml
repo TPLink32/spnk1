@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='utf-8'?>
+<form>
+  <label>Logged errors by Severity</label>
+  <searchTemplate>
+<!--     sourcetype="log* %*-$sev$-* | rex field=_raw "%(?<facility>\S+)-(?<severity>\d)-(?<msg>[A-Z0-9\_]+): (?<message>.*)" | table facility,severity,msg,message -->
+     sourcetype="log* %*-$sev$-* 
+  </searchTemplate>
+
+  <fieldset>
+        <input type="radio" token="sev" searchWhenChanged="True">
+            <label>Severity</label>
+            <default>*</default>
+            <choice value="*">Any</choice>
+            <choice value="0">Emergency (System is unusable)</choice>
+            <choice value="1">Alerts (Immediate action needed)</choice>
+            <choice value="2">Critical (Critical conditions)</choice>
+            <choice value="3">Errors (Error conditions)</choice>
+            <choice value="4">Warnings (Warning conditions)</choice>
+            <choice value="5">Notifications (Normal but significant conditions)</choice>
+            <choice value="6">Informational (Informational messages)</choice>
+            <choice value="7">Debugging (Debugging messages)</choice>
+        </input>
+
+      <!-- Add default TimePicker -->
+      <input type="time" />
+      
+  </fieldset>
+  
+  <row>
+      <table>
+          <title>Matching events</title>
+          <option name="count">50</option>
+      </table>
+    </row>
+
+</form>
+

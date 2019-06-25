@@ -1,0 +1,102 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Perfmon | Splunk{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/perfmon/Perfmon.css" />
+
+{% endblock css %}
+
+{% block content %}
+
+    <div class="dashboard-body container-fluid main-section-body">
+        <h1 class="exchange-header">Perfmon</h1>
+        <div id="action-buttons">
+            <a id="share-button" href="#"><span class="icon-share action-icon"></span>Share</a>
+        </div>
+        <div id="timerange-div"></div>
+
+        <div id="compare-controls-div">
+            <span id="compare-time"></span>
+            <span id="compare-time-svg"></span>
+            <span id="compare-avg-container" style="display: none;">
+                <span class="compare-avg-checkbox-container">
+                    <i class="icon-box-unchecked"></i>
+                </span>     
+                <span>
+                    Show Average from Yesterday
+                </span>
+                <span id="compare-avg-svg"></span>
+            </span>
+        </div>
+        
+        <div class="dashboard-row" id="selector-row">
+            <div class="dashboard-cell" style="width: 100%">
+                <div class="dashboard-panel">
+                    <div class="dashboard-element">
+                        <div id="chart-div"></div>
+                        <div id="chart-links-div"></div>
+                    </div>
+                </div>
+            </div>
+        </div>     
+
+        <div class="dashboard-row" id="tables-row">
+            <div class="dashboard-cell" style="width: 100%">
+                <div class="dashboard-panel">
+                    <div class="dashboard-element">
+                        <div class="panel-body">
+                            <div id="counter-table-div"></div>
+                            <div id="counter-table-buttons">
+                                <button id="add-counters-button" class="splunk-perfmon-button btn">+ add</button>
+                                <button id="remove-counters-button" class="splunk-perfmon-button btn" disabled="true">remove</button>
+                            </div>
+                            <div id="splunk-perfmon-counter-picker"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="share-modal" tabindex="-1" role="dialog" aria-labelledby="share-modal-title" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="share-modal-title">Share Perfmon Search</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Copy the link to share this page</p>
+                        
+                         <input id="share-modal-text-field" type="text">
+                           
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+            
+{% endblock content%}
+
+{% block js %}        
+    <script>
+        requirejs.config({ urlArgs: 'bust=267225' });
+        require([
+                'jquery', 
+                'splunk_app_windows_infrastructure/perfmon/PerfmonPageView'
+            ], 
+            function($, PerfmonView) {
+                var perfmonView = new PerfmonView({
+                    id: 'perfmonView'
+                }).render();
+            });
+    </script>
+{% endblock js %}

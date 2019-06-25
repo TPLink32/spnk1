@@ -1,0 +1,39 @@
+<form>
+  <label>Event Information</label>
+  <init>
+    <set token="event_type">*</set>
+    <set token="srx_host">*</set>
+  </init>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="eventinfo_time">
+      <label>Time Period</label>
+      <default>
+        <earliest>rt-5m</earliest>
+        <latest>rt</latest>
+      </default>
+    </input>
+    <input type="text" token="srx_host" searchWhenChanged="true">
+      <label>SRX</label>
+    </input>
+    <input type="text" token="event_type" searchWhenChanged="true">
+      <label>Event Type</label>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <title>Event Information</title>
+      <event>
+        <search>
+          <query>source="Jnpr-syslog" $event_type$ $srx_host$ |  regex _raw = "^((?!RT_).)*$"</query>
+          <earliest>$eventinfo_time.earliest$</earliest>
+          <latest>$eventinfo_time.latest$</latest>
+        </search>
+        <option name="count">20</option>
+        <option name="list.drilldown">none</option>
+        <option name="maxLines">20</option>
+        <option name="raw.drilldown">none</option>
+        <option name="rowNumbers">1</option>
+      </event>
+    </panel>
+  </row>
+</form>

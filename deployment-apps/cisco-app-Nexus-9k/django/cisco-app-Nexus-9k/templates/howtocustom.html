@@ -1,0 +1,167 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}How to run custoom search command{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}cisco-app-Nexus-9k/home.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+{% endblock css %}
+
+{% block content %}
+
+<div class="dashboard-body container-fluid main-section-body">
+    <div class="dashboard-header clearfix">
+        <h2>NX-API collector</h2>
+    </div>
+    <p>This app provides a generic NX-API collector which empowers users to make use of NX-API provided by Nexus 9k and periodically track certain data from 9k switch. It simply takes switch CLI and convert it into NX-API call and provide data which can be saved as a dashboard. </p>
+    <p>This app provides feature of Splunk custom search command. We have implemented Splunk custom search command called "nxapicollect".</p>
+     <div class="dashboard-header clearfix">
+        <h3>HOW TO USE</h3>
+    </div>
+
+    <p>Below are the steps to use the nxapicollect command. Note that the output of custom search commands is not indexed by default. </p>
+    <ol>
+    <li> Create a csv file with name <b>credentials.csv</b> at $SPLUNK_HOME/etc/apps/cisco-app-Nexus-9k/bin.Provide switch nexus 9k switch details in tab separated format as given below.<pre>&nbsp;&nbsp;172.31.210.15	user	password</pre></li>
+	<li><p>Go to search option and enter your search in search bar.</p>
+	<p>You have different option for custom search command:</p>
+	<ul>
+		<li>| nxapicollect command="your cli"  ("your cli" will use credentials.csv to get credentials for switch)</li>
+		<li>| nxapicollect command="your cli" device="172.21.128.12" </li>
+		<li>| nxapicollect command="your cli" device="172.21.128.12,172.21.128.15"  (Make sure credentials for this devices are already provided through setup page) </li>
+                <li>| nxapicollect command="your cli" inputcsv="QA-switch.csv"  (Make sure you have created QA-switch.csv file at $SPLUNK_HOME/etc/apps/cisco-app-Nexus-9k)</li>
+	</ul></br>
+	<p><img src="/dj/static/cisco-app-Nexus-9k/img/s1.png"/></p>
+	</br></li>
+
+	<li><p>Result of your search command</p>
+	<p><img src="/dj/static/cisco-app-Nexus-9k/img/s2.png"/></p></br>
+	</li>
+
+	<li>
+	<p>Click on <b>Save As</b> and click on <b>Dashboard Panel</b> to store your result in dashboard.</p>
+	<p><img src="/dj/static/cisco-app-Nexus-9k/img/s3.png"/></p></br>
+	</li>
+
+	<li>
+	<p>Enter <b>Dashboard Title</b>. You have to give <i>"report"</i> keyword in giving dashboard title.</p>
+	<p><img src="/dj/static/cisco-app-Nexus-9k/img/s4.png"/></p></br>
+</p>
+	</li>
+
+	<li>
+	<p>You can see your dashboard in <b>Custom reports</b></p>
+	<p><img src="/dj/static/cisco-app-Nexus-9k/img/s5.png"/></p></br>
+	</li>
+    </ol>
+    </div>
+            
+{% endblock content%}
+
+ <script id="item-template" type="text/template">
+        <div class="toolkit-item">
+            <a class="item-link" href="../<%= id %>">
+                <img class="item-thumb" src="<%= staticUrl %>splunk_wftoolkit/img/<%= id %>.png"/>
+                <div class="item-content">
+                    <h4><%= title %></h4>
+                    <p class="item-description"><%= description %></p>
+                    <p class="view-button">View</p>
+                </div>
+            </a>
+        </div>
+</script>
+    
+
+{% block js %}   
+
+<script type="text/javascript">
+    
+    require.config({
+            waitSeconds: 400
+           });
+    require.config({
+            shim: {
+                "cisco-app-Nexus-9k/contrib/waypoints": {
+                    deps: ["jquery"],
+                    exports: "waypoints"
+                },
+                "cisco-app-Nexus-9k/contrib/waypoints-sticky": {
+                    deps: ["jquery", "cisco-app-Nexus-9k/contrib/waypoints"],
+                    exports: "waypointsSticky"
+                }
+            }
+        });
+
+        require(["jquery", "cisco-app-Nexus-9k/contrib/waypoints", "cisco-app-Nexus-9k/contrib/waypoints-sticky"], function($, waypoint, waypointsSticky) {
+            $('.section-nav').waypoint('sticky', {
+                offset: -15
+            });
+        }); 
+
+        require(['jquery', 'underscore'], function($, _) {
+            $(function(){
+
+                function clearActiveButtons(){
+                    $('.active').removeClass('active');
+                }
+
+                // Set up smooth scrolling
+                // taken from: http://stackoverflow.com/questions/7717527/jquery-smooth-scrolling-when-clicking-an-anchor-link
+                $('a').click(function(){
+                    $('html, body').animate({
+                        scrollTop: $( $.attr(this, 'href') ).offset().top - 30
+                    }, 500);
+                    return false;
+                });
+
+                var staticUrl = '{{STATIC_URL}}';
+                $.getJSON(staticUrl + 'cisco-app-Nexus-9k/json/navinfo.json', function(navdata){
+                     var template = _.template( $('#item-template').html() ); 
+                    _.each(navdata, function(item){
+                        var $sectionList = $('#' + (item['section'] || 'learnmore' ) + '-list');
+                        $sectionList.append( template(_.extend(item,{staticUrl: staticUrl})));
+                    });
+                    $('#basiccomponents').waypoint(function(dir){
+                        clearActiveButtons();
+                        if(dir === 'down') {
+                            $('#basic-components-button').addClass('active');
+                        }
+                    });
+                    $('#basiccomponents-end').waypoint(function(dir){
+                        if (dir === 'up') {
+                            clearActiveButtons();
+                            $('#basic-components-button').addClass('active');
+                        }
+                    });
+                    $('#toolkitvisualizations').waypoint(function(dir){
+                        clearActiveButtons();
+                        $('#toolkit-visualizations-button').addClass('active');
+                    });
+                    $('#toolkitvisualizations-end').waypoint(function(dir){
+                        if (dir === 'up') {
+                            clearActiveButtons();
+                            $('#toolkit-visualizations-button').addClass('active');
+                        }
+                    });
+                    $('#examples').waypoint(function(dir){
+                        clearActiveButtons();
+                        $('#examples-button').addClass('active');
+                    });
+                    $('#examples-end').waypoint(function(dir){
+                        if (dir === 'up') {
+                            clearActiveButtons();
+                            $('#examples-button').addClass('active');
+                        }
+                    });
+                })
+                .fail(function(jqxhr, textStatus, error ) {
+                    var err = textStatus + ", " + error;
+                    console.log( "Request Failed: " + err );
+                })
+
+                
+            });
+        });
+    </script>
+{% endblock js %}

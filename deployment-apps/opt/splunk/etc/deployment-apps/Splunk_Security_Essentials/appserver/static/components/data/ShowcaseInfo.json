@@ -1,0 +1,1070 @@
+{
+  "roles": {
+    "default": {
+      "label": "All Examples",
+      "summaries": ["showcase_data_exfil", "showcase_first_logon", "showcase_first_git", "showcase_first_git_peer", "showcase_first_usb", "showcase_git_downloads", "showcase_many_hosts", "showcase_significant_printing", "showcase_notable_events","showcase_high_entropy_processes", "showcase_unusually_long", "showcase_first_seen_domain_controller", "showcase_new_parent_process_for_cmd","showcase_agd", "showcase_network_dc_dest","showcase_renamed_executables","showcase_new_ad_domain", "showcase_new_host_with_suspicious_cmd_launch","showcase_new_path_for_common_filename", "showcase_unique_patient_records_viewed", "showcase_remote_powershell_launches", "showcase_series_hacker_tools_filename", "showcase_series_hacker_tools_hashes", "showcase_series_discovery_tools_filename", "showcase_series_discovery_tools_hashes", "showcase_hosts_with_many_timestamps", "showcase_huge_volume_dns_volume", "showcase_huge_volume_dns_requests", "showcase_new_service_creations", "showcase_new_suspicious_exe_launch_for_user", "showcase_new_path_for_familiar_filename", "showcase_short_lived_accounts", "showcase_new_local_admin_account", "showcase_new_runas", "showcase_increase_in_runas", "showcase_increase_interactive_logon", "showcase_new_logon_type", "showcase_increase_in_interactively_logged_on_users", "showcase_superman", "showcase_listeningport", "showcase_new_interactive_service_logon", "showcase_lookalike_filenames", "showcase_spike_in_outgoing_email", "showcase_emails_with_lookalike_domains", "showcase_external_emails_with_internal_domain", "showcase_hosts_where_sourcetypes_go_silent", "showcase_spike_in_password_reset_emails", "showcase_spike_in_sfdc_exports", "showcase_new_sfdc_clients", "showcase_new_sfdc_tables", "showcase_new_sfdc_event_type", "showcase_new_sfdc_tables_peer", "showcase_spike_in_sfdc_document_downloads"]
+    },
+    "Access Domain": {
+      "label": "Access Domain",
+      "summaries": ["showcase_many_hosts",  "showcase_first_logon", "showcase_first_seen_domain_controller", "showcase_new_ad_domain", "showcase_short_lived_accounts", "showcase_new_local_admin_account", "showcase_increase_interactive_logon", "showcase_new_logon_type", "showcase_increase_in_interactively_logged_on_users", "showcase_superman", "showcase_new_interactive_service_logon"]
+    },
+    "Data Domain": {
+      "label": "Data Domain",
+      "summaries": ["showcase_first_git", "showcase_first_git_peer", "showcase_first_usb", "showcase_git_downloads", "showcase_significant_printing", "showcase_unique_patient_records_viewed", "showcase_spike_in_sfdc_exports", "showcase_new_sfdc_clients", "showcase_new_sfdc_tables", "showcase_new_sfdc_event_type", "showcase_new_sfdc_tables_peer", "showcase_spike_in_sfdc_document_downloads"]
+    },
+    "Endpoint Domain": {
+      "label": "Endpoint Domain",
+      "summaries": ["showcase_high_entropy_processes", "showcase_unusually_long", "showcase_new_parent_process_for_cmd", "showcase_renamed_executables", "showcase_new_host_with_suspicious_cmd_launch","showcase_new_path_for_common_filename", "showcase_remote_powershell_launches", "showcase_series_hacker_tools_filename", "showcase_series_hacker_tools_hashes", "showcase_series_discovery_tools_filename", "showcase_series_discovery_tools_hashes", "showcase_hosts_with_many_timestamps", "showcase_new_service_creations", "showcase_new_suspicious_exe_launch_for_user", "showcase_new_path_for_familiar_filename", "showcase_new_runas", "showcase_increase_in_runas", "showcase_listeningport", "showcase_lookalike_filenames", "showcase_hosts_where_sourcetypes_go_silent"]
+    },
+    "Network Domain":{
+      "label": "Network Domain",
+      "summaries": ["showcase_agd", "showcase_network_dc_dest", "showcase_remote_powershell_launches", "showcase_huge_volume_dns_volume", "showcase_huge_volume_dns_requests", "showcase_spike_in_outgoing_email", "showcase_emails_with_lookalike_domains", "showcase_external_emails_with_internal_domain", "showcase_spike_in_password_reset_emails"]
+    },
+    "Threat Domain": {
+      "label": "Threat Domain",
+      "summaries": ["showcase_data_exfil", "showcase_huge_volume_dns_volume", "showcase_huge_volume_dns_requests"]
+    }
+  },
+  "summaries": {
+    "showcase_standard_deviation_generic": {
+      "name": "Generically Detect Spikes",
+      "description": "<p>Find values that differ significantly from previous values. This is a generic search assistant</p>",
+      "help": "<p>This is the generic search builder for Time Series Spike Detection. While you can absolutely peruse our <a href=\"/app/Splunk_Security_Essentials/contents\">Use Case Listing</a>, you can also use this search assistant to build your own custom detections. To use the dashboard, you can put in any search you desire that calculates some number per day, per baseline. For example one that ends in | bucket _time span=1d | stats dc(host) by user, _time. Or | bucket _time span=1d | stats sum(number_of_pages_printed) by user, _time. Once you click submit, we're going to calculate an average, standard deviation, and the most recent value. We'll then surface any rows where the most recent value is more than (configurable -- select in the text box) standard deviations away from the average. Note that we've seen some weirdness in testing where you must refresh the page with each brand new search you build. If that becomes particularly frustrating for you, please let us know so that we can get it resolved.</p>",
+      "dashboard": "showcase_standard_deviation"
+    },
+    "showcase_first_git": {
+      "name": "First Time Accessing a Git Repository",
+      "description": "<p>Find users who accessed a git repository for the first time.</p><p><b>Alert Volume:</b> High</p>",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=Accessing New Git Repositories - Demo",
+      "datasource": "Source Code Repository Logs",
+      "released":"1.0.0",
+      "help": "<p>This example leverages the Detect New Values search assistant. Our dataset is the Splunk-internal git source source checkout history for a couple of our Splunk UBA software developers, anonymized to Alice and Chuck. On the last day, I added in a few more developers who visit other repositories, but set their usernames to Chuck so that it looks like he started downloading from a bunch of repositories that he's never touched before. We also have a user Bob, who has checked out from a few other repositories in the past, and is on Chuck's team. For this analysis, we are looking at the first time a username has checked out from a repository names, and alerting if that was in the last day. We can always also filter for peer groups, to exclude those repositories that Bob (on Chuck's team) had viewed before.</p>",
+      "relevance": "This is an insider threat use case. Your developers are often granted access to the Git (or other software life cycle repository) that their responsibilities require, but one condition to be aware of is the first time a user accesses a given repository. This could be perfectly normal, or if the repository contains code not relevant to the developers role, could be an anomaly to investigate.",
+      "highlight": "true",
+      "examples": [
+        {
+          "name":  "Accessing New Git Repositories - Demo",
+          "label":  "Demo Data"
+        },
+        {
+          "name": "Accessing New Git Repositories - Live",
+          "label": "Live Data"
+        },
+        {
+          "name": "Accessing New Git Repositories - Accelerated",
+          "label": "Accelerated Data"
+        }
+      ]
+    },
+    "showcase_first_git_peer": {
+      "name": "First Time Accessing a Git Repository Not Viewed by Peers",
+      "description": "<p>Find users who accessed a git repository for the first time, where their peer group also hasn't accessed it before.</p><p><b>Alert Volume:</b> Medium</p>",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=Accessing New Git Repositories With Peer - Demo",
+      "datasource": "Source Code Repository Logs",
+      "released":"1.0.0",
+      "help": "<p>This example leverages the Detect New Values search assistant. Our dataset is the Splunk-internal git source source checkout history for a couple of our Splunk UBA software developers, anonymized to Alice and Chuck. On the last day, I added in a few more developers who visit other repositories, but set their usernames to Chuck so that it looks like he started downloading from a bunch of repositories that he's never touched before. We also have a user Bob, who has checked out from a few other repositories in the past, and is on Chuck's team. Under the peer group, git_peer_group is selected, which includes that chuck and bob are on the same team. For this analysis, we are looking at the first time a username, or anyone in that username's peer group, has checked out from a repository names, and alerting if that was in the last day. </p>",
+      "relevance": "This is an insider threat use case that builds off of the \"Accessing New Git Repositories\" example. Your developers are often granted access to the Git (or other software life cycle repository) that they require, but why would they be gaining access to other repos that other members of their team (e.g. peer group) never access? This could be an alertable condition. In order to perform searches like this you must map your users into peer groups - we have done this via a simple Splunk lookup in the example, but this could be done via more automated fashion, and Splunk UBA contains its own methods of discovering peer groups for individual users.",
+      "highlight": "true",
+      "examples": [
+        {
+          "name":  "Accessing New Git Repositories With Peer - Demo",
+          "label":  "Demo Data"
+        }
+      ]
+    },
+    "showcase_first_usb": {
+      "name": "First Time USB Usage",
+      "description": "<p>Find systems the first time they generate Windows Event ID 20001, which for some customers occurs when a USB drive is plugged in.</p><p><b>Alert Volume:</b> Medium</p>",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=First USB Usage - Demo",
+      "datasource": "Windows System Logs",
+      "released":"1.0.0",
+      "relevance": "USB is a common attack vector for many different kinds of malicious deliverables. Your corporation may have a policy of not allowing removable media at all, or may only allow approved media to be used. By Splunking USB activity from Windows and other endpoints using the Universal Forwarder, we can get a feeling for what systems might be vulnerable to attack, or what users might need a security training refresher. This example demonstrates that if we have the USB usage data in Splunk, we can determine the first time a “new device” is used on an endpoint. This activity might result in an alert or a notable event so that security personnel can conduct followup.",
+      "help": "<p>This example leverages the Detect New Values search assistant. Our dataset is an anonymized collection of Windows Event ID 20001 logs, which correlated on that system with when USB drives were used. (You may also get value from using endpoint DLP, etc -- we have also seen at a larger customer where their Splunk installation did not have 20001 logs showing up). For this analysis, we are looking at the first time that Event ID is showing up from that system and alerting if that was in the last day. </p>",
+
+      "examples": [
+        {
+          "name":  "First USB Usage - Demo",
+          "label":  "Demo Data"
+        },
+        {
+          "name": "First USB Usage - Live",
+          "label": "Live Data"
+        },
+        {
+          "name": "First USB Usage - Accelerated",
+          "label": "Accelerated Data"
+        }
+      ]
+    },
+    "showcase_first_logon": {
+      "name": "First Time Logon to New Server",
+      "description": "<p>Find users who logged into a new server for the first time.</p><p><b>Alert Volume:</b> Very High</p>",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=First Log On to Server - Demo",
+      "datasource": "Windows Security Logs",
+      "help": "<p>This example leverages the Detect New Values search assistant. Our dataset is an anonymized collection of Windows Logon events. For this analysis, we are effectively grouping by username and system name, which will give us a row for each username+systemname combination. We check if the first time that has occurred was in the last day.</p>",
+      "relevance": "By monitoring and alerting on first time log ins to a server, you are able to detect if/when an adversary is able to escalate permissions or add new accounts to AD, or to endpoints directly. This should be a priority particularly for critical infrastructure, high-value and mission critical assets or those systems containing sensitive data. In addition to external adversary, this type of behavior can also be indicative of a potential insider threat issue, where an employee is probing their access, or potentially testing new accounts they may have created for malicious purposes.",
+      "highlight": "true",
+      "released":"1.0.0",
+      "examples": [
+        {
+          "name":  "First Log On to Server - Demo",
+          "label":  "Demo Data"
+        },
+        {
+          "name": "First Log On to Server - Live",
+          "label": "Live Data"
+        },
+        {
+          "name": "First Log On to Server - Accelerated",
+          "label": "Accelerated Data"
+        }
+      ]
+    },
+    "showcase_many_hosts": {
+      "name": "Increase in # of Hosts Logged into",
+      "description": "<p>Find users who log into more hosts than they typically do.</p><p><b>Alert Volume:</b> Low</p>",
+      "datasource": "Windows Security Logs",
+      "released":"1.0.0",
+      "help":"<p>This example leverages the Detect Spikes (standard deviation) search assistant. Our dataset is an anonymized collection of Windows Logon events (of all kinds). For this analysis, we are tracking the number of unique hosts the user has logged into per day 'dc(host) by user _time'. Then we calculate the average, standard deviation, and the most recent value, and filter out any users where the most recent is within the configurable number of standard deviations from average.</p>",
+      "dashboard": "showcase_standard_deviation?ml_toolkit.dataset=Unique Hosts Logged Into Per Day - Demo",
+      "examples": [
+        {
+          "name":  "Unique Hosts Logged Into Per Day - Demo",
+          "label":  "Demo Data"
+        },
+        {
+          "name": "Unique Hosts Logged Into Per Day - Live",
+          "label": "Live Data"
+        },
+        {
+          "name": "Unique Hosts Logged Into Per Day - Accelerated",
+          "label": "Accelerated with Data Models"
+        }
+      ]
+    },
+    "showcase_significant_printing": {
+      "name": "Increase in Pages Printed",
+      "description": "<p>Find users who printed more pages than normal.</p><p><b>Alert Volume:</b> Medium</p>",
+      "dashboard": "showcase_standard_deviation?ml_toolkit.dataset=Pages Printed Per User Per Day - Demo",
+      "relevance": "It may seem inefficient and old-fashioned, but users that suddenly start printing a lot more pages from networked printers than is “normal” could be a sign of data exfiltration. Sensitive data could be leaving your corporation, literally in black-and-white! It is particularly interesting to correlate this behavior to a watchlist which may contain the user IDs of personnel that are considered higher risk: contractors, new employees, employees that never go on vacation, employees with access to particularly sensitive data. Often, the data gathered by Splunk can include the destination printer(s), the source of the print jobs, the names of files printed, and even whether or not the output was black-and-white or color.",
+      "help":"<p>This example leverages the Detect Spikes (standard deviation) search assistant. Our demo dataset is an anonymized collection of Print Server logs from a Uniflow print server. For this analysis, we are tracking the total number of pages the user has printed per day 'sum(NumPages) by User _time'. Then we calculate the average, standard deviation, and the most recent value, and filter out any users where the most recent is within the configurable number of standard deviations from average.</p>",
+      "highlight": "true",
+      "released":"1.0.0",
+      "datasource": "Print Server Logs",
+      "examples": [
+        {
+          "name":  "Pages Printed Per User Per Day - Demo",
+          "label":  "Demo Data"
+        },
+        {
+          "name": "Pages Printed Per User Per Day - Live",
+          "label": "Live Data"
+        },
+        {
+          "name": "Pages Printed Per User Per Day - Accelerated",
+          "label": "Accelerated with Data Models"
+        }
+      ]
+    },
+    "showcase_git_downloads": {
+      "name": "Increase in Source Code (Git) Downloads",
+      "description": "<p>Find users who have downloaded more files from git than normal.</p><p><b>Alert Volume:</b> High</p>",
+      "dashboard": "showcase_standard_deviation?ml_toolkit.dataset=Git File Views or Downloads Per Day - Demo",
+      "released":"1.0.0",
+      "datasource": "Source Code Repository Logs",
+      "relevance": "Similar to some of the other examples, like <a href=\"/app/Splunk_Security_Essentials/showcase_standard_deviation?ml_toolkit.dataset=Pages%20Printed%20Per%20User%20Per%20Day%20-%20Demo\">Increase in Pages Printed</a>, the behavior of users with access to sensitive intellectual property like source code should be monitored for patterns of data exfiltration. Developers are always going to interact with source code repositories like Git, but if their accesses increase in a statistically significant manner this may represent the exfiltration of source code. It is particularly interesting to correlate this behavior to a watchlist which may contain the user IDs of personnel that are considered higher risk: contractors, new employees, employees that never go on vacation, employees with access to particularly sensitive source code.",
+      "help":"<p>This example leverages the Detect Spikes (standard deviation) search assistant. Our demo dataset is an anonymized collection of source code checkout logs from a git server. For this analysis, we are tracking the total number of files the user has downloaded per day 'count by user _time'. Then we calculate the average, standard deviation, and the most recent value, and filter out any users where the most recent is within the configurable number of standard deviations from average.</p>",
+      "examples": [
+        {
+          "name":  "Git File Views or Downloads Per Day - Demo",
+          "label":  "Demo Data"
+        },
+        {
+          "name": "Git File Views or Downloads Per Day - Live",
+          "label": "Live Data"
+        },
+        {
+          "name": "Git File Views or Downloads Per Day - Accelerated",
+          "label": "Accelerated with Data Models"
+        }
+      ]
+    },
+    "showcase_data_exfil": {
+      "name": "Detect Data Exfiltration",
+      "description": "<p>Find users who are exfiltrating data.</p>",
+      "highlight": "true",
+      "released":"1.0.0",
+      "datasource": "Other",
+      "help": "Help not needed -- UBA Use Case",
+      "dashboard": "UBA_Use_Case?ml_toolkit.dataset=Detecting Data Exfil"
+    },
+    "showcase_agd": {
+      "name": "Detect Algorithmically Generated Domains",
+      "description": "<p>AGD are commonly used by malware for command and control type activities. Detect them, and detect them better than you may be doing today.</p>",
+      "help": "Help not needed -- UBA Use Case",
+      "released":"1.0.0",
+      "datasource": "Other",
+      "dashboard": "UBA_Use_Case?ml_toolkit.dataset=AGD"
+    },
+    "showcase_first_seen_generic": {
+      "name": "Generic First Seen Value Detection",
+      "released":"1.0.0",
+      "description": "<p>Find values that are new, or new to other fields.</p>",
+      "help": "<p>This is the generic search builder for First Seen Detection. While you can absolutely peruse our <a href=\"/app/Splunk_Security_Essentials/contents\">Use Case Listing</a>, you can also use this search assistant to build your own custom detections. To use the dashboard, all we actually need are two fields to track (user and host, user and process name, what have you) and a valid _time. Once you click submit, effectively we're going to do a | stats earliest(_time) as earliest latest(_time) as latest by field1, field2 | where earliest > relative_time(now(), \"-1d@d\"). So feed in any dataset that you're interested in! Note that we've seen some weirdness in testing where you must refresh the page with each brand new search you build. If that becomes particularly frustrating for you, please let us know so that we can get it resolved.</p>",
+      "dashboard": "showcase_first_seen_demo"
+    },
+    "showcase_simple_search": {
+      "name": "Generic Splunk Search",
+      "released":"1.0.0",
+      "description": "<p>You can build these in normal search just as easily.</p>",
+      "help": "<p>This is the Search Assistant for normal Splunk searches. With the other search builders (First Seen, Spike Detection), you get additional value out of the search assistant for making searches easy -- with the normal Splunk search asssistant, you don't. This is just a slightly stripped down version of the search bar, so go ahead and use the normal search app for whatever custom searches you would like to run. If you want to try out a sample use case, check out <a href=\"/app/Splunk_Security_Essentials/contents\">Use Case Listing</a>.</p>",
+      "dashboard": "showcase_simple_search"
+    },
+    "showcase_notable_events": {
+      "name": "Feed Splunk Notable Events to UBA",
+      "released":"1.0.0",
+      "datasource": "Splunk Notable Events",
+      "description": "<p>You have Splunk correlation searches, send those alerts to UBA.</p><p><b>Alert Volume:</b> Medium</p>",
+      "help": "<p>This example leverages the Simple Search assistant. Our dataset is the notable events being generated from Splunk Enterprise Security. In this case, this app isn't doing any further analysis on the dataset -- just surfacing this as a use case, with a recommendation that it be sent to some anomaly aggregation and threat detection solution.</p>",
+      "dashboard": "showcase_simple_search?ml_toolkit.dataset=Send ES Notable Events",
+      "examples": [
+        {
+          "name": "Send ES Notable Events",
+          "label": "Live Search"
+        }
+      ]
+    },
+    "showcase_unusually_long": {
+      "name": "Find Unusually Long CLI Commands",
+      "description": "<p>Oftentimes we're able to detect malware by looking for unusually long command line strings.</p><p><b>Alert Volume:</b> Low</p>",
+      "help": "<p>This example leverages the Simple Search assistant. Our dataset is a collection of Sysmon process launch logs (EventCode 1). The search then looks for unusually long command line strings, and surfaces those.</p>",
+      "dashboard": "showcase_simple_search?ml_toolkit.dataset=Find Unusually Long CLI Commands - Demo",
+      "datasource": "Windows Security Logs|Windows Sysmon Logs",
+      "released":"1.0.0",
+      "relevance": "To avoid detection by file integrity monitoring solutions or similar, malware will often execute code 'in memory' and never write the code to disk. But if you're watching process executions in some detail via windows process command line auditing or via Sysmon or similar, you can often pick up anomalous behavior such as statistically significant command line execution lengths. The example given here shows a command interpreter executing a large amount of .vbs code to download a ransomware encryption binary.",
+      "examples": [
+        {
+          "name": "Find Unusually Long CLI Commands - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Find Unusually Long CLI Commands - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_high_entropy_processes": {
+      "name": "Processes with High Entropy Names",
+      "description": "<p>Some malware will launch processes with randomized filenames.</p><p><b>Alert Volume:</b> Medium</p>",
+      "help": "<p>This example leverages the Simple Search assistant. Our dataset is a collection of process launch logs (either Sysmon EventCode 1, or Windows Event ID 4688 -- either works). The search then leverages the URL Toolbox app from apps.splunk.com to determine entropy in the filename or file path. It takes filenames with the highest entropy, and surfaces them.</p>",
+      "dashboard": "showcase_simple_search?ml_toolkit.dataset=Processes With High Entropy Names in Users Directory - Demo",
+      "datasource": "Windows Security Logs|Windows Sysmon Logs",
+      "released":"1.0.0",
+      "relevance":"To avoid detection, malware often will launch malicious code with random filenames and/or paths. In this example, we use Shannon Entropy, provided by the URL Toolbox app, to identify these probable random names and report on them. Files with non-human-created character patterns are returned.",
+      "examples": [
+        {
+          "name": "Processes With High Entropy Names in Users Directory - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Processes With High Entropy Names in Users Directory - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_first_seen_domain_controller": {
+      "name": "Authentication Against a New Domain Controller",
+      "description": "<p>A common indicator for lateral movement is when a user starts logging into new domain controllers.</p><p><b>Alert Volume:</b> Medium</p>",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=First Connection to Domain Controller - Demo",
+      "datasource": "Windows Security Logs",
+      "released":"1.0.0",
+      "help": "<p>This example leverages the Detect New Values search assistant. Our dataset is a anonymized collection of Windows domain controller logon events (Event ID 4776). For this analysis, we are effectively grouping by username and domain controller name, which will give us a row for each username+domaincontrollername combination. We check if the first time that has occurred was in the last day.</p>",
+      "relevance": "Once an attacker gains access to a network either through a compromised asset or credentials, most will attempt to then move laterally within the network targeting critical infrastructure. As domain controllers provide the physical storage for the Active Directory Domain Services (AD DS) database, in addition to providing the services and data that allow enterprises to effectively manage endpoints (servers and workstations), users, and applications. If privileged access to a domain controller is obtained by a malicious user, that adversary can modify, corrupt, or destroy the AD DS database and, along with all of the systems and accounts that are managed by Active Directory. By monitoring both successful and unsuccessful authentication attempts organizations can identify anomalies such as time of day, frequency and other suspicious patters that may indicate compromised assets or credentials.",
+      "highlight": "true",
+      "examples": [
+        {
+          "name": "First Connection to Domain Controller - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "First Connection to Domain Controller - Live",
+          "label": "Live Data"
+        }
+      ]
+    }, 
+    "showcase_new_parent_process_for_cmd": {
+      "name": "New Parent Process for cmd.exe or regedit.exe",
+      "description": "<p>cmd.exe and regedit.exe tend to be used in the same ways. New parent processes can be suspicious. (<a href=\"https://car.mitre.org/wiki/CAR-2013-02-003\">MITRE CAR Reference</a>)</p><p><b>Alert Volume:</b> Medium</p>",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=New Parent Process for cmd.exe or regedit.exe - Demo",
+      "datasource": "Windows Security Logs|Windows Sysmon Logs",
+      "released":"1.0.0",
+      "help": "<p>This example leverages the Detect New Values search assistant. Our dataset is a anonymized collection of Windows domain controller logon events (Event ID 4776). For this analysis, we are effectively grouping by username and domain controller name, which will give us a row for each username+domaincontrollername combination. We check if the first time that has occurred was in the last day.</p>",
+      "relevance": "As described above, we want to carefully monitor certain executables on our Windows endpoints and understand what is calling them. For example, if we see a program like Word or Excel launching cmd.exe, it is probably up to no good especially if we’ve never seen it do that before. Programs that behave in this way legitimately should be whitelisted - others should be immediately investigated.",
+      "examples": [
+        {
+          "name": "New Parent Process for cmd.exe or regedit.exe - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "New Parent Process for cmd.exe or regedit.exe - Live",
+          "label": "Live Data"
+        }
+      ]
+    }, 
+
+
+    "showcase_renamed_executables": {
+      "name": "Find Processes with Renamed Executables",
+      "released":"1.0.0",
+      "description": "<p>Oftentimes, attackers will end up executing a temporary file, and eventually renaming it to something innocuous like svchost.exe to maintain persistence. This search will look for renamed executables. (<a href=\"https://car.mitre.org/wiki/CAR-2013-05-009\">MITRE CAR Reference</a>)</p><p><b>Alert Volume:</b> Low</p>",
+      "help": "<p>This example leverages the Simple Search assistant. Our dataset is a collection of Windows process launch logs (Event ID 4688), where we have hashing turned on (look for tools like WLS, or Sysmon to help here). It then looks for the number of filenames per system, per file hash, and surfaces files that have been renamed.</p>",
+      "relevance": "Often when we investigate malware, we look for filenames that have different hashes, but the same filenames. This could point to either a legitimate binary update activity, or it could be a malicious process masquerading as a legitimate one. But what about executables that have different filenames, but the same hash? This could be malware renaming itself to masquerade as something benign. In the example here, we see a .tmp file dumped into a roaming directory that later on gets renamed as a legitimate Windows executable - but it has the same hash as before. This warrants investigation.",
+      "dashboard": "showcase_simple_search?ml_toolkit.dataset=Find Processes with Renamed Executables - Demo",
+      "datasource": "Windows Sysmon Logs",
+      "examples": [
+        {
+          "name": "Find Processes with Renamed Executables - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Find Processes with Renamed Executables - Live",
+          "label": "Live Data"
+        }
+      ]
+    }, 
+
+    
+    "showcase_network_dc_dest": {
+      "name": "Source IPs Communicating with Far More Hosts Than Normal",
+      "released":"1.0.0",
+      "description": "<p>This will typically detect scanning activity, along with lateral movement activity.</p><p><b>Alert Volume:</b> Low</p>",
+      "dashboard": "showcase_standard_deviation?ml_toolkit.dataset=Distinct Hosts Communicated With Per Day - Demo",
+      "datasource": "Firewall|Netflow",
+      "help":"<p>This example leverages the Detect Spikes (standard deviation) search assistant. Our demo dataset is an anonymized set of firewall logs. For this analysis, we are tracking the total number of unique destinations the source IP has reached out to per day 'dc(dest) by src _time'. Then we calculate the average, standard deviation, and the most recent value, and filter out any users where the most recent is within the configurable number of standard deviations from average. Note that this use case is only reliable for servers -- users will move around too much due to DHCP and it won't be reliable. Look to a more advanced product, such as Splunk UBA.</p>",
+      "relevance": "The first phase of the Lockheed Martin Kill Chain is reconnaissance, which can include initial scanning of a target network to map out assets, as well as vulnerabilities for potential entry points using known exploits. It is important to note that this type of activity can happen both on the perimeter as well as inside of a network once an initial foothold has been made. Monitoring for this type of activity can help identify precursors to an attack as well as be an indicator that assets within an organization, or credentials have been compromised.",
+      "examples": [
+        {
+          "name": "Distinct Hosts Communicated With Per Day - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Distinct Hosts Communicated With Per Day - Live",
+          "label": "Live Data"
+        },
+        {
+          "name": "Distinct Hosts Communicated With Per Day - Accelerated",
+          "label": "Accelerated Data"
+        }
+      ]
+    } , 
+    "showcase_new_ad_domain": {
+      "name": "New AD Domain Detected",
+      "released":"1.0.0",
+      "description": "<p>New AD domain names showing up in your normal domain controller logs are a symptom of many Pass the Hash tools. While some of the latest don't produce these artifacts, this remains a very valuable detection mechanism.</p><p><b>Alert Volume:</b> Low</p>",
+      "help": "<p>This example leverages the Detect New Values search assistant. Our dataset is a anonymized collection of Windows logon events from a domain controller. For this analysis, we are looking for the earliest time for a domain name. We check if the first time that domain was seen was in the last day.</p>",
+      "relevance": "<p>In Windows logs, the domain name is often reported when it's not explicitly required for the authentication. Under normal operation, the domain name reported will be totally normal, but when someone is intentionally modifiying authentication (such as with Pass the Hash), you can see incorrect, or empty domains. Pass the Hash is used by attackers to move laterally within the organization, connecting to new servers. While not all Pass the Hash techniques will demonstrate this vulnerability, tracking new domains in your Windows logs is very valuable.</p>",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=New Domain Name Detected - Demo",
+      "datasource": "Windows Security Logs",
+      "examples": [
+        {
+          "name": "New Domain Name Detected - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "New Domain Name Detected - Live",
+          "label": "Live Data"
+        }
+      ]
+    }, 
+    "showcase_new_host_with_suspicious_cmd_launch": {
+      "name": "New Host with Suspicious cmd.exe / regedit.exe / powershell.exe Service Launch",
+      "released":"1.0.0",
+      "description": "<p>Very rarely would cmd.exe, regedit.exe, or powershell.exe be launched by services.exe. However, malware will do this. This will detect new hosts where services.exe runs cmd.exe / regedit.exe / powershell.exe. (<a href=\"https://car.mitre.org/wiki/CAR-2014-05-002\">MITRE CAR Reference</a>)</p><p><b>Alert Volume:</b> Very Low (for most companies)</p>",
+      "help": "<p>This example leverages the Detect New Values search assistant. Our dataset is a anonymized collection of process launch events (Event ID 4688) where known suspicious tools are launched as a service. For this analysis, we are effectively grouping by process name and host, which will give us a row for each process_name+hostname combination. We check if the first time that has occurred was in the last day.</p>",
+      "relevance": "There are some very powerful executables on Windows endpoints that should be carefully audited. Most are legit when they execute, but it is a useful exercise to monitor the parent process that does the launching. The Service Control Manager, or services.exe, has no legitimate reason to launch commands like cmd.exe, powershell.exe, or regedit.exe. Incidentally, a common way for malware to masquerade as something legitimate is to call itself service.exe.",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=New cmd.exe or regedit or powershell launched by services.exe - Demo",
+      "datasource": "Windows Security Logs|Windows Sysmon Logs",
+      "examples": [
+        {
+          "name": "New cmd.exe or regedit or powershell launched by services.exe - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "New cmd.exe or regedit or powershell launched by services.exe - Live",
+          "label": "Live Data"
+        }
+      ]
+    }, 
+    "showcase_new_path_for_common_filename": {
+      "name": "New Path for a Common Filename with Process Launch",
+      "released":"1.0.0",
+      "description": "<p>It's common for simpler malware to mask its presence not by using rootkits, but by hiding in plain sight with a filename like explorer.exe and running in the user profile instead of in system32. This detection will look for new paths, for common / expected executables. (<a href=\"https://car.mitre.org/wiki/CAR-2013-05-002\">MITRE CAR Reference</a>)</p><p><b>Alert Volume:</b> Very Low (for most companies)</p>",
+      "help": "<p>This example leverages the Detect New Values search assistant. Our dataset is a anonymized collection of process launch events (Event ID 4688) filtered for known good filenames, running from atypical directories. We find the first time that filename has launched from that path, and then alert if that was in the last day.</p>",
+      "relevance": "There are certain processes that everyone expects to see running on their Windows hosts, like iexplore.exe or svchost.exe. But they’re supposed to run from very specific places. This fairly simple search looks to find when legitimate looking filenames are found running, but out of unusual paths never seen before.",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=New Paths for Common Executables - Demo",
+      "datasource": "Windows Security Logs|Windows Sysmon Logs",
+      "examples": [
+        {
+          "name": "New Paths for Common Executables - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "New Paths for Common Executables - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_unique_patient_records_viewed": {
+      "name": "Healthcare Worker Opening More Patient Records Than Usual",
+      "released":"1.0.0",
+      "description": "<p>If a healthcare worker (or someone associated, such as a DBA) views more patient records than normal, or more than their peers, then it could be a sign that their system is infected, or that they are exfiltrating patient data.</p><p><b>Alert Volume:</b> Low</p>",
+      "dashboard": "showcase_standard_deviation?ml_toolkit.dataset=Number of Unique Patient Records Viewed Per Day - Demo",
+      "relevance": "Healthcare organizations need to be particularly concerned about privacy laws (HIPAA/HITECH) and data exfiltration of financially lucrative patient records. Patient records are worth 10x or 20x what credit card numbers are worth on the black market, as the more you know about an individual the more useful that individuals' information is for identity theft. This data can also be used so that an individual can impersonate the victim and obtain healthcare services, and then the bill for said services goes to the “real” individual. Therefore, tracking who is accessing patient records in a “normal” manner vs anomalous access patterns is be critical to detecting this activity before records are exfiltrated. Note that this search could find true insiders acting maliciously, or detection of users that have had their credentials compromised, and those user accounts are now being hijacked for data exfiltration.",
+      "help":"<p>This example leverages the Detect Spikes (standard deviation) search assistant. Our demo dataset is a set of manufactured logs based on a Cerner patient record system, which tracked the number of unique patient whose records a particular doctor, nurse, DBA, or etc. opened per day, 'dc(PatientID) as NumOpens by EmployeeName _time'. (In effect, if you worked with one patient all day, and opened their chart 100 times, you would have a NumOpens of 1, because you only viewed one patient). Then we calculate the average, standard deviation, and the most recent value, and filter out any users where the most recent is within the configurable number of standard deviations from average. Notably, the daily dc() is already done in this dataset -- this is akin to analyzing a summary index, as is explained in the High Cardinality Alert dialog.</p>",
+      "highlight": "true",
+      "datasource": "Electronic Medical Record System",
+      "examples": [
+        {
+          "name": "Number of Unique Patient Records Viewed Per Day - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Number of Unique Patient Records Viewed Per Day - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_remote_powershell_launches": {
+      "name": "Remote PowerShell Launches",
+      "released":"1.0.0",
+      "description": "<p>In many environments, it is unusual to remotely launch PowerShell. In others, only a few users should do it, or only on a few systems. This will track the first time a user + host combination is unique. You can easily adjust for any similar situation. </p><p><b>Alert Volume:</b> Low (for most companies)</p>",
+      "help": "<p>This example leverages the Detect New Values search assistant. Our dataset is a anonymized collection of process launch events (Event ID 4688) filtered for the Image and ParentImage that show up when Powershell is remotely triggered. We check the first time that's occurred per host, and then alert if that was in the last day.</p>",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=Remote Powershell Launches - Demo",
+      "datasource": "Windows Security Logs|Windows Sysmon Logs",
+      "relevance": "Remote execution of PowerShell is something that should rarely occur if at all within an network, and if it does should be associated with known executables or users. Therefore, unique instances of user and host combinations should be monitored and alerted upon for further investigation by security teams. This type of activity could be an indicator of compromised assets, user credentials, or a potential insider threat scenario.",
+      "examples": [
+        {
+          "name": "Remote Powershell Launches - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Remote Powershell Launches - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_series_hacker_tools_filename": {
+      "name": "Concentration of Hacker Tools by Filename",
+      "released":"1.0.0",
+      "description": "<p>It's uncommon to see filenames associated with attacker tools used in rapid succession on an endpoint. The first time, it's probably fine. The fourth or fifth file used should be suspicious. (<a href=\"https://car.mitre.org/wiki/CAR-2013-04-002\">MITRE CAR Reference</a>)</p><p><b>Alert Volume:</b> Low</p>",
+      "help": "<p>This example leverages the Simple Search assistant. Our dataset is a collection of Windows process launch logs (Event ID 4688). It then filters for a set of filenames that are known to be hacker related (from a lookup called tools.csv) and uses the transaction command to group them by time. If there's a single transaction with many events, it surfaces those.</p>",
+      "relevance": "These days, there are a lot of executables one can install and run on a Windows machine in order to cause mischief. The thing is, many amateur hackers will run a lot of these tools in succession (or automated scripts will run them, too). By correlating the process names being executed on endpoints with a list of 'known hacker tool executable names' we can detect this suspicious activity.",
+      "dashboard": "showcase_simple_search?ml_toolkit.dataset=Series of Hacker Filenames - Demo",
+      "datasource": "Windows Security Logs|Windows Sysmon Logs",
+      "highlight": "true",
+      "examples": [
+        {
+          "name": "Series of Hacker Filenames - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Series of Hacker Filenames - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_series_hacker_tools_hashes": {
+      "name": "Concentration of Hacker Tools by SHA1 Hash",
+      "released":"1.0.0",
+      "description": "<p>It's uncommon to see hashes (which uniquely identify files) associated with attacker tools used in rapid succession on an endpoint. The first time, it's probably fine. The fourth or fifth file used should be suspicious. (<a href=\"https://car.mitre.org/wiki/CAR-2013-04-002\">MITRE CAR Reference</a>)</p><p><b>Alert Volume:</b> Low</p>",
+      "help": "<p>This example leverages the Simple Search assistant. Our dataset is a collection of Windows process launch logs (Event ID 4688), where we have hashing turned on (look for tools like WLS, or Sysmon to help here). It then filters for a set of file hashes that are known to be hacker related (from a lookup called tools.csv) and uses the transaction command to group them by time. If there's a single transaction with many events, it surfaces those.</p>",
+      "relevance": "Building on the two examples of surfacing concentrations of hacker or discovery tools via filename, a more accurate method for doing this is to use the SHA1 cryptographic hashes for these tools, because tools can always be renamed before executing. By correlating the process hashes being executed on endpoints with a list of 'known hacker tool executable hashes' we can detect this suspicious activity.",
+      "dashboard": "showcase_simple_search?ml_toolkit.dataset=Series of Hacker Hashes - Demo",
+      "datasource": "Windows Sysmon Logs",
+      "examples": [
+        {
+          "name": "Series of Hacker Hashes - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Series of Hacker Hashes - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_series_discovery_tools_filename": {
+      "name": "Concentration of Discovery Tools by Filename",
+      "released":"1.0.0",
+      "description": "<p>It's uncommon to see filenames associated with host discovery tools used in rapid succession on an endpoint, except in very specific situations. The first time, it's probably fine. The fourth or fifth file used should be suspicious. (<a href=\"https://car.mitre.org/wiki/CAR-2016-03-001\">MITRE CAR Reference</a>)</p><p><b>Alert Volume:</b> Low (unless your company specifically does this)</p>",
+      "help": "<p>This example leverages the Simple Search assistant. Our dataset is a collection of Windows process launch logs (Event ID 4688). It then filters for a set of filenames that are known to be discovery related (from a lookup called tools.csv) and uses the transaction command to group them by time. If there's a single transaction with many events, it surfaces those.</p>",
+      "relevance": "These days, there are a lot of executables one can install and run on a Windows machine in order to cause mischief. The thing is, many amateur hackers will run a lot of these tools in succession (or automated scripts will run them, too). By correlating the process names being executed on endpoints with a list of 'known discovery tool executable names' we can detect this suspicious activity.",
+      "dashboard": "showcase_simple_search?ml_toolkit.dataset=Series of Hacker Hashes - Demo",
+      "dashboard": "showcase_simple_search?ml_toolkit.dataset=Series of Discovery Filenames - Demo",
+      "datasource": "Windows Security Logs|Windows Sysmon Logs",
+      "examples": [
+        {
+          "name": "Series of Discovery Filenames - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Series of Discovery Filenames - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_series_discovery_tools_hashes": {
+      "name": "Concentration of Discovery Tools by SHA1 Hash",
+      "released":"1.0.0",
+      "description": "<p>It's uncommon to see hashes (which uniquely identify files) associated with host discovery tools used in rapid succession on an endpoint, except in very specific situations. The first time, it's probably fine. The fourth or fifth file used should be suspicious. (<a href=\"https://car.mitre.org/wiki/CAR-2016-03-001\">MITRE CAR Reference</a>)</p><p><b>Alert Volume:</b> Low (unless your company specifically does this)</p>",
+      "help": "<p>This example leverages the Simple Search assistant. Our dataset is a collection of Windows process launch logs (Event ID 4688), where we have hashing turned on (look for tools like WLS, or Sysmon to help here). It then filters for a set of filenames that are known to be discovery related (from a lookup called tools.csv) and uses the transaction command to group them by time. If there's a single transaction with many events, it surfaces those.</p>",
+      "relevance": "Building on the two examples of surfacing concentrations of hacker or discovery tools via filename, a more accurate method for doing this is to use the SHA1 cryptographic hashes for these tools, because tools can always be renamed before executing. By correlating the process hashes being executed on endpoints with a list of 'known discovery tool executable hashes' we can detect this suspicious activity.",
+      "dashboard": "showcase_simple_search?ml_toolkit.dataset=Series of Discovery Hashes - Demo",
+      "datasource": "Windows Sysmon Logs",
+      "examples": [
+        {
+          "name": "Series of Discovery Hashes - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Series of Discovery Hashes - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_hosts_with_many_timestamps": {
+      "name": "Hosts with Varied and Future Timestamps",
+      "released":"1.0.0",
+      "description": "<p>One technique for foiling correlation searches is to alter the system time. This search will detect this scenario.</p><p><b>Alert Volume:</b> Low (and should be fixed)</p>",
+      "help": "<p>This example leverages the Simple Search assistant. Here we are looking through all Splunk logs for hosts that begin sending logs at very different timestamps. The goal is to detect an attacker who suddenly sets the year to 2020 or somepoint in the future to evade detection. We use the tstats command here, because we are only looking at indexed field, and it is super fast for those use cases. If we find a broad range of time for any host, the search surfaces it. We use 21 years into the future for the time range, because that is the maximum time range you can put into a Splunk search. We're looking for a range of more than one hour, just to make sure we're above chance.</p>",
+      "relevance": "Splunk uses the timestamps in the logs generated on an endpoint in order to log an accurate time when an event actually happened. This is why having all of the systems reporting into Splunk leverage an authoritative time source, like NTP, is so important. Attackers may realize that your correlation rules are based on time boundaries, e.g. 'search the last five minutes of data' but if a system is logging time 'in the future’ then your correlation rules may not trip when suspicious behavior is logged. It is important to find the systems with inaccurate system times and fix them.",
+      "dashboard": "showcase_simple_search?ml_toolkit.dataset=Systems with Timestamps Far Into the Future - Live",
+      "datasource": "Any Host Logs",
+      "examples": [
+        {
+          "name": "Systems with Timestamps Far Into the Future - Live",
+          "label": "Live Data (Auto Accelerated)"
+        }
+      ]
+    },
+    "showcase_huge_volume_dns_requests": {
+      "name": "Sources Sending Many DNS Requests",
+      "released":"1.0.0",
+      "description": "<p>A common method for Data Exfiltration is to send out many DNS or Ping requests, embedding data into the payload. This is often not logged.</p><p><b>Alert Volume:</b> Low</p>",
+      "dashboard": "showcase_simple_search?ml_toolkit.dataset=Huge Volume of DNS Requests - Demo",
+      "datasource": "Firewall|Netflow",
+      "relevance": "Similar to monitoring high volumes of data being transferred via DNS, organizations should also monitor for higher volume of DNS transactions, as some advanced malware will not only transfer data via DNS, but also issue and respond to commands via DNS tunneling. It is important to note that you should monitor both volume and frequency of DNS requests, and not rely on detecting specific strings in the data transferred as the data is often encrypted in transit. To test your DNS tunneling detection capabilities you can use tools such as dnscat2 (https://github.com/iagox86/dnscat2).",
+      "help": "<p>This example leverages the Simple Search assistant. Our dataset is a collection of firewall logs (with DNS app detection) from the last day or so. In it, we track per hour how many DNS requests are sent per source IP (you should exclude actual DNS servers from this analysis). We then look to see if it is dramatically higher than the history for that source IP, but also dramatically higher than the organization overall, so that we can to some extent account for DHCP ranges. You may need to tune this for just servers, if this produces too much noise for your environment, or build two separate searches for user-subnet and server-subnet ranges, so that the organization-wide average can be separate.</p>",
+      "examples": [
+        {
+          "name": "Huge Volume of DNS Requests - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Huge Volume of DNS Requests - Live",
+          "label": "Live Data"
+        },
+        {
+          "name": "Huge Volume of DNS Requests - Accelerated",
+          "label": "Accelerated Data"
+        }
+      ]
+    },
+    "showcase_huge_volume_dns_volume": {
+      "name": "Sources Sending a High Volume of DNS Traffic",
+      "released":"1.0.0",
+      "description": "<p>A common method of eata exfiltration is to send out a huge volume (in bytes) of DNS or ping requests, embedding data into the payload. This is often not logged.</p><p><b>Alert Volume:</b> Low</p>",
+      "dashboard": "showcase_simple_search?ml_toolkit.dataset=Huge Volume of DNS Traffic - Demo",
+      "datasource": "Firewall|Netflow",
+      "relevance": "DNS Exfiltration is a sophisticated, but increasingly common technique used by malware authors, as well as adversaries inside of a network to exfiltrate data. The technique is becoming popular due to organizations increased monitoring of data exfiltration, but limiting their monitoring to common protocols, yet failing to monitor DNS as an exfiltration vector. There are several methods to exfiltrate data via DNS, however one way to monitor activity is to gauge the total bytes transferred and looking for anomalies and deviations from normal traffic levels.",
+      "help": "<p>This example leverages the Simple Search assistant. Our dataset is a collection of firewall logs (with DNS app detection) from the last day or so. In it, we track per hour how much DNS traffic are sent per source IP (you should exclude actual DNS servers from this analysis). We then look to see if it is dramatically higher than the history for that source IP, but also dramatically higher than the organization overall, so that we can to some extent account for DHCP ranges. You may need to tune this for just servers, if this produces too much noise for your environment, or build two separate searches for user-subnet and server-subnet ranges, so that the organization-wide average can be separate.</p>",
+      "examples": [
+        {
+          "name": "Huge Volume of DNS Traffic - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Huge Volume of DNS Traffic - Live",
+          "label": "Live Data"
+        },
+        {
+          "name": "Huge Volume of DNS Traffic - Accelerated",
+          "label": "Accelerated Data"
+        }
+      ]
+    },
+    "showcase_new_service_creations": {
+      "name": "New Service Paths for Host",
+      "released":"1.0.0",
+      "description": "<p>Typically new service creations are relatively uncommon for any host. This search will look for new paths being launched by services.exe. This would typically be a high volume search, which should go through noise filtering like the Splunk ES Risk Framework or Splunk UBA.</p><p><b>Alert Volume:</b> High</p>",
+      "help": "<p>This example leverages the Detect New Values search assistant. Our dataset is a anonymized collection of process launch events (Event ID 4688) filtered for service launches. We check the first time that's occurred per path, per host, and then alert if that was in the last day.</p>",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=New Service Creation - Demo",
+      "datasource": "Windows Security Logs|Windows Sysmon Logs",
+      "relevance": "Although it is useful to know what paths are involved with services launched on an endpoint, unless the system is considered “locked down” such as a single-purpose system (POS, kiosk, etc) this will result in significant noise because new services are being created on endpoints all of the time. Therefore, this type of search is best applied with a whitelist so that only ‘unapproved’ service paths are reported.",
+      "examples": [
+        {
+          "name": "New Service Creation - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "New Service Creation - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_new_suspicious_exe_launch_for_user": {
+      "name": "New Suspicious Executable Launch for User",
+      "released":"1.0.0",
+      "description": "<p>Some files rarely get used by legitimate activities, such as at.exe. This search will detect those executables being launched, regardless of the circumstance. (<a href=\"https://car.mitre.org/wiki/CAR-2013-05-004\">MITRE CAR Reference</a>)</p><p><b>Alert Volume:</b> Low</p>",
+      "help": "<p>This example leverages the Detect New Values search assistant. Our dataset is a anonymized collection of process launch events (Event ID 4688) filtered for suspicious filenames (from a lookup called tools.csv). We check the first time that's occurred per path, per user, and then alert if that was in the last day.</p>",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=Suspicious Command Launch - Demo",
+      "datasource": "Windows Security Logs|Windows Sysmon Logs",
+      "relevance": "There are certain executables launched on endpoints that generally mean that someone, or something, is up to no good. For this example, we have provided a lookup file ‘tools.csv’ that among other things identifies binaries by executable name as being used for discovery or attack purposes. It may be perfectly normal for one or more of these executables to launch on a given endpoint, but if one of these executables is seen where it hasn’t been seen before, this can be considered an alert-able condition.",
+      "examples": [
+        {
+          "name": "Suspicious Command Launch - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Suspicious Command Launch - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_new_path_for_familiar_filename": {
+      "name": "Familiar Filename Launched with New Path on Host",
+      "released":"1.0.0",
+      "description": "<p>Processes are typically launched from the same path. When those paths change, it can be a malicious process masquerading as a valid one, to hide in task manager. (<a href=\"https://car.mitre.org/wiki/CAR-2013-05-004\">MITRE CAR Reference</a>)</p><p><b>Alert Volume:</b> Medium</p>",
+      "help": "<p>This example leverages the Detect New Values search assistant. Our dataset is a anonymized collection of process launch events (Event ID 4688). Then we separate the filename from the file path, and look to see if the same filename (e.g., svchost.exe) is run from multiple places by using dc(Image) by filename (where Image is the full path). For each file with multiple paths, we check to see if the the first time that occurred was in the last day.</p>",
+      "relevance": "A common technique employed by malware is to have a benign looking executable launch out of an unusual directory. Normal executions for the file will come out of a standard operating system path, but when we see the same filename launched out of multiple paths, it is time to investigate. Process whitelisting or lookup tables containing names of known-good executables can provide further fidelity here.",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=New Path for Process On Host - Demo",
+      "datasource": "Windows Security Logs|Windows Sysmon Logs",
+      "examples": [
+        {
+          "name": "New Path for Process On Host - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "New Path for Process On Host - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_short_lived_accounts": {
+      "name": "Short Lived Admin Accounts",
+      "released":"1.0.0",
+      "description": "<p>A technique used by attackers is to create an account, take some actions, and then delete it right away. This search will find those accounts on the local system.</p><p><b>Alert Volume:</b> Low</p>",
+      "help": "<p>This example leverages the Simple Search assistant. Our dataset is a collection of Windows security logs for user creation and user deletion. We filter for that, and then use the transaction command to group a create and delete in a short period of time. Anything that matches, we will surface. </p>",
+      "dashboard": "showcase_simple_search?ml_toolkit.dataset=Short Lived Accounts - Demo",
+      "datasource": "Windows Security Logs",
+      "examples": [
+        {
+          "name": "Short Lived Accounts - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Short Lived Accounts - Live",
+          "label": "Live Data"
+        },
+        {
+          "name": "Short Lived Accounts - Accelerated",
+          "label": "Accelerated Data"
+        }
+      ]
+    },
+    "showcase_new_local_admin_account": {
+      "name": "New Local Admin Account",
+      "released":"1.0.0",
+      "description": "<p>Local admin accounts are used by legitimate technicians, but they're also used by attackers. This search looks for newly created accounts that are elevated to local admins.</p><p><b>Alert Volume:</b> Medium</p>",
+      "help": "<p>This example leverages the Simple Search assistant. Our dataset is a collection of Windows security logs for user creation and group modification. We then use the transaction command to group an account create, and an addition to the local administrators group, in a short period of time. Anything that matches, we will surface.</p>",
+      "dashboard": "showcase_simple_search?ml_toolkit.dataset=New Local Admin - Demo",
+      "datasource": "Windows Security Logs",
+      "examples": [
+        {
+          "name": "New Local Admin - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "New Local Admin - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_new_runas": {
+      "name": "New RunAs Host / Privileged Account Combination",
+      "released":"1.0.0",
+      "description": "<p>Privilege escalation (either via RunAs or Scheduled Tasks) create Windows Security EventID 4648 events. This search will find new usernames / host combinations, which will track privilege escalation.</p><p><b>Alert Volume:</b> Medium</p>",
+      "help": "<p>This example leverages the Detect New Values search assistant. Our dataset is a anonymized collection of process launch with explicit credentials events (Windows Event ID 4648). We check the first time that's occurred per username, per host, and then alert if that was in the last day.</p>",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=New RunAs - Demo",
+      "datasource": "Windows Security Logs",
+      "relevance": "Privileged escalation on a Windows endpoint is often done via scheduled tasks, the at command, or RunAs. Since malware often requires elevated privileges to install or to perform certain actions, any unusual occurrence of the 4648 event should be tracked. 4648 will always precede a 4624 event assuming that the escalation is successful. Sometimes you will see ‘consent.exe’ in the process name for the 4648 event - this is the UAC popup dialog.",
+      "examples": [
+        {
+          "name": "New RunAs - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "New RunAs - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_increase_in_runas": {
+      "name": "Significant Increase in Windows Privilege Escalations",
+      "released":"1.0.0",
+      "description": "<p>Privilege escalation (either via RunAs or Scheduled Tasks) create Windows Security EventID 4648 events. This search will baseline per (original, unprivileged) user and then track deviations.</p><p><b>Alert Volume:</b> Low</p>",
+      "dashboard": "showcase_standard_deviation?ml_toolkit.dataset=Increase in Windows Privilege Escalation - Demo",
+      "datasource": "Windows Security Logs",
+      "help":"<p>This example leverages the Detect Spikes (standard deviation) search assistant. Our dataset is an anonymized collection of Windows logon with explicit credentials events (Event ID 4648, as you would see with RunAs). For this analysis, we are tracking the number of times the originating (unprivileged) user initiates an authentication with explicit credentials. Then we calculate the average, standard deviation, and the most recent value, and filter out any users where the most recent is within the configurable number of standard deviations from average. Notably, it might be more useful here to track the privileged account, for different use cases -- that's easy to do, just switch the dropdown from Unprivileged to Privileged. If you have a strong background and opinion on which is relevant in what scenarios, let us know so that we can improve this content for everyone.</p>",
+      "relevance":"Building upon the simpler example of reporting against 4648 events, this example tracks the privileged executions on a per-credential basis. It may be perfectly normal for a certain amount of privileged executions to happen from a given account, but when these spike against a certain account, this may be an indicator of account compromise.",
+      "examples": [
+        {
+          "name": "Increase in Windows Privilege Escalation - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Increase in Windows Privilege Escalation - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_increase_interactive_logon": {
+      "name": "Significant Increase in Interactive Logons",
+      "released":"1.0.0",
+      "description": "<p>Typically non-admin users will only interactively log into one system per day. If a user usually logs into one, then logs into many, or any other substantial increase, that can indicate account compromise and lateral movement.  (<a href=\"https://car.mitre.org/wiki/CAR-2013-02-012\">MITRE CAR Reference</a>)</p><p><b>Alert Volume:</b> Low</p>",
+      "help":"<p>This example leverages the Detect Spikes (standard deviation) search assistant. Our dataset is an anonymized collection of Windows Logon events, filtered to interactive logon types (Local: 2, RemoteInteractive: 10, Cached Local: 11). For this analysis, we are tracking the number of unique hosts the user has interactively logged into per day 'dc(host) by user _time'. Then we calculate the average, standard deviation, and the most recent value, and filter out any users where the most recent is within the configurable number of standard deviations from average.</p>",
+      "dashboard": "showcase_standard_deviation?ml_toolkit.dataset=Increase in Interactive Logons - Demo",
+      "datasource": "Windows Security Logs",
+      "relevance": "By monitoring the number of interactively logged in users to assets, security teams can identify anomalies that may indicate the compromise of an asset or credentials. A spike in users on a particular asset could be an indicate that the asset was compromised and additional system level user accounts are being created for malicious purposes, or if they are valid credentials in AD that accounts have been compromised and the adversary is testing the accounts against a particular asset or groups of assets to test and or escalate privileges to gain deeper access to critical assets and infrastructure.",
+      "examples": [
+        {
+          "name": "Increase in Interactive Logons - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Increase in Interactive Logons - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_new_logon_type": {
+      "name": "New Logon Type for User",
+      "released":"1.0.0",
+      "description": "<p>Windows defines several logon types, including Interactive (local keyboard and screen), RemoteInteractive (remote desktop), Network (remote file shares or printers), etc. Typically established users won't suddenly start to generate new logon types. This search will look for that. (<a href=\"https://car.mitre.org/wiki/CAR-2013-02-012\">MITRE CAR Reference</a>)</p><p><b>Alert Volume:</b> Low</p>",
+      "help": "<p>This example leverages the Detect New Values search assistant. Our dataset is a anonymized collection of logon events. We check the first time that each user has performed each logon type and then alert if that was in the last day.</p>",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=New Logon Type for User - Demo",
+      "datasource": "Windows Security Logs",
+      "examples": [
+        {
+          "name": "New Logon Type for User - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "New Logon Type for User - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_new_interactive_service_logon": {
+      "name": "New Interactive Logon from a Service Account",
+      "released":"1.0.0",
+      "description": "<p>In most environments, service accounts should not log on interactively. This search finds new user/host combinations for accounts starting with \"svc_\". </p><p><b>Alert Volume:</b> Low</p>",
+      "help": "<p>This example leverages the Detect New Values search assistant. Our dataset is a anonymized collection of interactive logon events, and then we apply a filter for when the account name starts with svc_ -- obviously you could adjust this, or leverage a lookup as applicable in your environment. We check the first time that each user has logged interactively onto each server. Notably, this search is probably one of the most difficult in the environment from a performance perspective. Searching for Logon Types requires pulling back almost all of the data off of disk -- it would be highly recommended to leverage a lookup to cache your baseline (on the roadmap for a future version of this app). That said, for most organizations you could likely dispense with the baseline and just whitelist known good service account / host combinations as well.</p>",
+      "relevance": "<p>Service accounts are more than likely privileged accounts in organizations. However, they should almost never log on interactively (e.g., via Remote Desktop, or by physically sitting at a keyboard and monitor). Because of their privilege and the fact that their usernames often describe their level of access (e.g., svc_exchange_admin), they're a big target for account compromise. Mature organizations should monitor for this activity, and investigate any new logon activity.",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=New Interactive Logon from a Service Account - Demo",
+      "datasource": "Windows Security Logs",
+      "examples": [
+        {
+          "name": "New Interactive Logon from a Service Account - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "New Interactive Logon from a Service Account - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_increase_in_interactively_logged_on_users": {
+      "name": "Significant Increase in Interactively Logged On Users",
+      "released":"1.0.0",
+      "description": "<p>Most systems will have a relatively predictable number of interactively logged on users. This search will look for systems that have dramatically more than they typically do, with a per-user baseline.</p><p><b>Alert Volume:</b> Medium</p>",
+      "help":"<p>This example leverages the Detect Spikes (standard deviation) search assistant. Our dataset is an anonymized collection of Windows Logon events, filtered to interactive logon types (Local: 2, RemoteInteractive: 10, Cached Local: 11). For this analysis, we are tracking the number of unique users log into each system per day 'dc(user) by host _time'. Then we calculate the average, standard deviation, and the most recent value, and filter out any systems where the most recent is within the configurable number of standard deviations from average.</p>",
+      "relevance": "<p>By monitoring the number of interactively logged in users to assets, security teams can identify anomalies that may indicate the compromise of an asset or credentials. A spike in users on a particular asset could be an indicate that the asset was compromised and additional system level user accounts are being created for malicious purposes, or if they are valid credentials in AD that accounts have been compromised and the adversary is testing the accounts against a particular asset or groups of assets to test and or escalate privileges to gain deeper access to critical assets and infrastructure.</p>",
+      "dashboard": "showcase_standard_deviation?ml_toolkit.dataset=Increase in Interactively Logged In Users - Demo",
+      "datasource": "Windows Security Logs",
+      "highlight": "true",
+      "examples": [
+        {
+          "name": "Increase in Interactively Logged In Users - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Increase in Interactively Logged In Users - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_superman": {
+      "name": "Geographically Improbable Access (Superman)",
+      "released":"1.0.0",
+      "description": "<p>If your organization is like most, you don't have users that can fly from San Francisco to Pyongyang in 5 seconds. Detect that with Splunk!</p><p><b>Alert Volume:</b> Medium</p>",
+      "help": "Help not needed -- ES Use Case",
+      "datasource": "Other",
+      "dashboard": "ES_Use_Case?ml_toolkit.dataset=Superman"
+    },
+    "showcase_listeningport": {
+      "name": "Anomalous New Listening Port",
+      "released":"1.0.0",
+      "datasource": "Other",
+      "description": "<p>New listening ports can be a sign of malware persistence, so detect them in your data!</p><p><b>Alert Volume:</b> Medium</p>",
+      "relevance": "Especially on user endpoints, but also on servers, we don’t expect processes to start up and listen on unusual ports. Systems that do this outside of standard change management procedures should be investigated immediately, as the listening port may be used as a C2 channel or a receiving port to exfiltrate data from another system. This type of search becomes even more effective when you can catalog the 'known good' ports in your environment and compare that list via Splunk lookup or similar with what is found on your endpoints.",  
+      "help": "Help not needed -- ES Use Case",
+      "dashboard": "ES_Use_Case?ml_toolkit.dataset=ListeningPort"
+    },
+    "showcase_lookalike_filenames": {
+      "name": "Processes with Lookalike (typo) Filenames",
+      "released":"1.0.0",
+      "description": "<p>A common technique to evade the eyes of an analyst quickly scanning through processes is to create a service named very similarly to that of a standard Windows service, e.g., scvhost.exe instead of svchost.exe. This search uses the Levenshtein algorithm to detect differences betweeen two strings, and looks for small differences. Idea inspired by David Bianco at Sqrrl (<a href=\"http://detect-respond.blogspot.com/2016/11/hunting-for-malware-critical-process.html\">link</a>).</p><p><b>Alert Volume:</b> Very Low</p>",
+      "help": "<p>This example leverages the Simple Search assistant. Our dataset is a collection of Windows process launches (EventID 4688), with one injected to use scvhost.exe instead of svchost.exe. The search then leverages the URL Toolbox app from apps.splunk.com to run a levenshtein distance calculation against multiple different common Windows processes. It filters by making sure that there's no exact matches (distance=0), and then filters for where any of the matches was 1 or 2 away from the normal (e.g., svdhost.exe or scvhost.exe). There are a few other techniques used in the search to provide more context to the analyst -- the most interesting of those is the use of curly braces \"{score}\" -- that will insert the value of the score field (e.g., \"2\") into the variable name (so, score2). The rest of the more complicated aspects of the search are just formatting -- in particular, the use of foreach to pull out all suspicious filenames from the dataset.</p>",
+      "dashboard": "showcase_simple_search?ml_toolkit.dataset=Processes With Lookalike Filenames - Demo",
+      "datasource": "Windows Security Logs|Windows Sysmon Logs",
+      "examples": [
+        {
+          "name": "Processes With Lookalike Filenames - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Processes With Lookalike Filenames - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_suspicious_timestamp_manipulation": {
+      "name": "Suspicious Timestamp Manipulation",
+      "released":"1.3",
+      "description": "<p>There are a pair of techniques used by attackers. One is that if they inject malware into a file, they might change the timestamp back to that of the unmodified version so that it doesn't appear different. Another is that they might change the timestamp to a value before 1970, to fool systems that leverage unix epoch time. Don't be fooled!</p><p><b>Alert Volume:</b> Very Low</p>",
+      "help": "<p>This example leverages the Simple Search assistant. Our dataset is a collection of Sysmon timestamp change logs (EventCode 2) from a real world ransomware installation. We don't have a good baseline here, because the system was stood up just for the ransomware attack, but the footprint of the attacker is very clearly seen by comparing the time difference between the UTCTime, and the PreviousUTCTime. When Splunk is handed a UTCTime that pre-dates unix epoch, it returns a null value, so we look for either a null value or for when the PreviousUTCTime is more than one hour ahead of the new time.</p>",
+      "dashboard": "showcase_simple_search?ml_toolkit.dataset=Suspicious Timestamp Manipulation - Demo",
+      "datasource": "Windows Sysmon Data",
+      "examples": [
+        {
+          "name": "Suspicious Timestamp Manipulation - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Suspicious Timestamp Manipulation - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_spike_in_outgoing_email": {
+      "name": "User with Increase in Outgoing Email",
+      "released":"1.2.0",
+      "description": "<p>Both to detect data exfiltration and compromised account, we can analyze users that are sending out dramatically more data than normal. This search looks per source email address for big increases in volume.</p><p><b>Alert Volume:</b> Low</p>",
+      "help": "<p>This example leverages the Detect Spikes (standard deviation) search assistant. Our dataset is an anonymized collection of email logs centered around a particular user for a month.</p>",
+      "dashboard": "showcase_standard_deviation?ml_toolkit.dataset=Spike in Email from Address - Demo",
+      "datasource": "Email Logs",
+      "examples": [
+        {
+          "name": "Spike in Email from Address - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Spike in Email from Address - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_emails_with_lookalike_domains": {
+      "name": "Emails with Lookalike Domains",
+      "released":"1.2.0",
+      "description": "<p>A common phishing technique uses a source domain that is similar to your own. If you work for mycompany.com, they will email from mycampany.com, it.mycampany.com or mycompany.yourithelpdesk.com. This search will detect those similar domains.</p><p><b>Alert Volume:</b> Very Low</p>",
+      "help": "<p>This example leverages the Simple Search assistant. Our dataset is an anonymized collection of email logs centered around a particular user for a month.</p>",
+      "dashboard": "showcase_simple_search?ml_toolkit.dataset=Emails With Lookalike Domains - Demo",
+      "datasource": "Email Logs",
+      "examples": [
+        {
+          "name": "Emails With Lookalike Domains - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Emails With Lookalike Domains - Live",
+          "label": "Live Data"
+        },
+        {
+          "name": "Emails With Lookalike Domains - Accelerated",
+          "label": "Accelerated Data"
+        }
+      ]
+    },
+    "showcase_external_emails_with_internal_domain": {
+      "name": "Emails from Outside the Organization with Company Domains",
+      "released":"1.2.0",
+      "description": "<p>One of the greatest risk for phishing and fraud comes when external parties use your company domain name. When someone from finance receives an email from yourceo@yourcompany.com, they're likely to acquiesce. Detect that now!</p><p><b>Alert Volume:</b> Very Low</p>",
+      "help": "<p>This example leverages the Simple Search assistant. Our dataset is an anonymized collection of email logs centered around a particular user for a month.</p>",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=New External IPs Sending Company Emails - Demo",
+      "datasource": "Email Logs",
+      "examples": [
+        {
+          "name": "New External IPs Sending Company Emails - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "New External IPs Sending Company Emails - Live",
+          "label": "Live Data"
+        },
+        {
+          "name": "New External IPs Sending Company Emails - Cisco ESA Live",
+          "label": "Cisco ESA Live Data"
+        },
+        {
+          "name": "New External IPs Sending Company Emails - Accelerated",
+          "label": "Accelerated Data"
+        }
+      ]
+    },
+    "showcase_hosts_where_sourcetypes_go_silent": {
+      "name": "Hosts Where Security Sources Go Quiet",
+      "released":"1.2.0",
+      "description": "<p>A frequent concern of SOCs is that their data feeds will disappear. While most SOCs monitor if entire data sources go offline, few track if a valuable endpoint data source suddenly stops for one host. Don't be like them -- keep an eye out for that!</p><p><b>Alert Volume:</b> Medium</p>",
+      "help": "<p>This example leverages the Simple Search assistant. Here we are looking through all Splunk logs for hosts that are sending logs, but not sending Windows Security logs. We track that percentage over time, and look to see how many instances where the percentage = 0 (no Windows Logs) in the past we've seen, and whether yesterday the percentage was zero.</p>",
+      "dashboard": "showcase_simple_search?ml_toolkit.dataset=Hosts That Stop Reporting Sourcetypes - Live",
+      "datasource": "Any Host Logs",
+      "examples": [
+        {
+          "name": "Hosts That Stop Reporting Sourcetypes - Live",
+          "label": "Live Data (Auto Accelerated)"
+        }
+      ]
+    },
+    "showcase_spike_in_password_reset_emails": {
+      "name": "Spike in Password Reset Emails",
+      "released":"1.2.0",
+      "description": "<p>Another common phishing technique involves password reset emails (or other related tactics). Protect your users by identifying spikes in the number of suspicious emails entering your environment. Correlate with phishing education risk scores for more value!</p><p><b>Alert Volume:</b> Very Low</p>",
+      "help": "<p>This example leverages the Detect Spikes (standard deviation) search assistant. Our dataset is an anonymized collection of email logs centered around a particular user for a month.</p>",
+      "dashboard": "showcase_standard_deviation?ml_toolkit.dataset=Spike in Password Reset Emails - Demo",
+      "datasource": "Email Logs",
+      "examples": [
+        {
+          "name": "Spike in Password Reset Emails - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Spike in Password Reset Emails - Live",
+          "label": "Live Data"
+        },
+        {
+          "name": "Spike in Password Reset Emails - Accelerated",
+          "label": "Accelerated Data"
+        }
+      ]
+    },
+    "showcase_spike_in_sfdc_exports": {
+      "name": "Spike in Exported Records from Salesforce.com",
+      "released":"1.4.0",
+      "description": "<p>For many organizations, Salesforce.com contains the most critical information in their company. This use case tracks the number of records exported per day (and is based on a real set of data collection).</p><p><b>Alert Volume:</b> Medium</p>",
+      "help": "<p>This example leverages the Detect Spikes (standard deviation) search assistant. Our dataset is an anonymized data collection from an actual customer environment.</p>",
+      "dashboard": "showcase_standard_deviation?ml_toolkit.dataset=Spike in SFDC Records Exported - Demo",
+      "datasource": "Salesforce Event Log File",
+      "examples": [
+        {
+          "name": "Spike in SFDC Records Exported - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Spike in SFDC Records Exported - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_new_sfdc_clients": {
+      "name": "New Application Accessing Salesforce.com API",
+      "released":"1.4.0",
+      "description": "<p>For many organizations, Salesforce.com contains the most critical information in their company. With Salesforce, you can use the API to pull information into third party apps. This search looks for new clients per user. </p><p><b>Alert Volume:</b> Low</p>",
+      "help": "<p>This is the generic search builder for First Seen Detection. Our dataset is an anonymized data collection from an actual customer environment.</p>",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=New Applications Contacting SFDC - Demo",
+      "datasource": "Salesforce Event Log File",
+      "examples": [
+        {
+          "name": "New Applications Contacting SFDC - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "New Applications Contacting SFDC - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_new_sfdc_tables": {
+      "name": "New Tables Queried by Salesforce.com User",
+      "released":"1.4.0",
+      "description": "<p>Salesforce.com supports a simplified query language called SOQL. This search detects users who begin querying new sensitive tables.</p><p><b>Alert Volume:</b> Low</p>",
+      "help": "<p>This is the generic search builder for First Seen Detection. Our dataset is an anonymized data collection from an actual customer environment.</p>",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=New SFDC Tables Queried by User - Demo",
+      "datasource": "Salesforce Event Log File",
+      "examples": [
+        {
+          "name": "New SFDC Tables Queried by User - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "New SFDC Tables Queried by User - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_new_sfdc_tables_peer": {
+      "name": "New Tables Queried by Salesforce.com Peer Group",
+      "released":"1.4.0",
+      "description": "<p>Salesforce.com supports a simplified query language called SOQL. This search detects users who begin querying sensitive tables that have never been contacted by peer group.</p><p><b>Alert Volume:</b> Low</p>",
+      "help": "<p>This is the generic search builder for First Seen Detection. Our dataset is an anonymized data collection from an actual customer environment.</p>",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=New SFDC Tables Queried by Peer Group - Demo",
+      "datasource": "Salesforce Event Log File",
+      "examples": [
+        {
+          "name": "New SFDC Tables Queried by Peer Group - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "New SFDC Tables Queried by Peer Group - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_new_sfdc_event_type": {
+      "name": "New High Risk Event Types for Salesforce.com User",
+      "released":"1.4.0",
+      "description": "<p>Salesforce.com supports a variety of different event types in their event logs. This search detects users who suddenly query event types associated with data exfiltration</p><p><b>Alert Volume:</b> Medium</p>",
+      "help": "<p>This is the generic search builder for First Seen Detection. Our dataset is an anonymized data collection from an actual customer environment.</p>",
+      "dashboard": "showcase_first_seen_demo?ml_toolkit.dataset=New Risky Event Types Per User - Demo",
+      "datasource": "Salesforce Event Log File",
+      "examples": [
+        {
+          "name": "New Risky Event Types Per User - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "New Risky Event Types Per User - Live",
+          "label": "Live Data"
+        }
+      ]
+    },
+    "showcase_spike_in_sfdc_document_downloads": {
+      "name": "Spike in Downloaded Documents Per User from Salesforce.com",
+      "released":"1.4.0",
+      "description": "<p>For many organizations, Salesforce.com contains the most critical information in their company. This use case tracks the number of documents downloaded per day per user (and is based on a real set of data collection).</p><p><b>Alert Volume:</b> Medium</p>",
+      "help": "<p>This example leverages the Detect Spikes (standard deviation) search assistant. Our dataset is an anonymized data collection from an actual customer environment.</p>",
+      "dashboard": "showcase_standard_deviation?ml_toolkit.dataset=Spike in SFDC Documents Downloaded - Demo",
+      "datasource": "Salesforce Event Log File",
+      "examples": [
+        {
+          "name": "Spike in SFDC Documents Downloaded - Demo",
+          "label": "Demo Data"
+        },
+        {
+          "name": "Spike in SFDC Documents Downloaded - Live",
+          "label": "Live Data"
+        }
+      ]
+    }
+  }
+}

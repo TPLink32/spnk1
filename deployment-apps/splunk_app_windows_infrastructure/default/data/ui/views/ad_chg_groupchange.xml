@@ -1,0 +1,178 @@
+<form>
+  <label>Group Changes</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="multiselect" token="multidropdown_forest" searchWhenChanged="true">
+      <label>Forest</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector`  |dedup ForestName | sort ForestName</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+      <fieldForLabel>ForestName</fieldForLabel>
+      <fieldForValue>ForestName</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>ForestName="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="multiselect" token="multidropdown_site" searchWhenChanged="true">
+      <label>Site</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector` | search $multidropdown_forest$|dedup Site|sort Site</query>
+      </search>
+      <fieldForLabel>Site</fieldForLabel>
+      <fieldForValue>Site</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>Site="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="multiselect" token="multidropdown_domaindnsname" searchWhenChanged="true">
+      <label>Domain</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector` | search $multidropdown_forest$ $multidropdown_site$|dedup DomainDNSName|sort DomainDNSName</query>
+      </search>
+      <fieldForLabel>DomainDNSName</fieldForLabel>
+      <fieldForValue>DomainDNSName</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>DomainDNSName="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="multiselect" token="multidropdown_host" searchWhenChanged="true">
+      <label>Server</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector` | search $multidropdown_forest$ $multidropdown_site$ $multidropdown_domaindnsname$|dedup host|sort host</query>
+      </search>
+      <fieldForLabel>host</fieldForLabel>
+      <fieldForValue>host</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>host="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="dropdown" token="select90" searchWhenChanged="true">
+      <label>Group</label>
+      <search>
+        <query>(eventtype=msad-group-changes OR eventtype=msad-groupmembership-changes) $multidropdown_host$ NOT src_nt_domain="NT AUTHORITY"|fillnull value="*" member_id|eval adminuser=src_nt_domain."\\".src_user|stats count by adminuser,user_group,member_id,MSADGroupClass,MSADGroupType|fields * | dedup user_group|sort user_group</query>
+      </search>
+      <fieldForLabel>user_group</fieldForLabel>
+      <fieldForValue>user_group</fieldForValue>
+      <choice value="*">All</choice>
+      <initialValue>*</initialValue>
+      <default>*</default>
+    </input>
+    <input type="dropdown" token="select96" searchWhenChanged="true">
+      <label>Group Scope</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>(eventtype=msad-group-changes OR eventtype=msad-groupmembership-changes) $multidropdown_host$ NOT src_nt_domain="NT AUTHORITY"|fillnull value="*" member_id|eval adminuser=src_nt_domain."\\".src_user|stats count by adminuser,user_group,member_id,MSADGroupClass,MSADGroupType|fields * | dedup MSADGroupType|sort MSADGroupType</query>
+      </search>
+      <fieldForLabel>MSADGroupType</fieldForLabel>
+      <fieldForValue>MSADGroupType</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="select94" searchWhenChanged="true">
+      <label>Group Class</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>(eventtype=msad-group-changes OR eventtype=msad-groupmembership-changes) $multidropdown_host$ NOT src_nt_domain="NT AUTHORITY"|fillnull value="*" member_id|eval adminuser=src_nt_domain."\\".src_user|stats count by adminuser,user_group,member_id,MSADGroupClass,MSADGroupType|fields * | dedup MSADGroupClass|sort MSADGroupClass</query>
+      </search>
+      <fieldForLabel>MSADGroupClass</fieldForLabel>
+      <fieldForValue>MSADGroupClass</fieldForValue>
+      <default>*</default>
+    </input>
+    <input type="dropdown" token="select88" searchWhenChanged="true">
+      <label>Administrator</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>(eventtype=msad-group-changes OR eventtype=msad-groupmembership-changes) $multidropdown_host$ NOT src_nt_domain="NT AUTHORITY"|fillnull value="*" member_id|eval adminuser=src_nt_domain."\\".src_user|stats count by adminuser,user_group,member_id,MSADGroupClass,MSADGroupType|fields * | dedup adminuser|sort adminuser</query>
+      </search>
+      <fieldForLabel>adminuser</fieldForLabel>
+      <fieldForValue>adminuser</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="select92" searchWhenChanged="true">
+      <label>Member</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>eventtype=msad-groupmembership-changes $multidropdown_host$ NOT src_nt_domain="NT AUTHORITY"|fillnull value="*" member|eval adminuser=src_nt_domain."\\".src_user|stats count by adminuser,user_group,member,MSADGroupClass,MSADGroupType|fields * | dedup member|sort member</query>
+      </search>
+      <fieldForLabel>member</fieldForLabel>
+      <fieldForValue>member</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="time" token="Time" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Group Changes</title>
+        <search>
+          <query>eventtype=msad-group-changes $multidropdown_host$ user_group="$select90$" MSADGroupType="$select96$" MSADGroupClass="$select94$"|eval adminuser=src_nt_domain."\\".src_user|search adminuser=$select88|s$|table _time,adminuser,msad_action,MSADGroupClass,MSADGroupType,src_nt_domain,user_group|rename adminuser as "Administrator",msad_action as "Action",user_group as "Group", MSADGroupClass as "Type", MSADGroupType as "Scope",src_nt_domain as "Domain"</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">20</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/ad_audit_group?form.ldaprecord.nt_domain=$row.Domain$&form.ldaprecord.groupName=$row.Group$
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Membership Changes</title>
+        <search>
+          <query>eventtype=msad-groupmembership-changes $multidropdown_host$ user_group="$select90$" MSADGroupType="$select96$" MSADGroupClass="$select94$" member="$select92$" | eval adminuser=src_nt_domain."\\".src_user | search adminuser=$select88|s$ | table _time,adminuser,MSADGroupClass,MSADGroupType,src_nt_domain,user_group,msad_action,member | rename adminuser as "Administrator",MSADGroupClass as "Type",MSADGroupType as "Scope",src_nt_domain as "Domain",user_group as "Group",msad_action as "Action",member as "Member"</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">cell</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">20</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/ad_audit_group?form.ldaprecord.nt_domain=$row.Domain$&form.ldaprecord.groupName=$row.Group$
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+</form>

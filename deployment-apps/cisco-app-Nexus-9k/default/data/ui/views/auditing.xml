@@ -1,0 +1,200 @@
+<form>
+  <label>Auditing</label>
+  <search id="baseSearch">
+    <query>|search tag=cisco_syslog | stats values(category) as category values(type) as type values(Login_msg) as Login_msg values(authenticated_user) as authenticated_user values(id) AS id values(mnemonics) AS mnemonics values(user) AS user values(update_src_ip) as update_src_ip values(update_user) AS update_user values(update_msg) as update_msg by _time, host | reverse</query>
+    <earliest>$earliest$</earliest>
+    <latest>$latest$</latest>
+  </search>
+  <description/>
+  <fieldset autoRun="true" submitButton="false">
+    <input type="time" searchWhenChanged="true">
+      <default>
+        <earliest>-60m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+    <input type="dropdown" token="device" searchWhenChanged="true">
+      <label>Device</label>
+      <choice value="*">All</choice>
+      <search>
+         <query>search tag=cisco_syslog | lookup nexus_hostname_lookup device AS host OUTPUT hostname AS hostname  | eval hostAndHostname = hostname."(".host.")" | stats count by host,hostAndHostname | rename hostAndHostname as hostname | table host hostname</query>
+        </search>
+         <earliest>$earliest</earliest>
+         <latest>$latest$</latest>
+         <fieldForLabel>hostname</fieldForLabel>
+         <fieldForValue>host</fieldForValue>  
+      <default>*</default>
+    </input>
+    <input type="dropdown" token="user" searchWhenChanged="true">
+      <label>User</label>
+      <choice value="*">All</choice>
+      <search>
+         <query>search tag=cisco_syslog category="AAA" | search host = $device$ | dedup authenticated_user | rename authenticated_user AS user | table user</query>
+        </search>
+         <earliest>$earliest</earliest>
+         <latest>$latest$</latest>
+         <fieldForLabel>user</fieldForLabel>
+         <fieldForValue>user</fieldForValue>  
+         <default>*</default>
+    </input>
+  </fieldset>
+  <row>
+   <panel>
+    <single>
+      <title>Unique devices</title>
+      <search base="baseSearch">
+         <query>| stats dc(host) AS "Count of Devices"</query>
+         <earliest>$earliest$</earliest>
+         <latest>$latest$</latest>
+      </search>
+        <option name="underLabel">Unique devices</option>
+     </single>
+    </panel>
+    <panel>
+     <single>
+      <title>Users</title>
+       <search base="baseSearch">
+         <query>| search category="AAA" | stats dc(authenticated_user) AS "Count of users"</query>
+         <earliest>$earliest$</earliest>
+         <latest>$latest$</latest>
+       </search>
+        <option name="underLabel">Users</option>
+     </single>
+    </panel>
+    <panel>
+     <single>
+      <title>Device Logins</title>
+      <search base="baseSearch">
+          <query>| search type="start" Login_msg="AAA_ACCOUNTING_MESSAGE" | dedup id | stats count AS device_logins</query>
+          <earliest>$earliest$</earliest>
+          <latest>$latest$</latest>
+       </search>
+      <option name="underLabel">Logins</option>
+     </single>
+    </panel> 
+  </row>
+  <row>
+    <panel>
+    <table>
+      <title>Device Logins by User</title>
+       <search base="baseSearch">
+        <query>| search type="start" Login_msg="AAA_ACCOUNTING_MESSAGE" | lookup nexus_hostname_lookup device AS host OUTPUT hostname AS hostname | stats values(authenticated_user) as User values(hostname) as Hostname values(host) as Device by _time,id | rename id as Id | search Device=$device$ User=$user$ | stats count(Id) AS "Login Counts" by Hostname,Device,User</query>
+        <earliest>$earliest$</earliest>
+        <latest>$latest$</latest>
+      </search>
+      <option name="wrap">true</option>
+      <option name="rowNumbers">false</option>
+      <option name="dataOverlayMode">none</option>
+      <option name="drilldown">cell</option>
+      <option name="count">10</option>
+    </table>
+    </panel>
+    <panel>
+    <chart>
+      <title>Device Logins by User</title>
+       <search base="baseSearch">
+         <query>| search type="start" Login_msg="AAA_ACCOUNTING_MESSAGE" | lookup nexus_hostname_lookup device AS host OUTPUT hostname AS hostname  | stats values(authenticated_user) as User values(host) as Device by _time,id | rename id as Id| search Device=$device$ User=$user$ | stats count(Id) AS "Login Counts" by User</query>
+         <earliest>$earliest$</earliest>
+         <latest>$latest$</latest>
+      </search>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.legend.placement">right</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.chart">bar</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+     </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+     <table>
+      <title>Failed Device login by User</title>
+      <search base="baseSearch">
+         <query>|  lookup nexus_hostname_lookup device AS host OUTPUT hostname AS hostname  | stats values(hostname) as Hostname values(host) as Device by _time,user | rename user  AS User | search Device=$device$ User=$user$ | stats count AS "Failed Logins" by Hostname,Device,User</query>
+         <earliest>$earliest$</earliest>
+         <latest>$latest$</latest>
+      </search>
+      <option name="wrap">true</option>
+      <option name="rowNumbers">false</option>
+      <option name="dataOverlayMode">none</option>
+      <option name="drilldown">cell</option>
+      <option name="count">10</option>
+     </table>
+    </panel>
+    <panel>
+     <chart>
+      <title>Failed Device Logins by User</title>
+       <search base="baseSearch">
+         <query>| lookup nexus_hostname_lookup device AS host OUTPUT hostname AS hostname  | stats values(hostname) as Hostname values(host) as Device by _time,user |rename user  AS User  | search Device=$device$ User=$user$ | stats count AS "Failed Logins" by User</query>
+         <earliest>$earliest$</earliest>
+         <latest>$latest$</latest>
+       </search>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.legend.placement">right</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.chart">bar</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+    </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+     <html>
+      <H1>Configuration Started by Host</H1>
+      <p>These events are generated from syslog, So user needs to enable "logging level aaa 7" on Nexus 9k device</p>
+     </html>
+     <chart>
+       <search base="baseSearch">     
+        <query>| lookup nexus_hostname_lookup device AS host OUTPUT hostname AS hostname  | stats count by _time,mnemonics,host | rename mnemonics as Mnemonics host AS Device | where Mnemonics LIKE "%CONFIG_I" | stats count by Device | search Device= $device$</query>
+        <earliest>$earliest$</earliest>
+        <latest>$latest$</latest>
+       </search>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.legend.placement">right</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.chart">pie</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+    </chart>
+    </panel>
+  </row>
+  <row>
+   <panel>
+    <html>
+      <H1>Configuration changes by User</H1>
+      <p>These events are generated from syslog, So user needs to enable "logging level aaa 7" on Nexus 9k device</p>
+    </html>
+    <table>
+         <search base="baseSearch">
+           <query>| lookup nexus_hostname_lookup device AS host OUTPUT hostname AS hostname  | stats values(hostname) as Hostname by _time,host,update_src_ip,update_user,update_msg | search host= $device$ update_user=$user$ | rename host as DestinationDevice update_src_ip as SourceDevice update_user as User update_msg as Message | fields _time Hostname SourceDevice DestinationDevice User Message</query>
+           <earliest>$earliest$</earliest>
+           <latest>$latest$</latest>
+      </search>
+        <option name="drilldown">none</option>
+      </table>
+   </panel>
+  </row>
+</form>

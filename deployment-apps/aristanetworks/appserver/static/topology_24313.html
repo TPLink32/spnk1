@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<meta charset='utf-8'>
+<script src='http://d3js.org/d3.v2.js?2.9.1' charset='utf-8'></script>
+<style>
+.link { fill: none; stroke: #003468; stroke-width: 1.5px; }
+.node circle { fill: #003468; stroke: #fff; stroke-width: 1.5px; }
+text { font: 9px sans-serif; }
+</style>
+</head><body><html><script>var topology = [
+  {source: 'EOSPlus-7050T-1', target: 'eosplus-bs1.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'localhost'},
+  {source: 'EOSPlus-7050T-1', target: 'splunk-testing-3'},
+  {source: 'EOSPlus-7050T-1', target: 'localhost.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'eosplus-bs2.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'ztps.ztps-test.com'},
+  {source: 'EOSPlus-7050T-1', target: 'localhost'},
+  {source: 'EOSPlus-7050T-1', target: 'localhost'},
+  {source: 'EOSPlus-7050T-1', target: 'splunk-testing-3'},
+  {source: 'EOSPlus-7050T-1', target: 'splunk-testing-3'},
+  {source: 'EOSPlus-7050T-1', target: 'ztps.ztps-test.com'},
+  {source: 'EOSPlus-7050T-1', target: 'eosplus-bs2.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'lab-oob-core.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'eosplus-bs1.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'localhost.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'localhost'},
+  {source: 'EOSPlus-7050T-1', target: 'eosplus-bs2.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'eosplus-bs1.nh.arista.com'},
+  {source: 'EOSPlus-7050T-1', target: 'localhost'},
+  {source: 'splunk-testing-1', target: 'jere-veos-s1.nh.arista.com'},
+  {source: 'splunk-testing-1', target: 'jere-veos-s1.nh.arista.com'},
+  {source: 'splunk-testing-1', target: 'splunk-testing-2'},
+  {source: 'splunk-testing-2', target: 'jere-veos-s1.nh.arista.com'},
+  {source: 'splunk-testing-2', target: 'splunk-testing-1'},
+  {source: 'splunk-testing-2', target: 'jere-veos-s1.nh.arista.com'}];
+var nodes = {};
+
+  // Compute the distinct nodes from the links.
+  topology.forEach(function(link) {
+    link.source = nodes[link.source] || (nodes[link.source] = {name: link.source});
+    link.target = nodes[link.target] || (nodes[link.target] = {name: link.target});
+  });
+
+  var width = 600,
+      height = 650;
+
+  var force = d3.layout.force()
+    .nodes(d3.values(nodes))
+    .links(topology)
+    .size([1024, height])
+    .linkDistance(200)
+    .charge(-600)
+    .on('tick', topologytick)
+    .start();
+
+  var svg = d3.select('body').append('svg')
+    .attr('width', '100%')
+    .attr('height', '650')
+
+  var link = svg.selectAll('.link')
+    .data(force.links())
+    .enter().append('line')
+    .attr('class', 'link');
+
+  var node = svg.selectAll('.node')
+    .data(force.nodes())
+    .enter().append('g')
+    .attr('class', 'node')
+    .on('mouseover', topologymouseover)
+    .on('mouseout', topologymouseout)
+    .call(force.drag);
+
+  node.append('circle')
+    .attr('r', 8);
+
+  node.append('text')
+    .attr('x', 12)
+    .attr('dy', '.35em')
+    .text(function(d) { return d.name; });
+
+function topologytick() {
+  link
+      .attr('x1', function(d) { return d.source.x; })
+      .attr('y1', function(d) { return d.source.y; })
+      .attr('x2', function(d) { return d.target.x; })
+      .attr('y2', function(d) { return d.target.y; });
+
+  node
+      .attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y + ')'; });
+}
+
+function topologymouseover() {
+  d3.select(this).select('circle').transition()
+      .duration(750)
+      .attr('r', 20);
+  d3.select(this).select('text').transition()
+      .duration(750)
+      .attr('fill', '#003468')
+      .attr('x', 20);
+}
+
+function topologymouseout() {
+  d3.select(this).select('circle').transition()
+      .duration(750)
+      .attr('r', 8);
+  d3.select(this).select('text').transition()
+      .duration(750)
+      .attr('fill', '#000000')
+      .attr('x', 12);
+}
+
+function topologyclick(d) {
+  alert(d.name);
+}
+</script>
+</body>
+</html>

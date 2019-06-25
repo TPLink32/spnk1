@@ -1,0 +1,643 @@
+{
+    "Git File Views or Downloads Per Day - Demo": {
+      "value": "| inputlookup anonymized_git_history.csv  | convert mktime(_time) timeformat=\"%Y-%m-%dT%H:%M:%S.%3Q-%z\" | eval comment=\"<--- That command is only needed for our fake lookup data -- don't worry about it\" | bucket _time span=1d | stats count by user _time ",
+      "label": "Git File Views or Downloads Per Day - Demo",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "user",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 2,
+      "cardinalityTest": "| inputlookup anonymized_git_history.csv  | convert mktime(_time) timeformat=\"%Y-%m-%dT%H:%M:%S.%3Q-%z\" | bucket _time span=1d | stats dc(user) as count by _time ",
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Demo Lookup",
+         "test": "| rest splunk_server=local /servicesNS/-/-/data//lookup-table-files | eval blah=1, row=\"row\"| xyseries row title blah ",
+         "resolution": "Verify that lookups installed with Splunk Security Essentials is present",
+          "field": "anonymized_git_history.csv",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Unique Hosts Logged Into Per Day - Demo": {
+      "value": "| inputlookup Sampled_AnonymizedLogonActivity.csv  | convert mktime(_time) timeformat=\"%Y-%m-%dT%H:%M:%S.%3Q-%z\" | eval comment=\"<--- That command is only needed for our fake lookup data -- don't worry about it\" | bucket _time span=1d | stats dc(anonymized_ComputerName) as count by user _time",
+      "label": "Unique Hosts Logged Into Per Day - Demo",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "user",
+      "cardinalityTest": "| inputlookup Sampled_AnonymizedLogonActivity.csv  | convert mktime(_time) timeformat=\"%Y-%m-%dT%H:%M:%S.%3Q-%z\"  | bucket _time span=1d | stats dc(user) as count by _time ",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 2,
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Demo Lookup",
+         "test": "| rest splunk_server=local /servicesNS/-/-/data//lookup-table-files | eval blah=1, row=\"row\"| xyseries row title blah ",
+         "resolution": "Verify that lookups installed with Splunk Security Essentials is present",
+          "field": "Sampled_AnonymizedLogonActivity.csv",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Increase in Windows Privilege Escalation - Demo": {
+      "value": "| inputlookup event_id_4648_runas.csv  | convert mktime(_time) timeformat=\"%Y-%m-%dT%H:%M:%S.%3Q%z\" | makemv Account_Name delim=\",\" | bucket _time span=1d | stats count by _time Unprivileged_Account_Name",
+      "label": "Increase in Windows Privilege Escalation - Demo",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "Unprivileged_Account_Name",
+      "cardinalityTest": "| inputlookup event_id_4648_runas.csv  | convert mktime(_time) timeformat=\"%Y-%m-%dT%H:%M:%S.%3Q%z\" | makemv Account_Name delim=\",\" | bucket _time span=1d | stats dc(Unprivileged_Account_Name) as count by _time  ",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 2,
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Demo Lookup",
+         "test": "| rest splunk_server=local /servicesNS/-/-/data//lookup-table-files | eval blah=1, row=\"row\"| xyseries row title blah ",
+         "resolution": "Verify that lookups installed with Splunk Security Essentials is present",
+          "field": "event_id_4648_runas.csv",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Increase in Windows Privilege Escalation - Live": {
+      "value": "index=* sourcetype=win*security 4648 EventCode=4648 | search NOT Account_Name=*$ | eval Unprivileged_Account_Name=mvindex(Account_Name, 1) | bucket _time span=1d | stats count by _time Unprivileged_Account_Name",
+      "label": "Increase in Windows Privilege Escalation - Live",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "user",
+      "cardinalityTest": "index=* sourcetype=win*security 4648 EventCode=4648 | search NOT Account_Name=*$ | eval Unprivileged_Account_Name=mvindex(Account_Name, 1) | bucket _time span=1d | stats dc(Unprivileged_Account_Name) as count by _time ",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 2,
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Windows Security data",
+         "test": "| metasearch earliest=-2h latest=now index=* sourcetype=win*security | head | stats count ",
+         "resolution": "This search requires Windows Security data to run. If it is not present, consider ingesting it via the Splunk Universal Forwarder.",
+          "field": "count",
+          "greaterorequalto": 1},
+          {"name": "Must have Privileged Escalation Events (EventCode=4648)",
+         "test": "| metasearch earliest=-30d sourcetype=win*security index=* TERM(eventcode=4648)  | head | stats count",
+         "resolution": "Windows Security Event ID 4648 tracks the explicit use of credentials, as in a runas event or batch login from a scheduled task. You can enable this from your Windows Logon Event policy configuration.",
+          "field": "count",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Increase in Interactive Logons - Demo": {
+      "value": "| inputlookup anon_interactive_logons.csv | convert mktime(_time) timeformat=\"%Y-%m-%dT%H:%M:%S.%3Q%z\" | bucket _time span=1d | stats dc(dest) as count by _time user ",
+      "label": "Increase in Interactive Logons - Demo",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "user",
+      "cardinalityTest": "| inputlookup anon_interactive_logons.csv | convert mktime(_time) timeformat=\"%Y-%m-%dT%H:%M:%S.%3Q%z\" | bucket _time span=1d | stats dc(user) as count by _time  ",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 2,
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Demo Lookup",
+         "test": "| rest splunk_server=local /servicesNS/-/-/data//lookup-table-files | eval blah=1, row=\"row\"| xyseries row title blah ",
+         "resolution": "Verify that lookups installed with Splunk Security Essentials is present",
+          "field": "anon_interactive_logons.csv",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Increase in Interactive Logons - Live": {
+      "value": "index=* sourcetype=win*security Logon_Type=2 OR Logon_Type=10 OR Logon_Type=11 Logon Type TaskCategory=Logon Audit Success | bucket _time span=1d | stats dc(dest) as count by _time user",
+      "label": "Increase in Interactive Logons - Live",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "user",
+      "cardinalityTest": "index=* sourcetype=win*security Logon_Type=2 OR Logon_Type=10 OR Logon_Type=11 Logon Type TaskCategory=Logon Audit Success | bucket _time span=1d | stats dc(user) as count by _time",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 2,
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Windows Security data",
+         "test": "| metasearch earliest=-2h latest=now index=* sourcetype=win*security | head | stats count ",
+         "resolution": "This search requires Windows Security data to run. If it is not present, consider ingesting it via the Splunk Universal Forwarder.",
+          "field": "count",
+          "greaterorequalto": 1}
+      ]
+    },
+
+
+
+    "Increase in Interactively Logged In Users - Demo": {
+      "value": "| inputlookup anon_interactive_logons.csv | convert mktime(_time) timeformat=\"%Y-%m-%dT%H:%M:%S.%3Q%z\" | bucket _time span=1d | stats dc(user) as count by _time dest ",
+      "label": "Increase in Interactively Logged In Users - Demo",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "dest",
+      "cardinalityTest": "| inputlookup anon_interactive_logons.csv | convert mktime(_time) timeformat=\"%Y-%m-%dT%H:%M:%S.%3Q%z\" | bucket _time span=1d | stats dc(dest) as count by _time  ",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 2,
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Demo Lookup",
+         "test": "| rest splunk_server=local /servicesNS/-/-/data//lookup-table-files | eval blah=1, row=\"row\"| xyseries row title blah ",
+         "resolution": "Verify that lookups installed with Splunk Security Essentials is present",
+          "field": "anon_interactive_logons.csv",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Increase in Interactively Logged In Users - Live": {
+      "value": "index=* sourcetype=win*security Logon_Type=2 OR Logon_Type=10 OR Logon_Type=11 Logon Type TaskCategory=Logon Audit Success | bucket _time span=1d | stats dc(user) as count by _time dest",
+      "label": "Increase in Interactively Logged In Users - Live",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "dest",
+      "cardinalityTest": "index=* sourcetype=win*security Logon_Type=2 OR Logon_Type=10 OR Logon_Type=11 Logon Type TaskCategory=Logon Audit Success | bucket _time span=1d | stats dc(dest) as count by _time",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 2,
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Windows Security data",
+         "test": "| metasearch earliest=-2h latest=now index=* sourcetype=win*security | head | stats count ",
+         "resolution": "This search requires Windows Security data to run. If it is not present, consider ingesting it via the Splunk Universal Forwarder.",
+          "field": "count",
+          "greaterorequalto": 1}
+      ]
+    },
+
+
+
+
+    
+    "Pages Printed Per User Per Day - Demo": {
+      "value": "| inputlookup uniflow_printer_log_sample.csv | convert mktime(_time) timeformat=\"%Y-%m-%dT%H:%M:%S.%3Q-%z\" | eval comment=\"<--- That command is only needed for our fake lookup data -- don't worry about it\" | bucket _time span=1d | stats sum(Page_Count) as Pages by User _time",
+      "label": "Pages Printed Per User Per Day - Demo",
+      "outlierVariable": "Pages",
+      "outlierVariableSubject": "User",
+      "outlierSearchType": "Avg",
+      "cardinalityTest": "| inputlookup uniflow_printer_log_sample.csv | convert mktime(_time) timeformat=\"%Y-%m-%dT%H:%M:%S.%3Q-%z\" | bucket _time span=1d | stats dc(User) as count by _time ",
+      "scaleFactor": 1,
+      "actions_createUBA": 1,
+      "actions_UBASeverity": 7,
+      "actions_createRisk": 1,
+      "actions_riskObjectType":  "user",
+    
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Demo Lookup",
+         "test": "| rest splunk_server=local /servicesNS/-/-/data//lookup-table-files | eval blah=1, row=\"row\"| xyseries row title blah ",
+         "resolution": "Verify that lookups installed with Splunk Security Essentials is present",
+          "field": "uniflow_printer_log_sample.csv",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Number of Unique Patient Records Viewed Per Day - Demo": {
+      "value": "| inputlookup healthcare_cerner_patient_records.csv | convert mktime(_time) timeformat=\"%Y-%m-%dT%H:%M:%S.%3Q%z\" | eval comment=\"<--- That convert is only required because this is CSV sample data. Also, this is pre-processed data, akin to what we would create for the Schedule High Cardinality Alert button below after Summary Indexing.\" | table _time EmployeeName NumOpens Role YearsAtCompany City Username",
+      "label": "Number of Unique Patient Records Viewed Per Day - Demo",
+      "outlierVariable": "NumOpens",
+      "outlierVariableSubject": "EmployeeName",
+      "outlierSearchType": "Avg",
+      "cardinalityTest": "| inputlookup healthcare_cerner_patient_records.csv | convert mktime(_time) timeformat=\"%Y-%m-%dT%H:%M:%S.%3Q%z\"| stats dc(EmployeeName) as count by _time ",
+      "scaleFactor": 6,
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Demo Lookup",
+         "test": "| rest splunk_server=local /servicesNS/-/-/data//lookup-table-files | eval blah=1, row=\"row\"| xyseries row title blah ",
+         "resolution": "Verify that lookups installed with Splunk Security Essentials is present",
+          "field": "healthcare_cerner_patient_records.csv",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Number of Unique Patient Records Viewed Per Day - Live": {
+      "value": "index=* sourcetype=Cerner | bucket_time span=1d | stats dc(\"event_list.participants.person_id\") as count by prsnl_name  _time",
+      "label": "Number of Unique Patient Records Viewed Per Day - Live",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "prsnl_name",
+      "outlierSearchType": "Avg",
+      "cardinalityTest": "index=* sourcetype=Cerner | bucket_time span=1d | stats dc(prsnl_name) as count by  _time",
+      "scaleFactor": 3,
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Cerner data (or similar healthcare data)",
+         "test": "| metasearch earliest=-24h latest=now index=* sourcetype=Cerner | head 100 | stats count ",
+         "resolution": "While this use case applies to any similar data, our sample search is looking for a sourcetype of Cerner somewhere. ",
+          "field": "count",
+          "greaterorequalto": 1},
+          {"name": "Must have a prsnl_id defined in your data",
+         "test": "earliest=-2h latest=now index=* sourcetype=Cerner| head 100 | stats dc(prsnl_id) as count ",
+         "resolution": "You should have a field called \"prsnl_id\" defined in your Cerner logs. If that's not currently extracted, build an extraction for it (or do an inline rex in the SPL below to work around this).",
+          "field": "count",
+          "greaterorequalto": 1},
+          {"name": "Must have a \"event_list.participants.person_id\" defined in your data",
+         "test": "earliest=-2h latest=now index=* sourcetype=Cerner| head 100 | stats dc(\"event_list.participants.person_id\") as count ",
+         "resolution": "You should have a field called \"event_list.participants.person_id\" defined in your Cerner logs. If that's not currently extracted, build an extraction for it (or do an inline rex in the SPL below to work around this).",
+          "field": "count",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Git File Views or Downloads Per Day - Live": {
+      "value": "index=* source=\"*/atlassian-bitbucket-access.log\" | bucket _time span=1d | stats count by user _time ",
+      "label": "Git File Views or Downloads Per Day - Live",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "user",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 2,
+      "cardinalityTest": "index=* source=\"*/atlassian-bitbucket-access.log\" | bucket _time span=1d | stats dc(user) as count by _time ",
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have BitBucket / Git data",
+         "test": "| metasearch earliest=-24h latest=now index=* source=\"*/atlassian-bitbucket-access.log\" | head 100 | stats count ",
+         "resolution": "In tests so far, Atlassian BitBucket git logs are stored in a file called atlassian-bitbucket-access.log. We're looking for that here.",
+          "field": "count",
+          "greaterorequalto": 1},
+          {"name": "Must have a user defined in your data",
+         "test": "earliest=-2h latest=now index=* source=\"*/atlassian-bitbucket-access.log\" | head 100 | stats dc(user) as count ",
+         "resolution": "You should have a field called \"user\" defined in your bitbucket logs. If that's not currently extracted, build an extraction for it (or do an inline rex in the SPL below to work around this).",
+          "field": "count",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Unique Hosts Logged Into Per Day - Live": {
+      "value": "index=* sourcetype=win*security (4624 OR 4647 OR 4648 OR 551 OR 552 OR 540 OR 528 OR 4768 OR 4769 OR 4770 OR 4771 OR 4768 OR 4774 OR 4776 OR 4778 OR 4779 OR 672 OR 673 OR 674 OR 675 OR 678 OR 680 OR 682 OR 683) | bucket _time span=1d | stats dc(host) as count by user _time",
+      "label": "Unique Hosts Logged Into Per Day - Live",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "user",
+      "cardinalityTest": "index=* sourcetype=win*security (4624 OR 4647 OR 4648 OR 551 OR 552 OR 540 OR 528 OR 4768 OR 4769 OR 4770 OR 4771 OR 4768 OR 4774 OR 4776 OR 4778 OR 4779 OR 672 OR 673 OR 674 OR 675 OR 678 OR 680 OR 682 OR 683) | bucket _time span=1d | stats dc(user) as count by  _time",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 2,
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Windows Security data",
+         "test": "| metasearch earliest=-2h latest=now index=* sourcetype=win*security | head 100 | stats count ",
+         "resolution": "This search requires Windows Security data to run. If it is not present, consider ingesting it via the Splunk Universal Forwarder.",
+          "field": "count",
+          "greaterorequalto": 1},
+          {"name": "Must have Logon Success Data",
+         "test": "sourcetype=win*security index=* (4624 OR 4647 OR 4648 OR 551 OR 552 OR 540 OR 528 OR 4768 OR 4769 OR 4770 OR 4771 OR 4768 OR 4774 OR 4776 OR 4778 OR 4779 OR 672 OR 673 OR 674 OR 675 OR 678 OR 680 OR 682 OR 683) | head 100 | stats count",
+         "resolution": "You should log logon events. There are many event IDs that we look for in the underlying logs, but they should all fall into the Audit Successful (or Failed) Logon events in your Windows Audit Policy. (<a href=\"https://technet.microsoft.com/en-us/library/cc431373.aspx\">docs</a>)",
+          "field": "count",
+          "greaterorequalto": 1},
+          {"name": "Must have the user field defined",
+         "test": "sourcetype=win*security earliest=-2h index=* (4624 OR 4647 OR 4648 OR 551 OR 552 OR 540 OR 528 OR 4768 OR 4769 OR 4770 OR 4771 OR 4768 OR 4774 OR 4776 OR 4778 OR 4779 OR 672 OR 673 OR 674 OR 675 OR 678 OR 680 OR 682 OR 683) | head 100 | stats dc(user) as count",
+         "resolution": "You should have a field called \"user\" defined in your Windows Security logs. This is provided by the Splunk TA for Windows. Consider adding that TA to make for a better experience!",
+          "field": "count",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Distinct Hosts Communicated With Per Day - Demo": {
+      "value": "| inputlookup od_splunklive_fw_data.csv | convert mktime(_time) timeformat=\"%Y-%m-%dT%H:%M:%S.%3Q%z\" | bucket _time span=1d | stats dc(dest_ip) as count by src_ip, _time",
+      "label": "Distinct Hosts Communicated With Per Day - Demo",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "src_ip",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 2,
+      "cardinalityTest": "| inputlookup od_splunklive_fw_data.csv | convert mktime(_time) timeformat=\"%Y-%m-%dT%H:%M:%S.%3Q%z\" | bucket _time span=1d | stats dc(src_ip) as count by _time ",
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Demo Lookup",
+         "test": "| rest splunk_server=local /servicesNS/-/-/data//lookup-table-files | eval blah=1, row=\"row\"| xyseries row title blah ",
+         "resolution": "Verify that lookups installed with Splunk Security Essentials is present",
+          "field": "od_splunklive_fw_data.csv",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Distinct Hosts Communicated With Per Day - Live": {
+      "value": "(tag=network tag=communicate) OR (index=pan_logs sourcetype=pan*traffic) OR (index=* sourcetype=opsec) OR (index=* sourcetype=cisco:asa)  | bucket _time span=1d | stats dc(dest_ip) as count by src_ip, _time",
+      "label": "Distinct Hosts Communicated With Per Day - Live",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "src_ip",
+      "outlierSearchType": "Avg",
+      "cardinalityTest": "(tag=network tag=communicate) OR (index=pan_logs sourcetype=pan*traffic) OR (index=* sourcetype=opsec) OR (index=* sourcetype=cisco:asa)  | bucket _time span=1d | stats dc(src_ip) as count by _time ",
+      "scaleFactor": 2,
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Firewall data",
+         "test": "(tag=network tag=communicate) OR (index=pan_logs sourcetype=pan*traffic) OR (index=* sourcetype=opsec) OR (index=* sourcetype=cisco:asa)| head 100 | stats count ",
+         "resolution": "This search requires Firewall or Netflow data to run. By default, we're checking for Common Information Model compliant data, and then also manually specifying the standard sourcetypes for Check Point, Palo Alto Networks, and Cisco ASAs. You should specify your particular index and sourcetype in the actual search to improve performance (or better yet, accelerate with the common information model!)",
+          "field": "count",
+          "greaterorequalto": 1},
+          {"name": "Must have a src_ip and dest_ip field",
+         "test": "((tag=network tag=communicate) OR (index=pan_logs sourcetype=pan*traffic) OR (index=* sourcetype=opsec) OR (index=* sourcetype=cisco:asa)) src_ip=* dest_ip=* | head 100 | stats count ",
+         "resolution": "This search is also looking for firewall logs, but with the added filter of making sure that a src_ip and dest_ip is defined.",
+          "field": "count",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Distinct Hosts Communicated With Per Day - Accelerated": {
+      "value": "| tstats summariesonly=t allow_old_summaries=t dc(All_Traffic.dest_ip) as count from datamodel=Network_Traffic by All_Traffic.src_ip _time span=1d ",
+      "label": "Distinct Hosts Communicated With Per Day - Accelerated",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "All_Traffic.src_ip",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 2,
+      "windowSize": 0,
+      "cardinalityTest": "| tstats summariesonly=t allow_old_summaries=t dc(All_Traffic.src_ip) as count from datamodel=Network_Traffic by _time span=1d ",
+      "prereqs": [
+        {"name": "Must have data in Network Traffic data model",
+         "test": "| tstats count from datamodel=Network_Traffic where earliest=-1h ",
+         "resolution": "This search requires Firewall or Netflow data to run. We are searching here for the common information model network traffic data model.",
+          "field": "count",
+          "greaterorequalto": 1},
+        {"name": "Must have an accelerated Network Traffic data model",
+         "test": "| tstats summariesonly=t allow_old_summaries=t count from datamodel=Network_Traffic where earliest=-1h ",
+         "resolution": "In addition to searching for the common information model network traffic data model, we are telling Splunk to only visit accelerated data models.",
+          "field": "count",
+          "greaterorequalto": 1},
+          {"name": "Network Traffic data model must have src_ip and dest_ip fields",
+         "test": "| tstats summariesonly=t allow_old_summaries=t dc(All_Traffic.dest_ip) as dest dc(All_Traffic.src_ip) as src from datamodel=Network_Traffic where earliest=-1h | eval count = dest * src",
+         "resolution": "In addition to searching for the accelerated common information model network traffic data model, we are telling Splunk to verify that there is a src_ip and dest_ip in this data set.",
+          "field": "count",
+          "greaterorequalto": 1}
+      ]
+    },
+
+
+
+
+
+    
+    "Pages Printed Per User Per Day - Live": {
+      "value": "index=*  sourcetype=uniflow OR (sourcetype=Win*system EventCode=307) | eval comment=\"My test data came from uniflow, but you can log Windows Print Servers as well!  . All we need is a user and # of pages printed\" | bucket _time span=1d | stats sum(Page_Count) as Pages by User _time",
+      "label": "Pages Printed Per User Per Day - Live",
+      "outlierVariable": "Pages",
+      "outlierVariableSubject": "User",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 1,
+      "cardinalityTest": "index=* sourcetype=uniflow OR (sourcetype=Win*system EventCode=307) | bucket _time span=1d stats dc(User) by _time ",
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Printer data",
+         "test": "earliest=-6h latest=now OR (sourcetype=Win*system EventCode=307) index=* | head 100 | stats count dc(Page_Count) as pages dc(User) as users",
+         "resolution": "This search requires Printer data. By default we are looking for either Uniflow logs (used from our demo data sample) or Windows Print Server logs. If you don't have this data right now, consider <a href=\"https://blogs.technet.microsoft.com/askperf/2008/08/12/two-minute-drill-enabling-print-queue-logging/\">ingesting it</a>! If you have other printer logs, go ahead and substitute the sourcetype below.",
+          "field": "count",
+          "greaterorequalto": 1},
+          {"name": "Must have a field called Page_Count defined",
+         "test": "earliest=-6h latest=now OR (sourcetype=Win*system EventCode=307) index=* | head 100 | stats count dc(Page_Count) as pages dc(User) as users",
+         "resolution": "You should have a field called \"Page_Count\" defined in your printer logs. If that's not currently extracted, build an extraction for it (or do an inline rex in the SPL below to work around this). Or just choose a different field below.",
+          "field": "pages",
+          "greaterorequalto": 1},
+          {"name": "Must have the user field defined",
+         "test": "earliest=-6h latest=now OR (sourcetype=Win*system EventCode=307) index=* | head 100 | stats count dc(Page_Count) as pages dc(User) as users",
+         "resolution": "You should have a field called \"User\" defined in your printer logs. If that's not currently extracted, build an extraction for it (or do an inline rex in the SPL below to work around this). Or just choose a different field below.",
+          "field": "users",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Git File Views or Downloads Per Day - Accelerated": {
+      "value": "| tstats summariesonly=t allow_old_summaries=t count from datamodel=Git where nodename=Git_View groupby user, _time span=1d | eval comment=\"<--- We don't have a standard data model that includes git repos, so you will need to build one to leverage data model acceleration\"   ",
+      "label": "Git File Views or Downloads Per Day - Accelerated",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "user",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 2,
+      "windowSize": 0,
+      "cardinalityTest": "| tstats summariesonly=t allow_old_summaries=t dc(user) as count from datamodel=Git where nodename=Git_View by _time span=1d",
+      "prereqs": [
+        {"name": "Must have an accelerated Git data model (non-default)",
+         "test": "| tstats summariesonly=t allow_old_summaries=t count from datamodel=Git where earliest=-24h latest=now nodename=Git_View ",
+         "resolution": "This search accelerated Git data. There is no formal CIM data model for Source Code checkins or checkouts, so we are presuming a custom data model called Git.",
+          "field": "count",
+          "greaterorequalto": 1},
+          {"name": "Must have a user field in accelerated Git data model",
+         "test": "| tstats summariesonly=t allow_old_summaries=t dc(user) as count from datamodel=Git where earliest=-24h latest=now nodename=Git_View",
+         "resolution": "The Git data model must have a user field defined.",
+          "field": "count",
+          "greaterorequalto": 1}
+        ]
+    },
+    "Unique Hosts Logged Into Per Day - Accelerated": {
+      "value": "| tstats summariesonly=t allow_old_summaries=t dc(Authentication.dest) as count  from datamodel=Authentication  groupby _time span=1d, Authentication.user | rename \"Authentication.user\" as user",
+      "label": "Unique Hosts Logged Into Per Day - Accelerated",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "user",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 2,
+      "windowSize": 0,
+      "cardinalityTest": "| tstats summariesonly=t allow_old_summaries=t dc(All_Traffic.src_ip) as count from datamodel=Network_Traffic by _time span=1d",
+      "prereqs": [
+        {"name": "Must have an accelerated Authentication data model",
+         "test": "| tstats summariesonly=t allow_old_summaries=t count  from datamodel=Authentication where earliest=-2h ",
+         "resolution": "This search requires an accelerated authentication data model to run. If it is not present, consider ingesting Windows Security data via the Splunk Universal Forwarder, and then accelerating it with the Common Information App from <a href=\"http://apps.splunk.com/\">apps.splunk.com</a>.",
+          "field": "count",
+          "greaterorequalto": 1},
+          {"name": "Authentication data model must have a field called dest defined",
+         "test": "| tstats summariesonly=t allow_old_summaries=t dc(Authentication.dest) as count  from datamodel=Authentication where earliest=-2h",
+         "resolution": "You should have a field called \"dest\" defined in your accelerated Authentication data model (referenced in tstats as Authentication.dest). If it is not present, consider ingesting Windows Security data via the Splunk Universal Forwarder, and then accelerating it with the Common Information App from <a href=\"http://apps.splunk.com/\">apps.splunk.com</a>.",
+          "field": "count",
+          "greaterorequalto": 1},
+          {"name": "Authentication data model must have the user field defined",
+         "test": "| tstats summariesonly=t allow_old_summaries=t dc(Authentication.user) as count from datamodel=Authentication where earliest=-2h",
+         "resolution": "You should have a field called \"user\" defined in your accelerated Authentication data model (referenced in tstats as Authentication.user). If it is not present, consider ingesting Windows Security data via the Splunk Universal Forwarder, and then accelerating it with the Common Information App from <a href=\"http://apps.splunk.com/\">apps.splunk.com</a>.",
+          "field": "count",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Pages Printed Per User Per Day - Accelerated": {
+      "value": "| tstats summariesonly=t allow_old_summaries=t count from datamodel=Printer where nodename=Print_Jobs groupby user, _time span=1d | eval comment=\"<--- We don't have a standard data model that includes pages printed, so you will need to build one to leverage data model acceleration... that said this is usually low volume enough to not be a big deal\"  ",
+      "label": "Pages Printed Per User Per Day - Accelerated",
+      "outlierVariable": "Pages",
+      "outlierVariableSubject": "User",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 1,
+      "windowSize": 0,
+      "cardinalityTest": "| tstats summariesonly=t allow_old_summaries=t dc(user) as count from datamodel=printer where nodename=Print_Jobs by _time span=1d",
+      "prereqs": [
+        {"name": "Must have a Printer data model (not default)",
+         "test": "| tstats summariesonly=t allow_old_summaries=t count from datamodel=Printer where nodename=Print_Jobs earliest=-6h",
+         "resolution": "This search requires Printer data. There is no default printer data model in Splunk, so you will need to define one in order to use an accelerated search. May we suggest building a data model with the fields user and Page_Count and then accelerate it?",
+          "field": "count",
+          "greaterorequalto": 1},
+          {"name": "Printer data model must have a field called Page_Count defined",
+         "test": "| tstats summariesonly=t allow_old_summaries=t dc(Printer.Page_Count) as count from datamodel=Printer where nodename=Print_Jobs earliest=-6h",
+         "resolution": "You should have a field called \"Page_Count\" defined in your printer data model (referenced in tstats as Printer.Page_Count). If that's not currently present and accelerated, do so. If it's a different field name, provide that below.",
+          "field": "count",
+          "greaterorequalto": 1},
+          {"name": "Printer data model must have the user field defined",
+         "test": "| tstats summariesonly=t allow_old_summaries=t dc(Printer.Page_Count) as count from datamodel=Printer where nodename=Print_Jobs earliest=-6h",
+         "resolution": "You should have a field called \"User\" defined in your printer data model (referenced in tstats as Printer.User). If that's not currently present and accelerated, do so. If it's a different field name, provide that below.",
+          "field": "count",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Spike in Email from Address - Demo": {
+      "value": "| inputlookup Anonymized_Email_Logs.csv | search Sender=*@mycompany.com | bucket _time span=1d | stats count by Sender, _time",
+      "label": "Spike in Email from Address - Demo",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "Sender",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 2,
+      "cardinalityTest": "| inputlookup Anonymized_Email_Logs.csv | bucket _time span=1d | stats dc(Sender) as count by _time ",
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Demo Lookup",
+         "test": "| rest splunk_server=local /servicesNS/-/-/data//lookup-table-files | eval blah=1, row=\"row\"| xyseries row title blah ",
+         "resolution": "Verify that lookups installed with Splunk Security Essentials is present",
+          "field": "Anonymized_Email_Logs.csv",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Spike in Email from Address - Live": {
+      "value": "index=* sourcetype=cisco:esa* OR sourcetype=MSExchange*:MessageTracking OR tag==email src_user=*| bucket _time span=1d | stats count by src_user, _time",
+      "label": "Spike in Email from Address - Live",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "sender",
+      "outlierSearchType": "Avg",
+      "cardinalityTest": "index=*  sourcetype=cisco:esa* OR sourcetype=MSExchange*:MessageTracking OR tag==email src_user=* | bucket _time span=1d | stats dc(src_user) as count by _time ",
+      "scaleFactor": 2,
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Email Data",
+         "test": "| tstats count where index=* sourcetype=cisco:esa* OR sourcetype=MSExchange*:MessageTracking OR tag==email earliest=-4h",
+         "resolution": "This search requires Email data. The out of the box field extractions support the Common Information Model, including Cisco ESA/Ironport and Microsoft Exchange. If you don't have this data today, we highly recommend ingesting it with the <a href=\"https://splunkbase.splunk.com/app/1761/\">Cisco ESA TA</a> or the <a href=\"https://splunkbase.splunk.com/app/3225/\">Splunk Add-on for Microsoft Exchange</a>. For best performance, accelerate the email data model from the <a href=\"https://splunkbase.splunk.com/app/1621/\">Common Information Model</a>!",
+          "field": "count",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Spike in Email from Address - Accelerated": {
+      "value": "| tstats summaries_only=t allow_old_summaries=t count from datamodel=Email by All_Email.src_user _time span=1d",
+      "label": "Spike in Email from Address - Accelerated",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "All_Email.src_user",
+      "outlierSearchType": "Avg",
+      "cardinalityTest": "| tstats summaries_only=t allow_old_summaries=t dc(All_Email.src_user) from datamodel=Email by _time span=1d",
+      "scaleFactor": 2,
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have an Email data model",
+         "test": "| tstats summaries_only=f allow_old_summaries=t count from datamodel=Email where earliest=-1h",
+         "resolution": "This search requires an Email data. This is dependent on the <a href=\"https://splunkbase.splunk.com/app/1621/\">Common Information Model</a> being present, and also having your data mapped to CIM via appropriate TAs, usually with the out of the box field extractions from the <a href=\"https://splunkbase.splunk.com/app/1761/\">Cisco ESA TA</a>, the <a href=\"https://splunkbase.splunk.com/app/3225/\">Splunk Add-on for Microsoft Exchange</a>, etc.",
+          "field": "count",
+          "greaterorequalto": 1},
+        {"name": "Must have an Accelerated Email data model",
+         "test": "| tstats summaries_only=t allow_old_summaries=t count from datamodel=Email where earliest=-1h",
+         "resolution": "This search requires an accelerated Email data. In order to run a fast accelerated search, you should accelerate your data model. (<a href=\"https://docs.splunk.com/Documentation/Splunk/latest/HadoopAnalytics/Configuredatamodelacceleration#Accelerate_the_data_model\">docs</a>)",
+          "field": "count",
+          "greaterorequalto": 1},
+        {"name": "Must have Sender Email Addresses (src_user) in your Accelerated Email data model",
+         "test": "| tstats summaries_only=t allow_old_summaries=t dc(All_Email.src_user) as count from datamodel=Email where earliest=-1h",
+         "resolution": "This search assumes that you have actual source email addresses -- check your field extractions for src_user and then rebuild your data models if not.",
+          "field": "count",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Spike in Password Reset Emails - Demo": {
+      "value": "| inputlookup Anonymized_Email_Logs.csv | eval Detect_Type=\"\", Detect_Type=case(LIKE(Subject, \"%Password Reset%\"), \"Password Reset\", LIKE(Subject, \"%Validate Credentials%\"), \"Validate Credentials\",1=1, null) | bucket _time span=1d | stats count by _time Detect_Type ",
+      "label": "Spike in Password Reset Emails - Demo",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "Detect_Type",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 2,
+      "cardinalityTest": "| inputlookup Anonymized_Email_Logs.csv | bucket _time span=1d | stats values(eval(\"1\")) by _time ",
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Demo Lookup",
+         "test": "| rest splunk_server=local /servicesNS/-/-/data//lookup-table-files | eval blah=1, row=\"row\"| xyseries row title blah ",
+         "resolution": "Verify that lookups installed with Splunk Security Essentials is present",
+          "field": "Anonymized_Email_Logs.csv",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Spike in Password Reset Emails - Live": {
+      "value": "index=* sourcetype=cisco:esa* OR sourcetype=MSExchange*:MessageTracking OR tag==email Password Reset | eval Detect_Type=\"\", Detect_Type=case(LIKE(Subject, \"%Password Reset%\"), \"Password Reset\", LIKE(Subject, \"%Validate Credentials%\"), \"Validate Credentials\",1=1, null) | bucket _time span=1d | stats count by _time Detect_Type ",
+      "label": "Spike in Password Reset Emails - Live",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "Detect_Type",
+      "outlierSearchType": "Avg",
+      "cardinalityTest": "index=*  sourcetype=cisco:esa* OR sourcetype=MSExchange*:MessageTracking OR tag==email src_user=* | bucket _time span=1d | stats dc(src_user) as count by _time ",
+      "scaleFactor": 2,
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Email Data",
+         "test": "| tstats count where index=* sourcetype=cisco:esa* OR sourcetype=MSExchange*:MessageTracking OR tag==email earliest=-4h",
+         "resolution": "This search requires Email data. The out of the box field extractions support the Common Information Model, including Cisco ESA/Ironport and Microsoft Exchange. If you don't have this data today, we highly recommend ingesting it with the <a href=\"https://splunkbase.splunk.com/app/1761/\">Cisco ESA TA</a> or the <a href=\"https://splunkbase.splunk.com/app/3225/\">Splunk Add-on for Microsoft Exchange</a>. For best performance, accelerate the email data model from the <a href=\"https://splunkbase.splunk.com/app/1621/\">Common Information Model</a>!",
+          "field": "count",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Spike in Password Reset Emails - Accelerated": {
+      "value": "| tstats summaries_only=t allow_old_summaries=t count from datamodel=Email where All_Email.subject=\"*Password Reset*\" by _time span=1d | eval Detect_Type=\"Password Reset\"",
+      "label": "Spike in Password Reset Emails - Accelerated",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "Detect_Type",
+      "outlierSearchType": "Avg",
+      "cardinalityTest": "| tstats summaries_only=t allow_old_summaries=t count from datamodel=Email by _time span=1d | eval count=1",
+      "scaleFactor": 2,
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have an Email data model",
+         "test": "| tstats summaries_only=f allow_old_summaries=t count from datamodel=Email where earliest=-1h",
+         "resolution": "This search requires an Email data. This is dependent on the <a href=\"https://splunkbase.splunk.com/app/1621/\">Common Information Model</a> being present, and also having your data mapped to CIM via appropriate TAs, usually with the out of the box field extractions from the <a href=\"https://splunkbase.splunk.com/app/1761/\">Cisco ESA TA</a>, the <a href=\"https://splunkbase.splunk.com/app/3225/\">Splunk Add-on for Microsoft Exchange</a>, etc.",
+          "field": "count",
+          "greaterorequalto": 1},
+        {"name": "Must have an Accelerated Email data model",
+         "test": "| tstats summaries_only=t allow_old_summaries=t count from datamodel=Email where earliest=-1h",
+         "resolution": "This search requires an accelerated Email data. In order to run a fast accelerated search, you should accelerate your data model. (<a href=\"https://docs.splunk.com/Documentation/Splunk/latest/HadoopAnalytics/Configuredatamodelacceleration#Accelerate_the_data_model\">docs</a>)",
+          "field": "count",
+          "greaterorequalto": 1},
+        {"name": "Must have Subjects (All_Email.subject) in your Accelerated Email data model",
+         "test": "| tstats summaries_only=t allow_old_summaries=t dc(All_Email.subject) as count from datamodel=Email where earliest=-1h",
+         "resolution": "This search assumes that you have actual source email addresses -- check your field extractions for src_user and then rebuild your data models if not.",
+          "field": "count",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Spike in SFDC Records Exported - Demo": {
+      "value": "| inputlookup SFDC_Sample_Data_Anon.csv  | search ROWS_PROCESSED>0 EVENT_TYPE=API OR EVENT_TYPE=BulkAPI OR EVENT_TYPE=RestAPI| lookup SFDC_User_Lookup USER_ID| bucket _time span=1d | stats sum(ROWS_PROCESSED) as rows by _time USER_NAME",
+      "label": "Spike in SFDC Records Exported - Demo",
+      "outlierVariable": "rows",
+      "outlierVariableSubject": "USER_NAME",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 2,
+      "cardinalityTest": "| inputlookup SFDC_Sample_Data_Anon.csv | search ROWS_PROCESSED>0 EVENT_TYPE=API OR EVENT_TYPE=BulkAPI OR EVENT_TYPE=RestAPI| bucket _time span=1d | stats values(eval(\"1\")) as count by _time ",
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Demo Lookup",
+         "test": "| rest splunk_server=local /servicesNS/-/-/data//lookup-table-files | eval blah=1, row=\"row\"| xyseries row title blah ",
+         "resolution": "Verify that lookups installed with Splunk Security Essentials is present",
+          "field": "SFDC_Sample_Data_Anon.csv",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Spike in SFDC Records Exported - Live": {
+      "value": "index=sfdc ROWS_PROCESSED>0 EVENT_TYPE=API OR EVENT_TYPE=BulkAPI OR EVENT_TYPE=RestAPI| lookup SFDC_User_Lookup USER_ID| bucket _time span=1d | stats sum(ROWS_PROCESSED) as rows by _time USER_NAME",
+      "label": "Spike in SFDC Records Exported - Live",
+      "outlierVariable": "rows",
+      "outlierVariableSubject": "USER_NAME",
+      "outlierSearchType": "Avg",
+      "cardinalityTest": "index=sfdc ROWS_PROCESSED>0 EVENT_TYPE=API OR EVENT_TYPE=BulkAPI OR EVENT_TYPE=RestAPI| bucket _time span=1d | stats dc(USER_ID) as count by _time ",
+      "scaleFactor": 2,
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Salesforce Data (assumes index=SFDC)",
+         "test": "| metasearch index=sfdc  earliest=-24h | head 100 | stats count",
+         "resolution": "This search requires data from the Salesforce Event Log File API. This is an additional fee from Salesforce, and can be effectively ingested and analyzed with the <a href=\"https://splunkbase.splunk.com/app/1931\">Splunk App for Salesforce</a>.",
+          "field": "count",
+          "greaterorequalto": 1},
+        {"name": "Must have Export Data (assumes index=SFDC)",
+         "test": "| metasearch index=sfdc API OR BulkAPI OR RestAPI earliest=-24h | head 100| stats count",
+         "resolution": "This search requires data from the Salesforce Event Log File API, and specifically the ROWS_PROCESSED by the API / BulkAPI / RestAPI EVENT_TYPEs. It is assumed that will always be present if you are ingesting data from the Salesforce Event Log File, this check just validates that.",
+          "field": "count",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Spike in SFDC Documents Downloaded - Demo": {
+      "value": "| inputlookup SFDC_Sample_Data_Anon.csv | search EVENT_TYPE=DocumentAttachmentDownloads | lookup SFDC_User_Lookup USER_ID | bucket _time span=1d | stats count by USER_NAME _time",
+      "label": "Spike in SFDC Documents Downloaded - Demo",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "USER_NAME",
+      "outlierSearchType": "Avg",
+      "scaleFactor": 2,
+      "cardinalityTest": "| inputlookup SFDC_Sample_Data_Anon.csv | search EVENT_TYPE=DocumentAttachmentDownloads | bucket _time span=1d | stats values(eval(\"1\")) as count by _time ",
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Demo Lookup",
+         "test": "| rest splunk_server=local /servicesNS/-/-/data//lookup-table-files | eval blah=1, row=\"row\"| xyseries row title blah ",
+         "resolution": "Verify that lookups installed with Splunk Security Essentials is present",
+          "field": "SFDC_Sample_Data_Anon.csv",
+          "greaterorequalto": 1}
+      ]
+    },
+    "Spike in SFDC Documents Downloaded - Live": {
+      "value": "index=sfdc EVENT_TYPE=DocumentAttachmentDownloads | lookup SFDC_User_Lookup USER_ID | bucket _time span=1d | stats count by USER_NAME _time",
+      "label": "Spike in SFDC Documents Downloaded - Live",
+      "outlierVariable": "count",
+      "outlierVariableSubject": "USER_NAME",
+      "outlierSearchType": "Avg",
+      "cardinalityTest": "index=sfdc EVENT_TYPE=DocumentAttachmentDownloads | bucket _time span=1d | stats dc(USER_ID) as count by _time ",
+      "scaleFactor": 2,
+      "windowSize": 0,
+      "prereqs": [
+        {"name": "Must have Salesforce Data (assumes index=SFDC)",
+         "test": "| metasearch index=sfdc  earliest=-24h | head 100 | stats count",
+         "resolution": "This search requires data from the Salesforce Event Log File API. This is an additional fee from Salesforce, and can be effectively ingested and analyzed with the <a href=\"https://splunkbase.splunk.com/app/1931\">Splunk App for Salesforce</a>.",
+          "field": "count",
+          "greaterorequalto": 1},
+        {"name": "Must have Download Data (assumes index=SFDC)",
+         "test": "| metasearch index=sfdc DocumentAttachmentDownloads earliest=-24h | head 100| stats count",
+         "resolution": "This search requires data from the Salesforce Event Log File API, and specifically DocumentAttachmentDownloads EVENT_TYPEs. It is assumed that will always be present if you are ingesting data from the Salesforce Event Log File, this check just validates that.",
+          "field": "count",
+          "greaterorequalto": 1}
+      ]
+    }
+}
+
+

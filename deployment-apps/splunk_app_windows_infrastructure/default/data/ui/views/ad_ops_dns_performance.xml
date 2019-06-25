@@ -1,0 +1,43 @@
+<form script="customized_chart_preload.js,dns_performance.js">
+  <label>DNS Performance</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="dropdown" token="ActiveDirectory.DNSPerformance.Host" searchWhenChanged="true">
+      <label>Server</label>
+      <search>
+        <query>eventtype=perfmon-dns|stats count by host,counter | dedup host | sort host</query>
+      </search>
+      <fieldForLabel>host</fieldForLabel>
+      <fieldForValue>host</fieldForValue>
+      <selectFirstChoice>true</selectFirstChoice>
+    </input>
+    <input type="dropdown" token="ActiveDirectory.DNSPerformance.Counter" searchWhenChanged="true">
+      <label>Counter</label>
+      <search>
+        <query>eventtype=perfmon-dns host="$ActiveDirectory.DNSPerformance.Host$" |stats count by host,counter | dedup counter | sort counter</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+      <fieldForLabel>counter</fieldForLabel>
+      <fieldForValue>counter</fieldForValue>
+      <selectFirstChoice>true</selectFirstChoice>
+    </input>
+    <input type="time" token="Time">
+      <label></label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <search id="dns_performance_query">
+        <query>eventtype=perfmon-dns host="$ActiveDirectory.DNSPerformance.Host$" counter="$ActiveDirectory.DNSPerformance.Counter$"|timechart avg(Value) as "$ActiveDirectory.DNSPerformance.Counter$"|join _time [search eventtype=perfmon host="$ActiveDirectory.DNSPerformance.Host$" object=Processor counter="% Processor Time"|timechart avg(Value) as "% Processor Time"]</query>
+        <latest>$Time.latest$</latest>
+      </search>
+      <html>
+        <div id="dns_performance_chart"/>
+      </html>
+    </panel>
+  </row>
+</form>

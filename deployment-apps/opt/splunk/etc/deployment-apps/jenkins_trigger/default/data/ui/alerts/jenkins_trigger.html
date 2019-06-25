@@ -1,0 +1,40 @@
+<form class="form-horizontal form-complex">
+    <div class="control-group">
+        <label class="control-label" for="jenkins_url">Jenkins Job URL</label>
+        <div class="controls">
+            <input type="text" name="action.jenkins_trigger.param.jenkins_url" id="jenkins_url"  />
+            <span class="help-block">Enter the url to your jenkins job, e.g.: https://jenkins.com/job/somefolder/job/somejob</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="hipchat_message">Jenkins user id</label>
+        <div class="controls">
+            <input type="text" name="action.jenkins_trigger.param.jenkins_user" id="jenkins_user" />
+            <span class="help-block">Enter the Jenkins User ID that will be used to run the job.</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="hipchat_card_attributes">Jenkins User API Key</label>
+
+        <div class="controls">
+            <input type="text" name="action.jenkins_trigger.param.api_token" id="api_token" />
+            <span class="help-block">Enter the API key for the Jenkins user above</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="jenkins_job_token">Jenkins Authentication Token</label>
+        <div class="controls">
+            <input type="text" name="action.jenkins_trigger.param.jenkins_auth_token" id="jenkins_auth_token" placeholder="Optional" />
+            <span class="help-block">Enter the Jenkins Authentication Token, if you configured one on the Jenkins job.</span>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label" for="jenkins_params">Jenkins Job Parameters</label>
+        <div class="controls">
+            <input type="text" name="action.jenkins_trigger.param.jenkins_params" id="jenkins_params" placeholder="&somevarible=$result.something&someothervariable=$result.soemthing$" />
+            <span class="help-block">Enter Parameters to pass to Jenkins job seperated by '&' e.g.: computehost=$result.host$&userName=$result.userName$
+        </br>Parameters required if job is parameterized</span>
+    </div>
+</div>
+</form>

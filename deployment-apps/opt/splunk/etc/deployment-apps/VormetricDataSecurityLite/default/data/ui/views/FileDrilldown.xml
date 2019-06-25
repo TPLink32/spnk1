@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<form>
+ <label>File Accesses</label>
+
+  <fieldset>
+	<input type="time">
+	  <default>All time</default>
+	</input>
+  </fieldset>
+
+  <row> 
+	<table>
+	<title>File Accesses - Host and Guard Point Selection</title>
+	<searchString>sourcetype="rfc5424_syslog" sdid="CGP@21513" | top showperc=0 limit=0 host,gp</searchString>
+     <option name="count">20</option>
+     <option name="displayRowNumbers">false</option>
+     <option name="showPager">true</option>
+
+     <drilldown>
+      <link>
+		<![CDATA[
+         /app/VormetricDataSecurityLite/FileDrilldown0?form.host=$row.host$&form.gp=$row.gp$&earliest=$earliest$&latest=$latest$
+		]]>
+       </link>
+     </drilldown>   
+
+   </table>
+ </row>
+
+</form>

@@ -1,0 +1,11 @@
+.single.splunk-view .panel-head h3{
+	visibility: hidden;
+}
+
+.single.splunk-view:nth-child(1) .panel-head h3{
+	visibility:visible;
+}
+
+tspan.single-result-unit {
+	font-size: 0.5em;
+}

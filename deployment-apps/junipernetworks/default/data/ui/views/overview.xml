@@ -1,0 +1,143 @@
+<form>
+  <label>Overview</label>
+  <init>
+    <set token="source_ip_address">*</set>
+    <set token="destination_ip_address">*</set>
+    <set token="username">*</set>
+    <set token="srx_host">*</set>
+  </init>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="overview" searchWhenChanged="true">
+      <label>Time Period</label>
+      <default>
+        <earliest>rt-5m</earliest>
+        <latest>rt</latest>
+      </default>
+    </input>
+    <input type="text" token="srx_host" searchWhenChanged="true">
+      <label>SRX</label>
+    </input>
+    <input type="text" token="source_ip_address" searchWhenChanged="true">
+      <label>Source IP Address</label>
+      <prefix>source_address="</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="username" searchWhenChanged="true">
+      <label>User Name</label>
+      <prefix>username="</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="destination_ip_address" searchWhenChanged="true">
+      <label>Destination IP Address</label>
+      <prefix>destination_address="</prefix>
+      <suffix>"</suffix>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <single>
+        <title>Threat Events</title>
+        <search>
+          <query>source="jnpr-syslog" $srx_host$ $source_ip_address$ $destination_ip_address$ $username$ ("RT_IDP" OR "RT_IDS" OR "AV_VIRUS_DETECTED_MT" OR "AV_VIRUS_DETECTED" OR "ANTISPAM_SPAM_DETECTED_MT" OR "FWAUTH_FTP_USER_AUTH_FAIL" OR "FWAUTH_HTTP_USER_AUTH_FAIL" OR "FWAUTH_TELNET_USER_AUTH_FAIL" OR "FWAUTH_WEBAUTH_FAIL"  OR ("AAMW_ACTION_LOG" AND verdict_number &gt;= 7  )) | stats count</query>
+          <earliest>$overview.earliest$</earliest>
+          <latest>$overview.latest$</latest>
+        </search>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>IDP Events</title>
+        <search>
+          <query>source="jnpr-syslog"  ("RT_IDP" OR "RT_IDS")  $srx_host$ $source_ip_address$ $destination_ip_address$ $username$  | stats count</query>
+          <earliest>$overview.earliest$</earliest>
+          <latest>$overview.latest$</latest>
+        </search>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>Malware Found</title>
+        <search>
+          <query>source="jnpr-syslog" "AAMW_MALWARE_EVENT_LOG" $srx_host$ $source_ip_address$ $destination_ip_address$ $username$ | stats count</query>
+          <earliest>$overview.earliest$</earliest>
+          <latest>$overview.latest$</latest>
+        </search>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>Affected Hosts</title>
+        <search>
+          <query>source="jnpr-syslog" "AAMW_HOST_INFECTED_EVENT_LOG" $srx_host$ $source_ip_address$ $destination_ip_address$ $username$| stats count</query>
+          <earliest>$overview.earliest$</earliest>
+          <latest>$overview.latest$</latest>
+        </search>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Top Sky ATP Malware found</title>
+        <search>
+          <query>source="jnpr-syslog" "AAMW_MALWARE_EVENT_LOG" malware_info != "N/A" $srx_host$ $source_ip_address$ $destination_ip_address$ $username$  | top 5 malware_info</query>
+          <earliest>$overview.earliest$</earliest>
+          <latest>$overview.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">Malware</option>
+        <option name="charting.axisTitleY.text">Event Count</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.legend.placement">none</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Top Infected hosts found by Sky ATP</title>
+        <search>
+          <query>source="jnpr-syslog" "AAMW_HOST_INFECTED_EVENT_LOG" $srx_host$ $source_ip_address$ $destination_ip_address$ $username$ | eval hostname-str = if(hostname="N/A", client_ip_str, hostname)  | top 5 hostname-str</query>
+          <earliest>$overview.earliest$</earliest>
+          <latest>$overview.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">Hostname</option>
+        <option name="charting.axisTitleY.text">Event Count</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.legend.placement">none</option>
+      </chart>
+    </panel>
+    <panel>
+      <table>
+        <title>Top Applications by Volume</title>
+        <search>
+          <query>source="jnpr-syslog" "APPTRACK_SESSION_VOL_UPDATE" $srx_host$ $source_ip_address$ $destination_ip_address$ $username$ | eval Application = if (nested_application = "UNKNOWN" , application, nested_application) | eval volume= (bytes_from_client + bytes_from_server) /1048576  | chart   sparkline  sum(volume) AS "Volume (MB)" BY Application   | sort  -"Volume (MB)" | head 5</query>
+          <earliest>$overview.earliest$</earliest>
+          <latest>$overview.latest$</latest>
+        </search>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">true</option>
+        <option name="totalsRow">true</option>
+        <format type="number" field="Volume(in KB)">
+          <option name="precision">1</option>
+        </format>
+        <format type="number" field="Volume"></format>
+        <format type="number" field="Volume (MB)"></format>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>All Threat Events</title>
+        <search>
+          <query>source="jnpr-syslog"  ("RT_IDP" OR "RT_IDS" OR "AV_VIRUS_DETECTED_MT" OR "AV_VIRUS_DETECTED" OR "ANTISPAM_SPAM_DETECTED_MT" OR "FWAUTH_FTP_USER_AUTH_FAIL" OR "FWAUTH_HTTP_USER_AUTH_FAIL" OR "FWAUTH_TELNET_USER_AUTH_FAIL" OR "FWAUTH_WEBAUTH_FAIL"  OR ("AAMW_ACTION_LOG" AND verdict_number &gt;= 7  )) $srx_host$ $source_ip_address$ $destination_ip_address$ $username$ | timechart  count</query>
+          <earliest>$overview.earliest$</earliest>
+          <latest>$overview.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">Time Period</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.text">Event Count</option>
+        <option name="charting.chart">area</option>
+        <option name="charting.legend.placement">none</option>
+      </chart>
+    </panel>
+  </row>
+</form>

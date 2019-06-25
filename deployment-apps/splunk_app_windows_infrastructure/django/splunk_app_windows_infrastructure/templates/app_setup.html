@@ -1,0 +1,35 @@
+<!-- Show only the Splunk bar. Do not show the app bar -->
+{% extends "splunkdj:base_with_account_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Windows Infrastructure Setup | Splunk{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}common/CustomPages/AppSetupPages/AppSetupPages.css" />
+    <link rel="stylesheet/less" type="text/css" href="{{STATIC_URL}}common/common_less_imports.less" />
+{% endblock css %}
+
+{% block content %}
+    <div class="dashboard-body container-fluid main-section-body">
+        <div class="dashboard-row">
+            <div id="app-setup-wizard"></div>
+        </div>
+        <div class="dashboard-row wizard-page">
+        </div>
+    </div>
+{% endblock content %}
+
+{% block js %}
+    <script type="text/javascript">
+        less = { globalVars: { theme: "" } };
+    </script> 
+    <script>
+        requirejs.config({ urlArgs: "bust=267225" });
+        require(['jquery', '{{app_name}}/setup/app_setup_wizard'], function($, AppSetupWizard) {
+            AppSetupWizard.render();
+        });        
+    </script>
+{% endblock js %}

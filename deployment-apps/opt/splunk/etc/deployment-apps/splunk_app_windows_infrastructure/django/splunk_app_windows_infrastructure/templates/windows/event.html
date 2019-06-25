@@ -1,0 +1,63 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Event Overview | Splunk{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+
+{% endblock css %}
+
+{% block content %}
+
+
+   <div>
+
+       
+        <div class="dashboard-body container-fluid main-section-body" id="windows-panel-container">
+            <div class="dashboard-row">
+                <div class="dashboard-cell span-full" id="windows-inputs">
+                </div>
+            </div>
+        </div>
+        
+       
+        
+        
+        <div class="dashboard-row">
+            <div class="dashboard-cell span-full">
+                <div class="dashboard-panel">
+                      <div class="dashboard-element">
+                        <div class="panel-head">
+                            <h4>More reports</h4>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="windows-footer">
+                                <li><a href="/app/{{app_name}}/%40go?s=Generic%20event%20counts">Generic event counts</a></li>
+                                <li><a href="/app/{{app_name}}/%40go?s=Event%20categories%20and%20counts%20by%20host%20for%20the%20last%2030%20days">Event categories and counts by host for the last 30 days</a></li>
+                                <li><a href="/app/{{app_name}}/%40go?s=Event%20severity%20counts%20by%20host%20for%20the%20last%207%20days">Event severity counts by host for the last 7 days</a></li>
+                                <li><a href="/app/{{app_name}}/%40go?s=Event%20severity%20counts%20by%20host%20for%20the%20last%2030%20days">Event severity counts by host for the last 30 days</a></li>
+                                <li><a href="/app/{{app_name}}/%40go?s=Event%20severity%20counts%20by%20host%20for%20the%20last%2024%20hours">Event severity counts by host for the last 24 hours</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>      
+        
+
+    </div>
+            
+
+{% endblock content%}
+
+{% block js %}    
+    <script>
+        requirejs.config({ urlArgs: "bust=267225" });
+require(['jquery', 'splunk_app_windows_infrastructure/paletterenderer'], function($, renderer) {
+            renderer.render($('#windows-panel-container'), "Windows.Event");
+        });
+    </script>
+{% endblock js %}

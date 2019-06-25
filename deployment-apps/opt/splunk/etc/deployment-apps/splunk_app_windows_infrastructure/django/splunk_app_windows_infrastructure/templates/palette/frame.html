@@ -1,0 +1,41 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc palette %}
+
+{% block title %}Dashboard Builder | Splunk{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/palette.css" />
+    <link rel="stylesheet" type="text/css" href="{{static_URL}}contrib/jquery.colorPicker.css" />
+</style>
+
+{% endblock css %}
+
+{% block content %}
+<div class="container-full-width square-corners" id="palette-editor-view">
+  <div class="row-fluid">
+    <!-- Top menu container -->
+      <div id="dashboard-main" class="content-padding">
+        <div class="row" id="dashboard-title-row"></div> 
+        <div class="row" id="dashboard-global-selectors-row"> 
+          <ul class="pull-right nav-pills side-borders" id="dashboard-global-selectors"></ul> 
+          <div style="clear:both;"></div> 
+          <div class="pull-right" id="dashboard-timepicker-slot"></div> 
+        </div> 
+        <div class="row stripe-bg" id="dashboard-panels-container">
+            {% block palette %}
+            {% endblock %}
+        </div> 
+      </div>
+  </div>
+</div>
+
+{% endblock content%}
+
+{% block js %}    
+    <script>
+    requirejs.config({ urlArgs: "bust=267225" });
+    require(['splunk_app_windows_infrastructure/palette_init'],
+      function(palette) { palette.render(); });</script>
+{% endblock js %}

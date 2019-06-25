@@ -1,0 +1,44 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Dashboards | Splunk{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/palette.css" />
+</style>
+
+{% endblock css %}
+
+{% block content %}
+
+    <div>
+        <div class="main-section-body" id="windows-panel-container">
+          <div class="section-padded section-header">
+            <div class="dashboards-title clearfix">
+              <div class="pull-left">
+                <h2 class="section-title">
+                  <i class="icon-clipboard"></i> Dashboards
+                  <a href="/dj/splunk_app_windows_infrastructure/palette/_new/#edit"
+                     class="btn btn-primary add-dashboard"><i style="color: white" class="icon-plus"></i> Create New</a></h2>
+                <p style="margin-top: 1ex"
+                   class="section-description"> Dashboards are
+                  prebuilt or custom pages that provide insight
+                  into Exchange, Windows, or Active Directory.</p>
+              </div>
+            </div>
+          </div>
+          <div class="dashboards-table" id="panel-body">
+          </div>
+        </div>
+    </div>          
+
+{% endblock content%}
+
+{% block js %}    
+    <script>
+    requirejs.config({ urlArgs: "bust=267225" });
+    require(['splunk_app_windows_infrastructure/palettes']);</script>
+{% endblock js %}

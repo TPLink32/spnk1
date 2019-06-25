@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<view onunloadCancelJobs="False" autoCancelInterval="100">
+  <label>Transceiver Optical Power levels (by Switch)</label>
+  <module name="AccountBar" layoutPanel="appHeader"/>
+  <module name="AppBar" layoutPanel="navigationHeader"/>
+  <module name="Message" layoutPanel="messaging">
+    <param name="filter">*</param>
+    <param name="clearOnJobDispatch">False</param>
+    <param name="maxSize">1</param>
+  </module>
+
+  <module name="HiddenSearch" layoutPanel="mainSearchControls" autoRun="True">
+    <param name="search">source="arista_switch_inventory" AristaXcvrInventory switchname</param>  
+
+    <module name="TimeRangePicker">
+      <param name="searchWhenChanged">True</param>
+      <param name="selected">Last 24 hours</param>
+
+       <module name="SearchSelectLister">
+        <param name="searchWhenChanged">True</param>
+        <param name="settingToCreate">switch_setting</param>
+        <param name="label">switch:</param>
+        <param name="applyOuterTimeRangeToInternalSearch">True</param>
+        <param name="search">source="arista_switch_inventory" AristaXcvrInventory | stats count by switchname | sort switchname</param>
+        <param name="searchFieldsToDisplay">
+          <list>
+            <param name="label">switchname</param>
+            <param name="value">switchname</param>
+          </list>
+        </param>
+        <module name="ConvertToIntention">
+          <param name="settingToConvert">switch_setting</param>
+          <param name="intention">
+            <param name="name">addterm</param>
+            <param name="arg">
+              <param name="switchname">$target$</param>
+            </param>
+            <param name="flags"><list>indexed</list></param>
+          </param>
+
+                <module name="Message" layoutPanel="graphArea">
+                  <param name="filter">splunk.search.job</param>
+                  <param name="clearOnJobDispatch">True</param>
+                  <param name="maxSize">2</param>
+                  <module name="HiddenSearch" layoutPanel="resultsAreaLeft">
+                    <param name="search">
+source="arista_switch_inventory" AristaXcvrInventory | dedup interface | sort switchname interface | table switchname,interface,mfgname,model,serialnum, txPower, rxPower
+</param>
+
+            <module name="FlashTimeline" layoutPanel="graphArea">
+              <param name="width">100%</param>
+              <param name="height">95px</param>
+              <module name="TitleBar" layoutPanel="viewHeader"/>
+
+            <module name="SimpleResultsHeader">
+              <param name="headerFormat">Optical Power Level statistics on $form.switchname$ $time$ (%(count)s interfaces) </param>
+              <param name="entityName">events</param>
+
+                            <module name="Paginator" layoutPanel="resultsAreaLeft">
+                              <param name="entityName">events</param>
+                              <param name="maxPages">10</param>
+
+<module name="SimpleResultsTable">
+</module>
+
+                            </module>
+                          </module>
+
+
+                  </module>
+
+                </module>
+            </module>
+          </module>
+        </module>
+      </module>
+      </module>
+</view>

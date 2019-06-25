@@ -1,0 +1,10 @@
+<% for(var i=0,il=apps.length;i<il;i++) { var app=apps[i]; %>
+<div class="submenu sidebar-menu panel-list-group-menu" data-count="<%= app.panels.length %>">
+  <div class="btn-combo row-fluid menu-header">
+    <div class="text-left btn span12 white-outline"><%= app.title %>&nbsp;(<%= app.panels.length %>)</div>
+    <a class="toggle-state-blue btn dropdown-toggle white-outline" href="#"><div class="icon-arrow-down"></div></a>
+  </div>
+  <ul class="submenu-items">
+  </ul>
+</div>
+<% } %>

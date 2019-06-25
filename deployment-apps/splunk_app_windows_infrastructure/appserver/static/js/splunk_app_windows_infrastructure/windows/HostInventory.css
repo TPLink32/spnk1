@@ -1,0 +1,92 @@
+.dashboard-panel {
+    padding: 10px;
+}
+
+.host-info-pane  {}
+
+.host-info-pane table {
+    empty-cells: show;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.host-info-pane table td {
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 10px;
+}
+
+.host-info-pane table td:hover
+{
+    overflow: visible;
+    z-index: 1;
+}
+
+.host-info-pane table td.title-cell {
+    width: 15%;
+}
+
+.host-info-pane table td.value-cell {
+    width: 35%;
+}
+
+.key-events-pane ul {
+    width: 100%;
+    list-style-type: none;
+    list-style-position: outside;
+    margin: 0 0 0 0;
+    padding-left: 0;
+}
+
+.key-events-pane li {
+    min-height: 40px;
+    max-height: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.key-events-pane li:hover
+{
+    overflow: visible;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+}
+
+div.section-separator {
+    padding-top: 20px;
+}
+
+.chosen-item {
+    background-color: #eeeeee;
+}
+
+.key-events-pane {
+    height:300px;
+    overflow:scroll;
+}
+
+.key-event-title {
+    background-color: #eeeeee;
+    font-size: 12px;
+    padding-top: 10px;
+    padding-left: 5px;
+    min-height: 40px;
+    max-height: 60px;
+    text-overflow: ellipsis;
+}
+
+.field-name {
+    font-weight: lighter;
+}
+
+div.key-event-cell {
+    min-height: 20px;
+}
+
+.host-info-input>div{
+    display: inline-block;
+    vertical-align: top;
+    width: 200px;
+}

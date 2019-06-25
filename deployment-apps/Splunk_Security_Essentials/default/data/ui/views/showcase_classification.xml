@@ -1,0 +1,79 @@
+<form script="runPageScript.js">
+
+  <label>Predict Categorical Fields</label>
+  <description>Predict the value of a categorical field using the values of other fields in that event.</description>
+
+  <fieldset autoRun="false" submitButton="false">
+    <html>
+      <ul id="dashboard-form-tabs">
+        <li>
+          <a class="tab-title-text" data-tab="newModel">Create New Model</a>
+        </li>
+        <li>
+          <a class="tab-title-text" data-tab="existingModel">Load Existing Settings</a>
+        </li>
+      </ul>
+      <div id="dashboard-form-controls">
+        <div id="inputControls" data-tab="newModel">
+          <label>1: Enter a search</label>
+          <div class="app-search-controls-wrapper">
+            <div id="searchBarControl"></div>
+            <div id="searchControlsControl"></div>
+          </div>
+          <br />
+          <div class="input input-dropdown splunk-view">
+            <label>2: Field to predict</label>
+            <div id="targetVariableControl"></div>
+          </div>
+          <div class="input input-multiselect splunk-view">
+            <label>3: Fields to use for predicting</label>
+            <div id="featuresVariableControl"></div>
+          </div>
+          <div class="input splunk-view">
+            <label>4: Split for training / test: <span id="trainingSetFractionSliderValue"></span></label>
+            <div id="trainingSetFractionSlider">
+            </div>
+          </div>
+          <div class="input input-text splunk-view">
+            <label>5: Save the model as</label>
+            <div id="modelNameInputControl"></div>
+          </div>
+          <div id="assistantControlsFooter"></div>
+          <div id="errorDisplay" class="alerts shared-flashmessages app-error-messages"></div>
+        </div>
+        <div id="queryHistoryPanel" data-tab="existingModel"></div>
+      </div>
+    </html>
+  </fieldset>
+
+  <row depends="$searchBarSearchJobIdToken$" rejects="$showResultPanelsToken$">
+    <panel>
+      <html>
+        <h3>Raw Data Preview</h3>
+        <div id="datasetPreviewPanel"></div>
+      </html>
+    </panel>
+  </row>
+
+  <row depends="$showResultPanelsToken$">
+    <panel id="dataAndPredictionsPanel">
+      <html></html>
+    </panel>
+  </row>
+
+  <row depends="$showResultPanelsToken$">
+    <panel id="classificationstatisticsPanel">
+      <html>
+        <div class="stats-panel">
+          <div id="precisionStatisticPanel"></div>
+          <div id="recallStatisticPanel"></div>
+          <div id="accuracyStatisticPanel"></div>
+          <div id="fOneStatisticPanel"></div>
+        </div>
+      </html>
+    </panel>
+    <panel id="confusionMatrixPanel">
+      <html></html>
+    </panel>
+  </row>
+</form>

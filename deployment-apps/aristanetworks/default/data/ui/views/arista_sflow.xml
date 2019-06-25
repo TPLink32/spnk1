@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<view onunloadCancelJobs="False" autoCancelInterval="100">
+  <label>sFlow</label>
+  <module name="AccountBar" layoutPanel="appHeader"/>
+  <module name="AppBar" layoutPanel="navigationHeader"/>
+  <module name="Message" layoutPanel="messaging">
+    <param name="filter">*</param>
+    <param name="clearOnJobDispatch">False</param>
+    <param name="maxSize">1</param>
+  </module>
+
+  <module name="SearchBar" layoutPanel="splSearchControls-inline">
+    <param name="default">source="arista_switch_sflow" [[switchname="myswitch" or any other fields]]</param>
+    <param name="useAssistant">true</param>
+    <param name="useTypeahead">true</param>
+    <param name="useOwnSubmitButton">False</param>
+    <module name="TimeRangePicker">
+      <param name="selected">Last 30 days</param>
+      <param name="searchWhenChanged">True</param>
+      <module name="SubmitButton">
+        <param name="allowSoftSubmit">True</param>
+
+        <module name="SimpleResultsHeader" layoutPanel="resultsAreaLeft">
+          <param name="entityName">events</param>
+          <param name="headerFormat">events (%(count)s)</param>
+        </module>
+        <module name="FieldPicker" layoutPanel="sidebar">
+          <param name="fields">*</param>
+          <module name="MultiFieldViewer">
+          </module>
+        <!-- FieldPicker ends -->
+        </module>
+
+                        <module name="Paginator" layoutPanel="pageControls">
+                            <param name="entityName">events</param>
+                            <param name="maxPages">10</param>
+
+                            <module name="EventsViewer" layoutPanel="resultsAreaLeft">
+                              <param name="segmentation">full</param>
+                              <param name="reportFieldLink">report_builder_format_report</param>
+                            </module>
+                         </module>
+
+
+      <!-- SubmitButton ends -->
+      </module>
+
+    <!-- TimeRangePicker ends -->
+    </module>
+
+  <!-- SearchBar ends -->
+  </module>
+
+</view>
+

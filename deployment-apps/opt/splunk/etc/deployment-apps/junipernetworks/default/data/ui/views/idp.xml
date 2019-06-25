@@ -1,0 +1,145 @@
+<form>
+  <label>IDP</label>
+  <init>
+    <set token="source_ip_address">*</set>
+    <set token="destination_ip_address">*</set>
+    <set token="user_name">*</set>
+    <set token="srx_host">*</set>
+  </init>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="time" token="idp_time">
+      <label>Time Period</label>
+      <default>
+        <earliest>rt-5m</earliest>
+        <latest>rt</latest>
+      </default>
+    </input>
+    <input type="text" token="srx_host" searchWhenChanged="true">
+      <label>SRX</label>
+    </input>
+    <input type="text" token="source_ip_address" searchWhenChanged="true">
+      <label>Source IP Address</label>
+      <prefix>source_address="</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="user_name">
+      <label>User Name</label>
+      <prefix>username="</prefix>
+      <suffix>"</suffix>
+    </input>
+    <input type="text" token="destination_ip_address">
+      <label>Destination IP Address</label>
+      <prefix>destination_address="</prefix>
+      <suffix>"</suffix>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <chart>
+        <title>Top IDP Sources</title>
+        <search>
+          <query>source="jnpr-syslog" "RT_IDP" "IDP_ATTACK_LOG_EVENT" $srx_host$ $source_ip_address$  $destination_ip_address$ $user_name$ | top 5 source_address</query>
+          <earliest>$idp_time.earliest$</earliest>
+          <latest>$idp_time.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">Source IP Address</option>
+        <option name="charting.axisTitleY.text">Event Count</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.legend.placement">none</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Top IDP Users</title>
+        <search>
+          <query>source="jnpr-syslog" "RT_IDP" "IDP_ATTACK_LOG_EVENT" $srx_host$ $source_ip_address$  $destination_ip_address$  $user_name$ | top 5 username</query>
+          <earliest>$idp_time.earliest$</earliest>
+          <latest>$idp_time.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">User Name</option>
+        <option name="charting.axisTitleY.text">Event Count</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.legend.placement">none</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>IDP Threat Events</title>
+        <search>
+          <query>source="jnpr-syslog"  "RT_IDP" "IDP_ATTACK_LOG_EVENT"  $srx_host$ $source_ip_address$ $destination_ip_address$ $user_name$   | timechart  count(threat_severity) by threat_severity</query>
+          <earliest>$idp_time.earliest$</earliest>
+          <latest>$idp_time.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">Severity</option>
+        <option name="charting.axisTitleY.text">Event Count</option>
+        <option name="charting.chart">area</option>
+        <option name="charting.legend.placement">bottom</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Top IDS and IDP Attacks</title>
+        <search>
+          <query>source="Jnpr-syslog" ("RT_IDS" OR "RT_IDP" )  $srx_host$ $source_ip_address$ $destination_ip_address$ $user_name$ | 
+ top 5 attack_name</query>
+          <earliest>$idp_time.earliest$</earliest>
+          <latest>$idp_time.latest$</latest>
+        </search>
+        <option name="charting.chart">pie</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Top Applications by Threat Severity - Critical</title>
+        <search>
+          <query>source="jnpr-syslog" "RT_IDP" (threat_severity = "CRITICAL") $srx_host$ $source_ip_address$ $destination_ip_address$ $user_name$ | chart count(threat_severity) by application_name | sort - count(threat_severity) | head 5</query>
+          <earliest>$idp_time.earliest$</earliest>
+          <latest>$idp_time.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">Application</option>
+        <option name="charting.axisTitleY.text">Threat Severity Count</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.legend.placement">none</option>
+        <option name="charting.seriesColors">[0xec7063]</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Top Applications by Threat Severity - High</title>
+        <search>
+          <query>source="jnpr-syslog" "RT_IDP" (threat_severity = "HIGH") $srx_host$ $source_ip_address$ $destination_ip_address$ $user_name$ | chart count(threat_severity) by application_name | sort - count(threat_severity) | head 5</query>
+          <earliest>$idp_time.earliest$</earliest>
+          <latest>$idp_time.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">Application</option>
+        <option name="charting.axisTitleY.text">Threat Severity Count</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.legend.placement">none</option>
+        <option name="charting.seriesColors">[0xFFC300]</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Top Applications by Threat Severity - Medium</title>
+        <search>
+          <query>source="jnpr-syslog" "RT_IDP" (threat_severity = "MEDIUM") $srx_host$ $source_ip_address$ $destination_ip_address$ $user_name$ | chart count(threat_severity) by application_name | sort - count(threat_severity) | head 5</query>
+          <earliest>$idp_time.earliest$</earliest>
+          <latest>$idp_time.latest$</latest>
+        </search>
+        <option name="charting.axisTitleX.text">Application</option>
+        <option name="charting.axisTitleY.text">Threat Severity Count</option>
+        <option name="charting.chart">column</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.legend.placement">none</option>
+        <option name="charting.seriesColors">[0x5dade2]</option>
+      </chart>
+    </panel>
+  </row>
+</form>

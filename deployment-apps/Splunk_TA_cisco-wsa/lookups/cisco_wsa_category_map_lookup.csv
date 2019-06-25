@@ -1,0 +1,187 @@
+x_webcat_code_abbr,webcat_code_full,usage,severity
+-,URL Filtering Bypassed,Unknown,medium
+adlt,Adult,Personal,informational
+Adul,Adult/Sexually Explicit,Violation,informational
+adv,Advertisements,Personal,informational
+Adve,Advertisements & Popups,Personal,informational
+Alco,Alcohol & Tobacco,Violation,unknown
+art,Arts and Entertainment,Personal,unknown
+Arts,Arts,Personal,unknown
+at,Alcohol and Tobacco,Violation,unknown
+Blog,Blogs & Forums,Personal,medium
+Busi,Business,Business,unknown
+busi,Business and Industry,Business,unknown
+cell,Mobile Phones,Personal,informational
+Chat,Chat,Borderline,medium
+chat,Web-based Chat,Borderline,medium
+comm,Online Communities,Personal,medium
+comp,Computers and Internet,Business,unknown
+Comp,Computing & Internet,Business,unknown
+cprn,Child Porn,Personal,informational
+Crim,Criminal Activity,Personal,informational
+csec,Computer Security,Personal,high
+cult,Cults,Violation,informational
+date,Dating,Violation,informational
+Down,Downloads,Personal,medium
+drug,Illegal Drugs,Violation,informational
+edu,Education,Personal,unknown
+Educ,Education,Personal,unknown
+Ente,Entertainment,Personal,unknown
+err,URL Filtering Bypassed,Unknown,medium
+Fash,Fashion & Beauty,Personal,unknown
+filt,Filter Avoidance,Unknown,medium
+Fina,Finance & Investment,Borderline,informational
+fnnc,Finance,Borderline,informational
+food,Dining and Drinking,Personal,unknown
+Food,Food & Dining,Personal,unknown
+free,Freeware and Shareware,Personal,medium
+fts,File Transfer Services,Personal,medium
+Gamb,Gambling,Violation,informational
+gamb,Gambling,Violation,informational
+Game,Games,Personal,informational
+game,Games,Personal,informational
+gov,Government and Law,Personal,unknown
+Gove,Government,Personal,unknown
+Hack,Hacking,Violation,high
+hack,Hacking,Violation,high
+hate,Hate Speech,Violation,informational
+Heal,Health & Medicine,Personal,unknown
+heal,Spiritual Healing,Personal,unknown
+hlth,Health and Nutrition,Personal,unknown
+Hobb,Hobbies & Recreation,Personal,unknown
+Host,Hosting Sites,Personal,medium
+ilac,Illegal Activities,Violation,informational
+Ille,Illegal Drugs,Violation,informational
+im,Instant Messaging,Borderline,medium
+imp,Impossible,Unknown,medium
+Infr,Infrastructure,Unknown,unknown
+infr,Infrastructure,Unknown,unknown
+Inti,Intimate Apparel & Swimwear,Personal,informational
+Into,Intolerance & Hate,Personal,informational
+IW_adlt,Adult,Violation,informational
+IW_adv,Advertisements,Personal,informational
+IW_art,Arts and Entertainment,Personal,unknown
+IW_at,Alcohol and Tobacco,Violation,unknown
+IW_busi,Business and Industry,Business,unknown
+IW_cell,Mobile Phones,Personal,informational
+IW_chat,Web-based Chat,Borderline,medium
+IW_comm,Online Communities,Personal,medium
+IW_comp,Computers and Internet,Business,unknown
+IW_cprn,Child Porn,Violation,informational
+IW_csec,Computer Security,Personal,high
+IW_cult,Cults,Violation,informational
+IW_date,Dating,Violation,informational
+IW_drug,Illegal Drugs,Violation,informational
+IW_edu,Education,Personal,unknown
+IW_filt,Filter Avoidance,Unknown,medium
+IW_fnnc,Finance,Borderline,informational
+IW_food,Dining and Drinking,Personal,unknown
+IW_free,Freeware and Shareware,Personal,medium
+IW_fts,File Transfer Services,Personal,medium
+IW_gamb,Gambling,Violation,informational
+IW_game,Games,Personal,informational
+IW_gov,Government and Law,Personal,unknown
+IW_hack,Hacking,Violation,high
+IW_hate,Hate Speech,Violation,informational
+IW_heal,Spiritual Healing,Personal,unknown
+IW_hlth,Health and Nutrition,Personal,unknown
+IW_ilac,Illegal Activities,Violation,informational
+IW_im,Instant Messaging,Borderline,medium
+IW_infr,Infrastructure,Unknown,unknown
+IW_job,Job Search,Personal,medium
+IW_kids,Safe for Kids,Personal,unknown
+IW_ling,Lingerie and Swimsuits,Personal,informational
+IW_lotr,Lottery and Sweepstakes,Personal,informational
+IW_mail,Web-based Email,Borderline,medium
+IW_mdia,Streaming Media,Personal,unknown
+IW_natr,Nature,Personal,unknown
+IW_news,News,Personal,unknown
+IW_nsn,Non-sexual Nudity,Personal,unknown
+IW_obs,Tasteless or Obscene,Personal,informational
+IW_osb,Online Storage and Backup,Personal,high
+IW_p2p,Peer File Transfer,Personal,high
+IW_para,Paranormal and Occult,Personal,informational
+IW_plag,Cheating and Plagiarism,Personal,unknown
+IW_porn,Porn,Violation,informational
+IW_ref,Reference,Business,unknown
+IW_rest,Real Estate,Personal,unknown
+IW_sci,Science and Technology,Business,unknown
+IW_scty,Society and Culture,Personal,unknown
+IW_shop,Shopping,Personal,unknown
+IW_snet,Social Networking,Personal,medium
+IW_socs,Social Science,Personal,unknown
+IW_sprt,Sports and Recreation,Personal,unknown
+IW_srch,Search Engines and Portals,Borderline,unknown
+IW_swup,Software Updates,Borderline,medium
+IW_sxed,Sex Ed and Abortion,Personal,unknown
+IW_tat,Tattoos,Personal,unknown
+IW_trad,Online Trading,Personal,unknown
+IW_tran,Web Page Translation,Personal,high
+IW_trns,Transportation,Personal,unknown
+IW_trvl,Travel,Borderline,unknown
+IW_viol,Violence,Personal,informational
+IW_voip,Internet Telephony,Personal,medium
+IW_weap,Weapons,Personal,informational
+IW_whst,Web Hosting,Personal,medium
+job,Job Search,Personal,medium
+Job,Job Search & Career Development,Personal,medium
+Kids,Kids Sites,Personal,unknown
+kids,Safe for Kids,Personal,unknown
+ling,Lingerie and Swimsuits,Personal,informational
+lotr,Lottery and Sweepstakes,Personal,informational
+mail,Web-based Email,Borderline,medium
+mdia,Streaming Media,Personal,unknown
+Moto,Motor Vehicles,Personal,unknown
+natr,Nature,Personal,unknown
+nc,Uncategorized URLs,Unknown,medium
+News,News,Personal,unknown
+news,News,Personal,unknown
+nsn,Non-sexual Nudity,Personal,unknown
+obs,Tasteless or Obscene,Personal,informational
+osb,Online Storage and Backup,Personal,high
+p2p,Peer File Transfer,Personal,high
+para,Paranormal and Occult,Personal,informational
+Peer,Peer-to-Peer,Personal,high
+Pers,Personals & Dating,Personal,informational
+Phil,Philanthropic & Professional Orgs.,Personal,unknown
+Phot,Photo Searches,Personal,unknown
+plag,Cheating and Plagiarism,Personal,unknown
+Poli,Politics,Personal,unknown
+porn,Porn,Personal,informational
+Prox,Proxies & Translators,Personal,high
+Real,Real Estate,Personal,unknown
+ref,Reference,Business,unknown
+Refe,Reference,Business,unknown
+Reli,Religion,Personal,unknown
+rest,Real Estate,Personal,unknown
+Ring,Ringtones/Mobile Phone Downloads,Personal,informational
+sci,Science and Technology,Business,unknown
+scty,Society and Culture,Personal,unknown
+Sear,Search Engines,Borderline,unknown
+Sex,Sex Education,Personal,unknown
+Shop,Shopping,Personal,unknown
+shop,Shopping,Personal,unknown
+snet,Social Networking,Personal,medium
+Soci,Society & Culture,Personal,unknown
+socs,Social Science,Personal,unknown
+Spor,Sports,Personal,unknown
+sprt,Sports and Recreation,Personal,unknown
+srch,Search Engines and Portals,Borderline,unknown
+Stre,Streaming Media,Personal,unknown
+Susp,Suspect/Threat URLs,Personal,critical
+swup,Software Updates,Borderline,medium
+sxed,Sex Ed and Abortion,Personal,unknown
+Tast,Tasteless & Offensive,Personal,informational
+tat,Tattoos,Personal,unknown
+trad,Online Trading,Personal,unknown
+tran,Web Page Translation,Personal,high
+Trav,Travel,Borderline,unknown
+trns,Transportation,Personal,unknown
+trvl,Travel,Borderline,unknown
+Viol,Violence,Violation,informational
+viol,Violence,Violation,informational
+voip,Internet Telephony,Personal,medium
+Weap,Weapons,Personal,informational
+weap,Weapons,Personal,informational
+Web-,Web-based E-mail,Borderline,medium
+whst,Web Hosting,Personal,medium

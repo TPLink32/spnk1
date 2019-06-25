@@ -1,0 +1,126 @@
+<form>
+  <label>Network Activity</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="dropdown" token="NetworkHost" searchWhenChanged="true">
+      <label>Host</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_netmon_system | dedup Host | sort Host</query>
+      </search>
+      <fieldForLabel>Host</fieldForLabel>
+      <fieldForValue>Host</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="Direction" searchWhenChanged="true">
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_netmon_details | dedup Direction | sort Direction</query>
+      </search>
+      <fieldForLabel>Direction</fieldForLabel>
+      <fieldForValue>Direction</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="Protocol" searchWhenChanged="true">
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_netmon_details | search Direction="$Direction$" | dedup Protocol | sort Protocol</query>
+      </search>
+      <fieldForLabel>Protocol</fieldForLabel>
+      <fieldForValue>Protocol</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="PacketType" searchWhenChanged="true">
+      <label>Packet Type</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_netmon_details | search Direction="$Direction$" Protocol="$Protocol$" | dedup PacketType | sort PacketType</query>
+      </search>
+      <fieldForLabel>PacketType</fieldForLabel>
+      <fieldForValue>PacketType</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="RemoteHostName" searchWhenChanged="true">
+      <label>Remote Host</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_netmon_details | search Direction="$Direction$" Protocol="$Protocol$" PacketType="$PacketType$" | dedup RemoteHostName | sort RemoteHostName</query>
+      </search>
+      <fieldForLabel>RemoteHostName</fieldForLabel>
+      <fieldForValue>RemoteHostName</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="RemotePort" searchWhenChanged="true">
+      <label>Remote Port</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_netmon_details | search Direction="$Direction$" Protocol="$Protocol$" PacketType="$PacketType$" RemoteHostName="$RemoteHostName$" | dedup RemotePort | sort RemotePort</query>
+      </search>
+      <fieldForLabel>RemotePort</fieldForLabel>
+      <fieldForValue>RemotePort</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="LocalPort" searchWhenChanged="true">
+      <label>Local Port</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_netmon_details | search Direction="$Direction$" Protocol="$Protocol$" PacketType="$PacketType$" RemoteHostName="$RemoteHostName$" RemotePort="$RemotePort$" | dedup LocalPort | sort LocalPort</query>
+      </search>
+      <fieldForLabel>LocalPort</fieldForLabel>
+      <fieldForValue>LocalPort</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="NetworkProcessName" searchWhenChanged="true">
+      <label>Process Name</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_netmon_details | search Direction="$Direction$" Protocol="$Protocol$" PacketType="$PacketType$" RemoteHostName="$RemoteHostName$" RemotePort="$RemotePort$" LocalPort="$LocalPort$" | dedup ProcessName | sort ProcessName</query>
+      </search>
+      <fieldForLabel>ProcessName</fieldForLabel>
+      <fieldForValue>ProcessName</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="UserName" searchWhenChanged="true">
+      <label>User Name</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_netmon_details | search Direction="$Direction$" Protocol="$Protocol$" PacketType="$PacketType$" RemoteHostName="$RemoteHostName$" RemotePort="$RemotePort$" LocalPort="$LocalPort$" ProcessName="$NetworkProcessName$" | dedup UserName | sort UserName</query>
+      </search>
+      <fieldForLabel>UserName</fieldForLabel>
+      <fieldForValue>UserName</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="time" token="Time" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Network Information</title>
+        <search>
+          <query>eventtype=netmon_windows host="$NetworkHost$" Direction="$Direction$" Protocol="$Protocol$" PacketType="$PacketType$" RemoteHostName="$RemoteHostName$" RemotePort="$RemotePort$" ProcessName="$NetworkProcessName$" UserName="$UserName$" | table host, Direction, PacketType, Protocol, RemoteHostName, LocalPort, RemotePort, ProcessName, UserName</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">cell</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>

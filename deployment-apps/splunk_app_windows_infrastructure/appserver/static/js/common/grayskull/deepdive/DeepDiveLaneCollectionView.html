@@ -1,0 +1,79 @@
+<div class="deep-dive-lane-collection-header">
+	<table class="deep-dive-layout-table">
+		<tr>
+			<td class="deep-dive-controls-container">
+				<div class="deep-dive-add-button-container">
+					<a id="deep-dive-add-lane"><i class="icon-plus-circle icon-no-underline"></i><span>Add Lane</span></a>
+				</div>
+			</td>
+			<td class="deep-dive-time-axis-container" style="vertical-align: bottom;">
+				<svg class="deep-dive-lane-collection-time-axis-top deep-dive-lane-collection-time-axis">
+					<g class="axis-container" transform="translate(1,0)"></g>
+				</svg>
+			</td>
+		</tr>
+	</table>
+</div>
+<div class="deep-dive-lanes-container">
+    <div class="deep-dive-lanes-container-list">
+    </div>
+    <div class="deep-dive-lane-collection-pane">
+    	<svg class="deep-dive-lane-collection-overlay">
+    		<defs>
+    			<filter id="dropGlow">
+    				<feColorMatrix type="matrix"
+    	        values=
+    	            "0 0 0 1 0
+    	             0 0 0 1 0 
+    	             0 0 0 1 0 
+    	             0 0 0 1 0"/>
+    				<feGaussianBlur stdDeviation="0.5" result="blur"/>
+    				<feOffset in="blur" dx="1" dy="1" result="offsetBlur"/>
+    				<feMerge>
+    					<feMergeNode in="offsetBlur"/>
+    					<feMergeNode in="SourceGraphic"/>
+    				</feMerge>
+    			</filter>
+    		</defs>
+	    	<g class="lane-time-bar">
+    			<text class="lane-investigator-time-label" text-anchor="middle" font-family="Roboto, Droid, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="12px" fill="#444444" y="14"></text>
+            </g>
+    		<g class="time-window-container"></g>
+
+            <g class="lane-investigator-circle" opacity="1e-6">
+                <circle class="lane-investigator-graph-dot" r="3.5" fill="#bbb"></circle>
+            </g>
+
+   			<g class="lane-investigator-range-axis" opacity="1e-6">
+   				<rect class="lane-investigator-range-axis-marker" x="-5" y="0" width="5" height="1" fill="#000000"></rect>
+   				<rect class="lane-investigator-range-axis-marker" x="-5" y="58" width="5" height="1" fill="#000000"></rect>
+   				<text class="lane-investigator-range-axis-max" x="-4.5" y="8" text-anchor="end" font-weight="bold" font-family="Roboto, Droid, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="9px" fill="#FFFFFF"></text>
+   				<text class="lane-investigator-range-axis-max" x="-5" y="8" text-anchor="end" font-weight="bold" font-family="Roboto, Droid, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="9px" fill="#444444"></text>
+   				<text class="lane-investigator-range-axis-min" x="-4.5" y="58" text-anchor="end" font-weight="bold" font-family="Roboto, Droid, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="9px" fill="#FFFFFF"></text>
+   				<text class="lane-investigator-range-axis-min" x="-5" y="58" text-anchor="end" font-weight="bold" font-family="Roboto, Droid, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-size="9px" fill="#444444"></text>
+  			</g>
+    	</svg>
+    </div>
+</div>
+<div class="deep-dive-lane-collection-footer">
+	<table class="deep-dive-layout-table">
+		<tr>
+			<td class="deep-dive-controls-container">
+				<div class="deep-dive-primary-time-picker-container">
+					<div style="display:inline-block;">Primary Time Range</div>
+					<div style="display:inline-block;" class="deep-dive-primary-time-picker"></div>
+				</div>
+			</td>
+			<td class="deep-dive-time-axis-container" style="vertical-align: top;">
+				<svg class="deep-dive-lane-collection-time-axis-bottom deep-dive-lane-collection-time-axis">
+					<rect class="viewport-background" height="23" fill="#DDDDDD" x="1" cursor="pointer"></rect>
+					<rect class="viewport-left-border" height="24" fill="#DDDDDD" width="1"></rect>
+					<rect class="viewport-right-border" height="24" fill="#DDDDDD"width="1"></rect>
+					<rect class="viewport-window-box" height="23" fill="#FFFFFF"></rect>
+					<text class="viewport-window-label" text-anchor="middle" fill="#444444" font-size="12px" y="15" text-anchor="middle"></text>
+					<g class="axis-container" transform="translate(1,23)"></g>
+				</svg>
+			</td>
+		</tr>
+	</table>
+</div>

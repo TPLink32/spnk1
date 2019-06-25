@@ -1,0 +1,84 @@
+.deep-dive-collection {
+	margin-top: 15px;
+}
+
+#deepdive-view {
+    width: 100%;
+}
+
+#deepdive-view #deepdive-component-lanes-collection {
+	width: 100%;
+    transition: all 200ms;
+}
+
+#deepdive-view #deepdive-component-event-focus {
+    width: 0;
+    transition: all 200ms;
+}
+
+#deepdive-view.with-event-focus #deepdive-component-lanes-collection {
+    width: 73%;
+}
+
+#deepdive-view.with-event-focus #deepdive-component-event-focus {
+    width: 25%;
+}
+
+.deep-dive-lanes-container {
+	/* position set for overlay to be absolute to */
+	position: relative;
+	border-style: solid;
+	border-color: #DDDDDD;
+	border-top-width: 1px;
+	border-bottom-width: 0px;
+	border-left-width: 1px;
+	border-right-width: 1px;
+	background-color: #FFFFFF;
+}
+
+.deep-dive-lane-collection-overlay {
+	background-color: rgba(0, 0, 0, 0);
+	position: absolute;
+	/* left is the lane title width 260 */
+	left: 260px;
+	/* top is the border of the top lane 0 and an overlap on the top time axis*/
+	top: -40px;
+	width: 95%;
+}
+
+.deep-dive-controls-container {
+	width: 260px;
+}
+
+.deep-dive-time-axis-container {
+	width: 100%;
+}
+
+.deep-dive-primary-time-picker-container, .deep-dive-add-button-container {
+	width: 260px;
+}
+
+
+.deep-dive-lane-collection-time-axis-top {
+	height: 15px;
+	width: 95%;
+}
+
+.deep-dive-lane-collection-time-axis-bottom {
+	height: 38px;
+	width: 95%;
+}
+
+
+.deep-dive-lane-collection-time-axis .tick text {
+	fill: #6B6B6B;
+}
+.deep-dive-lane-collection-time-axis .domain {
+	fill: #DDDDDD;
+}
+
+
+.deep-dive-layout-table td {
+	padding: 0px;
+	margin: 0px;
+}

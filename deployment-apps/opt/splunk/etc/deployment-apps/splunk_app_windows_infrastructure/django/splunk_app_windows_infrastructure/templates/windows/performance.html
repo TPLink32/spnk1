@@ -1,0 +1,63 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Performance Overview | Splunk{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+</style>
+
+{% endblock css %}
+
+{% block content %}
+
+    <div>
+
+       
+        <div class="dashboard-body container-fluid main-section-body" id="windows-panel-container">
+            <div class="dashboard-row">
+                <div class="dashboard-cell span-full" id="windows-inputs">
+                </div>
+            </div>
+        </div>
+        
+       
+        
+        
+        <div class="dashboard-row">
+            <div class="dashboard-cell span-full">
+                <div class="dashboard-panel">
+                      <div class="dashboard-element">
+                        <div class="panel-head">
+                            <h4>More reports</h4>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="windows-footer">
+                                <li><a href="/app/{{app_name}}/%40go?s=Performance%20counter%20categories%20and%20counts%20by%20host%20for%20the%20last%207%20days">Performance counter categories and counts by host for the last 7 days</a></li>
+                                <li><a href="/app/{{app_name}}/%40go?s=Number%20of%20hosts%20with%20Average%20CPU%20utilization%20%3E%2080%25%20in%20the%20last%2024%20hours">Number of hosts with Average CPU utilization > 80% in the last 24 hours</a></li>
+                                <li><a href="/app/{{app_name}}/%40go?s=Average%20Memory%20utilization%20per%20process%2C%20host%20in%20the%20last%2024%20hours">Average Memory utilization per process, host in the last 24 hours</a></li>
+                                <li><a href="/app/{{app_name}}/%40go?s=Average%20CPU%20utilization%20per%20process%2C%20host%20in%20the%20last%2024%20hours">Average CPU utilization per process, host in the last 24 hours</a></li>
+                            </ul>
+                            
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>      
+        
+
+    </div>
+            
+
+{% endblock content%}
+
+{% block js %}    
+    <script>
+        requirejs.config({ urlArgs: "bust=267225" });
+require(['jquery', 'splunk_app_windows_infrastructure/paletterenderer'], function($, renderer) {
+            renderer.render($('#windows-panel-container'), "Windows.Performance");
+        });
+    </script>
+{% endblock js %}

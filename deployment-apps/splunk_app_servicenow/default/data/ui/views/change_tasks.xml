@@ -1,0 +1,105 @@
+<form script="dashboard_entry.js">
+  <label>Change Tasks</label>
+  <fieldset autoRun="true" submitButton="false">
+    <input id="time" type="time" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliest>-30d@d</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+
+    <single>
+      <title>Number of Change Tasks</title>
+      <search>
+        <query>eventtype=snow_change_task | dedup sys_id|  stats count(number) AS "value" |  rangemap field=value  low=0-24 high=24-72 default=severe</query>
+      </search>
+        <option name="classField">range</option>
+        <option name="field">value</option>
+        <option name="drilldown">all</option>
+        <option name="linkView">search</option>
+    </single>
+    <single>
+      <title>Number of Open Change Tasks</title>
+      <search>
+        <query>eventtype=snow_change_task | dedup sys_id| search state &lt;3|  stats count(number) AS "value" |  rangemap field=value  low=0-24 high=24-72 default=severe</query>
+      </search>
+        <option name="classField">range</option>
+        <option name="field">value</option>
+        <option name="drilldown">all</option>
+        <option name="linkView">search</option>
+    </single>
+    <single>
+      <title>Number of Closed Change Tasks</title>
+      <search>
+        <query>eventtype=snow_change_task  | dedup sys_id| search state &gt;=3|  stats count(number) AS "value" |  rangemap field=value  low=0-24 high=24-72 default=severe</query>
+      </search>
+        <option name="classField">range</option>
+        <option name="field">value</option>
+        <option name="drilldown">all</option>
+        <option name="linkView">search</option>
+    </single>
+  </row>
+  <row>
+    <chart>
+      <title>Change Tasks over Time</title>
+      <search>
+        <query>eventtype=snow_change_task |  timechart dc(number) | rename dc(number) as "Change Tasks count"</query>
+      </search>
+      <option name="charting.axisTitleX.visibility">collapsed</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">area</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+      <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+      <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+      <option name="charting.axisTitleY2.visibility">visible</option>
+      <option name="charting.axisY2.enabled">0</option>
+      <option name="charting.axisY2.scale">inherit</option>
+      <option name="charting.chart.bubbleMaximumSize">50</option>
+      <option name="charting.chart.bubbleMinimumSize">10</option>
+      <option name="charting.chart.bubbleSizeBy">area</option>
+      <option name="charting.chart.showDataLabels">none</option>
+      <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+    </chart>
+  </row>
+  <row>
+    <chart>
+      <title>Change Task by State</title>
+      <search>
+        <query>eventtype=snow_change_task  | stats dc(number) by change_state_name</query>
+      </search>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">pie</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+      <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+      <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+      <option name="charting.axisTitleY2.visibility">visible</option>
+      <option name="charting.axisY2.enabled">false</option>
+      <option name="charting.axisY2.scale">inherit</option>
+      <option name="charting.chart.bubbleMaximumSize">50</option>
+      <option name="charting.chart.bubbleMinimumSize">10</option>
+      <option name="charting.chart.bubbleSizeBy">area</option>
+    </chart>
+  </row>
+</form>

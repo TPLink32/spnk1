@@ -1,0 +1,2 @@
+TTTTTTTT 10.66.128.217 ,f5_irule=Splunk-iRule-DNS_RESPONSE,src_ip=10.66.128.224,dns_server_ip=10.66.128.217,question_name=dr.sg.baidu.com,is_wideip=0,answer=""
+TTTTTTTT 10.66.128.63 ,f5_irule=Splunk-iRule-DNS_RESPONSE,src_ip=10.66.128.62,dns_server_ip=10.66.128.63,question_name=bigip.splunk.com,is_wideip=1,answer="bigip.splunk.com.	30	IN	A	10.66.131.189"

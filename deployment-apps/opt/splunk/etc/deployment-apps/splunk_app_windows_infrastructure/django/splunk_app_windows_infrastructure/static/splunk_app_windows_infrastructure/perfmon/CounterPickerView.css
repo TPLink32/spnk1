@@ -1,0 +1,85 @@
+.perfmon-list-counter {
+    margin-left: 20px;
+}
+
+li.collapsibleListClosed div::before {
+    content: "\25b6"; /* right point triangle in escaped unicode */
+    color:rgb(112,112,112) ;
+    margin-right: 2px;
+    margin-left: 2px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.perfmon-list-object li.collapsibleListClosed::before {
+    content: "\25b6"; /* right point triangle in escaped unicode */
+    color:rgb(112,112,112);
+    margin-right: 2px;
+    margin-left: 2px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+li.collapsibleListOpen div::before {
+    content: "\25bc"; /* down point triangle in escaped unicode */
+    color:rgb(112,112,112) ;
+    margin-right: 2px;
+    margin-left: 2px;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+.perfmon-list-object li.collapsibleListOpen::before {
+    content: "\25bc"; /* down point triangle in escaped unicode */
+    color:rgb(112,112,112);
+    margin-right: 2px;
+    margin-left: 2px;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+/* add padding */
+.perfmon-list-object {
+    margin-left: 5px;
+}
+
+/* better mouse cursor */
+.collapsibleListClosed,
+.collapsibleListOpen,
+.perfmonListOpen {
+    cursor: pointer;
+}
+
+/* style counters */
+.perfmon-list-instance {
+    font-weight: bold;
+    line-height: 17px;
+    padding: 2px 6px;
+    margin-left: 30px;
+}
+
+/* use light blue for selected items in Splunk */
+.list-picker-control-chosen-item {
+    background: #B1D8FF;
+}
+
+/* change to Splunk Icons for expand/collapse icons */
+li.collapsibleListOpen div::before,
+li.collapsibleListClosed div::before,
+.perfmon-list-object li.collapsibleListOpen::before,
+.perfmon-list-object li.collapsibleListClosed::before {
+    font-family: "Splunk Icons";
+    color: #888;
+    font-size: 10px;
+}
+
+/* reduce the wobble when opening/closing */
+li.collapsibleListClosed div::before,
+.perfmon-list-object li.collapsibleListClosed::before {
+    margin-right: 3px;
+    margin-left: 3px;
+}
+li.collapsibleListOpen div::before,
+.perfmon-list-object li.collapsibleListOpen::before {
+    margin-right: 4px;
+}

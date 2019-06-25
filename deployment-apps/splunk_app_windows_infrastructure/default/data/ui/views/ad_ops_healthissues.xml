@@ -1,0 +1,124 @@
+<form>
+  <label>Health Issues</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="multiselect" token="multidropdown_forest" searchWhenChanged="true">
+      <label>Forest</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector`  |dedup ForestName | sort ForestName</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+      <fieldForLabel>ForestName</fieldForLabel>
+      <fieldForValue>ForestName</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>ForestName="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="multiselect" token="multidropdown_site" searchWhenChanged="true">
+      <label>Site</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector` | search $multidropdown_forest$|dedup Site|sort Site</query>
+      </search>
+      <fieldForLabel>Site</fieldForLabel>
+      <fieldForValue>Site</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>Site="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="multiselect" token="multidropdown_domaindnsname" searchWhenChanged="true">
+      <label>Domain</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector` | search $multidropdown_forest$ $multidropdown_site$|dedup DomainDNSName|sort DomainDNSName</query>
+      </search>
+      <fieldForLabel>DomainDNSName</fieldForLabel>
+      <fieldForValue>DomainDNSName</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>DomainDNSName="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="multiselect" token="multidropdown_host" searchWhenChanged="true">
+      <label>Server</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector` | search $multidropdown_forest$ $multidropdown_site$ $multidropdown_domaindnsname$|dedup host|sort host</query>
+      </search>
+      <fieldForLabel>host</fieldForLabel>
+      <fieldForValue>host</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>host="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="time" token="Time">
+      <label></label>
+      <default>
+        <earliest>-24h@h</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Outages</title>
+        <search>
+          <query>eventtype=msad-dc-health $multidropdown_forest$ $multidropdown_site$ $multidropdown_domaindnsname$ $multidropdown_host$|eval ok=if(ProcsOK=="False" OR DNSRegister=="False" OR SYSVOLShare=="False",0,1)|streamstats sum(ok) as trx_id by host|where ok=0|stats first(_time) as end, last(_time) as start,       min(ProcsOK) as ProcsOK, min(DNSRegister) as DNSRegister, min(SYSVOLShare) as SYSVOLShare by trx_id, host|eval duration=round(end-start)|eval "Start Time"=strftime(start,"%c")|eval "Duration (Approx)"=tostring(duration,"duration") + " - " + tostring(duration + 5*60,"duration")|rename host as "Host", ProcsOK as "Services", DNSRegister as "DNS Registration", SYSVOLShare as "SYSVOL Shared"|table "Start Time", "Duration (Approx)", "Host", "Services", "DNS Registration", "SYSVOL Shared"</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/ad_ops_dc_status?form.select118=$row.Host$
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Anomalous Events - Health</title>
+        <search>
+          <query>eventtype=msad-anomalous-events $multidropdown_host$|lookup EventCodes EventCode,LogName OUTPUTNEW desc|eval desc=if(isnull(desc),"Unknown EventCode",desc)|stats count by host,Type,EventCode,LogName,desc</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/search?q=eventtype=msad-anomalous-events host="$row.host$\" Type="$row.Type$" EventCode="$row.EventCode$" LogName="$row.LogName$"
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+</form>

@@ -1,0 +1,10 @@
+<dashboard script="cef_output_list.js" stylesheet="cef_output_list.css" isDashboard="false">
+    <label>CEF outputs</label>
+    <row>
+        <html id="element1">
+            <div class="output_list">
+                <div id="list_table"></div>
+            </div>
+        </html>
+    </row>>
+</dashboard>

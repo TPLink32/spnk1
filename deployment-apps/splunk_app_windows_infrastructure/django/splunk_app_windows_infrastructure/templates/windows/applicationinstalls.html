@@ -1,0 +1,62 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Application Installs | Splunk{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+
+{% endblock css %}
+
+{% block content %}
+
+   <div>
+
+       
+        <div class="dashboard-body container-fluid main-section-body" id="windows-panel-container">
+            <div class="dashboard-row">
+                <div class="dashboard-cell span-full" id="windows-inputs">
+                </div>
+            </div>
+        </div>
+        
+       
+        
+        
+        <div class="dashboard-row">
+            <div class="dashboard-cell span-full">
+                <div class="dashboard-panel">
+                      <div class="dashboard-element">
+                        <div class="panel-head">
+                            <h4>More reports</h4>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="windows-footer">
+                                <li><a href="/app/{{app_name}}/%40go?s=Count%20of%20total%20installs%20per%20user%20for%20the%20last%207%20days">Count of total installs per user for the last 7 days</a></li>
+                                <li><a href="/app/{{app_name}}/%40go?s=Count%20of%20total%20installs%20per%20user%20each%20day%20for%20the%20last%207%20days">Count of total installs per user each day for the last 7 days</a></li>
+                                <li><a href="/app/{{app_name}}/%40go?s=Count%20of%20total%20installs%20per%20Application%20each%20day%20for%20the%20last%207%20days">Count of total installs per Application each day for the last 7 days</a></li>
+                                <li><a href="/app/{{app_name}}/%40go?s=List%20of%20Applications%2C%20Time%20of%20install%2C%20User%20and%20Host%20for%20the%20last%207%20days">List of Applications, Time of install, User and Host for the last 7 days</a></li>
+                            </ul>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>      
+        
+
+    </div>
+            
+
+{% endblock content%}
+
+{% block js %}    
+    <script>
+        requirejs.config({ urlArgs: "bust=267225" });
+require(['jquery', 'splunk_app_windows_infrastructure/paletterenderer'], function($, renderer) {
+            renderer.render($('#windows-panel-container'), "Windows.ApplicationInstalls");
+        });
+    </script>
+{% endblock js %}

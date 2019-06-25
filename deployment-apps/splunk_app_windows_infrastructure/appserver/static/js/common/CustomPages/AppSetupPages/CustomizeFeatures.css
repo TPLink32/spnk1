@@ -1,0 +1,45 @@
+.left-right-select-multiple select {
+    height: 150px;
+}
+#customize-section h3 {
+    padding: 10px;
+    font-size: 12px;
+}
+#customize-section li.outer {
+    display: inline-block;
+    float: left;
+}
+#customize-section li {
+    list-style-type: none;
+    font-size: 18px;
+    line-height: 25px;
+    margin-top: 10px;
+}
+#customize-section .description .learn-more,
+#customize-section .description .show-details {
+    display: block;
+    font-size: 12px;
+}
+#customize-section .description {
+    line-height: 20px;
+    padding-right:20px;
+}
+#customize-section .description.collapsed {
+    display: none;
+}
+#save-button {
+    margin: 30px 10px;
+}
+.detect-output {
+    overflow-y: scroll;
+    height: 300px;
+}
+#customize-section input[type="checkbox"] {
+    margin: 0;
+}
+div.current-step {
+    padding: 4px 12px;
+}
+#save-features-button {
+    display: none;
+}

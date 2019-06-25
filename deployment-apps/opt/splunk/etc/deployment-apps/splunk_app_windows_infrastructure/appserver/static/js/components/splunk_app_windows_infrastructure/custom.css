@@ -1,0 +1,57 @@
+ul.windows-footer {
+	margin:0;
+}
+
+ul.windows-footer li {
+	display:block;
+} 
+
+.clearfix {
+	clear:both;
+}
+
+.lister {
+    float:left;
+    width:298px;
+}
+
+.dashboard-cell.span-full {
+    width: 100%;
+}
+
+.dashboard-cell.span-half {
+    width: 50%;
+}
+
+/* Added for beta feedback and idea buttons */
+.dashboard-element.help,
+.dashboard-element.feedback {
+display: inline-block;
+float: left;
+width: 100% !important;
+font-size: 14px;
+line-height: 24px;
+min-height: 150px;
+}
+
+.dashboard-element.feedback .panel-head h1 {
+	padding-top: 30px;
+}
+
+.dashboard-element.feedback a.btn {
+margin-top: 8px;
+}
+
+.dashboard-panel.feedback:after {
+background-color: whiteSmoke;
+border: 1px solid #CCC;
+border-radius: 2px 0 2px 0;
+color: #9DA0A4;
+content: "Beta Testers";
+font-size: 12px;
+font-weight: bold;
+left: -1px;
+padding: 3px 7px;
+position: absolute;
+top: -1px;
+}

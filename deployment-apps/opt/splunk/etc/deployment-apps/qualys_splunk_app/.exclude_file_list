@@ -1,0 +1,12 @@
+#*.py
+#qualys/*.py
+#qualys/splunkpopulator/*.py
+#bin/*.py
+*.pyc
+.idea
+.git
+local/
+tmp/*.xml
+tmp/*.log
+logs/*.xml
+metadata/local.meta

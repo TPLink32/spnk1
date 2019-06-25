@@ -1,0 +1,20 @@
+Sat Mar  2 12:26:18 2013 Info: Version: ###VERSION### SN: ###SN###
+Sat Mar  2 12:26:18 2013 Info: Begin Logfile
+Sat Mar  2 16:33:33 171.22.21.140 testmaillog: Info: Version: ###VERSION### SN: ###SN###
+Sat Mar  2 12:42:53 2013 Info: req:###IP### user:###USER_NAME### id:LH09MofqDf2j21zW9QN4 200 GET ###URI### HTTP/1.1 ###USER_AGENT###
+Sat Mar  2 12:42:53 2013 Info: req:###IP### user:###USER_NAME### id:LH09MofqDf2j21zW9QN5 200 GET ###URI### HTTP/1.1 ###USER_AGENT###
+Sat Mar  2 12:27:12 2013 Info: req:###IP### user:- id:LH09MofqDf2j21zW9QN1 303 POST ###URI### HTTP/1.1 ###USER_AGENT###
+Sat Mar  2 12:27:12 2013 Info: req:###IP### user:- id:LH09MofqDf2j21zW9QN2 303 POST ###URI### HTTP/1.1 ###USER_AGENT###
+Sat Mar  2 12:27:12 2013 Info: req:###IP### user:- id:LH09MofqDf2j21zW9QN4 303 POST ###URI### HTTP/1.1 ###USER_AGENT###
+Sat Mar  2 12:27:12 2013 Info: req:###IP### user:- id:LH09MofqDf2j21zW9QN5 303 POST ###URI### HTTP/1.1 ###USER_AGENT###
+Sat Mar  2 12:27:12 2013 Info: login:###IP### user:###USER_NAME### session:LH09MofqDf2j21zW9QN3
+Sat Mar  2 12:27:05 2013 Info: req:###IP### user:- id:LH09MofqDf2j21zW9QN7 200 GET ###URI### HTTP/1.1 ###USER_AGENT###
+Sat Mar  2 12:27:05 2013 Info: req:###IP### user:- id:LH09MofqDf2j21zW9QN8 200 GET ###URI### HTTP/1.1 ###USER_AGENT###
+Sat Mar  2 12:27:05 2013 Info: req:###IP### user:- id:LH09MofqDf2j21zW9QN9 200 GET ###URI### HTTP/1.1 ###USER_AGENT###
+Sat Mar  2 12:27:05 2013 Info: req:###IP### user:- id:LH09MofqDf2j21zW9QN2 200 GET ###URI### HTTP/1.1 ###USER_AGENT###
+Sat Mar  2 12:27:05 2013 Info: req:###IP### user:- id:LH09MofqDf3j21zW9QN4 200 GET ###URI### HTTP/1.1 ###USER_AGENT###
+Sat Mar  2 12:27:04 2013 Info: Session kuhuXokWC3msoib4WoJW from ###IP### not found
+Sat Mar  2 12:26:20 2013 Info: PERIODIC REPORTS: PERIODIC_REPORTS.SYSTEM.STARTED
+Sat Mar  2 12:26:20 2013 Info: https service listening on ###IP###:443
+Sat Mar  2 12:26:20 2013 Info: http service on ###IP###:80 redirecting to https port 443
+Sat Mar  2 12:26:18 2013 Info: System is coming up.

@@ -1,0 +1,31 @@
+<dashboard>
+  <label>Setup</label>
+  
+  <row>
+    <panel>
+      <title>Setup Information</title>
+      <html>
+        <p>All demo data in this app is stored in lookup files, so that it won't impact your environment by indexing more data. Additionally, the lookups are automatically excluded from distributed search so that you won't increase your bundles too big. As of the 1.0 version of the app, this hasn't been tested in big environments, so act with prudence, but by design it should be something you can install on your production SHs.</p>
+        <p>The impact of the system, on the other hand, will depend on how many searches you schedule. Each search that you decide has value and want to schedule will inherently have some sort of system load, so you should make sure that the searches you schedule are valuable in your environment.</p>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>App Dependencies</title>
+      <table>
+        <search>
+          <query>| makeresults count=4 | streamstats count as App_Num | eval App_Name = case(App_Num="1", "Splunk_Security_Essentials", App_Num="2", "Splunk_TA_ueba", App_Num="3", "SA-ThreatIntelligence", App_Num="4", "utbox") |join App_Name [| rest /services/apps/local | table title *ersion* *nabled* *isabled* | eval Status="good" | rename title as App_Name] | rex field=version "^(?&lt;majorminor&gt;\d*\.\d*)" | eval Status="", Status=if(App_Name="Splunk_Security_Essentials", "Good", Status), Status=if(App_Name="utbox", case(disabled=1, "App Disabled -- will not be able to use Shannon Entropy", isnull(disabled), "App Not Installed -- will not be able to use Shannon Entropy Randomness Detection", 1=1, "Good"), Status), Status=if(App_Name="SA-ThreatIntelligence", case(disabled=1, "App Disabled -- will not be able to send risk or notable events to ES", isnull(disabled), "App Not Installed -- will not be able to send risk or notable events to ES", majorminor &lt; 4.5, "App Too Old -- will not be able to send risk or notable events to ES",  1=1, "Good"), Status), Status=if(App_Name="Splunk_TA_ueba", case(disabled=1, "App Disabled -- will not be able to send events to Splunk UBA", isnull(disabled), "App Not Installed -- will not be able to send events to Splunk UBA", majorminor &lt; 1.1, "App Too Old -- will not be able to send events to Splunk UBA", 1=1, "Good"), Status) | table App_Name Status version | rename version as Version</query>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>

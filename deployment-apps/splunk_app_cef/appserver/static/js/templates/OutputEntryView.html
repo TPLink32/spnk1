@@ -1,0 +1,74 @@
+<div id="editOutputModal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+        <h3 id="myModalLabel"><span class="modal_new_state">New</span><span class="modal_edit_state">Edit</span> Output Group</h3>
+    </div>
+    <div class="modal-body">
+        
+        <div class="warning-message-container">
+            <div id="warning-message" class="hide alert alert-error">
+              <i class="icon-alert"></i><span id="warning-message-text"></span>
+            </div>
+        </div>
+        
+        <form class="form-horizontal">
+            <div class="control-group name-input-group">
+                <label class="control-label" >Name</label>
+		        <div class="controls">
+		          <input type="text" id="name_input" placeholder="Cannot contain / or spaces" value="" />
+		          <input type="hidden" id="name_input_hidden" />
+		          <input type="hidden" id="app_input" />
+		          <input type="hidden" id="owner_input" />
+		        </div>
+		    </div>
+        </form>
+        
+        <form class="form-horizontal">
+            <div class="control-group host-input-group">
+                <label class="control-label">Hosts to output data to:</label>
+                <div class="controls">
+                  <input type="text" name="hosts_input" id="hosts_input" placeholder='e.g. "1.2.3.4:514"' />
+                  <span class="help-block">Enter the hosts and separate by a comma</span>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+    
+    <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <button class="btn btn-primary" id="save_new" aria-hidden="true">Save</button>
+    </div>
+    
+</div>
+
+<% if( outputs.length === 0 ) { %>
+<div class="no_outputs">No outputs exist yet; <a class="new_output_group" href="#">Create a new output group</a>. </div>
+<% } else { %>
+
+<table class="table table-condensed">
+
+    <thead>
+        <tr>
+            <td>Assigned</td>
+            <td>Name</td>
+            <td>Host</td>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <% for (var i = 0; i < outputs.length; i++) { %>
+            <tr>
+                <td><input class="output_group_assignment" name="assigned_output_group" type="radio" data-output-index="<%- i %>" <% if(selected_output === outputs[i].name) { %>checked<% } %>/></td>
+                <td><a class="output_entry_edit_href" data-output-index="<%- i %>" href="#"><%- outputs[i].name %></a></td>
+                <td><%- outputs[i].hosts %></td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<% } %>
+
+<div class="extra_options">
+<a class="new_output_group" href="#"> <i class="icon-plus-circle"></i>Create new output group</a>
+</div>

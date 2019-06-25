@@ -1,0 +1,201 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Host Information | Splunk{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+
+    <style type="text/css">
+        td:nth-child(1), td:nth-child(3) {
+            text-align: right;
+        }
+        .info-links {
+            padding-left: 20px;
+        }
+        td {
+            padding: 2px 5px;
+        }
+        td span {
+            font-weight: bold;
+        }
+        .dashboard-element {
+            padding: 10px;
+        }
+        .info-links {
+            visibility: hidden;
+        }
+    </style>
+
+{% endblock css %}
+
+{% block content %}
+
+    <div>
+
+       
+        <div class="dashboard-body container-fluid main-section-body">
+            <h2>Host Information</h2>
+            <div class="dashboard-row">
+                <a class="info-links" href="/dj/splunk_app_windows_infrastructure/windows/services?HostMonitoringHost=$HostMonitoringHost$">View Services</a> <a class="info-links" href="/dj/splunk_app_windows_infrastructure/windows/processes?HostMonitoringHost=$HostMonitoringHost$">View Processes</a>
+            </div>
+            <div class="dashboard-row">
+                
+                <div class="dashboard-cell span-half">
+                    <div class="dashboard-element">
+                        <div class="panel-head">
+                            <h3>Computer Information</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table>
+                                <tr>
+                                    <td>OS:</td>
+                                    <td><span id="os-text"></span></td>
+
+                                    <td>Total Physical Memory:</td>
+                                    <td><span id="total-physical-memory-text"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Architecture:</td>
+                                    <td><span id="os-architecture-text"></span></td>
+
+                                    <td>Free Physical Memory:</td>
+                                    <td><span id="free-physical-memory-text"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Version:</td>
+                                    <td><span id="version-text"></span></td>
+
+                                    <td>Total Virtual Memory:</td>
+                                    <td><span id="total-virtual-memory-text"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Service Pack:</td>
+                                    <td><span id="service-pack-text"></span></td>
+
+                                    <td>Free Virtual Memory:</td>
+                                    <td><span id="free-virtual-memory-text"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Serial Number:</td>
+                                    <td><span id="serial-number-text"></span></td>
+
+                                    <td>Manufacturer:</td>
+                                    <td><span id="os-manufacturer-text"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Install Date:</td>
+                                    <td><span id="install-date-text"></span></td>
+
+                                    <td>Model:</td>
+                                    <td><span id="model-text"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Last Boot Time:</td>
+                                    <td><span id="last-boot-time-text"></span></td>
+
+                                    <td>Domain:</td>
+                                    <td><span id="domain-text"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-cell span-half">
+                    <div class="dashboard-element">
+                        <div class="panel-head">
+                            <h3>Processor Information</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table>
+                                <tr>
+                                    <td>Name:</td>
+                                    <td><span id="processor-name-text"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Manufacturer:</td>
+                                    <td><span id="manufacturer-text"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Architecture:</td>
+                                    <td><span id="architecture-text"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Speed:</td>
+                                    <td><span id="speed-text"></span></td>
+                                </tr>
+                                <tr>
+                                    <td>Number of Cores:</td>
+                                    <td><span id="cores-text"></span></td>
+                                </tr>
+                                 <tr>
+                                    <td>Number of Processors:</td>
+                                    <td><span id="processors-text"></span></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="dashboard-row">
+
+                <div class="dashboard-cell span-half">
+                    <div class="dashboard-element">
+                        <div class="panel-head">
+                            <h3>Disk Information</h3>
+                        </div>
+                        <div class="panel-body">
+                            {% resulttable managerid="disk-information" id="disk-info-panel" %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-cell span-half">
+                    <div class="dashboard-element">
+                        <div class="panel-head">
+                            <h3>Network Adapter Information</h3>
+                        </div>
+                        <div class="panel-body">
+                            {% resulttable managerid="network-information" id='net-info-panel' %}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+            
+
+{% endblock content%}
+
+{% block managers %}
+    {% searchmanager 
+        id="computer-and-processor" 
+        search='eventtype=hostmon_windows Type=OperatingSystem host="$Host$" | dedup host | eval OSArchitecture=Architecture | join host [search eventtype=hostmon_windows Type=Computer host="$Host$" | dedup host | eval ComputerManufacturer=Manufacturer] | join host [search eventtype=hostmon_windows Type=Processor host="$Host$" | dedup host]'|token_safe
+        autostart=False
+    %}
+
+    {% searchmanager
+        id="disk-information"
+        search='eventtype=hostmon_windows Type=Disk host="$Host$" | dedup Name | fillnull value="-" | table Name, DriveType, FileSystem, TotalSpaceKB, FreeSpaceKB | sort Name'|token_safe
+        autostart=False
+    %}
+
+    {% searchmanager
+        id="network-information"
+        search='eventtype=hostmon_windows Type=NetworkAdapter host="$Host$" | dedup Name | table Name, Manufacturer, MACAddress, Status | sort Name'|token_safe
+        autostart=False
+    %}
+{% endblock managers %}
+
+{% block js %}    
+    <script>requirejs.config({ urlArgs: "bust=267225" });
+require(['splunk_app_windows_infrastructure/windows/hostinformation']);</script>
+{% endblock js %}

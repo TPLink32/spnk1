@@ -1,0 +1,570 @@
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:52:23 +0800] 127.0.0.1 TLSv1 DHE-RSA-AES256-SHA "/iControl/iControlPortal.cgi" 769
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 127.0.0.1 - - [23/Dec/2014:14:52:23 +0800] "/iControl/iControlPortal.cgi" 200 769
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:52:08 +0800] 127.0.0.1 TLSv1 DHE-RSA-AES256-SHA "/iControl/iControlPortal.cgi" 769
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug crond[12448]: pam_unix(crond:session): session closed for user syscheck
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info crond[12449]: (syscheck) CMD (/usr/bin/system_check -q)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug crond[12448]: pam_unix(crond:session): session opened for user syscheck by (uid=0)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[4709]: pam_unix(crond:session): session closed for user syscheck
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info crond[4710]: (syscheck) CMD (/usr/bin/system_check -q)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[4709]: pam_unix(crond:session): session opened for user syscheck by (uid=0)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err syslog-ng[3458]: Initiating connection failed, reconnecting; time_reopen='60'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err syslog-ng[3458]: Connection failed; error='Network is unreachable (101)'
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:51:38 +0800] 127.0.0.1 TLSv1 DHE-RSA-AES256-SHA "/iControl/iControlPortal.cgi" 769
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 192.168.2.100 - - [23/Dec/2014:14:51:25 +0800] "/xui/common/images/favicon.ico" 200 23558
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:51:25 +0800] 192.168.2.100 TLSv1.2 DHE-RSA-AES256-SHA "/xui/common/images/favicon.ico" 23558
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:51:25 +0800] 192.168.2.100 TLSv1.2 DHE-RSA-AES256-SHA "/xui/common/css/base.css" -
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 192.168.2.100 - - [23/Dec/2014:14:51:25 +0800] "/xui/common/css/base.css" 304 -
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:51:24 +0800] 192.168.2.100 TLSv1.2 DHE-RSA-AES256-SHA "/tmui/login.jsp" 2579
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:51:24 +0800] 192.168.2.100 TLSv1.2 DHE-RSA-AES256-SHA "/xui/tmui/login/images/logo_f5.png" 193
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 192.168.2.100 - - [23/Dec/2014:14:51:24 +0800] "/xui/tmui/login/images/logo_f5.png" 302 193
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 192.168.2.100 - - [23/Dec/2014:14:51:24 +0800] "/xui/update/configuration/alert/statusmenu/coloradvisory" 302 193
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:51:24 +0800] 192.168.2.100 TLSv1.2 DHE-RSA-AES256-SHA "/xui/update/configuration/alert/statusmenu/coloradvisory" 193
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice httpd[3392]: 01070417:5: AUDIT - user admin - RAW: httpd(mod_auth_pam): user=admin(admin) partition=[All] level=Administrator tty=/sbin/nologin host=192.168.2.100 attempts=1 start="Tue Dec 23 14:12:16 2014" end="Tue Dec 23 14:51:24 2014".
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 192.168.2.100 - admin [23/Dec/2014:14:51:18 +0800] "/xui/update/configuration/alert/statusmenu/coloradvisory" 200 1679
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice tmsh[12367]: 01420002:5: AUDIT - pid=12367 user=root folder=/Common module=(tmos)# status=[Command OK] cmd_data=list sys db
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice tmsh[12363]: 01420002:5: AUDIT - pid=12363 user=root folder=/Common module=(tmos)# status=[Command OK] cmd_data=show sys mcp-state field-fmt
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info crond[12360]: (root) CMD (/usr/bin/diskmonitor)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[4618]: pam_unix(crond:session): session closed for user root
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice tmsh[4626]: 01420002:5: AUDIT - pid=4626 user=root folder=/Common module=(tmos)# status=[Command OK] cmd_data=list sys db
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice tmsh[4621]: 01420002:5: AUDIT - pid=4621 user=root folder=/Common module=(tmos)# status=[Command OK] cmd_data=show sys mcp-state field-fmt
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info crond[4619]: (root) CMD (/usr/bin/diskmonitor)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 192.168.2.100 - admin [23/Dec/2014:14:50:58 +0800] "/xui/update/configuration/alert/statusmenu/coloradvisory" 200 1679
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 127.0.0.1 - - [23/Dec/2014:14:50:53 +0800] "/iControl/iControlPortal.cgi" 200 626
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err syslog-ng[3458]: Initiating connection failed, reconnecting; time_reopen='60'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug crond[12319]: pam_unix(crond:session): session closed for user root
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info crond[12322]: (root) CMD (nice -n 19 ionice -c 3 /usr/sbin/logrotate /etc/monitors/monitors_logrotate.conf)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info crond[12321]: (root) CMD (/usr/lib/sa/sa1)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info crond[4582]: (root) CMD (/usr/lib/sa/sa1)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info crond[4583]: (root) CMD (nice -n 19 ionice -c 3 /usr/sbin/logrotate /etc/monitors/monitors_logrotate.conf)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err syslog-ng[3458]: Initiating connection failed, reconnecting; time_reopen='60'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.2.26 - admin [23/Dec/2014:14:49:10 +0800] "/iControl/iControlPortal.cgi" 200 507315
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][23/Dec/2014:14:49:10 +0800] 10.66.2.26 TLSv1.2 DHE-RSA-AES256-GCM-SHA384 "/iControl/iControlPortal.cgi" 507315
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.2.26 - admin [23/Dec/2014:14:49:09 +0800] "/iControl/iControlPortal.cgi" 200 387464
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][23/Dec/2014:14:49:08 +0800] 10.66.2.26 TLSv1.2 DHE-RSA-AES256-GCM-SHA384 "/iControl/iControlPortal.cgi" 387464
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.2.26 - - [23/Dec/2014:14:49:10 +0800] "/iControl/iControlPortal.cgi" 401 1743
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][23/Dec/2014:14:49:07 +0800] 127.0.0.1 TLSv1 DHE-RSA-AES256-SHA "/iControl/iControlPortal.cgi" 765
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][23/Dec/2014:14:48:56 +0800] 127.0.0.1 TLSv1 DHE-RSA-AES256-SHA "/iControl/iControlPortal.cgi" 769
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err syslog-ng[3458]: Initiating connection failed, reconnecting; time_reopen='60'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.2.26 - admin [23/Dec/2014:14:42:10 +0800] "/iControl/iControlPortal.cgi" 200 507315
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][23/Dec/2014:14:41:59 +0800] 10.66.2.26 TLSv1.2 DHE-RSA-AES256-GCM-SHA384 "/iControl/iControlPortal.cgi" 507315
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 01070417:5: AUDIT - client Unknown, user root - transaction #176390-2 - object 0 - modify { db_variable { db_variable_name "configsync.localconfigtime" db_variable_object_id 9885 db_variable_display_name "Configsync.LocalConfigTime" db_variable_value "1419316739" db_variable_default "0" db_variable_sync_type "private_local" db_variable_data_type "integer" db_variable_minimum "0" db_variable_maximum "2147483647" db_variable_scf_config "false" db_variable_enumerated { } db_variable_transaction_id 2294 } } [Status=Command OK]
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err tmm1[15685]: 01010221:3: Pool /Common/Pool-syslog now has available members
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 01070727:5: Pool /Common/Pool-syslog member /Common/Server-05:9514 monitor status up. [ /Common/udp: up ]  [ was down for 0hr:0min:31sec ]
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err tmm2[15685]: 01010028:3: No members available for pool /Common/Pool-syslog
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice syslog-ng[3458]: Suspending write operation because of an I/O error; fd='36', time_reopen='60'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err syslog-ng[3458]: Connection broken; time_reopen='60'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err syslog-ng[3458]: I/O error occurred while writing; fd='36', error='Connection refused (111)'
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info crond[4124]: (root) CMD (/usr/bin/copy_rrd save)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice mcpd[6758]: 01070417:5: AUDIT - client Unknown, user root - transaction #1389848-2 - object 0 - modify { db_variable { db_variable_name "configsync.localconfigtime" db_variable_object_id 9885 db_variable_display_name "Configsync.LocalConfigTime" db_variable_value "1419316740" db_variable_default "0" db_variable_sync_type "private_local" db_variable_data_type "integer" db_variable_minimum "0" db_variable_maximum "2147483647" db_variable_scf_config "false" db_variable_enumerated { } db_variable_transaction_id 603 } } [Status=Command OK]
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 err tmm[15892]: 01010221:3: Pool /Common/Pool-syslog now has available members
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice mcpd[6758]: 01070727:5: Pool /Common/Pool-syslog member /Common/Server-05:9514 monitor status up. [ /Common/udp: up ]  [ was down for 0hr:0min:31sec ]
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 err tmm3[15892]: 01010028:3: No members available for pool /Common/Pool-syslog
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice syslog-ng[3455]: Suspending write operation because of an I/O error; fd='35', time_reopen='60'
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 err syslog-ng[3455]: Connection broken; time_reopen='60'
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 err syslog-ng[3455]: I/O error occurred while writing; fd='35', error='Connection refused (111)'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug httpd[7505]: pam_bigip_authz: pam_sm_acct_mgmt returning status SUCCESS
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug httpd[6652]: pam_bigip_authz: pam_sm_acct_mgmt returning status SUCCESS
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err httpd[7505]: [error] [client 10.66.2.26] AUTHCACHE Error processing cookie 13D8462BE58F43FE297182F64F4C18E16C0B3F5C - Cookie impersonation detected from remote IP 10.66.2.26 to remote IP 10.66.2.141
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 10.66.2.141 - admin [23/Dec/2014:14:34:51 +0800] "/tmui/tmui/overview/welcome/introduction.jsp" 200 150
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info crond[11673]: (root) CMD (/usr/bin/copy_rrd save)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:33:43 +0800] 10.66.2.141 TLSv1.2 DHE-RSA-AES256-GCM-SHA384 "/iControl/iControlPortal.cgi" 26597
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 10.66.2.141 - admin [23/Dec/2014:14:33:43 +0800] "/iControl/iControlPortal.cgi" 200 26597
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:33:29 +0800] 10.66.2.141 TLSv1.2 DHE-RSA-AES256-GCM-SHA384 "/iControl/iControlPortal.cgi" 1742
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 10.66.2.141 - admin [23/Dec/2014:14:33:19 +0800] "/iControl/iControlPortal.cgi" 200 1822
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 192.168.2.100 - - [23/Dec/2014:14:31:19 +0800] "/xui/common/blank.html" 200 261
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:31:19 +0800] 192.168.2.100 TLSv1.2 DHE-RSA-AES256-SHA "/xui/common/blank.html" 261
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 192.168.2.100 - admin [23/Dec/2014:14:31:19 +0800] "/tmui/tmui/skins/Default/images/logged_in_checker.gif" 200 43
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:31:19 +0800] 192.168.2.100 TLSv1.2 DHE-RSA-AES256-SHA "/tmui/tmui/skins/Default/images/logged_in_checker.gif" 43
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 192.168.2.100 - admin [23/Dec/2014:14:31:16 +0800] "/tmui/Control/form" 200 4749
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:31:16 +0800] 192.168.2.100 TLSv1.2 DHE-RSA-AES256-SHA "/tmui/Control/form" 4749
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:31:13 +0800] 192.168.2.100 TLSv1.2 DHE-RSA-AES256-SHA "/xui/common/images/favicon.ico" 23558
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:31:04 +0800] 192.168.2.100 TLSv1.2 DHE-RSA-AES256-SHA "/tmui/Control/jspmap/tmui/locallb/rule/properties.jsp" 4784
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 192.168.2.100 - admin [23/Dec/2014:14:31:04 +0800] "/tmui/Control/jspmap/tmui/locallb/rule/properties.jsp" 200 4784
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info crond[11501]: (root) CMD (/usr/bin/diskmonitor)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 10.66.2.141 - admin [23/Dec/2014:14:31:00 +0800] "/iControl/iControlPortal.cgi" 200 456423
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice tmsh[3697]: 01420002:5: AUDIT - pid=3697 user=root folder=/Common module=(tmos)# status=[Command OK] cmd_data=list sys db
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[3690]: pam_unix(crond:session): session closed for user root
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.2.26 - - [23/Dec/2014:14:24:17 +0800] "/iControl/iControlPortal.cgi" 401 1743
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 127.0.0.1 - - [23/Dec/2014:14:23:44 +0800] "/iControl/iControlPortal.cgi" 200 765
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:21:31 +0800] 192.168.2.100 TLSv1.2 DHE-RSA-AES256-SHA "/xui/common/scripts/jquery_1.3.2.js" -
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 192.168.2.100 - - [23/Dec/2014:14:21:31 +0800] "/xui/common/scripts/jquery_1.3.2.js" 304 -
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:21:31 +0800] 192.168.2.100 TLSv1.2 DHE-RSA-AES256-SHA "/xui/common/scripts/jquery-1.4.2.min.js" -
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 192.168.2.100 - - [23/Dec/2014:14:21:31 +0800] "/xui/common/scripts/jquery-1.4.2.min.js" 304 -
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 192.168.2.100 - admin [23/Dec/2014:14:21:30 +0800] "/xui/framework/scripts/xui.js" 304 -
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:21:30 +0800] 192.168.2.100 TLSv1.2 DHE-RSA-AES256-SHA "/index.html" 4013
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 192.168.2.100 - - [23/Dec/2014:14:21:30 +0800] "/index.html" 200 4013
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 10.66.2.141 - admin [23/Dec/2014:14:21:08 +0800] "/tmui/tmui/overview/welcome/introduction.jsp" 200 150
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug crond[11053]: pam_unix(crond:session): session closed for user root
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 10.66.2.141 - admin [23/Dec/2014:14:21:04 +0800] "/xui/framework/images/icon_close.png" 200 325
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 10.66.2.141 - admin [23/Dec/2014:14:20:14 +0800] "/rrdstats/rrdstats" 200 17909
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:20:14 +0800] 10.66.2.141 TLSv1.2 DHE-RSA-AES256-SHA "/rrdstats/rrdstats" 17909
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:20:11 +0800] 10.66.2.141 TLSv1.2 DHE-RSA-AES256-SHA "/rtstats/rtstats" 13675
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 10.66.2.141 - admin [23/Dec/2014:14:18:13 +0800] "/rtstats/rtstats" 200 13998
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 127.0.0.1 - - [23/Dec/2014:14:18:01 +0800] "/iControl/iControlPortal.cgi" 200 626
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[3094]: pam_unix(crond:session): session opened for user syscheck by (uid=0)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info crond[3095]: (syscheck) CMD (/usr/bin/system_check -q)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[3094]: pam_unix(crond:session): session closed for user syscheck
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 10.66.2.141 - admin [23/Dec/2014:14:14:00 +0800] "/mcpq/mcpq" 200 3933
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[2921]: pam_unix(crond:session): session opened for user syscheck by (uid=0)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info crond[2922]: (syscheck) CMD (/usr/bin/system_check -q)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[2921]: pam_unix(crond:session): session closed for user syscheck
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice tmsh[10596]: 01420002:5: AUDIT - pid=10596 user=root folder=/Common module=(tmos)# status=[Command OK] cmd_data=show sys mcp-state field-fmt
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:11:02 +0800] 10.66.2.141 TLSv1.2 DHE-RSA-AES256-SHA "/rtstats/rtstats" 13868
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice tmsh[2697]: 01420002:5: AUDIT - pid=2697 user=root folder=/Common module=(tmos)# status=[Command OK] cmd_data=list sys db
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[2688]: pam_unix(crond:session): session closed for user root
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info crond[9915]: (root) CMD (run-parts /etc/cron.hourly)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:14:00:55 +0800] 127.0.0.1 TLSv1 DHE-RSA-AES256-SHA "/iControl/iControlPortal.cgi" 769
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug httpd[1507]: pam_bigip_authz: pam_sm_acct_mgmt returning status SUCCESS
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice tmsh[8777]: 01420002:5: AUDIT - pid=8777 user=root folder=/Common module=(tmos)# status=[Command OK] cmd_data=list sys db
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug crond[8047]: pam_unix(crond:session): session closed for user syscheck
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err httpd[7545]: [error] [client 10.66.2.141] FastCGI: incomplete headers (0 bytes) received from server "/usr/local/www/iControl/iControlPortal.cgi"
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err httpd[7545]: [error] [client 10.66.2.141] FastCGI: comm with server "/usr/local/www/iControl/iControlPortal.cgi" aborted: idle timeout (300 sec)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info crond[4932]: (syscheck) CMD (/usr/bin/system_check -q)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 10.66.2.141 - admin [23/Dec/2014:12:09:58 +0800] "/rtstats/rtstats" 200 13973
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[28828]: pam_unix(crond:session): session opened for user root by (uid=0)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[28829]: pam_unix(crond:session): session opened for user syscheck by (uid=0)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[28827]: pam_unix(crond:session): session opened for user root by (uid=0)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info crond[28830]: (syscheck) CMD (/usr/bin/system_check -q)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info crond[28831]: (root) CMD (nice -n 19 ionice -c 3 /usr/sbin/logrotate /etc/monitors/monitors_logrotate.conf)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info crond[28832]: (root) CMD (/usr/lib/sa/sa1)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[28827]: pam_unix(crond:session): session closed for user root
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[28828]: pam_unix(crond:session): session closed for user root
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[28829]: pam_unix(crond:session): session closed for user syscheck
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug crond[2782]: pam_unix(crond:session): session closed for user syscheck
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug httpd[1449]: pam_bigip_authz: pam_sm_acct_mgmt returning status SUCCESS
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err syslog-ng[3458]: Initiating connection failed, reconnecting; time_reopen='60'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err httpd[1417]: [error] server reached MaxClients setting, consider raising the MaxClients setting
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice dcoep: Closing the stdout
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice dcoep: Read pid as: 1428
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice dcoep: My pid: 1428
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice dcoep: Looking for processes no longer attached to FastCGI
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice dcoep: DCO Endpoint switched uid & gid to root
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice dcoep: DCO Endpoint started t 1.2
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip warning fcgi-[1427]: [warn] FastCGI: server "/usr/local/www/iControl/iControlPortal.cgi" started (pid 1434)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip warning fcgi-[1427]: [warn] FastCGI: server "/usr/local/www/rtstats/rtstats" started (pid 1433)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip warning fcgi-[1427]: [warn] FastCGI: server "/shared/mgmt/ep/dcoep" started (pid 1428)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip warning httpd[1417]: [warn] RSA server certificate is a CA certificate (BasicConstraints: CA == TRUE !?)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug httpd[1257]: pam_bigip_authz: pam_sm_acct_mgmt returning status SUCCESS
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:11:11:58 +0800] 10.66.2.141 TLSv1.2 DHE-RSA-AES256-SHA "/rtstats/rtstats" 13796
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[25661]: pam_unix(crond:session): session opened for user syscheck by (uid=0)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info crond[25662]: (syscheck) CMD (/usr/bin/system_check -q)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[25661]: pam_unix(crond:session): session closed for user syscheck
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011a4002:1: SNMP_TRAP: Pool /Common/GTM-Pool-01 member /Common/Virtual-Server-http (ip:port=10.66.131.189:80) state change red --> green
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011ae0f2:1: Monitor instance /Common/http 10.66.131.189:80 DOWN --> UP from 10.66.128.217 (state: success)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011a3003:1: SNMP_TRAP: Wide IP /Common/bigip.splunk.com state change red --> green
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011a1004:1: SNMP_TRAP: Pool /Common/GTM-Pool-01 state change red --> green
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011a4002:1: SNMP_TRAP: Pool /Common/GTM-Pool-01 member /Common/Virtual-Server-http-02 (ip:port=10.66.131.188:80) state change red --> green
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011a6005:1: SNMP_TRAP: VS /Common/Virtual-Server-http-02 (ip:port=10.66.131.199:80) (Server /Common/GTM-02) state change red --> green
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011ae0f2:1: Monitor instance /Common/bigip 10.66.131.199:80 DOWN --> UP from 10.66.128.63 (UP)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011a6005:1: SNMP_TRAP: VS /Common/Virtual-Server-http (ip:port=10.66.131.189:80) (Server /Common/GTM-01) state change red --> green
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 01071681:5: SNMP_TRAP: Virtual /Common/Virtual-Server-http has become available
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011ab003:1: SNMP_TRAP: Data center /Common/Data-Center-02 state change red --> green
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011a5003:1: SNMP_TRAP: Server /Common/GTM-02 (ip=10.66.128.63) state change red --> green
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 01071681:5: SNMP_TRAP: Virtual /Common/Virtual-Server-http-02 has become available
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011a5008:1: SNMP_TRAP: BIG-IP GTM /Common/GTM-02 (10.66.128.63) joined sync group default
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011ab003:1: SNMP_TRAP: Data center /Common/Data-Center-01 state change red --> green
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug ntpd[5730]: new interface(s) found: waking up resolver
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info ntpd[5730]: Listening on interface #18 eth3, fe80::250:56ff:feae:918b#123 Enabled
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 01070728:5: Node /Common/Server-05 address 10.66.128.241 monitor status up. [ /Common/icmp: up ]  [ was down for 16hrs:6mins:21sec ]
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice network: Bringing up interface eth9:  failed
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err /etc/sysconfig/network-scripts/ifup-eth: Device eth9 does not seem to be present, delaying initialization.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice ifup: Device eth9 does not seem to be present, delaying initialization.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice network: Bringing up interface eth8:  failed
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info kernel: eth3: NIC Link is Up 10000 Mbps
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info kernel: eth3: intr type 3, mode 0, 5 vectors allocated
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011a500b:1: SNMP_TRAP: Box 10.66.128.63 state change red --> green
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice gtmd[11393]: 011ae01a:5: SSL handshake complete to 10.66.128.63
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice gtmd[11393]: 011ae01c:5: Connection complete to 10.66.128.63. Starting SSL handshake
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info kernel: eth2: NIC Link is Up 10000 Mbps
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 192.168.2.100 - admin [23/Dec/2014:10:51:25 +0800] "/modules/System/icon_mainmenu.png" 200 1457
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 10.66.4.39 - - [23/Dec/2014:10:49:08 +0800] "/xui/common/blank.html" 200 261
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:10:48:43 +0800] 10.66.4.39 TLSv1.2 DHE-RSA-AES256-SHA "/xui/common/blank.html" 261
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][23/Dec/2014:10:41:08 +0800] 192.168.30.100 TLSv1.2 DHE-RSA-AES256-SHA "/xui/index.html" 916
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 192.168.30.100 - - [23/Dec/2014:10:41:04 +0800] "/xui/" 302 179
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 err csyncd[7631]: 013b0004:3: Invalid characters in /root/	: ignoring
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info sshd(pam_audit)[22424]: 01070417:6: AUDIT - user root - RAW: sshd(pam_audit): user=root(root) partition=[All] level=Administrator tty=ssh host=10.66.2.141 attempts=1 start="Tue Dec 23 10:14:38 2014" end="Tue Dec 23 10:21:03 2014".
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info sshd(pam_audit)[22424]: user=root(root) partition=[All] level=Administrator tty=ssh host=10.66.2.141 attempts=1 start="Tue Dec 23 10:14:38 2014" end="Tue Dec 23 10:21:03 2014".
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info sshd[22424]: Received disconnect from 10.66.2.141: 11: disconnected by user
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice tmm2[15892]: 01010045:5: Bandwidth utilization is 8 Mbps, exceeded 75% of Licensed 8 Mbps
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice tmm2[15892]: 01010045:5: Bandwidth utilization is 8 Mbps, exceeded 75% of Licensed 8 Mbps
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info sshd[22596]: Accepted keyboard-interactive/pam for root from 10.66.2.141 port 53589 ssh2
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug sshd[22600]: pam_bigip_authz: pam_sm_acct_mgmt returning status SUCCESS
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice shell: scp -t ~/
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 127.0.0.1 - - [23/Dec/2014:10:14:22 +0800] "/iControl/iControlPortal.cgi" 200 626
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info crond[21703]: (root) CMD (run-parts /etc/cron.hourly)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 10.66.2.141 - - [23/Dec/2014:09:35:48 +0800] "/xui/common/images/icon_loading.gif" 200 1849
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[19048]: pam_unix(crond:session): session closed for user root
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug crond[8099]: pam_unix(crond:session): session closed for user root
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug find-activate: lookup of callhome.f5.com failed, unable to resolve via root servers or local resolver
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug find-activate: external lookup selected
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info audit_forwarder: audit_forwarder started.
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice syslog-ng[3455]: Configuration reload request received, reloading configuration;
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 debug find-activate: lookup of callhome.f5.com failed, unable to resolve via root servers or local resolver
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 err httpd[14075]: [error] [client 10.66.4.23] AUTHCACHE Error processing cookie 968AE4285DD9C1596ECA5529125609D808D8FEED - Cookie impersonation detected from remote IP 10.66.4.23 to remote IP 10.66.2.141, referer: https://10.66.128.63/xui/
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 alert gtmd[11568]: 011ae0f2:1: Monitor instance /Common/bigip 10.66.131.188:80 UP --> DOWN from 10.66.128.217 (DOWN)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 alert gtmd[11568]: 011ab004:1: SNMP_TRAP: Data center /Common/Data-Center-01 state change green --> red (No enabled servers available)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 alert gtmd[11568]: 011a5004:1: SNMP_TRAP: Server /Common/GTM-01 (ip=10.66.128.217) state change green --> red (No enabled VS available)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 alert gtmd[11568]: 011a6006:1: SNMP_TRAP: VS /Common/Virtual-Server-http-02 (ip:port=10.66.131.188:80) (Server /Common/GTM-01) state change green --> red (No nodes up)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 alert gtmd[11568]: 011ae0f2:1: Monitor instance /Common/bigip 10.66.131.190:443 UP --> DOWN from 10.66.128.217 (DOWN)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 alert gtmd[11568]: 011a6006:1: SNMP_TRAP: VS /Common/Virtual-Server-https (ip:port=10.66.131.190:443) (Server /Common/GTM-01) state change green --> red (No nodes up)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 alert gtmd[11568]: 011ae0f2:1: Monitor instance /Common/bigip 10.66.131.188:80 DOWN --> UP from 10.66.128.217 (UP)
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 alert gtmd[11568]: 011ab003:1: SNMP_TRAP: Data center /Common/Data-Center-01 state change red --> green
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 alert gtmd[11568]: 011a5003:1: SNMP_TRAP: Server /Common/GTM-01 (ip=10.66.128.217) state change red --> green
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice gtmd[11393]: 011ae020:5: Connection in progress to 10.66.128.63 
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: Starting racoon
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice bigd[6768]: 01060136:5: Received links up - monitoring starts.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice sod[7641]: 010c0049:5: Tmm ready - links up.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice logger: /usr/bin/tmipsecd --tmmcount 4  ==> /usr/bin/bigstart start racoon
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice tmm[15685]: 01490555:5: 00000000: Initializing Access with max global concurrent url filtering session limit: 100
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice tmm[15685]: 01490510:5: 00000000: Initializing Access with max global concurrent access session limit: 10
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice sod[7641]: 010c0019:5: Active
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice sod[7641]: 010c0053:5: Active for traffic group /Common/traffic-group-1.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice sod[7641]: 010c006d:5: Leaving Offline for Active for dbvar not redundant.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice sod[7641]: 01140030:5: HA proc_running datasyncd is now responding.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info crond[6047]: (root) RELOAD (cron/root)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 01071682:5: SNMP_TRAP: Virtual /Common/Listener-external has become unavailable
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011ae0f2:1: Monitor instance /Common/http 10.66.131.188:80 UNKNOWN_MONITOR_STATE --> DOWN from 10.66.128.217 (state: connect failed)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice gtmd[11393]: 011a0059:5: hookOnChild: tmsh config save exited with status == 0.(success)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice tmsh[16790]: 01420002:5: AUDIT - pid=16790 user=root folder=/Common module=(tmos)# status=[Command OK] cmd_data=save sys config gtm-only partitions all
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info sflow_agent[7456]: NET-SNMP version 5.7.2 AgentX subagent connected
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011ab004:1: SNMP_TRAP: Data center /Common/Data-Center-02 state change green --> red (No enabled servers available)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011a5004:1: SNMP_TRAP: Server /Common/GTM-02 (ip=10.66.128.63) state change green --> red (No enabled VS available)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011a500c:1: SNMP_TRAP: Box 10.66.128.63 state change green --> red (Box 10.66.128.63 on Unavailable)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 01070404:5: Add a new Publication for publisherID bd and filterType 0x200
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice icrd:  7261,16115,                        tm/wom,   INFO,registerPublicUri tm/wom
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip warning sod[7641]: 01140029:4: HA proc_running datasyncd fails action is go offline and down links.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info kernel: bd uses obsolete (PF_INET,SOCK_PACKET)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice kernel: [built:20:31:06][unic] unic_cmp_addunic(1705): TMM CMP index 2, device eth2
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug tsconfd[16732]: mcpd_bridge started
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 alert gtmd[11568]: 011a5008:1: SNMP_TRAP: BIG-IP GTM /Common/GTM-01 (10.66.128.217) joined sync group default
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info perl[15457]: 01310053:6: ASM started successfully
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice icrd:  7261,16116,                       tm/util,   INFO,registerPublicUri tm/util
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice icrd:  7261,16115,                tm/transaction,   INFO,registerPublicUri tm/transaction
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice apd[11312]: 0149013f:5: APD started.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice apd[11312]: 01490164:5: APD updated device Id: bdabbb725cd72c9f7b6ffda9225a793f for self device: /Common/bigip.splunk
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice apd[11312]: 01490000:5: AccessPolicyProcessor/MasterKeyMgr.cpp func: "resetMasterKey()" line: 142 Msg: new Master Key has been updated
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice apd[11312]: 01490176:5: APD initialized as a cluster member role: Primary
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice icrd:  7261,16115,                   tm/security,   INFO,registerPublicUri tm/security
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 01070404:5: Add a new Publication for publisherID %apd and filterType (nil)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011a3004:1: SNMP_TRAP: Wide IP /Common/bigip.splunk.com state change blue --> red (No enabled pools available)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11393]: 011a1005:1: SNMP_TRAP: Pool /Common/GTM-Pool-01 state change blue --> red (No enabled pool members available)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info perl[15457]: 01310053:6: ASM starting
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice icrd:  7261,16113,                         tm/cm,   INFO,registerPublicUri tm/cm
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice apd[11312]: 01490000:5: AccessPolicyD.cpp func: "wait_for_memcached_ready()" line: 366 Msg: Successfully connected to tmm (sessiondb)...
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice sod[7641]: 01140044:5: HA reports tmm ready.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err icrd:  7261,16112,             RestRequestSender, SEVERE,Connect timeout fd:12 127.0.0.1:8100
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 alert gtmd[11568]: 011a500b:1: SNMP_TRAP: Box 10.66.128.217 state change red --> green
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err kernel: [built:20:31:06][unic] unic_rx_queue(1447): no unic on this dev eth2 
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice gtmd[11568]: 011ae01a:5: SSL handshake complete to 10.66.128.217
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice gtmd[11568]: 011ae01c:5: Connection complete to 10.66.128.217. Starting SSL handshake
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice gtmd[11568]: 011ae020:5: Connection in progress to 10.66.128.217 
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice kernel: [built:20:31:06][unic] handle_unic_mmap(863): size=327680, start=47406544875520, end=47406545203200, type=128
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice tmm2[15685]: 01010044:5: AFM feature not licensed
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice tmm2[15685]: 01490541:5: Access using device name: /Common/bigip.splunk and device ID: bdabbb725cd72c9f7b6ffda9225a793f.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice tmm2[15685]: 01010044:5: Gx feature is not licensed
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info kernel: device eth2 entered promiscuous mode
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice apd[11312]: 01490000:5: AccessPolicyD.cpp func: "wait_for_memcached_ready()" line: 362 Msg: Unable to connect to tmm (sessiondb). Trying again...
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice websso.3[16564]: 014d0003:5: 014d0000:7: ===  SSO Plugin initialization done (channel: mem://websso3)  ===
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice websso.3[16564]: 014d0003:5: MCP Subscribing with id: mem://websso3
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice websso.3[16564]: 014d0003:5: 014d0000:7: ===  Initializing SSO Plugin with channel: mem://websso3  ===
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice kernel: ltm driver: Tickless mode: 1. Pause scheduler tick: 0.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug kernel: SELinux: initialized (dev dm-14, type ext3), uses xattr
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info kernel: EXT3-fs (dm-14): mounted filesystem with ordered data mode
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info kernel: EXT3-fs (dm-14): using internal journal
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info kernel: kjournald starting.  Commit interval 5 seconds
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice apd[11312]: 01490000:5: AccessPolicyD.cpp func: "get_tmm_count()" line: 347 Msg: APD retreived TMM count: 4
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice vdi[12506]: 01490000: {} Starting VDI plugin...
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice tmsh[16457]: 01420002:5: AUDIT - pid=16457 user=root folder=/Common module=(tmos)# status=[Command OK] cmd_data=list apm epsec epsec-package
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice eca[11371]: 01620010:5: ECA log level Notice (5)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice eca[11371]: 01620010:5: ECA logdefs2file: enable
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info snmpd[7461]: NET-SNMP version 5.7.2
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info snmpd[7461]: Turning on AgentX master support.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info snmpd[7461]: custom mib initialization completed. total 0 custom mib entry registered
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug snmpd[7461]: custom mib initialization failed: couldn't read file "/config/snmp/custom_mib.tcl": no such file or directory
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug snmpd[7461]: init custom mib started
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug sflow_agent[7456]: Processed max messages (201) in a loop.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug sflow_agent[7456]: sflow_mcp.cpp::556: 
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err snmpd[7461]: duplicate registration: MIB modules mibII/sysObjectID and sysObjectID (oid .1.3.6.1.2.1.1.2).
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip warning sflow_agent[7456]: Warning: Failed to connect to the agentx master agent ([NIL]): 
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info audit_forwarder: audit_forwarder started.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info rmonsnmpd[7458]: rmonsnmpd subagent is up.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice syslog-ng[3458]: Configuration reload request received, reloading configuration;
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice /usr/libexec/eam[11368]: APM full license is required for OAM to work.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice /usr/libexec/eam[11368]: 01490000:5: APM full license is required for OAM to work.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice /usr/libexec/eam[11368]: 01490000:7: ===  EAM Plugin initialization done  ===
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice /usr/libexec/eam[11368]: 01490000:5: 0 accessgate(s) effectively initialized
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice /usr/libexec/eam[11368]: 01490000:5: License change received
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 01070404:5: Add a new Publication for publisherID cbrd and filterType (nil)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug kernel: SELinux: initialized (dev loop0, type iso9660), uses genfs_contexts
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug kernel: ISO 9660 Extensions: Microsoft Joliet Level 3
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice /usr/libexec/eam[11368]: 01490000:7: ===  Initializing EAM Plugin  ===
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice httpd: iControlPortal.cgi -SIGUSR1 succeeded
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice httpd: httpd -USR1 succeeded
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice gtmd[11393]: 011a0007:5: /usr/sbin/gtmd started ===============================
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice sod[7641]: 010c0044:5: Command:  running enable bd bigstart.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice tmsh[15984]: 01420002:5: AUDIT - pid=15984 user=root folder=/Common module=(tmos)# status=[Command OK] cmd_data=list sys daemon-ha bd running
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice gtmd[11568]: 011ae020:5: Connection in progress to 10.66.128.217 
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice icrd:  7261, 7261,                        tm/wom,   INFO,registerPublicUri tm/wom
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice icrd:  7261, 7261,                       tm/vcmp,   INFO,registerPublicUri tm/vcmp
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice icrd:  7261, 7261,                tm/transaction,   INFO,registerPublicUri tm/transaction
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice icrd:  7261, 7261,                   tm/security,   INFO,registerPublicUri tm/security
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice icrd:  7261, 7261,                         tm/cm,   INFO,registerPublicUri tm/cm
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice icrd:  7261, 7261,                  tm/analytics,   INFO,registerPublicUri tm/analytics
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice icrd:  7261, 7261,                    tm/actions,   INFO,registerPublicUri tm/actions
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice icrd:  7261, 7261,                     RestQueue,   INFO,Start: Begin process servicing threads.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice icrd:  7261, 7261,             RestRequestSender,   INFO,RestRequestSender starting
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice icrd:  7261, 7261,                    RestServer,   INFO,Start: start process done.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice big3d[7254]: 012b0000:5: big3d Version 11.6.0.0.0.401 started ===============================
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice big3d[7254]: 012b0018:5: Respawning to run /shared/bin/big3d.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice big3d[7254]: 012b0014:5: Current executable path is /usr/sbin/big3d. Checking for existence of /shared/bin/big3d.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip warning kernel: netlink: 12 bytes leftover after parsing attributes.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 01070413:5: Updated existing subscriber tmrouted with new filter class 8004000.
+TTTTTTTT 10.66.128.217 TTTTTTTT tmm1 notice tmm1[15685]: 01010001:5: pgo_use x86_64 vadc TMM Version 11.6.0.0.0.401  starting
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info promptstatusd[6075]: 01460007:6: semaphore tmm.running(1) released
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info kernel: vnic: register instance 1
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice setsebool: The allow_dynad policy boolean was changed to on by root
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice logger: /bin/sh /etc/bigstart/scripts/avr.provision  ==> /usr/bin/bigstart restart dwbld
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice apmd[11314]: 01490000:5: ApmD.cpp func: "apmd_main()" line: 456 Msg: APD cluster role: 1
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice gtmd[11568]: 011ae020:5: Connection in progress to 10.66.128.217 
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info ntpd[5730]: Listening on interface #16 lo, 127.10.0.0#123 Enabled
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 01070404:5: Add a new Publication for publisherID Zrd daemon and filterType 0x10000
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice zxfrd[7635]: 01531300:5: Cluster status changing from Unknown to Standalone.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice dnscached[11328]: command channel listening on 127.0.0.1#10953
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info dnscached[11328]: set up managed keys zone for view _default, file 'managed-keys.bind'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info dnscached[11328]: sizing zone task pool based on 0 zones
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info dnscached[11328]: generating session key for dynamic DNS
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info dnscached[11328]: listening on IPv4 interface lo, 127.0.0.1#10053
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info dnscached[11328]: using default UDP/IPv6 port range: [1024, 65535]
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info dnscached[11328]: loading configuration from '/config/named.conf'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info dnscached[11328]: using up to 4096 sockets
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info dnscached[11328]: found 4 CPUs, using 1 worker thread
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice dnscached[11328]: adjusted limit on open files from 4096 to 1048576
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice dnscached[11328]: ----------------------------------------------------
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice dnscached[11328]: available at https://www.isc.org/support
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice dnscached[11328]: corporation.  Support and training for BIND 9 are 
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice dnscached[11328]: Inc. (ISC), a non-profit 501(c)(3) public-benefit 
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice dnscached[11328]: BIND 9 is maintained by Internet Systems Consortium,
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice dnscached[11328]: built with '--prefix=/usr/bind9' '--sbindir=/usr/sbin' '--sysconfdir=/config' '--localstatedir=/var' '--exec-prefix=/usr' '--libdir=/usr/lib' '--mandir=/usr/share/man' '--with-openssl=/home/f5cm/cm/bigip11.6.0/386543/f5_build/devfs/usr' '--enable-fixed-rrset' '--enable-shared' '--enable-threads' '--enable-ipv6' '--with-libtool' '--with-libxml2=no' '--with-idn=/home/f5cm/cm/bigip11.6.0/386543/f5_build/devfs/usr' '--with-pic' '--with-gssapi=/home/f5cm/cm/bigip11.6.0/386543/f5_build/devfs' 'STD_CDEFINES=-DDIG_SIGCHASE=1' 'CFLAGS=-g -O2 -L/home/f5cm/cm/bigip11.6.0/386543/f5_build/devfs//usr/lib -L/home/f5cm/cm/bigip11.6.0/386543/f5_build/devfs/lib' 'LDFLAGS=-Wl,-rpath-link,/home/f5cm/cm/bigip11.6.0/386543/f5_build/devfs//usr/lib:/home/f5cm/cm/bigip11.6.0/386543/f5_build/devfs/lib' 'LD_LIBRARY_PATH=/home/f5cm/cm/bigip11.6.0/386543/f5_build/devfs/lib:/home/f5cm/cm/bigip11.6.0/386543/f5_build/devfs//usr/lib'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice dnscached[11328]: starting BIND 9.9.5 -f -t /var/dnscached -u named -c /config/named.conf -n 1
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug su: pam_unix(su:session): session opened for user tomcat by (uid=0)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info named[14295]: set up managed keys zone for view external, file '3c4623849a49a53911c4a3e48d8cead8a1858960bccdea7a1b978d73ec2f06d7.mkeys'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info named[14295]: listening on IPv6 interface lo, ::1#53
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info named[14295]: reading built-in trusted keys from file '/config/bind.keys'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip emerg logger: Re-starting httpd_apm
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info crontab[14240]: (root) REPLACE (root)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice ant_server.sh[13008]: stopped.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice tmsh[13345]: 01420002:5: AUDIT - pid=13345 user=root folder=/Common module=(tmos)# status=[Command OK] cmd_data=save / sys config partitions all
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice logger: /usr/bin/perl /etc/bigstart/scripts/admcloud_cc.pl none b40dcf178a5a436ea00e11843fbe3c79d385823ff35969ed528cac168c733994f640bf8467d14f46dca6fd761764932c081c450f8f76b7eb4fd8c2ad75db97c4- l7adm /var/run/admd.2cloud.pipe /var/run/admd.2bigip.pipe l4adm /var/run/bdosd.2cloud.pipe /var/run/bdosd.2bigip.pipe  ==> /usr/bin/bigstart restart admd
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice logger: /bin/sh ./run 0 0  ==> /usr/bin/bigstart singlestatus admd
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice tmsh[13494]: 01420002:5: AUDIT - pid=13494 user=root folder=/Common module=(tmos)# status=[Command OK] cmd_data=show sys license detail
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info set_ibdata1_size.pl[13481]: Setting ibdata1 size finished successfully, a new size is: 8466M
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice : 0149F000: Endpoint security package version 1.0.0-343.0 installed.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice iprepd[7455]: 015c0009:5: IP Reputation has no license currently
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice ant_server.sh[13008]: ant_server does not seem to be running, no ./run/ant_server/ant_server.pid
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice ant_server.sh[13008]: stopping ant_server...
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 01070404:5: Add a new Publication for publisherID scriptd-publisher and filterType (nil)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip warning restorecond: Reset file context /etc/mtab: system_u:object_r:etc_t:s0->system_u:object_r:etc_runtime_t:s0
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8723:: 'Provisioning successful.'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8723:: 'Setting F5::COAPI::DbVariable{provision.action} = none'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8723:: 'fyi: mcpd is up'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice logger: /usr/bin/perl /usr/bin/mprov.pl --quiet --commit apm asm gtm ltm tmos  ==> /usr/bin/bigstart start 
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8723:: '/usr/bin/bigstart start'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice logger: /usr/bin/perl /usr/bin/mprov.pl --quiet --commit apm asm gtm ltm tmos  ==> /usr/bin/bigstart start acctd aced admcloud admd apd apmd asm avrd datasyncd dnscached dosl7d dosl7d_attack_monitor eam eca fslogd gtmd httpd_apm localdbmgr logd logmysqld logstatd monpd mysql nlad omapd rba rewrite samlidpd tmipsecd tmm vxland websso zrd
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8723:: '/usr/bin/bigstart start acctd aced admcloud admd apd apmd asm avrd datasyncd dnscached dosl7d dosl7d_attack_monitor eam eca fslogd gtmd httpd_apm localdbmgr logd logmysqld logstatd monpd mysql nlad omapd rba rewrite samlidpd tmipsecd tmm vxland websso zrd'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8723:: '/bin/mknod /dev/mprov/tmm/physmem c 251 1 2>&1 1>/dev/null'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8723:: '/bin/mount -t hugetlbfs none /dev/mprov/tmm 2>&1 1>/dev/null'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8723:: '/bin/umount /dev/mprov/tmm 2>&1 1>/dev/null'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip warning mcpd[6764]: 01070995:4: get_tmstat: tmstat_sample not ready. Statsd may not be running.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8723:: 'getDiskMiB_Potential: 64452'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8723:: 'lvm test complete'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8723:: 'Number of TMM threads = 4'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8723:: 'Fetching TMM thread count.'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8723:: 'Number of TMMs = 4'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8723:: 'Fetching TMM count.'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err httpd[5940]: [error] [client 10.66.2.141] AUTHCACHE Cannot get random stream from TMM
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8723:: Invoked as: /usr/bin/mprov.pl (pid=8723) --quiet --commit apm asm gtm ltm tmos
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8497:: 'Provisioning (legacy update) successful.'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8516:: 'Provisioning (validation) successful.'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8516:: 'There are NO extra disks.'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip warning mprov:8516:: 'Bad number of TMMs (0) - setting to 4'
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8516:: Invoked as: /usr/bin/mprov.pl (pid=8516) --file /var/run/config/.mprov.temp --quiet --list
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8505:: Invoked as: /usr/bin/mprov.pl (pid=8505) --displayminimums
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info mprov:8497:: Invoked as: /usr/bin/mprov.pl (pid=8497) --quiet --legacy
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice sod[7641]: 010c005f:5: Mcpd has reached phase base, current phase is running.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice sod[7641]: 010c0057:5: Activating traffic group /Common/traffic-group-1.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice promptstatusd[6075]: 01460006:5: mcpd.running(1) released, subscribe to mcpd
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 01071436:5: CMI listener established at 192.168.1.2 port 6699
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 010713c2:5: No new proposal values detected.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 010713c1:5: Initial management network proposals triggered (initConfigStateMachine: mcp phase running).
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 01070427:5: Initialization complete.  The MCP is up and running
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpd[6764]:   -- KeyImp::kinitialize() returning (1 && 1)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpd[6764]: notify_master_key: notification sent.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpd[6764]:  -- reading file /config/bigip/kstore/master
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpd[6764]:  -- reading file /config/bigip/kstore/.unitkey
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpd[6764]: KeyImp::hash_keyfiles() called
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpd[6764]: loaded and decrypted 16 byte master key
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpd[6764]: load_master_key(false) called
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpd[6764]:  - Successfully loaded unit key
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 01071038:5: Unit key hash computed from read key:06:0f:a1:82:21:c3:6d:4c:e4:9f:20:ae:ce:16:48:0a:ea:f6:6f:3f
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 01071038:5: Unit key hash from key header: 06:0f:a1:82:21:c3:6d:4c:e4:9f:20:ae:ce:16:48:0a:ea:f6:6f:3f
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpd[6764]: Legacy Storage open: /config/bigip/kstore/.unitkey
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpd[6764]: load_unit_key(, UnitKey) called
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpd[6764]: Loading from Files
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpd[6764]:  -- Found master key database object!
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpd[6764]:    detected platform Z100, securekey NOT available
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpd[6764]: determine_platform
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpd[6764]: Setting ha number to 1 (from db variable)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpd[6764]: KeyImp::initialize() called FILES
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpsync: tm_install::MultiDisk::pv_extent_KiB -- cannot locate device for disk sdb (legacy)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip warning mcpsync: tm_install::TMOS::TMOS_binary: cannot find program: smartctl searched: /usr/sbin/smartctl Called from tm_install::Disk::Disk_selftest_status
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpsync: tm_install::Process::Process_array_member_pending -- no array exists.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpsync: tm_install::DosPtable::DosPtable_get_all_devices -- current = 1
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpsync: tm_install::MultiDisk::MultiDisk_get_reserves_MiB -- Default r_reserves->{sdb}=20480 
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpsync: tm_install::MultiDisk::MultiDisk_get_reserves_MiB -- r_reserves->{sda}=0
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpsync: tm_install::Volume::Volume_unmount -- unmounting /dev/sda1 from /mnt/tm_install/8360.KAyOFo
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpsync: tm_install::Volume::Volume_close -- handle = /dev/sda1
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpsync: new temp mount dir /mnt/tm_install/8360.KAyOFo created for sda.dat.boot
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpsync: tm_install::Volume::Volume_open -- name=sda.dat.boot, nw=yes, rp=(none)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice chmand[6430]: 012a0005:5: Interface: mgmt is UP
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info chmand[6430]: 012a0006:6: Registered chmand_publisher as a publisher with MCP
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info chmand[6430]: 012a0006:6: FPGA firmware configured type 156884820, version: 
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info chmand[6430]: 012a0006:6: macInfo.macsaPoolSize = 0
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice chmand[6430]: 012a0005:5: Platform marketing name: BIG-IP Virtual Edition
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice chmand[6430]: 012a0005:5: MCP initialized, publishing platform info.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info ntpd[5730]: Listening on interface #13 socks-tunnel, fe80::250:56ff:feae:7af3#123 Enabled
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice chmand[6430]: 012a0005:5: Start platform publishing (mcp phase = 0)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 010718ed:5: DATASYNC: Done initializing datasync configuration for provisioned modules [ asm ]
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 010718ed:5: DATASYNC: Initializing datasync configuration for provisioned modules [ asm ]
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 0107165d:5: init_system_epsec_software_status: EPSEC:: loading of Epsec software status passed
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpd[6764]:    -- hal not ready
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug mcpd[6764]: Found registered attribute, skipping
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6764]: 01071539:5: Mcpd is starting.  The BIG-IP version is 11.6.0.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug kernel: SELinux: initialized (dev tmpfs, type tmpfs), uses transition SIDs
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice chmand[6430]: 012a0005:5: Base service initialized.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info chmand[6430]: 012a0006:6: Found NIC (nic1.3) for interface (1.3) on bus(0)/slot(249) (devclass(200):bus(0):slot(f9):func(0):vendor(f5f5):devid(f500):rev(0):devindex(0)owner(2)flags(0)bandwidth_factor(1))
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info chmand[6430]: 012a0006:6: addNics()
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info chmand[6430]: 012a0006:6: (non-pci) add Mgmt Nic : devclass(200):bus(0):slot(f6):func(0):vendor(f5f5):devid(f500):rev(0):devindex(0)owner(1)flags(0)bandwidth_factor(1)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice chmand[6430]: 012a0005:5: Initialization of HAL services for platform Z100(base)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info chmand[6430]: 012a0006:6: host         = Z100
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info chmand[6430]: 012a0006:6: platform     = Z100
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info chmand[6430]: 012a0006:6: probeBits    = 0x1000013
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info chmand[6430]: 012a0006:6: family       = 0xc0000000
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info chmand[6430]: 012a0006:6: systype      = 0x71
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info chmand[6430]: 012a0006:6: Found platform 'Z100' in /PLATFORM
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice chmand[6430]: 012a0005:5: Starting ChassisManager (chmand)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice kernel: overdog[6074]: watchdog enabled ...
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info crond[6047]: (CRON) STARTUP (V5.0)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug kernel: eth3: no IPv6 routers present
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip warning fcgi-[5826]: [warn] FastCGI: server "/shared/mgmt/ep/dcoep" started (pid 5828)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info ntpd[5730]: synchronized to LOCAL(0), stratum 10
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice vmware-guestd:  succeeded
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info ntpd[5730]: frequency initialized 0.000 PPM from /var/lib/ntp/drift
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info ntpd[5730]: Listening on routing socket on fd #29 for interface updates
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info ntpd[5730]: Listening on interface #8 lo:1, 127.2.0.2#123 Enabled
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info ntpd[5730]: Listening on interface #3 lo, ::1#123 Enabled
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip debug ntpd[5730]: ntp_io: estimated max descriptors: 1024, initial socket boundary: 16
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info ntpd[5730]: precision = 0.893 usec
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice ntpd[5729]: ntpd 4.2.4p8@1.1612-o Tue Aug 12 03:42:23 UTC 2014 (1)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info sshd[5709]: Server listening on :: port 22.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice lvm2-monitor: Starting monitoring for VG vg-db-sda: succeeded
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice vgchange:   15 logical volume(s) in volume group "vg-db-sda" monitored
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice netfs: Mounting other filesystems:  succeeded
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 alert gtmd[11568]: 011ae0f2:1: Monitor instance /Common/bigip 10.66.131.190:443 UP --> DOWN from /Common/GTM-02 (no reply from big3d: timed out)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info syslog-ng[8357]: Termination requested via signal, terminating;
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info sshd(pam_audit)[27425]: 01070417:6: AUDIT - user root - RAW: sshd(pam_audit): user=root(root) partition=[All] level=Administrator tty=ssh host=192.168.2.100 attempts=1 start="Mon Dec 22 18:40:19 2014" end="Mon Dec 22 18:45:50 2014".
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info sshd(pam_audit)[27425]: user=root(root) partition=[All] level=Administrator tty=ssh host=192.168.2.100 attempts=1 start="Mon Dec 22 18:40:19 2014" end="Mon Dec 22 18:45:50 2014".
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info sshd[5708]: Received signal 15; terminating.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err httpd[5776]: [error] child process 25856 still did not exit, sending a SIGKILL
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info ntpd[5729]: Deleting interface #15 tmm0, 127.1.1.1#123, interface stats: received=0, sent=0, dropped=0, active_time=369623 secs
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info ntpd[5729]: Deleting interface #14 tmm0, fe80::298:76ff:fe54:3210#123, interface stats: received=0, sent=0, dropped=0, active_time=369623 secs
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info ntpd[5729]: Deleting interface #13 socks-tunnel, fe80::250:56ff:feae:7af3#123, interface stats: received=0, sent=0, dropped=0, active_time=369623 secs
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 alert gtmd[11568]: 011a5009:1: SNMP_TRAP: BIG-IP GTM /Common/GTM-01 (10.66.128.217) left sync group default
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err snmpd[7440]: alertd pid file not found: No such file or directory
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info snmpd[7440]: Received TERM or STOP signal...  shutting down...
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice vdi[12626]: 01490000: {} VDI plugin has been stopped.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err tsconfd[16883]: dcc|ERR|Dec 22 18:45:13.124|16883| [tsconfd::ASMCONFIG_CALL, update mcp db] Failed due to Thrift exception: connect() failed: Connection refused
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err zrd[11814]: 01150d00:3: Error 'Cannot assign requested address' during netlink err
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err tsconfd[16883]: dcc|ERR|Dec 22 18:45:12.958|16883| [tsconfd::ASMCONFIG_CALL, update mcp device] Failed due to Thrift exception: No more data to read.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info su(pam_audit)[6407]: 01070417:6: AUDIT - user tomcat - RAW: su(pam_audit): user=tomcat(root) partition=(unknown) level=(unknown) tty=(unknown) host=(unknown) attempts=1 start="Thu Dec 18 12:03:42 2014" end="Mon Dec 22 18:45:12 2014".
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info su(pam_audit)[6407]: user=tomcat(root) partition=(unknown) level=(unknown) tty=(unknown) host=(unknown) attempts=1 start="Thu Dec 18 12:03:42 2014" end="Mon Dec 22 18:45:12 2014".
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6743]: 01070406:5: Per-invocation log rate exceeded; throttling.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6743]: 01070406:5: Removed publication with publisher id scriptd-publisher
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice alertd[7617]: 01100043:5: logcheck Notice: Disconnect mcpd 0
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 alert gtmd[11568]: 011ab004:1: SNMP_TRAP: Data center /Common/Data-Center-01 state change green --> red (No enabled servers available)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice big3d[7234]: 012b0001:5: big3d exiting ===============================
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6743]: 01070406:5: Removed publication with publisher id %apd
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 alert gtmd[11568]: 011a500c:1: SNMP_TRAP: Box 10.66.128.217 state change green --> red (Box 10.66.128.217 on Unavailable)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info perl[15647]: 01310053:6: Caught signal SIGTERM, Stopping ASM
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice logger: /bin/bash /etc/rc6.d/K03bigstart stop  ==> /usr/bin/bigstart stop 
+TTTTTTTT 10.66.128.217 TTTTTTTT -- debug root[6058]: pam_unix(login:session): session closed for user root
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info login(pam_audit)[6058]: user=root(root) partition=[All] level=Administrator tty=tty1 host=(unknown) attempts=1 start="Fri Dec 19 10:18:16 2014" end="Mon Dec 22 18:45:09 2014".
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert init: Mon Dec 22 18:45:09 2014  Switching to runlevel: 6 (reboot)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice shutdown[27844]: Mon Dec 22 18:45:09 2014 : shutting down for system reboot on behalf of root
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info sshd[27425]: Accepted keyboard-interactive/pam for root from 192.168.2.100 port 51846 ssh2
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice tmsh[27287]: 01420002:5: AUDIT - pid=27287 user=root folder=/Common module=(tmos)# status=[Command OK] cmd_data=list sys db dhclient.mgmt one-line
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip err sshd[26613]: error: PAM: Authentication failure for root from 10.66.2.141
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info sshd(pam_audit)[26617]: 01070417:6: AUDIT - user root - RAW: sshd(pam_audit): User=root tty=ssh host=10.66.2.141 failed to login after 1 attempts (start="Mon Dec 22 18:24:18 2014" end="Mon Dec 22 18:24:26 2014").
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info sshd(pam_audit)[26617]: User=root tty=ssh host=10.66.2.141 failed to login after 1 attempts (start="Mon Dec 22 18:24:18 2014" end="Mon Dec 22 18:24:26 2014").
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice sshd[26617]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=10.66.2.141  user=root
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice mcpd[6758]: 01071681:5: SNMP_TRAP: Virtual /Common/Virtual-Server-http-02 has become available
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 alert gtmd[11568]: 011ab003:1: SNMP_TRAP: Data center /Common/Data-Center-02 state change red --> green
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice mcpd[6758]: 01071681:5: SNMP_TRAP: Virtual /Common/Virtual-Server-http has become available
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_acc] 10.66.4.39 - admin [22/Dec/2014:15:20:27 +0800] "/xui/framework/images/background_button_create.png" 200 1208
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 info logger: [ssl_req][22/Dec/2014:15:20:20 +0800] 10.66.4.39 TLSv1.2 DHE-RSA-AES256-SHA "/index.html" 4013
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice httpd[31905]: 01070417:5: AUDIT - user admin - RAW: httpd(mod_auth_pam): user=admin(admin) partition=[All] level=Administrator tty=/sbin/nologin host=10.66.4.39 attempts=1 start="Mon Dec 22 14:04:15 2014" end="Mon Dec 22 15:20:20 2014".
+TTTTTTTT 10.66.128.63 TTTTTTTT bigip-02 notice httpd[31905]: 01070417:5: AUDIT - user admin - RAW: httpd(mod_auth_pam): user=admin(admin) partition=[All] level=Administrator tty=/sbin/nologin host=10.66.4.39 attempts=1 start="Mon Dec 22 14:04:15 2014" end="Mon Dec 22 15:20:20 2014".
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info sshd[2825]: Disconnecting: Timeout, your session not responding.
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.23 - admin [22/Dec/2014:15:05:12 +0800] "/xui/update/configuration/alert/statusmenu/coloradvisory" 200 1665
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][22/Dec/2014:15:05:12 +0800] 10.66.4.23 TLSv1.2 DHE-RSA-AES256-SHA "/xui/update/configuration/alert/statusmenu/coloradvisory" 1665
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][22/Dec/2014:15:04:55 +0800] 10.66.4.23 TLSv1.2 DHE-RSA-AES256-SHA "/xui/update/configuration/alert/statusmenu/coloradvisory" 1665
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][22/Dec/2014:15:04:29 +0800] 10.66.4.23 TLSv1.2 DHE-RSA-AES256-SHA "/xui/common/blank.html" 261
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.23 - - [22/Dec/2014:15:04:29 +0800] "/xui/common/blank.html" 200 261
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.23 - admin [22/Dec/2014:15:04:29 +0800] "/tmui/tmui/skins/Default/images/logged_in_checker.gif" 200 43
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][22/Dec/2014:15:04:29 +0800] 10.66.4.23 TLSv1.2 DHE-RSA-AES256-SHA "/tmui/tmui/skins/Default/images/logged_in_checker.gif" 43
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][22/Dec/2014:15:04:28 +0800] 10.66.4.23 TLSv1.2 DHE-RSA-AES256-SHA "/tmui/Control/jspmap/tmui/locallb/rule/properties.jsp" 4281
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.23 - admin [22/Dec/2014:15:04:28 +0800] "/tmui/Control/jspmap/tmui/locallb/rule/properties.jsp" 200 4281
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][22/Dec/2014:15:04:21 +0800] 10.66.4.23 TLSv1.2 DHE-RSA-AES256-SHA "/xui/common/blank.html" 261
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.23 - admin [22/Dec/2014:15:04:21 +0800] "/xui/framework/images/banner_device.png" 200 1027
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][22/Dec/2014:15:04:21 +0800] 10.66.4.23 TLSv1.2 DHE-RSA-AES256-SHA "/xui/framework/images/banner_device.png" 1027
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.23 - - [22/Dec/2014:15:04:08 +0800] "/xui/common/scripts/api.js" 200 2081
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.23 - admin [22/Dec/2014:15:04:08 +0800] "/modules/Applications/icon_mainmenu.png" 200 2452
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][22/Dec/2014:15:04:06 +0800] 10.66.4.23 TLSv1.2 DHE-RSA-AES256-SHA "/xui/update/mainmenu" 101647
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.23 - admin [22/Dec/2014:15:04:06 +0800] "/xui/update/mainmenu" 200 101647
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][22/Dec/2014:15:04:07 +0800] 10.66.4.23 TLSv1.2 DHE-RSA-AES256-SHA "/xui/common/scripts/jquery-1.4.2.min.js" 28604
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.23 - - [22/Dec/2014:15:04:07 +0800] "/xui/common/scripts/jquery-1.4.2.min.js" 200 28604
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][22/Dec/2014:15:04:07 +0800] 10.66.4.23 TLSv1.2 DHE-RSA-AES256-SHA "/xui/common/scripts/jquery_1.3.2.js" 22624
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.23 - - [22/Dec/2014:15:04:07 +0800] "/xui/common/scripts/jquery_1.3.2.js" 200 22624
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.23 - - [22/Dec/2014:15:04:07 +0800] "/tmui/tmui/login/scripts/base.js" 200 446
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][22/Dec/2014:15:04:07 +0800] 10.66.4.23 TLSv1.2 DHE-RSA-AES256-SHA "/tmui/tmui/login/scripts/base.js" 446
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][22/Dec/2014:15:04:06 +0800] 10.66.4.23 TLSv1.2 DHE-RSA-AES256-SHA "/xui/index.html" 916
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.23 - admin [22/Dec/2014:15:04:06 +0800] "/tmui/tmui/system/settings/redirect.jsp" 200 252
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][22/Dec/2014:15:04:05 +0800] 10.66.4.23 TLSv1.2 DHE-RSA-AES256-SHA "/index.html" 4013
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.23 - - [22/Dec/2014:15:04:05 +0800] "/index.html" 200 4013
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice httpd[14815]: 01070417:5: AUDIT - user admin - RAW: httpd(mod_auth_pam): user=admin(admin) partition=[All] level=Administrator tty=/sbin/nologin host=10.66.4.23 attempts=1 start="Mon Dec 22 15:04:05 2014".
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.23 - - [22/Dec/2014:15:04:02 +0800] "/tmui/tmui/login/welcome.jsp" 200 516
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.23 - - [22/Dec/2014:15:04:02 +0800] "/xui/common/css/base.css" 304 -
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][22/Dec/2014:15:04:02 +0800] 10.66.4.23 TLSv1.2 DHE-RSA-AES256-SHA "/xui/common/css/base.css" -
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.39 - admin [22/Dec/2014:14:48:55 +0800] "/xui/update/configuration/alert/statusmenu/coloradvisory" 200 1665
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.39 - - [22/Dec/2014:14:37:10 +0800] "/xui/common/blank.html" 200 261
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.39 - admin [22/Dec/2014:14:36:35 +0800] "/tmui/tmui/skins/Default/css/print.css" 304 -
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][22/Dec/2014:14:36:34 +0800] 10.66.4.39 TLSv1.2 DHE-RSA-AES256-SHA "/tmui/tmui/login/scripts/logged_in_checker.js" -
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.4.39 - - [22/Dec/2014:14:36:34 +0800] "/tmui/tmui/login/scripts/logged_in_checker.js" 304 -
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.2.141 - admin [22/Dec/2014:14:31:00 +0800] "/tmui/tmui/skins/Default/images/logged_in_checker.gif" 200 43
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.2.141 - - [22/Dec/2014:14:24:35 +0800] "/xui/common/blank.html" 200 261
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11524]: 011a6006:1: SNMP_TRAP: VS /Common/Virtual-Server-http-02 (ip:port=10.66.131.199:80) (Server /Common/GTM-02) state change green --> red (No nodes up)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11524]: 011a5004:1: SNMP_TRAP: Server /Common/GTM-02 (ip=10.66.128.63) state change green --> red (No enabled VS available)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11524]: 011ab004:1: SNMP_TRAP: Data center /Common/Data-Center-02 state change green --> red (No enabled servers available)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11524]: 011ae0f2:1: Monitor instance /Common/bigip 10.66.131.199:80 UP --> DOWN from 10.66.128.63 (DOWN)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6743]: 01071682:5: SNMP_TRAP: Virtual /Common/Virtual-Server-https has become unavailable
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11524]: 011a6006:1: SNMP_TRAP: VS /Common/Virtual-Server-https (ip:port=10.66.131.190:443) (Server /Common/GTM-01) state change green --> red (No nodes up)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11524]: 011ae0f2:1: Monitor instance /Common/bigip 10.66.131.190:443 UP --> DOWN from 10.66.128.217 (DOWN)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][22/Dec/2014:14:24:32 +0800] 10.66.2.26 TLSv1.2 DHE-RSA-AES256-GCM-SHA384 "/iControl/iControlPortal.cgi" 1743
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip notice mcpd[6743]: 01071682:5: SNMP_TRAP: Virtual /Common/Virtual-Server-http has become unavailable
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11524]: 011a6006:1: SNMP_TRAP: VS /Common/Virtual-Server-http (ip:port=10.66.131.189:80) (Server /Common/GTM-01) state change green --> red (No nodes up)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip alert gtmd[11524]: 011ae0f2:1: Monitor instance /Common/bigip 10.66.131.189:80 UP --> DOWN from 10.66.128.217 (DOWN)
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 127.0.0.1 - - [22/Dec/2014:14:23:47 +0800] "/iControl/iControlPortal.cgi" 200 626
+Dec 22 14:23:54 10.66.128.217 |:80|device_product=Splunk-iRule-LB_FAILED|10.66.128.217|GET|"/"|HTTP/0.9||"-"||||2014/12/22 14:23:49||/Common/Pool-02 0
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_req][22/Dec/2014:14:23:32 +0800] 127.0.0.1 TLSv1 DHE-RSA-AES256-SHA "/iControl/iControlPortal.cgi" 626
+Dec 22 14:23:38 10.66.128.217 |device_product=Splunk-iRule-DNS_RESPONSE|10.66.128.224|10.66.128.217|teredo.ipv6.microsoft.com|0|
+TTTTTTTT 10.66.128.217 TTTTTTTT bigip info logger: [ssl_acc] 10.66.2.26 - admin [22/Dec/2014:14:21:45 +0800] "/iControl/iControlPortal.cgi" 200 671
+Dec 22 14:21:54 10.66.128.217 |:80|device_product=Splunk-iRule-LB_FAILED|10.66.128.217|GET|"/"|HTTP/0.9||"-"||||2014/12/22 14:21:49||/Common/Pool-02 0

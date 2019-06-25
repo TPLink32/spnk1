@@ -1,0 +1,71 @@
+<dashboard>
+  <label>Infoblox Knowledgeitems</label>
+  <row>
+    <panel>
+      <title>Objects (|inputlookup infoblox_objects)</title>
+      <table>
+        <search>
+          <query>|inputlookup infoblox_objects | table object,description</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Structs (|inputlookup infoblox_structs)</title>
+      <table>
+        <search>
+          <query>|inputlookup infoblox_structs | table struct,description</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Search operators (|inputlookup infoblox_searchmodifier)</title>
+      <table>
+        <search>
+          <query>|inputlookup infoblox_searchmodifier | table searchmodifier,description</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Additional fields (| inputlookup infoblox_api_fieldlist)</title>
+      <table>
+        <search>
+          <query>| inputlookup infoblox_api_fieldlist | table object,fields</query>
+          <earliest>@d</earliest>
+          <latest>now</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>

@@ -1,0 +1,82 @@
+<form script="dashboard_entry.js">
+  <label>Auto-Created Incidents</label>
+  <fieldset autoRun="true" submitButton="false">
+    <input id="time" type="time" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliest>-7d@h</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <single>
+        <title>Total ServiceNow Incidents Created by Splunk</title>
+        <search>
+          <query>eventtype=snow_incident  | dedup sys_id  | rex field=short_description "(?&lt;resource_exists&gt;[^:]+):\s[^(]+\([^)]+\)"   | where (resource_exists !="NULL" ) OR (number LIKE "SPL%") | stats count</query>
+        </search>
+        <option name="linkView">search</option>
+        <option name="drilldown">none</option>
+      </single>
+    </panel>
+    <panel>
+      <single>
+        <title>Total ServiceNow Events Created by Splunk</title>
+        <search>
+          <query>eventtype=snow_em_event | rex field=_raw ",source=\"(?&lt;source_snow&gt;[^\"]+)\""| search source_snow=Splunk | stats count</query>
+        </search>
+        <option name="linkView">search</option>
+        <option name="drilldown">none</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Incident State - Last 24h</title>
+        <search>
+          <query>eventtype=snow_incident   | dedup sys_id   | rex field=short_description "(?&lt;resource_exists&gt;[^:]+):\s[^(]+\([^)]+\)"   | where (resource_exists !="NULL" )  OR (number LIKE "SPL%")  | stats count by incident_state_name|rename incident_state_name as State</query>
+        </search>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Incident Table</title>
+        <search>
+          <query>eventtype=snow_incident  | dedup sys_id   | rex field=short_description "(?&lt;resource_exists&gt;[^:]+):\s[^(]+\([^)]+\)"| where (resource_exists !="NULL") OR (number LIKE "SPL%") | table number,short_description, incident_state_name sys_created_on|rename incident_state_name as State|rename short_description as Description| rename number as Incident|rename sys_created_on as Created</query>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>

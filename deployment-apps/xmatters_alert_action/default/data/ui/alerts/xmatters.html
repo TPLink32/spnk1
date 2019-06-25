@@ -1,0 +1,32 @@
+<form class="form-horizontal form-complex">
+    <div class="control-group">
+        <label class="control-label" for="xmatters_recipients">Recipients</label>
+        <div class="controls">
+            <textarea name="action.xmatters.param.recipients" id="xmatters_recipients" />
+            <span class="help-block">Enter the groups and people you want to receive notifications (separated by semicolons).</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="xmatters_priority">Priority</label>
+        <div class="controls">
+            <select name="action.xmatters.param.priority" id="xmatters_priority">
+              <option value="HIGH">High</option>
+              <option value="MEDIUM">Medium</option>
+              <option value="LOW">Low</option>
+            </select>
+        </div>
+    </div>
+<!-- 
+    <span class="help-block">Enter the Group or User to recieve the notification separated by a semicolon (;).</span>
+    <splunk-control-group label="Recipients">
+        <splunk-text-input name="action.chat.param.recipients" id="xmatters_recipients">
+        </splunk-text-input>
+    </splunk-control-group>
+    <splunk-control-group label="Priority">
+      <splunk-select name="action.xmatters.param.priority" id="xmatters_priority">
+        <option>High</option>
+        <option>Medium</option>
+        <option>Low</option>
+      </splunk-select>
+    </splunk-control-group> -->
+</form>

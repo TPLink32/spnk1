@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nav>
+	<view name="flashtimeline"/>
+	<view name="welcome" default="true"/>
+	<view name="configuration"/>
+	<collection label="Reference">
+		<view name="ldapsearch"/>
+		<view name="ldapfetch"/>
+		<view name="ldapfilter"/>
+		<view name="ldapgroup"/>
+		<view name="ldaptestconnection"/>
+	</collection>
+</nav>

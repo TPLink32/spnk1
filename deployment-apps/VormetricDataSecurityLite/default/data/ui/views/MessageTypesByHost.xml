@@ -1,0 +1,33 @@
+<form>
+  <label>Message Types by Severity</label>
+
+  <searchTemplate> sourcetype="rfc5424_syslog" sev="$sev$"
+                   | top sev msgid by host | sort -count
+  </searchTemplate>
+
+  <fieldset>
+      <input type="radio" token="sev">
+	  	<label>Severity</label>
+		<choice value="*">All</choice>
+        <choice value="FATAL">Fatal</choice>
+        <choice value="ERROR">Error</choice>
+        <choice value="WARN">Warn</choice>
+        <choice value="INFO">Info</choice>
+        <choice value="DEBUG">Debug</choice>
+      </input>
+
+      <input type="time">
+        <default>Last 7 days</default>
+      </input>
+
+  </fieldset>
+  
+	<row>
+      <table>
+            <title>Results</title>
+            <option name="count">20</option>
+			<option name="dataOverlayMode">heatmap</option>
+			<option name="showPager">true</option>
+      </table>
+  </row>
+</form>

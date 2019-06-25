@@ -1,0 +1,52 @@
+.mltk-experiments-type-selector {
+    display: none;
+    padding-top: 10px;
+}
+
+.mltk-experiments-type-selector h2 {
+    text-align: center;
+    padding-top: 30px;
+    font-weight: 200;
+}
+
+.mltk-experiments-type-list {
+    max-width: 1000px;
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+}
+
+.mltk-experiments-type-list > li {
+    display: inline-block;
+    width: 250px;
+    background: white;
+    padding: 8px 18px;
+    margin: 20px;
+    vertical-align: top;
+    border: 2px solid;
+    border-color: white;
+    height: 180px;
+}
+
+.mltk-experiments-type-list > li:hover {
+    border-color: #1e93c6;
+    cursor: pointer;
+}
+
+.mltk-experiments-type-list-title {
+    margin-bottom: 10px;
+}
+
+.mltk-experiments-type-list-title > * {
+    vertical-align: middle;
+}
+
+.mltk-experiments-type-list-title > .icon {
+    font-size: 40px;
+    color: #1e93c6;
+}
+
+.mltk-experiments-type-list-title > h3 {
+    display: inline-block;
+    margin-left: 10px;
+}

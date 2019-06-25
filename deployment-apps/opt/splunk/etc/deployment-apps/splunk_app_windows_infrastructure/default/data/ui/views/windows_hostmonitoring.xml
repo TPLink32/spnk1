@@ -1,0 +1,80 @@
+<form>
+  <label>Hosts Overview</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="multiselect" token="HostMonitoringMultiHost" searchWhenChanged="true">
+      <label>Hosts</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_hostmon_system  | dedup Host | sort Host</query>
+      </search>
+      <fieldForLabel>Host</fieldForLabel>
+      <fieldForValue>Host</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valuePrefix>host="</valuePrefix>
+      <valueSuffix>"</valueSuffix>
+      <delimiter> OR  </delimiter>
+    </input>
+    <input type="text" token="HostMonitoringMultiHostWildcard" searchWhenChanged="true">
+      <label>Host (text search)</label>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="OSVersion" searchWhenChanged="true">
+      <label>OS version</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_hostmon_machine_details  | dedup OS | sort OS</query>
+      </search>
+      <fieldForLabel>OS</fieldForLabel>
+      <fieldForValue>OS</fieldForValue>
+      <initialValue>*</initialValue>
+      <default>*</default>
+    </input>
+    <input type="dropdown" token="Domain" searchWhenChanged="true">
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_hostmon_machine_details | search OS=$OSVersion$ | dedup Domain | sort Domain</query>
+      </search>
+      <fieldForLabel>Domain</fieldForLabel>
+      <fieldForValue>Domain</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="dropdown" token="Architecture" searchWhenChanged="true">
+      <choice value="*">All</choice>
+      <search>
+        <query>| inputlookup windows_hostmon_machine_details | search OS="$OSVersion$" Domain="$Domain$" | dedup Architecture | sort Architecture</query>
+      </search>
+      <fieldForLabel>Architecture</fieldForLabel>
+      <fieldForValue>Architecture</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Host Information</title>
+        <search>
+          <query>eventtype="hostmon_windows" (Type=Computer OR Type=OperatingSystem) | stats latest(OS) as OS, latest(Domain) as Domain, latest(Architecture) as Architecture by host | search $HostMonitoringMultiHost$ host="$HostMonitoringMultiHostWildcard$" OS="$OSVersion$" Domain="$Domain$" Architecture="$Architecture$"</query>
+          <earliest>0</earliest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+        <drilldown target="_blank">
+      <link>
+              <![CDATA[
+            /app/splunk_app_windows_infrastructure/host_information?form.host=$row.host$
+      ]]>
+            </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+</form>

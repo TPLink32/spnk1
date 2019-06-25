@@ -1,0 +1,87 @@
+<DOCTYPE html>
+	<html>
+	<head>
+	<title>Thales Data Security Message Catalog: GEN1279I</title>
+	</head>
+	
+	<script language="javascript" type="text/javascript" >
+	function jumpto(x,y){
+		if (y != "") {
+			var t = "";
+			if (x != "") {
+				t = x + "_";
+			}
+			t = t + y + ".html";
+			location.replace (t);
+		}
+	}
+	</script>
+	<body style="position:absolute;top:0px;bottom:0px;left:0px;right:0px">
+
+	<div id="menu" 
+	 style="background-color:#3fbedb;padding:10px;width:auto;height:92%;float:left;">
+
+	<h2>Navigation</h2><div id="buttons" style="text-align:center">
+<p><button type="button" onClick="jumpto('idx','GEN')">(up)</button>
+<p><button type="button" onClick="jumpto('msg','GEN1276I')">Previous</button>
+<p><button type="button" onClick="jumpto('msg','GEN1280E')">Next</button>
+</dl><form name="form3">
+	<select name="jumpmenu" 
+			onChange="jumpto('msg',document.form3.jumpmenu.options[document.form3.jumpmenu.options.selectedIndex].value)">
+	<option value="">Message ID</option>
+	<option value="GEN1253E">GEN1253E</option>
+<option value="GEN1276I">GEN1276I</option>
+<option value="GEN1279I">GEN1279I</option>
+<option value="GEN1280E">GEN1280E</option>
+ 
+	</select>
+	</form>
+	<form name=form4>
+	<p>
+	or enter ID<br>
+	<input type="text" size="8" maxlength="8" name="msgid"><br>
+	<input type="text" style="display:none;">
+	<button type="button" onclick="jumpto('msg',document.form4.msgid.value)">
+	Lookup</button>
+	</form>
+	</div>
+	</div>
+	<div id="content" style="width:75%;padding:10px;color:#094e6c;float:left;">
+
+	<h1>Message ID</h1>
+	<ul>
+		GEN1279I
+	</ul>
+
+	<h2>Severity</h2>
+	<ul>
+		Information
+	</ul>
+
+	<h2>Long Form</h2> <ul>Trusted channel established to {0}.</ul>
+	<h2>Short Form</h2> <ul>trusted channel established
+			<h3>Parameters</h3>
+			<ul>
+			<table cellpadding="3" border="1">
+			<tr>
+			<th>Label</th>
+			<th>CEF Label</th>
+			<th>Type</th>
+			<th>Usage</th>
+			</tr>
+					<tr>
+					<td>shost</td>
+					<td>shost</td>
+					<td>Text</td>
+					<td>Source host name</td>
+					</tr></table></ul>
+</ul><h2>Description</h2>
+<ul>None
+	</ul>
+	</div>
+	<div id="footer" style="clear:both;text-align:center;">
+	Copyright &copy; 2017
+ Thales e-Security Inc.
+	</div>
+	</body>
+	</html> 

@@ -1,0 +1,115 @@
+<setup>
+    <block title="Splunk App for CEF Setup">
+        <text>
+        
+            <![CDATA[
+            <style>
+                #item-blockFieldset-0 legend {
+                    font-size: 13pt;
+                }
+        
+                #eaiform > h2 {
+                    display: none;
+                }
+                
+            </style>
+
+            ]]>
+      
+            <![CDATA[
+            The Splunk App for CEF (Common Event Format) has been successfully installed.
+            A few additional steps are required to complete the configuration.
+            Review the steps below and when you have made your selections, click <b>Save</b> to complete the setup. 
+            ]]>
+            
+            <![CDATA[
+            <p>
+            If you need help, please <a target="_blank" href="http://www.splunk.com/support">contact support.</a>
+            </p>
+            ]]>
+            
+        </text>
+    </block>
+    
+    <block title="Realtime" endpoint="/configs/conf-limits/" >
+        <text>
+            <![CDATA[
+            Indexed real time allows real time searches to be multi-tasked for greatly increased performance. See <a target="_blank" href="http://docs.splunk.com/Documentation/Splunk/latest/Search/Aboutrealtimesearches">About realtime searches</a> for more information on this topic.
+            ]]>
+        </text>
+        
+        <input entity="realtime" field="indexed_realtime_use_by_default">
+            <label>Enable Indexed Realtime</label>
+            <type>bool</type>
+        </input>
+        
+        <input entity="realtime" field="indexed_realtime_disk_sync_delay">
+            <label>Number of seconds to wait for disk flushes to finish with</label>
+            <type>text</type>
+            <validation>\d+</validation>
+        </input>
+    </block>
+    
+    <block title="Indexer Setup" endpoint="/admin/splunk_app_cef" entity="general_settings">
+        <text>
+            <![CDATA[
+            Define your indexers so that the Splunk can configure indexing to work with CEF output. The indexers should be added as a comma separated list of hosts (with the port number).
+            <p style="margin-top: 12px">
+            <strong style="color:red">Note:</strong> that enabling the CEF output app will cause this host to stop local indexing; all local logs will be sent to the indexers instead. This app should only be installed on a dedicated search head.
+            </p>
+            
+            <script>
+            
+            function isValidHost( host ) {
+	            
+	            var host_re = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])([:][0-9]+)?$/;
+	            var ip_re = /^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])([:][0-9]+)?$/;
+	            
+	            if( host_re.test(host) || ip_re.test(host) ){
+	                return true;
+	            }
+	            
+	            return false;
+	        }
+            
+            function stopSaveIfValidationFails(){
+              
+                // 
+                var indexers_list = $('[name*=indexers]').val();
+                
+                if( indexers_list.length === 0 ){
+                    alert("No indexers were provided");
+                    return false;
+                }
+                
+                var indexers = indexers_list.split(",");
+                
+                for(var i = 0; i < indexers.length; i++){
+                    
+                    if( !isValidHost(indexers[i]) ){
+                        alert('Indexer "' + indexers[i] + '" is not a valid domain name or IP address');
+                        return false;
+                    }
+                }
+                
+                return true;
+            }
+            
+            $(document).ready(
+                function(){
+                    $("[name*=indexers]").attr("placeholder", "e.g. 1.2.3.4:9997,5.6.7.8:9997");
+                    $('.splButton-primary').click( stopSaveIfValidationFails );
+                }
+            );
+            
+            </script>
+            ]]>
+        </text>
+    
+        <input field="indexers">
+            <label>Indexers</label>
+            <type>text</type>
+        </input>
+    </block>
+  
+</setup>

@@ -1,0 +1,16 @@
+[app/install/state]
+version = 6.3.0
+modtime = 1445458491.812182000
+
+[ldap/default]
+version = 6.3.0
+modtime = 1445625387.379598000
+
+[passwords/credential%3ASA-ldapsearch%3Adefault%3A]
+owner = admin
+version = 6.3.0
+modtime = 1445625387.381016000
+
+[app/install/is_configured]
+version = 6.3.0
+modtime = 1445625387.421983000

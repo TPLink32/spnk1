@@ -1,0 +1,16 @@
+<dashboard>
+  <label>Messages by severity level</label>
+  <description/>
+  <row>
+    <panel>
+      <table>
+        <title>Severity: $severity$ messages</title>
+         <search>
+           <query>search tag=cisco_syslog | lookup nexus_hostname_lookup device AS host OUTPUT hostname AS Hostname | lookup nexus_severity_lookup severity_id AS severity OUTPUT severity_name AS severity_name,severity_description AS severity_description | search severity_name=$severity$ | stats latest(syslog_msg) as syslog_msg values(Hostname) as Hostname values(severity_name) as severity_name values(severity_description) AS Description by _time,host,category,mnemonics | rename syslog_msg as Message host as deviceIP mnemonics as Mnemonics category AS Facility | fields _time Hostname deviceIP Facility Mnemonics Message</query>
+            <earliest>$earliest$</earliest>
+            <latest>$latest$</latest>
+        </search>
+      </table>
+    </panel>
+  </row>
+</dashboard>

@@ -1,0 +1,3 @@
+<view template="splunk_app_windows_infrastructure:/templates/adminonly.tmpl">
+    <label>Get data in</label>
+</view>

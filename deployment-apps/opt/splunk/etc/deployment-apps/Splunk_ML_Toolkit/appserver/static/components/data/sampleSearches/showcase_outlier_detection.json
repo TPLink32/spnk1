@@ -1,0 +1,32 @@
+{
+    "Server Response Time": {
+      "value": "| inputlookup hostperf.csv | eval _time=strptime(_time, \"%Y-%m-%dT%H:%M:%S.%3Q%z\") | timechart span=10m max(rtmax) as responsetime | head 1000",
+      "label": "Server Response Time",
+      "outlierVariable": "responsetime",
+      "thresholdMethod": "MAD",
+      "thresholdMultiplier": 20,
+      "windowSize": 200
+    },
+    "Employee Logins (prediction errors)": {
+      "value": "| inputlookup logins.csv | predict logins as prediction algorithm=LLP future_timespan=150 holdback=0 | where prediction!=\"\" AND logins!=\"\" | eval residual = prediction - logins",
+      "label": "Employee Logins (prediction errors)",
+      "outlierVariable": "residual",
+      "thresholdMethod": "MAD",
+      "thresholdMultiplier": 9,
+      "windowSize": 72
+    },
+    "Supermarket Purchases": {
+      "value": "| inputlookup supermarket.csv | head 1000",
+      "label": "Supermarket Purchases",
+      "outlierVariable": "quantity",
+      "thresholdMethod": "Avg",
+      "thresholdMultiplier": 5
+    },
+    "Power Plant Humidity": {
+      "value": "| inputlookup power_plant.csv",
+      "label": "Power Plant Humidity",
+      "outlierVariable": "Humidity",
+      "thresholdMethod": "Avg",
+      "thresholdMultiplier": 3
+    }
+}

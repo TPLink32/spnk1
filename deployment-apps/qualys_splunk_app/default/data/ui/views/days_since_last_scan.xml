@@ -1,0 +1,63 @@
+<form>
+  <label>Days since Last scan</label>
+  <description></description>
+    <fieldset autoRun="true" submitButton="false">
+    <input type="time" searchWhenChanged="true">
+      <default/>
+    </input>
+    </fieldset>
+  <row>
+      <chart>
+      <title>Hosts Scanned</title>
+      <searchString>index=qualys HOSTSUMMARY ACTIVE_SEVERITY_5 > 0 | dedup 1 HOST_ID | timechart dc(HOST_ID) as "Hosts" span=1d</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">column</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+    </chart>
+      <chart>
+      <title>OS distribution</title>
+      <searchString>index=qualys sourcetype=qualys_vm_detection HOSTSUMMARY ACTIVE_SEVERITY_5 > 0 | stats dc(HOST_ID) as HOSTS by OS</searchString>
+      <earliestTime>0</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">pie</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+    </chart>
+  </row>
+  <row>
+    <table>
+      <title></title>
+      <searchString>index=qualys HOSTSUMMARY  ACTIVE_SEVERITY_5 > 0 | dedup 1 HOST_ID sortby -_time  | replace "*Z" with "* UTC" in LAST_SCAN_DATETIME |  eval epochevent=strptime(LAST_SCAN_DATETIME, "%Y-%m-%dT%H:%M:%S %Z") | eval epochnow=now() | eval "Time Since Last Scan"=tostring(epochnow-epochevent, "duration") | sort 100 -"Time Since Last Scan" | table HOST_ID, IP, OS, DNS, LAST_SCAN_DATETIME, ACTIVE_SEVERITY_5, "Time Since Last Scan"</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="linkView">search</option>
+      <option name="wrap">true</option>
+      <option name="rowNumbers">false</option>
+      <option name="dataOverlayMode">none</option>
+      <option name="drilldown">row</option>
+      <option name="count">50</option>
+    </table>
+  </row>
+</form>

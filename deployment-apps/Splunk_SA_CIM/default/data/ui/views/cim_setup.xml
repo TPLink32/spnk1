@@ -1,0 +1,10 @@
+<dashboard script="cim_setup.js" stylesheet="cim_setup.css" hideAppBar="true" hideEdit="true" isDashboard="false">
+  <label>CIM Setup</label>
+  <row>
+    <panel>
+      <html>
+        <div id="cim_setup_container"/>
+      </html>
+    </panel>
+  </row>
+</dashboard>

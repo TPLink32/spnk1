@@ -1,0 +1,10 @@
+<dashboard script="cef_output_edit.js" stylesheet="cef_output_edit.css" isDashboard="false">
+    <label>Edit CEF output</label>
+    <row>
+        <html>
+            <div id="cef_output_editor">
+            Loading...
+            </div>
+        </html>
+    </row>
+</dashboard>

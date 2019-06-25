@@ -1,0 +1,35 @@
+[monitor://\\ep3_tpo_cifs.dco.elmae\ep3_evp_data\EVPLog\MonitorLog\*\2017*\*\]
+disabled = false
+crcSalt = <SOURCE>
+whitelist = \.txt$|\.log$
+index = tpo_prod
+sourcetype = tpo:evp
+host_regex = \w{6}\w+(E.\d\w+\D\D{2}\d+)
+ignoreOlderThan = 25d
+
+[monitor://\\ep9_tpo_cifs.dco.elmae\ep9_evp_data\EVPLog\MonitorLog\*\2017*\*\]
+disabled = false
+crcSalt = <SOURCE>
+whitelist = \.txt$|\.log$
+index = tpo_prod
+sourcetype = tpo:evp
+host_regex = \w{6}\w+(E.\d\w+\D\D{2}\d+)
+ignoreOlderThan = 25d
+
+[monitor://\\ep3_tpo_cifs.dco.elmae\ep3_evp_data\EVPLog\TraceLog\*\2017*\*\]
+disabled = false
+crcSalt = <SOURCE>
+whitelist = \.txt$|\.log$
+index = tpo_prod
+sourcetype = tpo:evp
+host_regex = \w{6}\w+(E.\d\w+\D\D{2}\d+)
+ignoreOlderThan = 25d
+
+[monitor://\\ep9_tpo_cifs.dco.elmae\ep9_evp_data\EVPLog\TraceLog\*\2017*\*\]
+disabled = false
+crcSalt = <SOURCE>
+whitelist = \.txt$|\.log$
+index = tpo_prod
+sourcetype = tpo:evp
+host_regex = \w{6}\w+(E.\d\w+\D\D{2}\d+)
+ignoreOlderThan = 25d

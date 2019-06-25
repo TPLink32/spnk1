@@ -1,0 +1,13 @@
+<panel>
+      <title>Infoblox - Top 10 MAC of DHCP Activities in Last 24H</title>
+      <table>
+        <search>
+          <query>sourcetype="infoblox:dhcp" earliest=-1d|eval mac=COALESCE(dest_mac,src_mac)|top 10 mac|table mac count|rename mac as "MAC Address" count as "Activities Counts"</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+      </table>
+</panel>

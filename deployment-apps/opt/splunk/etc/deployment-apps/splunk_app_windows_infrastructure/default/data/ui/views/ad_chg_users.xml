@@ -1,0 +1,115 @@
+<form>
+  <label>User Record Changes</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="multiselect" token="multidropdown_forest" searchWhenChanged="true">
+      <label>Forest</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector`  |dedup ForestName | sort ForestName</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+      <fieldForLabel>ForestName</fieldForLabel>
+      <fieldForValue>ForestName</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>ForestName="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="multiselect" token="multidropdown_site" searchWhenChanged="true">
+      <label>Site</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector` | search $multidropdown_forest$|dedup Site|sort Site</query>
+      </search>
+      <fieldForLabel>Site</fieldForLabel>
+      <fieldForValue>Site</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>Site="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="multiselect" token="multidropdown_domaindnsname" searchWhenChanged="true">
+      <label>Domain</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector` | search $multidropdown_forest$ $multidropdown_site$|dedup DomainDNSName|sort DomainDNSName</query>
+      </search>
+      <fieldForLabel>DomainDNSName</fieldForLabel>
+      <fieldForValue>DomainDNSName</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>DomainDNSName="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="multiselect" token="multidropdown_host" searchWhenChanged="true">
+      <label>Server</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector` | search $multidropdown_forest$ $multidropdown_site$ $multidropdown_domaindnsname$|dedup host|sort host</query>
+      </search>
+      <fieldForLabel>host</fieldForLabel>
+      <fieldForValue>host</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>host="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="text" token="textbox111" searchWhenChanged="true">
+      <label>Account User</label>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="time" token="Time" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Security-Relevant Changes</title>
+        <search>
+          <query>eventtype=msad-user-changes $multidropdown_host$ user="$textbox111$" | eval adminuser=src_nt_domain."\\\\".src_user|eval dest_user_subject=dest_nt_domain."\\\\".user | `msad-changed-attributes` | table _time,adminuser,msad_action,dest_user_subject,MSADChanges | rename adminuser as "Administrator",msad_action as "Action",dest_user_subject as "Target User",MSADChanges as "Changes"</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">cell</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Directory Record Changes</title>
+        <search>
+          <query>eventtype=admon objectClass="*person*" NOT objectClass="*computer*" sAMAccountName="$textbox111$" $multidropdown_host$|dedup distinguishedName,uSNChanged|rex field=_raw "(?ms)Additional Details:\\s*[\\r\\n]+(?&lt;MSADChangedAttributes&gt;.*)"|`msad-changed-attributes`|table _time,sAMAccountName,MSADChanges|where mvcount(MSADChanges)&gt;0</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+
+<form>
+ <label>User Accesses</label>
+
+  <fieldset>
+	<input type="time">
+	  <default>All time</default>
+	</input>
+  </fieldset>
+
+  <row> 
+	<table>
+	<title>User Accesses - Host and User Selection</title>
+	<searchString>sourcetype="rfc5424_syslog" sdid="CGP@21513" | top showperc=0 limit=0 host,uinfo</searchString>
+     <option name="count">20</option>
+     <option name="displayRowNumbers">false</option>
+     <option name="showPager">true</option>
+
+     <drilldown>
+      <link>
+		<![CDATA[
+         /app/VormetricDataSecurityLite/UserDrilldown0?form.host=$row.host$&form.uinfo=$row.uinfo$&earliest=$earliest$&latest=$latest$
+		]]>
+       </link>
+     </drilldown>   
+
+   </table>
+ </row>
+
+</form>

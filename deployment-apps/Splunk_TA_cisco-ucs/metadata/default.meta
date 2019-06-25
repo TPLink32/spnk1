@@ -1,0 +1,79 @@
+# shared Application-level permissions
+[]
+access = read : [ * ], write : [ admin ]
+export = system
+
+
+# Application-level permissions
+
+[]
+access = read : [ * ], write : [ admin, power ]
+export = system
+
+### EVENT TYPES
+
+[eventtypes]
+export = system
+
+
+### PROPS
+
+[props]
+export = system
+
+
+### TRANSFORMS
+
+[transforms]
+export = system
+
+
+### LOOKUPS
+
+[lookups]
+export = system
+
+
+### Saved searches
+#
+[savedsearches]
+export = system
+
+
+### Commands
+
+[commands]
+export = system
+
+
+### workflow
+[workflow_actions]
+export = system
+
+
+### VIEWSTATES: even normal users should be able to create shared viewstates
+
+[viewstates]
+access = read : [ * ], write : [ * ]
+export = system
+
+
+[html/Managers]
+owner = none
+export = none
+
+
+[html/Tasks]
+owner = none
+export = none
+
+
+[html/Templates]
+owner = none
+export = none
+
+
+[html/Logging]
+owner = none
+export = none
+

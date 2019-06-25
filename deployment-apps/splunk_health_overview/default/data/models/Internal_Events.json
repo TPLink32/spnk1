@@ -1,0 +1,222 @@
+{
+    "modelName": "Internal_Events",
+    "displayName": "Internal Events",
+    "description": "Model to encapsulate some operational data for executive summary dashboards.",
+    "objectSummary": {
+        "Event-Based": 1,
+        "Transaction-Based": 0,
+        "Search-Based": 0
+    },
+    "objects": [
+        {
+            "objectName": "Internal_Log_Events",
+            "displayName": "Internal Log Events",
+            "parentName": "BaseEvent",
+            "fields": [
+                {
+                    "fieldName": "b",
+                    "owner": "Internal_Log_Events",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "b",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "series",
+                    "owner": "Internal_Log_Events",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "series",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "ev",
+                    "owner": "Internal_Log_Events",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "ev",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "group",
+                    "owner": "Internal_Log_Events",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "group",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "pool",
+                    "owner": "Internal_Log_Events",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "pool",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "type",
+                    "owner": "Internal_Log_Events",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "type",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "kb",
+                    "owner": "Internal_Log_Events",
+                    "type": "number",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "kb",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "h",
+                    "owner": "Internal_Log_Events",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "h",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "idx",
+                    "owner": "Internal_Log_Events",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "idx",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "st",
+                    "owner": "Internal_Log_Events",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "st",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "splunk_server",
+                    "owner": "Internal_Log_Events",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "splunk_server",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "i",
+                    "owner": "Internal_Log_Events",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "i",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "_time",
+                    "owner": "BaseEvent",
+                    "type": "timestamp",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "_time",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "host",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "host",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "source",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "source",
+                    "comment": "",
+                    "fieldSearch": ""
+                },
+                {
+                    "fieldName": "sourcetype",
+                    "owner": "BaseEvent",
+                    "type": "string",
+                    "required": false,
+                    "multivalue": false,
+                    "hidden": false,
+                    "editable": true,
+                    "displayName": "sourcetype",
+                    "comment": "",
+                    "fieldSearch": ""
+                }
+            ],
+            "calculations": [],
+            "constraints": [
+                {
+                    "search": "index=_internal source=*license_usage.log* type=Usage",
+                    "owner": "Internal_Log_Events"
+                }
+            ],
+            "lineage": "Internal_Log_Events"
+        }
+    ],
+    "objectNameList": [
+        "Internal_Log_Events"
+    ]
+}

@@ -1,0 +1,226 @@
+.clear-both {
+  zoom: 1;
+}
+.clear-both:before,
+.clear-both:after {
+  content: "";
+  display: table;
+}
+.clear-both:after {
+  clear: both;
+}
+.clear-right {
+  zoom: 1;
+}
+.clear-right:before,
+.clear-right:after {
+  content: "";
+  display: table;
+}
+.clear-right:after {
+  clear: right;
+}
+.clear-left {
+  zoom: 1;
+}
+.clear-left:before,
+.clear-left:after {
+  content: "";
+  display: table;
+}
+.clear-left:after {
+  clear: left;
+}
+.section-header {
+  padding-top: 10px;
+  position: relative;
+  cursor: pointer;
+}
+.section-header .section-label {
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.main-section-body {
+  background-color: white;
+}
+.app-page {
+  width: 960px;
+  margin: 0 auto;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+div.section {
+  margin-top: 30px;
+}
+div.section-close {
+  margin-top: 20px;
+}
+div.section:first-child {
+  margin-top: 0;
+}
+div.section-close:first-child {
+  margin-top: 0;
+}
+div.section p.title {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+.app-page-error .msg.msg-none,
+.app-page-body .msg.msg-none {
+  display: none;
+}
+.app-page-error .msg.msg-success,
+.app-page-body .msg.msg-success {
+  background-color: #dff0d8;
+  color: #3c763d;
+  border: 1px solid #d6e9c6;
+}
+.app-page-error .msg.msg-error,
+.app-page-body .msg.msg-error {
+  background-color: #faeae6;
+  border: 1px solid #d85d3c;
+  color: #d85d3c;
+}
+.app-page-error .msg.msg-warning,
+.app-page-body .msg.msg-warning {
+  background-color: #fef5da;
+  border: 1px solid #deaa05;
+  color: #deaa05;
+}
+.app-page-error .msg,
+.app-page-body .msg {
+  padding: 8px;
+  margin-bottom: 20px;
+  zoom: 1;
+}
+.app-page-error .msg .close,
+.app-page-body .msg .close {
+  top: 15px;
+  right: 15px;
+  background: transparent;
+}
+.app-page-error .msg i.icon,
+.app-page-body .msg i.icon {
+  float: left;
+  display: inline-block;
+  font-size: 24px;
+  line-height: 24px;
+  margin-right: 8px;
+}
+.app-page-error .msg div.msg-text,
+.app-page-body .msg div.msg-text {
+  width: 888px;
+  display: inline-block;
+  position: relative;
+  top: 4px;
+}
+.app-page-error .msg:before,
+.app-page-body .msg:before,
+.app-page-error .msg:after,
+.app-page-body .msg:after {
+  content: "";
+  display: table;
+}
+.app-page-error .msg:after,
+.app-page-body .msg:after {
+  clear: both;
+}
+.custom-waiting-panel.hide {
+  display: none;
+}
+.custom-waiting-panel .msg {
+  position: fixed;
+  top: 50%;
+  text-align: center;
+  width: 100%;
+  font-size: 16px;
+  z-index: 1041;
+}
+.custom-waiting-panel .msg .img {
+  width: 48px;
+  height: 48px;
+  margin-right: 10px;
+}
+.model-white {
+  background-color: #fff;
+}
+.snow-page-header {
+  width: 100%;
+  border-bottom: 1px silver solid;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+.snow-page-header .title {
+  font-size: 20px;
+  line-height: 30px;
+}
+.snow-page-header .nav-paths {
+  margin: 5px 0 10px 0;
+}
+.snow-page-header .nav-paths .nav-path-deco {
+  margin: 0 5px;
+}
+.snow-page-header .nav-paths .nav-path-deco:last-child {
+  display: none;
+}
+.snow-page-header .nav-paths .nav-path:last-child {
+  text-decoration: none;
+  cursor: default;
+  color: #1e93c6;
+}
+.app-components-views-controls-notificationdialog .modal-body {
+  min-height: 50px;
+}
+.app-components-views-controls-notificationdialog div.modal-footer a.btn {
+  min-width: 80px;
+  margin-left: 20px;
+}
+.add-snow-input-dialog-modal .msg.msg-none {
+  display: none;
+}
+.add-snow-input-dialog-modal .msg.msg-error {
+  background-color: #faeae6;
+  border: 1px solid #d85d3c;
+  color: #d85d3c;
+}
+.add-snow-input-dialog-modal .msg.msg-warning {
+  background-color: #fef5da;
+  border: 1px solid #deaa05;
+  color: black;
+}
+.add-snow-input-dialog-modal .msg.msg-warning i.icon {
+  color: #fac51c;
+}
+.add-snow-input-dialog-modal .msg.msg-warning .msg-text {
+  opacity: 0.5;
+}
+.add-snow-input-dialog-modal .msg.msg-warning a {
+  opacity: 1;
+}
+.add-snow-input-dialog-modal .msg {
+  padding: 8px;
+  margin-bottom: 20px;
+  zoom: 1;
+}
+.add-snow-input-dialog-modal .msg i.icon {
+  display: block;
+  float: left;
+  font-size: 24px;
+  line-height: 24px;
+  width: 18px;
+  margin-right: 8px;
+}
+.add-snow-input-dialog-modal .msg div.msg-text {
+  display: block;
+  float: left;
+  width: 716px;
+  margin-top: 4px;
+}
+.add-snow-input-dialog-modal .msg:before,
+.add-snow-input-dialog-modal .msg:after {
+  content: "";
+  display: table;
+}
+.add-snow-input-dialog-modal .msg:after {
+  clear: both;
+}

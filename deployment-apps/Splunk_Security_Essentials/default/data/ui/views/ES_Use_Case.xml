@@ -1,0 +1,36 @@
+<dashboard script="es_use_case.js">
+  <label>ES Use Case</label>
+  <row>
+    <panel>
+      <html>
+        <h3>Enterprise Security Use Case</h3>
+        <p>While you could build any or all of Splunk Enterprise Security (ES) on top of the core Splunk Enterprise product, why would you want to spend your cycles building or rebuilding what is QA'd and certified enterprise-ready from Splunk? Splunk Enterprise Security provides out of the box SIEM functionality, a robust Threat Intel framework, and a basic Anomaly Aggregation capability thanks to the Risk Framework. Most of all, it provides all of this out of the box!</p>
+        <p>Find out more about Splunk Enterprise Security <a href="https://www.splunk.com/en_us/products/premium-solutions/splunk-enterprise-security.html">here</a>.</p>
+      </html>
+    </panel>
+  </row>
+    <row>
+    <panel depends="$Superman$">
+      <html>
+        <h3>Geographically Improbable Accesses (Superman Problem)</h3>
+        <p>The superman problem is one of the first use cases most UEBA solutions take on -- detecting account compromise by looking for sequential logins from distant parts of the world, where it is in improbable someone might travel (such as a login from North Korea 5 minutes or 5 seconds after a login San Francisco).</p>
+        <p>This use case is so common, that you can actually solve it in several places within Splunk. It is provided as a native anomaly in Splunk UBA, you can download a community supported app called <a href="https://splunkbase.splunk.com/app/3232/">SA-geodistance</a>. However, if you don't have UBA deployed yet, and you don't want to try to configure a community supported app to work for you, Splunk ES has this out of the box! Under Security Intelligence -&gt; User Intelligence -&gt; Access Anomalies, you can find a series of report of use, including the Geographically Improbable Accesses report. To automatically be alerted, or automatically integrate this into your Anomaly Aggregation solution of choice (Splunk UBA, ES Risk, etc.), ES also has a correlation rule out of the box to do this detection. </p>
+        <h3>Screenshot(s)</h3>
+        <div style="float:left; width:49%"><img style="border: gray 1px solid;" src="/static/app/Splunk_Security_Essentials/images/es_images/es_superman.png" /></div><div style="float:right; width:49%"><img style="border: gray 1px solid;" src="/static/app/Splunk_Security_Essentials/images/es_images/es_ir_superman.png" /></div>
+      </html>
+    </panel>
+  </row>
+    
+    <row>
+    <panel depends="$ListeningPort$">
+      <html>
+        <h3>Anomalous New Listening Port</h3>
+        <p>Unusual new listening ports is a sign of potential malware persistence in your environment. Building out this search, with the potential cardinality of every unique port on every system in your environment can be a trial. Fortunately, Splunk ES ships this search out of the box!</p>
+
+        <p>Just as with many anomalies, it may be benign -- the installation of some new software that opens new listening ports -- so it is important to correlate this event with other anomalous events in your environment though an aggregation layer, such as Splunk UBA (or as a starting point, Splunk ES's Risk Framework). </p>
+        <h3>Screenshot(s)</h3>
+        <div style="float:left; width:49%"><img style="border: gray 1px solid;" src="/static/app/Splunk_Security_Essentials/images/es_images/es_anomalous_listening_port.png" /></div><div style="float:right; width:49%"><img style="border: gray 1px solid;" src="/static/app/Splunk_Security_Essentials/images/es_images/es_ir_anomalous_listening_port.png" /></div>
+      </html>
+    </panel>
+  </row>
+</dashboard>

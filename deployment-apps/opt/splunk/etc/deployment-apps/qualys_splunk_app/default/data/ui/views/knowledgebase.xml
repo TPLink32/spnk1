@@ -1,0 +1,92 @@
+<form>
+  <label>Knowledgebase</label>
+  <description></description>
+  <fieldset autoRun="true" submitButton="false">
+    <input type="time" searchWhenChanged="true">
+      <default/>
+    </input>
+  </fieldset>
+    <row>
+    <single>
+      <title>Total Vulnerabilities</title>
+      <searchString>| inputlookup qualys_kb_lookup | dedup QID | stats count(QID)</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="underLabel">Total Vulnerabilities</option>
+      <option name="linkView">search</option>
+    </single>
+  </row>
+  <row>
+      <chart>
+      <title>Vulnerabilities by Category</title>
+      <searchString>| inputlookup qualys_kb_lookup | stats count(QID) as QIDS by CATEGORY</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">pie</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+    </chart>
+    <chart>
+      <title>Vulnerabilities by Severity</title>
+      <searchString>| inputlookup qualys_kb_lookup |  stats count(QID) as QIDS by SEVERITY</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">pie</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+    </chart>
+      <chart>
+      <title>Vulnerabilities by Patch Status</title>
+      <searchString>| inputlookup qualys_kb_lookup | stats count(QID) as QIDS by PATCHABLE</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">pie</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+    </chart>
+  </row>
+  <row>
+    <table>
+      <title></title>
+      <searchString>| inputlookup qualys_kb_lookup | rename VULN_TYPE as TYPE | table  QID, SEVERITY, TYPE, TITLE, CATEGORY, PATCHABLE, CVSS_BASE, CVSS_TEMPORAL, CVE, VENDOR_REFERENCE, PUBLISHED_DATETIME</searchString>
+      <earliestTime>$earliest$</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="linkView">search</option>
+      <option name="wrap">true</option>
+      <option name="rowNumbers">false</option>
+      <option name="dataOverlayMode">none</option>
+      <option name="drilldown">row</option>
+      <option name="count">10</option>
+    </table>
+  </row>
+</form>

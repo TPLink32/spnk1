@@ -1,0 +1,161 @@
+{
+    "Disk": {
+        "value": "| inputlookup disk_failures.csv | search SMART_1_Raw=* | sample 1000",
+        "label": "Disk",
+        "preprocessSteps": [
+            {
+                "method": "StandardScaler",
+                "fields": [
+                    "SMART_1_Raw",
+                    "SMART_2_Raw",
+                    "SMART_3_Raw",
+                    "SMART_4_Raw",
+                    "SMART_5_Raw"
+                ]
+            },
+            {
+                "method": "PCA",
+                "fields": [
+                    "SS_SMART_1_Raw",
+                    "SS_SMART_2_Raw",
+                    "SS_SMART_3_Raw",
+                    "SS_SMART_4_Raw",
+                    "SS_SMART_5_Raw"
+                ],
+                "params": ["k=4"]
+            }
+        ],
+        "algorithm": "KMeans",
+        "clusterVariable": [
+            "PC_1",
+            "PC_2",
+            "PC_3",
+            "PC_4"
+        ],
+        "algorithmParams": ["k=3"],
+        "modelName": "example_hard_drives"
+    },
+    "Apps": {
+        "value": "| inputlookup app_usage.csv",
+        "label": "Apps",
+        "preprocessSteps": [
+            {
+                "method": "StandardScaler",
+                "fields": [
+                    "CloudDrive",
+                    "Recruiting",
+                    "RemoteAccess",
+                    "Webmail"
+                ]
+            }
+        ],
+        "algorithm": "SpectralClustering",
+        "clusterVariable": [
+            "SS_CloudDrive",
+            "SS_Recruiting",
+            "SS_RemoteAccess",
+            "SS_Webmail"
+        ],
+        "algorithmParams": ["k=3"]
+    },
+    "Housing": {
+        "value": "| inputlookup housing.csv",
+        "label": "Housing",
+        "preprocessSteps": [
+            {
+                "method": "StandardScaler",
+                "fields": [
+                    "avg_rooms_per_dwelling",
+                    "business_acres",
+                    "crime_rate",
+                    "distance_to_employment_center",
+                    "highway_accessibility_index",
+                    "land_zone",
+                    "median_house_value",
+                    "nitric_oxide_concentration",
+                    "property_tax_rate",
+                    "pupil_teacher_ratio",
+                    "units_prior_1940"
+                ]
+            },
+            {
+                "method": "PCA",
+                "fields": [
+                    "SS_avg_rooms_per_dwelling",
+                    "SS_business_acres",
+                    "SS_crime_rate",
+                    "SS_distance_to_employment_center",
+                    "SS_highway_accessibility_index",
+                    "SS_land_zone",
+                    "SS_median_house_value",
+                    "SS_nitric_oxide_concentration",
+                    "SS_property_tax_rate",
+                    "SS_pupil_teacher_ratio",
+                    "SS_units_prior_1940"
+                ],
+                "params": ["k=3"]
+            }
+        ],
+        "algorithm": "DBSCAN",
+        "clusterVariable": [
+            "PC_1",
+            "PC_2",
+            "PC_3"
+        ],
+        "algorithmParams": ["eps=0.96"]
+    },
+    "Track": {
+        "value": "| inputlookup track_day.csv",
+        "label": "Track",
+        "preprocessSteps": [
+            {
+                "method": "StandardScaler",
+                "fields": [
+                    "batteryVoltage",
+                    "engineCoolantTemperature",
+                    "engineSpeed",
+                    "lateralGForce",
+                    "longitudeGForce",
+                    "speed",
+                    "verticalGForce"
+                ]
+            },
+            {
+                "method": "PCA",
+                "fields": [
+                    "SS_batteryVoltage",
+                    "SS_engineCoolantTemperature",
+                    "SS_engineSpeed",
+                    "SS_lateralGForce",
+                    "SS_longitudeGForce",
+                    "SS_speed",
+                    "SS_verticalGForce"
+                ],
+                "params": ["k=3"]
+            }
+        ],
+        "algorithm": "Birch",
+        "clusterVariable": [
+            "PC_1",
+            "PC_2",
+            "PC_3"
+        ],
+        "algorithmParams": ["k=6"],
+        "modelName": "example_vehicles"
+    },
+    "PowerPlant": {
+        "value": "| inputlookup power_plant.csv | sample 1000",
+        "label": "PowerPlant",
+        "preprocessSteps": [],
+        "algorithm": "Birch",
+        "clusterVariable": [
+            "Energy_Output",
+            "Humidity",
+            "Pressure",
+            "Temperature",
+            "Vacuum"
+        ],
+        "algorithmParams": ["k=4"],
+        "modelName": "example_powerplant"
+    }
+}

@@ -1,0 +1,6 @@
+Mon Oct 26 11:34:33 2015 Info: Begin Logfile
+Mon Oct 26 11:34:33 2015 Info: Version: 9.0.0-485 SN: 848F69E6010F-JYFZWQ1
+Mon Oct 26 11:34:33 2015 Info: Time offset from UTC: 0 seconds
+Mon Oct 26 23:44:26 2015 Info: Time offset from UTC: -25200 seconds
+Mon Oct 26 23:44:26 2015 Info: Firewall blocked TCP data from ##IP_V4##:25655 to ##IP_V4##:80.
+Mon Oct 26 23:44:26 2015 Info: Firewall blocked TCP data from ##IP_V4##:37331 to ##IP_V4##:80.

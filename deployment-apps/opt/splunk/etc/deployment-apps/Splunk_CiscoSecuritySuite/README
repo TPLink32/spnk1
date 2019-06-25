@@ -1,0 +1,61 @@
+Copyright (C) 2005-2014 Splunk Inc. All Rights Reserved.
+
+Add-on:             Splunk for Cisco Security
+Last Modified:	    03/01/2015
+Splunk Version:	    6.0 or Higher
+Author:             Splunk Labs
+
+The Splunk for Cisco Security app provides reports and dashboards that give you visual insight into your data from Cisco 
+Security Devices, including the Cisco ASA, PIX, FWSM, ESA, ISE, IPS, Sourcefire, and WSA devices.
+
+=======
+Last Modified:	    Mar 01, 2015
+Splunk Version:	    6.0 or higher
+Author:             Splunk
+
+The Cisco Security Suite provides a single pane of glass interface into Cisco security data. It supports Cisco ASA and PIX firewall appliances, the FWSM firewall services module, the WSA web security appliance, and the Cisco Identity Services Engine (ISE).
+
+##### What's New #####
+3.1.1
+- Report Acceleration in saved searches where applicable
+- Warning message on setup page for uninstalled Add-on
+3.1.0
+- Support for Cisco IPS added
+- Setup routine added
+
+3.0.2
+- Support for Cisco ESA added
+- Documentation updates
+
+3.0.1
+- Support for Cisco ISE added
+- WSA Add-on moved to a separate package
+
+3.0.0 (02.20.2014)
+- Major update to the app.
+- Completely rewritten for Splunk Enterprise 6 with support for Cisco ASA, PIX, FWSM and WSA
+
+2.0 (04.01.12)
+- Major updaate to the app.
+- Completely change the look and feel of the app.
+- Refactor the code base.
+>>>>>>> develop
+
+
++++ Initial Configuration +++
+
+1) Install the Splunk_CiscoSecuritySuite App
+2) Install the approprite TAs
+3) Restart your server
+4) Logon to your Splunk Instance
+5) Follow the instructions within the app under Cisco Security Suite -> Documentation
+
++++ Important Note about Upgrading +++
+
+Several of the Cisco TA's in the past recorded events with a sourcetype of (for example) cisco_asa.  The new TA's use
+the ES3 compliant sourcetype (for example) cisco:asa.  If you want to view your old events, then alter the various
+eventtypes included in the packages so that they include the old data.
+=======
+
+Documentation is now included in the app.  Once the app is installed, navigate to the “Help” menu.
+

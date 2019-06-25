@@ -1,0 +1,23 @@
+.test-error {
+    background-color: red;
+    color: white;
+    font-size: 12px;
+}
+
+.test-pass {
+    background-color: green;
+    color: white;
+    font-size: 12px;
+}
+
+.test-progress {
+    background-color: #eeeeee;
+    color: black;
+    font-size: 12px;
+}
+
+.test-title {
+    background-color: #eeeeee;
+    color: blue;
+    font-size: 20px;
+}

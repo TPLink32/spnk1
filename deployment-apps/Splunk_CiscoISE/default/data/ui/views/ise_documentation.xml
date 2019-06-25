@@ -1,0 +1,57 @@
+<dashboard stylesheet="application.css">
+	<label>Splunk App for Cisco ISE Configuration</label>
+
+	<row>
+		<html>
+<h2>Steps to Setup the Splunk App for Cisco Identity Services Engine</h2>
+<p><strong>Important note:</strong> This app is only contains dashboards and reports.  No data is collected by this app.  For Cisco ISE data collection, install and configure the separate <a href="https://apps.splunk.com/app/1915/">Splunk Add-on for Cisco ISE</a></p>
+
+<h1>Overview</h1>
+
+<p>Cisco Identity Services Engine (ISE) is a security policy management and control platform. It automates and simplifies access control and security compliance for wired, wireless, and VPN connectivity.</p>
+
+<p>The Splunk App for Cisco ISE includes sample dashboards and reports for profiling, authentication, system statistics, alarms, and location awareness.  A separate <a href="https://apps.splunk.com/app/1915/">Splunk Add-on for Cisco ISE</a> needs to be installed to collect data from Cisco ISE systems.</p>
+
+<h2>Release Notes</h2>
+
+<p>This version of the Splunk App for Cisco ISE only contains dashboards and reports.  No data collection is performed.  In order to collect data from a Cisco ISE system, install the separate <a href="https://apps.splunk.com/app/1915/">Splunk Add-on for Cisco ISE</a>.</p>
+
+<h3>Support and resource links</h3>
+
+<p><strong>This is a community-supported app.</strong></p>
+
+<p>Access questions and answers at <a href="http://answers.splunk.com/app/questions/1589.html">answers.splunk.com/app/questions/1589.html</a></p>
+
+<p>For general Splunk Enterprise support, see the Splunk Support Programs page:
+<a href="http://www.splunk.com/support">www.splunk.com/support</a></p>
+
+<p>If you have specific questions about the separate Splunk Add-on for Cisco ISE, log a case using the Splunk Support Portal at <a href="https://www.splunk.com/index.php/submit_issue">www.splunk.com/index.php/submit_issue</a></p>
+
+<h1>Installation and Configuration</h1>
+
+<h2>Hardware and software requirements</h2>
+
+<h3>Prerequisites</h3>
+
+<p>Install and configure the <a href="https://apps.splunk.com/app/1915/">Splunk Add-on for Cisco ISE</a>.</p>
+
+<h3>Splunk Enterprise system requirements</h3>
+
+<p>Because this add-on runs on Splunk Enterprise, all of the Splunk Enterprise system requirements apply.</p>
+
+<h2>Installation Steps</h2>
+
+<ol>
+<li>Download and install the Splunk Add-on for Cisco ISE (https://apps.splunk.com/app/1915/).</li>
+<li>Delete any previous version of the Splunk for Cisco ISE application.</li>
+<li>Download the Splunk App for Cisco ISE https://apps.splunk.com/app/1589/</li>
+<li>From the Splunk Web interface, click on Apps > Manage Apps to open the Apps Management page.</li>
+<li>Click Install app from file, locate the downloaded file, and click Upload.</li>
+</ol>
+
+
+<p><strong>Note</strong>: ensure the “Upgrade app” checkbox is checked.</p>
+
+		</html>
+	</row>
+</dashboard>

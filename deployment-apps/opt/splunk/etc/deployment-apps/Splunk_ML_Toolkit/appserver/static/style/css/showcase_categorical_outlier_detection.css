@@ -1,0 +1,31 @@
+#singleOutliersPanel .mlts-panel-body, #singleResultsPanel .mlts-panel-body{
+    height: 115px;
+}
+
+.panel-footer {
+    display: none;
+}
+
+/* Anomaly Detection Coloring */
+td.outlier-event {
+    font-weight: bold;
+}
+
+.icon-inline i {
+    font-size: 18px;
+    margin-left: 5px;
+}
+
+.categorical-outlier-alert-modal .modal-body br + * {
+    margin: 0;
+    vertical-align: text-bottom;
+}
+
+.categorical-outlier-alert-modal-probable-cause-checkbox input[type="checkbox"] {
+    margin-top: 2px;
+}
+
+/* Firefox doesn't handle the width correctly if we set only the "width" property on the MultiDropdownView */
+.categorical-outlier-alert-modal-probable-cause-control {
+    width: 300px;
+}

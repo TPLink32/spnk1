@@ -1,0 +1,55 @@
+<form>
+  <label>Resource Summary</label>
+  <fieldset autoRun="true" submitButton="false">
+    <input type="time" searchWhenChanged="true">
+      <default>
+        <earliest>-60m@m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+    <input type="multiselect" token="multiTokenQuery" searchWhenChanged="true">
+        <default>*</default>
+        <label>Device</label>
+        <delimiter> OR device=</delimiter>
+        <choice value="*">ALL</choice>
+        <search>
+         <query>`nexus_index` sourcetype=cisco:nexus:json | lookup nexus_hostname_lookup device AS device OUTPUT hostname AS hostname  | eval hostAndHostname = hostname."(".device.")" | stats values(device) as device by hostAndHostname | fields hostAndHostname device | sort hostAndHostname</query>
+       </search>
+         <earliest>$earliest</earliest>
+         <latest>$latest$</latest>
+         <fieldForLabel>hostAndHostname</fieldForLabel>
+         <fieldForValue>device</fieldForValue>
+        
+      </input>
+  </fieldset>
+  <row>
+    <panel>
+     <table>
+      <title>Resource Summary</title>
+       <search>
+        <query>`nexus_index` sourcetype=cisco:nexus:json component=nxresource device = $multiTokenQuery$ | lookup nexus_hostname_lookup device AS device OUTPUT  hostname AS hostname | stats latest(memory_usage_total) AS "Total Memory(KBytes)" latest(memory_usage_used) AS "Used Memory(KBytes)" latest(memory_usage_free) AS "Free Memory(KBytes)" sparkline(avg(memory_usage_used)) AS "Memory Usage Trend" latest(current_memory_status) AS "Current Memory Status"  latest(cpu_state_user) AS "CPU User(Percentage)" latest(cpu_state_idle) AS "CPU Idle(Percentage)" sparkline(avg(cpu_state_idle)) AS "CPU Idle Trend" latest(cpu_state_kernel) AS "CPU Kernel(Percentage)" latest(load_avg_1min) as "Load average(1min)" latest(load_avg_5min) as "Load average(5min)" latest(load_avg_15min) as "Load average(15min)" by hostname,device| rename hostname AS Hostname device as Device</query>
+        <earliest>$earliest$</earliest>
+        <latest>$latest$</latest>
+      </search>
+      <format type="sparkline" field="Memory Usage Trend">
+        <option name="lineColor">#5379af</option>
+        <option name="fillColor">#CCDDFF</option>
+        <option name="lineWidth">1</option>
+        <option name="maxSpotColor">#A2FFA2</option>
+        <option name="spotRadius">3</option>
+        <option name="height">25px</option>
+        <option name="width">75px</option>
+      </format>
+      <format type="sparkline" field="CPU Idle Trend">
+        <option name="lineColor">#5379af</option>
+        <option name="fillColor">#CCDDFF</option>
+        <option name="lineWidth">1</option>
+        <option name="maxSpotColor">#A2FFA2</option>
+        <option name="spotRadius">3</option>
+        <option name="height">25px</option>
+        <option name="width">75px</option>
+      </format>
+     </table>
+    </panel>  
+  </row>
+</form>

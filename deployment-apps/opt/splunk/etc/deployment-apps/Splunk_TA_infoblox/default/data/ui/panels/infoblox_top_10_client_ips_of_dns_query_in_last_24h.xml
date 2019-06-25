@@ -1,0 +1,10 @@
+<panel>
+	<title>Infoblox - Top 10 Client IPs of DNS Query in Last 24H</title>
+    <table>
+      <search>
+          <query>sourcetype="infoblox:dns"  earliest=-1d  client |top 10 src_ip|table src_ip count |rename src_ip AS "Client IP" count AS "Requests"</query>
+        <earliest></earliest>
+        <latest></latest>
+      </search>
+    </table>
+</panel>

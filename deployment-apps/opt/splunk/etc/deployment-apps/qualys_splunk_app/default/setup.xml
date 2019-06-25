@@ -1,0 +1,74 @@
+<setup>
+     <block title="Configure This App">
+    </block>
+    <block title="Enter Qualys Credentials" endpoint="storage/passwords" entity="_new">
+        <text> Leave username/password blank, if you have already set it up.</text>
+        <input field="name">
+            <label>Username</label>
+            <type>text</type>
+        </input>
+
+        <input field="password">
+            <label>Password</label>
+            <type>password</type>
+        </input>
+    </block>
+
+
+  <block title="Advanced Setup" endpoint="qualys/qualys_configure" entity="setupentity">
+      <input field="api_server">
+        <label>QualysGuard API Server</label>
+        <type>text</type>
+      </input>
+      <input field="log_host_summary">
+        <label>Log Host Summary events</label>
+        <type>bool</type>
+      </input>
+      <input field="log_extra_host_summary">
+        <label>Log extra statistics in host summary ( Breakdown of Vulnerability Count by (Severity and Type), by (Severity and Status)</label>
+        <type>bool</type>
+      </input>
+      <input field="log_detections">
+        <label>Log Individual Host Vulnerabilities</label>
+        <type>bool</type>
+      </input>
+      <input field="log_host_details_in_detections">
+        <label>Log host information with each detection ( e.g. IP, OS, DNS, NetBios)</label>
+        <type>bool</type>
+      </input>
+
+      <input field="detection_params">
+        <label>Extra parameters to pass to Detection API. Enter as URL Query (e.g. a=1&amp;b=2 ) or as json (e.g. {a:1, b:2} )</label>
+        <type>text</type>
+      </input>
+  </block>
+     <block title="Proxy Configuration" endpoint="qualys/qualys_configure" entity="setupentity">
+      <input field="use_proxy">
+        <label>Use a proxy Server for Qualys API requests</label>
+        <type>bool</type>
+      </input>
+      <input field="proxy_server">
+        <label>Proxy Server (e.g. 10.10.10.2:8080)</label>
+        <type>text</type>
+      </input>
+  </block>
+  <block title="Multi-threaded loading of detection data" endpoint="qualys/qualys_configure" entity="setupentity">
+        <input field="use_multi_threading">
+        <label>Load detection data using multiple threads (resource intensive)</label>
+        <type>bool</type>
+      </input>
+      <input field="num_threads">
+        <label>Number of threads to use (between 1 and 10)</label>
+        <type>text</type>
+      </input>
+  </block>
+  <block title="Debug" endpoint="qualys/qualys_configure" entity="setupentity">
+      <input field="enable_debug">
+        <label>Enable debug logs?</label>
+        <type>bool</type>
+      </input>
+
+  </block>
+
+
+</setup>

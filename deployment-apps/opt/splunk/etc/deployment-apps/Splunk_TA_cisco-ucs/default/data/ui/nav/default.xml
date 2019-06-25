@@ -1,0 +1,12 @@
+<nav search_view="search" color="#15495D">
+
+<collection label="Configurations">
+  <view name="Managers" default="true" label="Managers" />
+  <view name="Templates" default="false" label="Templates" />
+  <view name="Tasks" default="false" label="Task" />
+</collection>
+
+ <view name="Logging" default="false" label="Logging" />
+ <view name="search" default="false" label="Search" />
+
+</nav>

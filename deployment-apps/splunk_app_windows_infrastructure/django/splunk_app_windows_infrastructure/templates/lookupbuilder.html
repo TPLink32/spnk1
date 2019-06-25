@@ -1,0 +1,18 @@
+{% extends "splunkdj:base_with_account_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Build Lookups | Splunk{% endblock title %}
+
+{% block css %}
+{% endblock css %}
+
+{% block content %}
+{% endblock content%}
+
+{% block js %}
+    <script>
+    requirejs.config({ urlArgs: "bust=267225" });
+    require(['{{app_name}}/lookupbuilder/lookupbuilder']);
+    </script>
+{% endblock js %}

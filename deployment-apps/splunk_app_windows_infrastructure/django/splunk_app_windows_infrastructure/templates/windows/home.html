@@ -1,0 +1,108 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Overview | Splunk{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}{{app_name}}/custom.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+    <style type="text/css">
+        .splunk-single {
+            display: inline-block;
+            width: 33%;
+        }
+        .dashboard-panel {
+            padding: 5px 10px;
+        }
+        .dashboard-body {
+            padding-top: 10px;
+        }
+    </style>
+
+{% endblock css %}
+
+{% block content %}
+
+    <div class="dashboard-body container-fluid main-section-body">
+        <div class="dashboard-row">
+            <div class="dashboard-cell span-full">
+                <div class="dashboard-panel">
+                    <div class="dashboard-element">
+                        <div class="panel-head">
+                            <h4>Windows events</h4>
+                        </div>
+                        <div class="panel-body html">
+                            <div id="event-hosts-single-container"></div>
+                            <div id="event-lognames-single-container"></div>
+                            <div id="event-eventids-single-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dashboard-row">
+            <div class="dashboard-cell span-full">
+                <div class="dashboard-panel">
+                    <div class="dashboard-element">
+                        <div class="panel-head">
+                            <h4>Windows performance counters</h4>
+                        </div>
+                        <div class="panel-body html">
+                            <div id="performance-hosts-single-container"></div>
+                            <div id="performance-objects-single-container"></div>
+                            <div id="performance-counters-single-container"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dashboard-row">
+            <div class="dashboard-cell span-full">
+                <div class="dashboard-panel">
+                    <div class="dashboard-element">
+                        <div class="panel-head">
+                            <h4>All indexed data</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div id="timepicker-master-container"></div>
+
+                            <div class="lister">
+                                <h3>Sources</h3>
+                                <div id="searchlister-sources-paginator-container"></div>
+                                <div id="searchlister-sources-container"></div>
+                            </div>
+
+                            <div class="lister">
+                                <h3>Sourcetypes</h3>
+                                <div id="searchlister-sourcetypes-paginator-container"></div>
+                                <div id="searchlister-sourcetypes-container"></div>
+                            </div>
+
+                            <div class="lister">
+                                <h3>Hosts</h3>
+                                <div id="searchlister-hosts-paginator-container"></div>
+                                <div id="searchlister-hosts-container"></div>
+                            </div>
+
+                            <div class="clearfix"></div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+            
+
+{% endblock content%}
+
+{% block js %}    
+    <script>
+        requirejs.config({ urlArgs: "bust=267225" });
+require(['splunk_app_windows_infrastructure/windows/home']);
+    </script>
+{% endblock js %}

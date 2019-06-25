@@ -1,0 +1,90 @@
+<form script="runPageScript.js">
+  <label>Detect Numeric Outliers</label>
+  <description>Find values that differ significantly from previous values.</description>
+  <fieldset autoRun="false" submitButton="false">
+    <html>
+      <ul id="dashboard-form-tabs">
+        <li>
+          <a class="tab-title-text" data-tab="newOutliers">Detect Outliers</a>
+        </li>
+        <li>
+          <a class="tab-title-text" data-tab="existingOutliers">Load Existing Settings</a>
+        </li>
+      </ul>
+      <div id="dashboard-form-controls">
+      <div id="inputControls" data-tab="newOutliers">
+        <label>Enter a search</label>
+        <div class="app-search-controls-wrapper">
+          <div id="searchBarControl"></div>
+          <div id="searchControlsControl"></div>
+        </div>
+        <br />
+        <div>
+          <div class="input input-dropdown splunk-view">
+            <label>Field to analyze</label>
+            <div id="outlierVariableControl"></div>
+          </div>
+          <div class="input input-dropdown splunk-view">
+            <label>Threshold method</label>
+            <div id="outlierSearchTypeControl"></div>
+          </div>
+          <div class="input input-text splunk-view">
+            <label>Threshold multiplier</label>
+            <div id="scaleFactorControl"></div>
+          </div>
+          <div class="input input-text splunk-view" id="windowedAnalysisControlWrapper">
+            <div class="checkbox">
+              <label><div id="windowedAnalysisCheckboxControl"></div>Sliding window (# of values)</label>
+            </div>
+            <div id="windowSizeControl"></div>
+            <div class="checkbox">
+              <div id="currentPointCheckboxControl"></div>
+              Include current point
+            </div>
+          </div>
+        </div>
+        <div id="assistantControlsFooter"></div>
+        <div id="errorDisplay" class="alerts shared-flashmessages app-error-messages"></div>
+      </div>
+        <div id="queryHistoryPanel" data-tab="existingOutliers"></div>
+      </div>
+    </html>
+  </fieldset>
+
+  <row depends="$searchBarSearchJobIdToken$" rejects="$showResultPanelsToken$">
+    <panel>
+      <html>
+        <h3>Raw Data Preview</h3>
+        <div><p id="ReminderToSubmit">(Review settings and click Detect above to find outliers.)</p></div>
+        <div id="datasetPreviewPanel"></div>
+      </html>
+    </panel>
+  </row>
+
+  <row depends="$showResultPanelsToken$">
+    <panel id="singleOutliersPanel">
+      <html></html>
+    </panel>
+    <panel id="singleResultsPanel">
+      <html></html>
+    </panel>
+  </row>
+
+  <row depends="$showResultPanelsToken$">
+    <panel id="outliersPanel">
+      <html></html>
+    </panel>
+  </row>
+
+  <row depends="$showResultPanelsToken$, $showOutliersOverTimeToken$">
+    <panel id="outliersOverTimePanel">
+      <html></html>
+    </panel>
+  </row>
+
+  <row depends="$showResultPanelsToken$">
+    <panel id="outliersTablePanel">
+      <html></html>
+    </panel>
+  </row>
+</form>

@@ -1,0 +1,318 @@
+{% extends "splunkdj:base_with_app_bar.html" %}
+
+{% load splunkmvc %}
+
+{% block title %}Setup Guide{% endblock title %}
+
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}cisco-app-Nexus-9k/home.css" />
+    <link rel="stylesheet" type="text/css" href="{{STATIC_URL}}splunkjs/css/dashboard.css" />
+{% endblock css %}
+
+{% block content %}
+
+<div class="dashboard-body container-fluid main-section-body">
+    <div class="dashboard-header clearfix">
+        <h2>Cisco Nexus 9k App for Splunk Enterprise</h2>
+    </div>
+    <p>The Cisco Nexus 9k App for Splunk Enterprise  is used to Build dashboard on indexed data provided by "Cisco Nexus 9k Add-on for Splunk Enterprise" app. Cisco Nexus 9k Add-on for Splunk Enterprise provides a scripted input for Splunk that automatically extracts response of CLI commands of Cisco Nexus 9000 Switches. Add-on app gathers Syslog from Cisco Nexus 9000 Switches and provides the same to the main app. It is tested on Splunk 6.2.0.</p>
+     <p>A number of dashboards and searches are also included to demonstrate how Splunk can be used to visualize Nexus 9k switch CLI and Syslog. </p>
+    <div class="section-nav">
+        <ul class="nav-buttons">
+            <li id="basic-components-button">
+                <a data-section="basiccomponents" href="#basiccomponents" >
+                    Requirements
+                </a>
+            </li>
+             <li id="basic-components-button">
+                <a data-section="topology" href="#topology" >
+                     Splunk Setup
+                </a>
+            </li>
+            <li id="toolkit-visualizations-button">
+                <a data-section="installation" href="#installation" >
+                    Installation
+                </a>
+            </li>
+             <li id="toolkit-visualizations-button">
+                <a data-section="config" href="#config" >
+                    Configuration
+                </a>
+            </li>
+            <li id="examples-button">
+                <a data-section="examples" href="#examples" >
+                    Test&nbsp;Installation
+                </a>
+            </li>
+            <li id="examples-button">
+                <a data-section="datagen" href="#datagen" >
+                    Data&nbsp;Generator
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    <div id="basiccomponents" class="toolkit-section clearfix">
+        <h3>Requirements</h3>
+	<p>Requirements for Main App</p>
+        <ul>
+	   <li>Splunk version 6.2.0</li>
+	   <li>Splunk search head system should have 8 GB of RAM and a quad-core CPU to run this app smoothly.</li>
+        </ul>
+        <p>Requirements for Add-on App</p>
+
+        <p class="list-description">
+        <ul>
+	   <li>Splunk version 6.2.0</li>
+           <li>The forwarder system must have network access (HTTP/HTTPS) to one or more nexus 9k switches which are to be Splunked.</li>
+	   <li>Admin user ID and password for collecting data from nexus 9k switches</li>
+	   <li>Python version of minimum 2.7.x or higher must be installed on forwarder system.</li>
+	   <li>Make sure NX-API is running on your switch.</br>
+	   <pre>SWITCH-1# conf</br>SWITCH-1(config)# feature nxapi</br>SWITCH-1(config)# show nxapi</br>nxapi enabled</br>Listen on port 80</br>Listen on port 443</pre>
+	   </li>
+	   <li>Splunk forwarder system should have 4 GB of RAM and a quad-core CPU to run this app smoothly.</li>
+        </ul>
+        </p>
+        <div id="basiccomponents-list" class="toolkit-item-list clearfix">
+             <p></p>
+        </div>
+        <div id="basiccomponents-end"></div>
+    </div>
+	
+   <div id="topology" class="toolkit-section clearfix">
+        <h3>Splunk Setup</h3>
+        <p class="list-description">
+        <ul>
+           <li> This app has been distributed in two parts.</li>
+           <p>  1) Add-on app, which runs collector scripts and gathers data from Cisco Nexus 9k switch, does indexing on it and provides indexed data to Main app.<br>
+                 2) Main app, which receives indexed data from Add-on app, runs searches on it and builds dashboard using indexed data.</p>
+           <p>This App can be set up in two ways:</p>
+           <p> 1) <b>Standalone Mode</b>: Install  main app and Add-on app on a single machine.<br>
+                  <ul>
+                  <li>Here both the app resides on a single machine.</li>
+                  <li>Main app uses the data collected by Add-on app and builds dashboard on it<br></li>
+                  </ul>
+           </p>
+           <p> 2) <b>Distributed Environment</b>: Install main app and Add-on app on search head and only Add-0n app on forwarder system.<br>
+                  <ul>
+                   <li>Here also both the apps resides on search head machine.</li>
+                   <li>Only Add-on app required to be installed on forwarder system.</li>
+                   <li>Execute the following command to forward the collected data to the search head.<br>
+                       <code>/opt/splunk/bin/splunk add forward-server <search_head_ip_address>:9997</code> </li>
+                   <li>On Seach head machine, enable the event listening on port 9997 (recommended by Splunk).</li>
+                   <li>Main app on search head uses the received data and builds dashboard on it.</li>
+                   </ul>
+           </p>
+        </ul>
+        </p>
+        <div id="topology-list" class="toolkit-item-list clearfix">
+             <p></p>
+        </div>
+        <div id="topology-end"></div>
+    </div>
+
+   
+   <div id="installation" class="toolkit-section clearfix">
+        <h3>Installation</h3>
+        <p class="list-description">Installation of Main App
+      		<ul>
+			<li>This app can be installed either through UI through "Manage Apps" or by extracting zip file into <i>/opt/splunk/etc/apps</i> folder.</li>
+			<li>Restart Splunk</li>
+			
+		</ul>
+  	<p class="list-description">Installation of Add-on App</p>
+		<ul>
+			<li>Add-on app can be installed either through UI through "Manage Apps" or by extracting zip file into <i>/opt/splunk/etc/apps</i> folder.</li>
+		<li>Enable Data collector Scripts using "<i>input.conf</i>" (default disabled = 0) or through UI (Settings -> DataInputs -> Scripts).</li>	
+		<li>Restart Splunk</li>
+		</ul>
+        </p>
+        <div id="toolkitvisualizations-list" class="toolkit-item-list clearfix">
+            <!-- Tooklkit Visualizations pages here -->
+        </div>
+        <div id="toolkitvisualizations-end"></div>
+    </div> 
+
+   <div id="config" class="toolkit-section clearfix">
+        <h3>Configuration</h3>
+	<p>Configuration of Main App</p>
+        <ul> 
+         <li>No configuration steps are required for Main app.</li>
+        </ul> 
+	<p>Configuration of Add-on App</p>
+        <ul>
+        <li>After installation, go to the Apps->Manage Apps->Set up TA_cisco-Nexus-9k.It will open a  set up screen  which will ask for Nexus9k credentials.Please provide ip address, username, password and save them.</li>
+         <li>Splunk REST API will encrypt the password and store it in app itself(local/app.conf) in encrypted form, Data collector script will fetch these credentials through REST API to connect to the Nexus 9k.</li>
+         </ul>
+         <p><b>NOTE:</b>Whenever User wants to change the credentials, he/she needs to remove the current entry from directory TA_cisco-Nexus-9k/local/app.conf  first, restart the splunk then  provide the credentials through UI(This time from Apps->"Manage Apps"->Set up TA_cisco-Nexus-9k).</p>
+	<p>1)&nbsp;inputs.conf</p>
+	<p>This file contains filename paths which are different based on your OS platform. The app is configured out of the box to work for Unix/Linux/Mac OS systems. If you are running this app on a Windows system, perform the following steps:</p>
+	<pre>Delete the file "default/inputs.conf" (or rename it)</br>Rename the file "default/inputs.conf.WINDOWS" to "default/inputs.conf"</pre>
+         <p>Each entry in this file contains one field with name <b>passAuth</b> and its default value is admin.Basically, value of this field  is  used by collector script to fetch the credentials of Nexus 9k through REST API.User can assign any splunk username here but please make sure that username is having admin privileges to access the credentials through REST API.</p>
+        
+	<p>2) input.txt</p>
+	<p>Write your CLI in this file. You can also give component name(optional). This will be helpful in filtering events based on your CLI.</p>
+	<p><code>show module, nxmodule</code></p>
+	<p>where <i>show module</i> is your cli and <i>nxmodule</i> is component.</p>
+   <div id="basiccomponents-list" class="toolkit-item-list clearfix">
+            
+        
+    </div>
+
+    <div id="examples" class="toolkit-section clearfix">
+        <h3>Test your installation</h3>
+        <p class="list-description">
+		The main app dashboard can take some time before the data is returned which will populate some of the panels. A good test to see that you are receiving all of the data we expect is to run this search after several minutes:</br>
+	<pre>index="n9000" | stats count by sourcetype</pre>
+	</p>
+	<p>
+		In particular, you should see the following sourcetype</br>
+		<code>cisco:nexus:json</code>
+	</p>
+	<p>
+		If you don't see these sourcetypes, have a look at the messages output by the scripted input: collect.py. Here is a sample search that will show them:
+	<pre>index=_internal component="ExecProcessor" collect.py "Nexus Error"| table _time host log_level message</pre>
+	</p>
+        <div id="toolkitvisualizations-list" class="toolkit-item-list clearfix">
+            <!-- Tooklkit Visualizations pages here -->
+        </div>
+        <div id="toolkitvisualizations-end"></div>
+    </div>
+    
+    <div id="datagen" class="toolkit-section clearfix">
+        <h3>Data Generator</h3>
+        <p class="list-description">
+           <p>This app is provided with sample data which can be used to generate dummy data. To simulate this sample data, first of all Splunk Event generator, which is available at <a href="https://github.com/splunk/eventgen"> https://github.com/splunk/eventgen</a>, needs to be installed at $SPLUNK_HOME/etc/apps/. This app generates the dummy data for Cisco Nexus 9k switches and populates the dashboards of main app with the dummy data.</p>
+
+     <div id="datagen-list" class="toolkit-item-list clearfix">
+            <!-- Examples pages here -->
+        </div>
+        <div id="datagen-end"></div>
+    </div>
+
+    <div id="about" class="toolkit-section clearfix">
+	<h3>About the data</h3>
+	<p class="list-description">
+		You can see what each event looks like by going to $SPLUNK_HOME/etc/apps/TA_cisco-Nexus-9k/bin and executing collect.py</p>
+	<p>
+		Field names are case sensitive in the nexus 9k. Every event starts with the timestamp, and always contains device from which that particular event came.For simplification we can add one additional field in each event  named "component" and provide appropriate value to it so that we can easily segregate the data on the basis of its component name.
+	</p>
+	<p>
+		Sample event records is as below. It gives system resource details in Json format.
+	</p>
+	<pre>{"device": "172.21.128.76", "timestamp": "2014-06-23 01:20:19", "Row_info": {"cpuid": "0", "kernel": "0.99", "idle": "99.00", "user": "0.00"}, "component": "nxresource"}
+{"device": "172.21.128.76", "timestamp": "2014-06-23 01:20:19", "Row_info": {"cpuid": "1", "kernel": "0.00", "idle": "100.00", "user": "0.00"}, "component": "nxresource"}
+{"device": "172.21.128.76", "timestamp": "2014-06-23 01:20:19", "Row_info": {"cpuid": "2", "kernel": "0.00", "idle": "100.00", "user": "0.00"}, "component": "nxresource"}
+{"device": "172.21.128.76", "timestamp": "2014-06-23 01:20:19", "Row_info": {"cpuid": "3", "kernel": "0.00", "idle": "100.00", "user": "0.00"}, "component": "nxresource"}
+	</pre>
+	<div id="examples-list" class="toolkit-item-list clearfix">
+            <!-- Examples pages here -->
+        </div>
+        <div id="examples-end"></div>
+    </div>
+            
+{% endblock content%}
+<script id="item-template" type="text/template">
+        <div class="toolkit-item">
+            <a class="item-link" href="../<%= id %>">
+                <img class="item-thumb" src="<%= staticUrl %>splunk_wftoolkit/img/<%= id %>.png"/>
+                <div class="item-content">
+                    <h4><%= title %></h4>
+                    <p class="item-description"><%= description %></p>
+                    <p class="view-button">View</p>
+                </div>
+            </a>
+        </div>
+</script>
+
+{% block js %}
+<script type="text/javascript">
+
+        require.config({
+	waitSeconds: 400
+        });
+        require.config({
+            shim: {
+                "cisco-app-Nexus-9k/contrib/waypoints": {
+                    deps: ["jquery"],
+                    exports: "waypoints"
+                },
+                "cisco-app-Nexus-9k/contrib/waypoints-sticky": {
+                    deps: ["jquery", "cisco-app-Nexus-9k/contrib/waypoints"],
+                    exports: "waypointsSticky"
+                }
+            }
+        });
+
+        require(["jquery", "cisco-app-Nexus-9k/contrib/waypoints", "cisco-app-Nexus-9k/contrib/waypoints-sticky"], function($, waypoint, waypointsSticky) {
+            $('.section-nav').waypoint('sticky', {
+                offset: -15
+            });
+        }); 
+
+        require(['jquery', 'underscore'], function($, _) {
+            $(function(){
+
+                function clearActiveButtons(){
+                    $('.active').removeClass('active');
+                }
+
+                // Set up smooth scrolling
+                // taken from: http://stackoverflow.com/questions/7717527/jquery-smooth-scrolling-when-clicking-an-anchor-link
+                $('a').click(function(){
+                    $('html, body').animate({
+                        scrollTop: $( $.attr(this, 'href') ).offset().top - 30
+                    }, 500);
+                    return false;
+                });
+
+                var staticUrl = '{{STATIC_URL}}';
+                $.getJSON(staticUrl + 'cisco-app-Nexus-9k/json/navinfo.json', function(navdata){
+                     var template = _.template( $('#item-template').html() ); 
+                    _.each(navdata, function(item){
+                        var $sectionList = $('#' + (item['section'] || 'learnmore' ) + '-list');
+                        $sectionList.append( template(_.extend(item,{staticUrl: staticUrl})));
+                    });
+                    $('#basiccomponents').waypoint(function(dir){
+                        clearActiveButtons();
+                        if(dir === 'down') {
+                            $('#basic-components-button').addClass('active');
+                        }
+                    });
+                    $('#basiccomponents-end').waypoint(function(dir){
+                        if (dir === 'up') {
+                            clearActiveButtons();
+                            $('#basic-components-button').addClass('active');
+                        }
+                    });
+                    $('#toolkitvisualizations').waypoint(function(dir){
+                        clearActiveButtons();
+                        $('#toolkit-visualizations-button').addClass('active');
+                    });
+                    $('#toolkitvisualizations-end').waypoint(function(dir){
+                        if (dir === 'up') {
+                            clearActiveButtons();
+                            $('#toolkit-visualizations-button').addClass('active');
+                        }
+                    });
+                    $('#examples').waypoint(function(dir){
+                        clearActiveButtons();
+                        $('#examples-button').addClass('active');
+                    });
+                    $('#examples-end').waypoint(function(dir){
+                        if (dir === 'up') {
+                            clearActiveButtons();
+                            $('#examples-button').addClass('active');
+                        }
+                    });
+                })
+                .fail(function(jqxhr, textStatus, error ) {
+                    var err = textStatus + ", " + error;
+                    console.log( "Request Failed: " + err );
+                })
+
+                
+            });
+        });
+    </script>
+{% endblock js %}

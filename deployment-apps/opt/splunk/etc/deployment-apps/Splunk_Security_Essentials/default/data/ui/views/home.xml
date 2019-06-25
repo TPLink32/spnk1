@@ -1,0 +1,36 @@
+<dashboard>
+  <label>Introduction</label>
+  
+  <row>
+    <panel>
+      <title>Introduction</title>
+      <html>
+      <p>Welcome to the Splunk Security Essentials app!</p>
+    </html>
+  </panel>
+</row>
+<row>
+  <panel>
+      <title>What is the Splunk Security Essentials app?</title>
+    <html>
+      <p>Detect insiders and advanced attackers in your environment with the free Splunk Splunk Security Essentials app. This app uses Splunk Enterprise and the power of our Search Processing Language (SPL) to showcase 40+ working examples of anomaly detection related to entity behavior analysis (UEBA). Each use case includes sample data and actionable searches that can immediately be put to use in your environment.</p>
+
+      <p>The use cases leverage analytics to give analysts the ability to detect unusual activities like users who print more pages than usual (spike detection) or logon to new servers (first seen behavior), the ability to see when adversaries change file names to evade detection, and more. Each use case includes the expected alert volume, an explanation of how the search works, description of the security impact, and you can save searches directly from the app to leverage any alert actions you have installed such as creating a Notable Event or Risk Indicator in ES, an External Alarm in UBA, or sending email for review.</p>
+
+      <p>For more machine learning-led detection of risky behavior in the environment, in-depth security analytics around user and entity behavior especially focused on the 'unknowns,' and full kill-chain depiction of threats, try Splunk UBA which is well integrated into the rest of Splunk’s security portfolio – Enterprise, Essentials and Enterprise Security.</p>
+    </html>
+  </panel>
+</row>
+<row>
+  <panel>
+      <title>Splunk Security Essentials</title>
+    <html>
+      <p>To get started, click <a href="/app/Splunk_Security_Essentials/contents">Use Cases</a> and start exploring the pre-built use cases relevant to your organization. Make sure to look for the Security Relevance at the top of each use case! After looking at the demo data, feel free to explore the Live (raw data) or Accelerated (ES Data Model) use cases. All Live or Accelerated use cases will contain checks to make sure that you have the right data in the first place. As always with Splunk Enterprise, you should feel eager to click Open in Search and make sure that the search matches your needs, or "Show SPL" to see a brief explanation. Finally, click Schedule Alert to schedule the search to run -- if you have ES installed, or the UBA Search Addon, we will automatically populate the ES Risk framework or UBA with the alert as well.</p>
+
+      <p>The final piece of this app, for once you've explored all the existing use cases, is to go build your own. Splunk is a platform and 75% of what this app does is provide two basic searches (time series spike detection and new values) for a number of different datasets. Use the Search Assistants from the nav menu to use these same approaches for your own custom use cases! Use this for something interesting? Reach out to us! We'd love to add it into the app so that everyone can take advantage your great idea. Run into any issues? Reach out as well, so that we can help!</p>
+
+      </html>
+    </panel>
+  </row>
+  
+</dashboard>

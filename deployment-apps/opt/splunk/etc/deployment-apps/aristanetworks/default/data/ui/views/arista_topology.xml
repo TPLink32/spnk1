@@ -1,0 +1,17 @@
+<view template="dashboard.html">
+    <label>Network Topology</label>
+    <module name="AccountBar" layoutPanel="appHeader"/>
+    <module name="AppBar" layoutPanel="navigationHeader"/>
+    <module name="Message" layoutPanel="messaging">
+        <param name="filter">*</param>
+        <param name="clearOnJobDispatch">False</param>
+        <param name="maxSize">1</param>
+    </module>
+
+    <module name="HiddenSearch" layoutPanel="panel_row1_col1" group="switches" autoRun="True">
+            <param name="search">sourcetype="arista_switch_topology" | table src,dst | dedup src,dst</param>
+            <module name="AristaShowTopology">
+</module>
+    </module>
+</view>
+

@@ -1,0 +1,222 @@
+<form script="dashboard_entry.js">
+  <label>Overview</label>
+  <fieldset submitButton="false">
+    <input id="time" type="time" token="field1" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliest>-30d@d</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <single>
+        <title>Open Incidents</title>
+        <search>
+          <query>eventtype=snow_incident| dedup sys_id | search state!=7  | stats count(sys_id) as value |  rangemap field=value  low=0-100 high=100-500 default=severe</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="colorBy">value</option>
+        <option name="colorMode">none</option>
+        <option name="numberPrecision">0</option>
+        <option name="rangeColors">["0x65a637","0xf7bc38","0xd93f3c"]</option>
+        <option name="rangeValues">[30,70]</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="trendInterval">auto</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+        <option name="linkFields">result</option>
+        <option name="linkView">incident_performance</option>
+      </single>
+      <single>
+        <title>Unprocessed Critical Events</title>
+        <search>
+          <query>eventtype=snow_em_event|dedup sys_id|search (state=Error OR Ready) severity_name=Critical|stats count</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="colorBy">value</option>
+        <option name="colorMode">none</option>
+        <option name="numberPrecision">0</option>
+        <option name="rangeColors">["0x65a637","0xf7bc38","0xd93f3c"]</option>
+        <option name="rangeValues">[0,10]</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="trendInterval">auto</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+        <option name="linkFields">result</option>
+        <option name="linkView">servicenow_events</option>
+      </single>
+      <single>
+        <title>Approved Changed Requests</title>
+        <search>
+          <query>eventtype=snow_change_request | dedup sys_id| search approval=approved | stats dc(number) AS "value"</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="colorBy">value</option>
+        <option name="colorMode">none</option>
+        <option name="numberPrecision">0</option>
+        <option name="rangeColors">["0x65a637","0xf7bc38","0xd93f3c"]</option>
+        <option name="rangeValues">[30,70]</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="trendInterval">auto</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+        <option name="linkFields">result</option>
+        <option name="linkView">change_performance</option>
+      </single>
+      <single>
+        <title>Rejected Change Requests</title>
+        <search>
+          <query>eventtype=snow_change_request | dedup sys_id |  search approval=rejected | stats dc(number) AS "value"</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="colorBy">value</option>
+        <option name="colorMode">none</option>
+        <option name="numberPrecision">0</option>
+        <option name="rangeColors">["0x65a637","0xf7bc38","0xd93f3c"]</option>
+        <option name="rangeValues">[30,70]</option>
+        <option name="showSparkline">1</option>
+        <option name="showTrendIndicator">1</option>
+        <option name="trendColorInterpretation">standard</option>
+        <option name="trendDisplayMode">absolute</option>
+        <option name="trendInterval">auto</option>
+        <option name="useColors">1</option>
+        <option name="useThousandSeparators">1</option>
+        <option name="linkFields">result</option>
+        <option name="linkView">change_performance</option>
+      </single>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Incident Performance</title>
+        <search>
+          <query>eventtype=snow_incident incident_state_name=* | dedup sys_id | timechart count(sys_id) by incident_state_name | rename count(sys_id) AS "Incident count"</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="charting.chart">column</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Events by Node</title>
+        <search>
+          <query>eventtype=snow_em_event node != "NULL" | timechart dc(sys_id) by node limit=10</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="charting.chart">column</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>Change Requests by Status and Priority</title>
+        <search>
+          <query>eventtype=snow_change_request change_state_name=* | dedup sys_id  |  chart dc(number) over priority by change_state_name</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="charting.chart">bar</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">stacked</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+    <panel>
+      <table>
+        <title>Change Request Tickets</title>
+        <search>
+          <query>eventtype=snow_change_request | dedup sys_id | table number, description , change_state_name, priority| rename change_state_name as Status, number as "Number", description as "Description", priority as "Priority"</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">cell</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>

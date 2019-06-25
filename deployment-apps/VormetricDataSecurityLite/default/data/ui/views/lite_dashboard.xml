@@ -1,0 +1,188 @@
+<view autoCancelInterval="90" isVisible="true" objectMode="SimpleDashboard" onunloadCancelJobs="true" refresh="-1" template="dashboard.html">
+  <label>Vormetric Security Intelligence - Dashboard </label>
+  <module name="AccountBar" layoutPanel="appHeader"/>
+  <module name="AppBar" layoutPanel="navigationHeader"/>
+  <module name="Message" layoutPanel="messaging">
+    <param name="maxSize">1</param>
+    <param name="clearOnJobDispatch">False</param>
+    <param name="filter">*</param>
+  </module>
+  <module name="DashboardTitleBar" layoutPanel="viewHeader"/>
+  <module name="Message" layoutPanel="navigationHeader">
+    <param name="level">warn</param>
+    <param name="maxSize">1</param>
+    <param name="clearOnJobDispatch">True</param>
+    <param name="filter">splunk.search.job</param>
+  </module>
+
+  <module name="HiddenSearch" layoutPanel="panel_row1_col1" 
+          group="Access Attempts from Unauthorized Agents to the DSM" autoRun="True">
+    <param name="search"> sourcetype="rfc5424_syslog" msgid="COM0173I" | rename host as DSM | rename shost as Agent | top showperc=0 limit=0 DSM Agent</param>
+	<module name="TimeRangePicker">
+	  <param name="searchWhenChanged">True</param>
+	  <param name="selected">Last 7 days</param>
+	  <module name="ViewstateAdapter">
+		<param name="suppressionList">
+		  <item>displayRowNumbers</item>
+		  <item>dataOverlayMode</item>
+		</param>
+		<module name="HiddenFieldPicker">
+		  <param name="strictMode">True</param>
+		  <module name="JobProgressIndicator"/>
+		  <module name="Paginator">
+			<param name="count">10</param>
+			<param name="entityName">results</param>
+			<module name="EnablePreview">
+			  <param name="display">False</param>
+			  <param name="enable">True</param>
+			  <module name="SimpleResultsTable">
+				<param name="allowTransformedFieldSelect">True</param>
+				<param name="entityName">results</param>
+				<param name="dataOverlayMode">heatmap</param>
+				<param name="drilldown">row</param>
+				<param name="displayRowNumbers">false</param>
+				<module name="Gimp"/>
+				<module name="ConvertToDrilldownSearch">
+				  <module name="ViewRedirector">
+					<param name="viewTarget">flashtimeline</param>
+				  </module>
+				</module>
+			  </module>
+			  <module name="ViewRedirectorLink">
+				<param name="viewTarget">flashtimeline</param>
+			  </module>
+			</module>
+		  </module>
+		</module>
+	  </module>
+    </module>
+  </module>
+
+  <module name="HiddenSearch" layoutPanel="panel_row1_col2" 
+          group="User Logins to the DSM" autoRun="True">
+	  <param name="search">sourcetype="rfc5424_syslog" sdid="USR@21513" | eval Result=if(msgid=="USR0631I","OK","Failed") | eval Name=if(msgid=="USR0298I",administrator,user) | rename host as DSM | top showperc=0 limit=0 Name DSM Result</param>
+	<module name="TimeRangePicker">
+	  <param name="searchWhenChanged">True</param>
+	  <param name="selected">Last 7 days</param>
+	  <module name="ViewstateAdapter">
+		<param name="suppressionList">
+		  <item>displayRowNumbers</item>
+		  <item>dataOverlayMode</item>
+		</param>
+		<module name="HiddenFieldPicker">
+		  <param name="strictMode">True</param>
+		  <module name="JobProgressIndicator"/>
+		  <module name="Paginator">
+			<param name="count">10</param>
+			<param name="entityName">results</param>
+			<module name="EnablePreview">
+			  <param name="display">False</param>
+			  <param name="enable">True</param>
+			  <module name="SimpleResultsTable">
+				<param name="allowTransformedFieldSelect">True</param>
+				<param name="entityName">results</param>
+				<param name="dataOverlayMode">heatmap</param>
+				<param name="drilldown">row</param>
+				<param name="displayRowNumbers">false</param>
+				<module name="Gimp"/>
+				<module name="ConvertToDrilldownSearch">
+				  <module name="ViewRedirector">
+					<param name="viewTarget">flashtimeline</param>
+				  </module>
+				</module>
+			  </module>
+			  <module name="ViewRedirectorLink">
+				<param name="viewTarget">flashtimeline</param>
+			  </module>
+			</module>
+		  </module>
+        </module>
+      </module>
+    </module>
+  </module>
+
+  <module name="HiddenSearch" layoutPanel="panel_row1_col3" 
+          group="Top Processes accessing Guardpoint Data" autoRun="True">
+    <param name="search">sourcetype="rfc5424_syslog" | rename sproc as "Process Name" | top limit=20 "Process Name" </param>
+	<module name="TimeRangePicker">
+	  <param name="searchWhenChanged">True</param>
+	  <param name="selected">Last 7 days</param>
+	  <module name="ViewstateAdapter">
+		<param name="suppressionList">
+		  <item>charting.chart</item>
+		</param>
+		<module name="HiddenFieldPicker">
+		  <param name="strictMode">True</param>
+		  <module name="JobProgressIndicator">
+			<module name="EnablePreview">
+			  <param name="display">False</param>
+			  <param name="enable">True</param>
+			  <module name="HiddenChartFormatter">
+				<param name="charting.chart">pie</param>
+				<module name="JSChart">
+				  <param name="width">100%</param>
+				  <module name="Gimp"/>
+				  <module name="ConvertToDrilldownSearch">
+					<module name="ViewRedirector">
+					  <param name="viewTarget">flashtimeline</param>
+					</module>
+				  </module>
+				</module>
+				<module name="ViewRedirectorLink">
+				  <param name="viewTarget">flashtimeline</param>
+				</module>
+			  </module>
+			</module>
+		  </module>
+		</module>
+	  </module>
+	</module>
+  </module>
+
+  <module name="HiddenSearch" layoutPanel="panel_row3_col1" 
+          group="Guard Point Updates" autoRun="True">
+    <param name="search">sourcetype="rfc5424_syslog" msgid="DAO0229I" OR msgid="DAO0230I" OR msgid="DAO0235I"  OR msgid="DAO0237I" | eval Action=case(msgid=="DAO0229I","Added", msgid=="DAO0230I","Added disabled", msgid=="DAO0235I","Updated", msgid=="DAO0237I","Deleted") | table _time shost gp Action admin pol</param>
+	<module name="TimeRangePicker">
+	  <param name="searchWhenChanged">True</param>
+	  <param name="selected">Last 7 days</param>
+	  <module name="ViewstateAdapter">
+		<param name="suppressionList">
+		  <item>count</item>
+		  <item>displayRowNumbers</item>
+		  <item>dataOverlayMode</item>
+		  <item>showPager</item>
+		</param>
+		<module name="HiddenFieldPicker">
+		  <param name="strictMode">True</param>
+		  <module name="JobProgressIndicator"/>
+		  <module name="Paginator">
+			<param name="count">10</param>
+			<param name="entityName">results</param>
+			<module name="EnablePreview">
+			  <param name="display">False</param>
+			  <param name="enable">True</param>
+			  <module name="SimpleResultsTable">
+				<param name="displayRowNumbers">false</param>
+				<param name="entityName">results</param>
+				<param name="allowTransformedFieldSelect">True</param>
+				<param name="dataOverlayMode">heatmap</param>
+				<param name="count">10</param>
+				<param name="drilldown">row</param>
+				<module name="Gimp"/>
+				<module name="ConvertToDrilldownSearch">
+				  <module name="ViewRedirector">
+					<param name="viewTarget">flashtimeline</param>
+				  </module>
+				</module>
+			  </module>
+			  <module name="ViewRedirectorLink">
+				<param name="viewTarget">flashtimeline</param>
+			  </module>
+			</module>
+		  </module>
+		</module>
+	  </module>
+	</module>
+  </module>
+
+</view>

@@ -1,0 +1,37 @@
+<form script="customized_chart_preload.js,audit_report.js">
+  <label>Organizational Unit Audit</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="dropdown" token="ldaprecord.nt_domain" searchWhenChanged="true">
+      <label>Account Domain</label>
+      <search>
+        <query>| inputlookup DomainSelector | eval nt_domain=DomainNetBIOSName | dedup nt_domain | search nt_domain !="" | table nt_domain</query>
+      </search>
+      <fieldForLabel>nt_domain</fieldForLabel>
+      <fieldForValue>nt_domain</fieldForValue>
+      <selectFirstChoice>true</selectFirstChoice>
+    </input>
+    <input type="text" token="ldaprecord.ouobject" searchWhenChanged="true">
+      <label>Organizational Unit Name</label>
+      <default>*</default>
+      <initialValue>*</initialValue>
+    </input>
+    <input type="time" token="Time">
+      <label></label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <search id="audit_query">
+        <query>|ldapsearch domain=$ldaprecord.nt_domain$ search=&quot;(&amp;(objectclass=organizationalUnit)(ou=$ldaprecord.ouobject$))&quot;|rex field=gPLink max_match=10 &quot;\[(?&lt;gpoLink&gt;[^\]]+)\]&quot;|rename gpoLink as gPLink|fields *</query>
+        <latest>$Time.latest$</latest>
+      </search>
+      <html>
+        <div id="audit_report"/>
+      </html>
+    </panel>
+  </row>
+</form>

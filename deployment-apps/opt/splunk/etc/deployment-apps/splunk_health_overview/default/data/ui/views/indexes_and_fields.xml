@@ -1,0 +1,33 @@
+<form>
+  <label>Indexes and Fields</label>
+  <description/>
+  <fieldset submitButton="false">
+    <input type="dropdown" token="index">
+      <label>Available Indexes</label>
+      <populatingSearch fieldForLabel="index" fieldForValue="index">| tstats values(sourcetype) AS st where index=* by index  | fields - st</populatingSearch>
+    </input>
+    <input type="dropdown" token="sourcetype">
+      <label>Available Sourcetypes</label>
+      <populatingSearch fieldForLabel="sourcetype" fieldForValue="sourcetype">| tstats values(sourcetype) AS st where index=$index$ by sourcetype  | fields - st</populatingSearch>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Available Fields and Values for Index: $index$ and Sourcetype: $sourcetype$</title>
+        <searchString>index=$index$ sourcetype=$sourcetype$ | fieldsummary maxvals=1 | rex field=values "value\"\:\"(?&lt;Sample_Value&gt;.+)\"\," | eval index="$index$" | eval sourcetype="$sourcetype$" | where Sample_Value!="" |fields field Sample_Value index sourcetype | stats list(field) AS "Field Name" list(Sample_Value) AS "Sample Value" by index sourcetype</searchString>
+        <earliestTime>-24h</earliestTime>
+        <latestTime>now</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <drilldown target="search">
+          <link field="index">/app/search/search/?q=search index%3D$row.index$ earliest=-15m</link>
+          <link field="sourcetype">/app/search/search/?q=search index%3D$row.index$ sourcetype%3D$sourcetype$ earliest=-15m</link>
+          <link field="Field Name">/app/search/search/?q=search index%3D$row.index$ sourcetype%3D$sourcetype$ earliest=-15m</link>
+          <link field="Sample Value">/app/search/search/?q=search index%3D$row.index$ sourcetype%3D$sourcetype$ earliest=-15m</link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+</form>

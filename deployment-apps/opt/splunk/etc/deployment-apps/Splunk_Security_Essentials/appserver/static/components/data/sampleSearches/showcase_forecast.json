@@ -1,0 +1,38 @@
+{
+  "Employee Logins": {
+    "label": "Employee Logins",
+    "value": "| inputlookup logins.csv",
+    "fieldToPredict": "logins",
+    "algorithm": "LLP",
+    "holdback": "114",
+    "futureTimespan": "36",
+    "confidenceInterval": "95"
+  },
+  "Souvenir Sales": {
+    "label": "Souvenir Sales",
+    "value": "| inputlookup souvenir_sales.csv | eval _time=strptime(Month, \"%Y-%m-%d\") | timechart span=1mon values(sales) as sales",
+    "fieldToPredict": "sales",
+    "algorithm": "LLP",
+    "holdback": "0",
+    "futureTimespan": "24",
+    "confidenceInterval": "95"
+  },
+  "Internet Traffic": {
+    "label": "Internet Traffic",
+    "value": "| inputlookup internet_traffic.csv | timechart span=120min avg(\"bits_transferred\") as bits_transferred | eval bits_transferred=round(bits_transferred)",
+    "fieldToPredict": "bits_transferred",
+    "algorithm": "LLP5",
+    "holdback": "112",
+    "futureTimespan": "112",
+    "confidenceInterval": "95"
+  },
+  "Bluetooth Devices": {
+    "label": "Bluetooth Devices",
+    "value": "| inputlookup bluetooth.csv | where probe=\"AxisBoard-5\" | timechart dc(address) as distinct_addresses span=3h",
+    "fieldToPredict": "distinct_addresses",
+    "algorithm": "LLP",
+    "holdback": "100",
+    "futureTimespan": "100",
+    "confidenceInterval": "95"
+  }
+}

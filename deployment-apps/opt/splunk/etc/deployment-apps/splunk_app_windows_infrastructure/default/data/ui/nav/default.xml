@@ -1,0 +1,144 @@
+<nav color="#94B6E1">
+  <view name="infra_home" default="true" />
+  <collection label="Windows">
+    <view name="windows_home"/>
+    <divider />
+    <view name="windows_event"/>
+    <view name="windows_performance"/>
+    <collection label="Applications and Updates">
+      <view name="windows_applicationcrashes"/>
+      <view name="windows_applicationinstalls"/>
+      <view name="windows_windowsupdate"/>
+    </collection>
+    <collection label="Host Monitoring">
+      <view name="windows_hostmonitoring"/>
+      <view name="windows_host_inventory" />
+      <view name="windows_operationsdashboard"/>
+      <view name="windows_diskinformation"/>
+      <view name="windows_processes"/>
+      <view name="windows_services"/>
+    </collection>
+    <collection label="Network Monitoring">
+      <view name="windows_networkmonitoring"/>
+      <view name="windows_networkmonitoringoperations"/>
+    </collection>
+    <collection label="Print Monitoring">
+      <view name="windows_printmonitoring"/>
+      <view name="windows_printmonitoringoperations"/>
+      <view name="windows_printmonitoringjobbrowser"/>
+    </collection>
+  </collection>
+  <collection label="Active Directory">
+    <view name="ad_ops_topology"/>
+    <divider />
+    <collection label="Domains">
+      <view name="ad_ops_healthissues"/>
+      <view name="ad_ops_subnet_affinity"/>
+      <view name="ad_ops_replication"/>
+      <view name="ad_performance"/>
+    </collection>
+    <collection label="Domain Controllers">
+      <view name="ad_ops_domain_status"/>
+      <view name="ad_ops_site_status"/>
+      <view name="ad_ops_dc_status"/>
+    </collection>
+    <collection label="DNS">
+      <view name="ad_ops_dns_status"/>
+      <view name="ad_ops_dns_server_status"/>
+      <view name="ad_ops_dns_zoneinfo"/>
+      <view name="ad_ops_dns_performance"/>
+      <collection label="Reports">
+        <saved source="unclassified" match="DNS:"/>
+      </collection>
+    </collection>
+    <divider />
+    <collection label="Users">
+      <view name="ad_sec_user_utilization"/>
+      <view name="ad_audit_user"/>
+      <view name="ad_sec_admin_audit"/>
+      <view name="ad_chg_users"/>
+      <view name="ad_sec_logon_fail"/>
+      <view name="ad_sec_logon_anomalies"/>
+      <collection label="User Reports">
+        <view name="ad_secrpt_account_all"/>
+        <view name="ad_secrpt_account_new"/>
+        <view name="ad_secrpt_account_deleted"/>
+        <view name="ad_secrpt_account_active"/>
+        <view name="ad_secrpt_account_inactive"/>
+        <view name="ad_secrpt_account_unused"/>
+        <view name="ad_secrpt_account_disabled"/>
+        <view name="ad_secrpt_account_noexpiry"/>
+        <view name="ad_secrpt_account_nopasswd"/>
+        <view name="ad_secrpt_account_nopasswdexpiry"/>
+        <view name="ad_secrpt_account_smartcard_notreq"/>
+        <view name="ad_secrpt_account_smartcard_req"/>
+        <view name="ad_secrpt_account_passwdtooold"/>
+        <view name="ad_secrpt_account_nomanager"/>
+        <view name="ad_secrpt_account_sensitive"/>
+      </collection>
+    </collection>
+    <collection label="Computers">
+      <view name="ad_audit_computer" />
+      <view name="ad_chg_assets"/>
+      <collection label="Computer Reports">
+        <view name="ad_secrpt_computer_all"/>
+        <view name="ad_secrpt_computer_alldc"/>
+        <view name="ad_secrpt_computer_new"/>
+        <view name="ad_secrpt_computer_deleted"/>
+        <view name="ad_secrpt_computer_active"/>
+        <view name="ad_secrpt_computer_inactive"/>
+        <view name="ad_secrpt_computer_unused"/>
+        <view name="ad_secrpt_computer_disabled"/>
+        <view name="ad_secrpt_computer_trusted"/>
+        <view name="ad_secrpt_computer_nomanager"/>
+      </collection>
+    </collection>
+    <collection label="Groups">
+      <view name="ad_audit_group"/>
+      <view name="ad_chg_groupchange"/>
+      <collection label="Security Group Reports">
+        <view name="ad_secrpt_group_all"/>
+        <view name="ad_secrpt_group_new"/>
+        <view name="ad_secrpt_group_deleted"/>
+        <view name="ad_secrpt_group_changed"/>
+        <view name="ad_secrpt_group_empty"/>
+        <view name="ad_secrpt_group_large"/>
+        <view name="ad_secrpt_group_nested"/>
+        <view name="ad_secrpt_group_nomanager"/>
+      </collection>
+    </collection>
+    <collection label="Group Policy">
+      <view name="ad_audit_gpo"/>
+      <view name="ad_chg_gpo"/>
+      <collection label="Group Policy Object Reports">
+        <view name="ad_secrpt_gpo_all"/>
+        <view name="ad_secrpt_gpo_new"/>
+        <view name="ad_secrpt_gpo_deleted"/>
+        <view name="ad_secrpt_gpo_disabled"/>
+      </collection>
+    </collection>
+    <collection label="Organizational Units">
+      <view name="ad_audit_ou"/>
+      <collection label="Organizational Unit Reports">
+        <view name="ad_secrpt_ou_all"/>
+        <view name="ad_secrpt_ou_new"/>
+        <view name="ad_secrpt_ou_deleted"/>
+        <view name="ad_secrpt_ou_nomanager"/>
+        <view name="ad_secrpt_ou_gpolink"/>
+      </collection>
+    </collection>
+  </collection>
+  <collection label="Core Views">
+    <view name="pivot"/>
+    <view name="reports"/>
+    <view name="alerts"/>
+    <view name="dashboards"/>    
+  </collection>
+  <view name="search" />
+  <collection label="Tools and Settings">
+    <view name="guided_setup" />
+    <view name="customize_features" />
+    <view name="lookup_builder" />
+    <view name="lookup_migrator" />
+  </collection>
+</nav>

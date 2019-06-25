@@ -1,0 +1,151 @@
+<form>
+  <label>User Overview</label>
+  <fieldset submitButton="false" autoRun="true">
+    <input type="multiselect" token="multidropdown_forest" searchWhenChanged="true">
+      <label>Forest</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector`  |dedup ForestName | sort ForestName</query>
+        <earliest>0</earliest>
+        <latest></latest>
+      </search>
+      <fieldForLabel>ForestName</fieldForLabel>
+      <fieldForValue>ForestName</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>ForestName="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="multiselect" token="multidropdown_site" searchWhenChanged="true">
+      <label>Site</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector` | search $multidropdown_forest$|dedup Site|sort Site</query>
+      </search>
+      <fieldForLabel>Site</fieldForLabel>
+      <fieldForValue>Site</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>Site="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="multiselect" token="multidropdown_domaindnsname" searchWhenChanged="true">
+      <label>Domain</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector` | search $multidropdown_forest$ $multidropdown_site$|dedup DomainDNSName|sort DomainDNSName</query>
+      </search>
+      <fieldForLabel>DomainDNSName</fieldForLabel>
+      <fieldForValue>DomainDNSName</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>DomainDNSName="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="multiselect" token="multidropdown_host" searchWhenChanged="true">
+      <label>Server</label>
+      <choice value="*">All</choice>
+      <search>
+        <query>|`domain-selector` | search $multidropdown_forest$ $multidropdown_site$ $multidropdown_domaindnsname$|dedup host|sort host</query>
+      </search>
+      <fieldForLabel>host</fieldForLabel>
+      <fieldForValue>host</fieldForValue>
+      <default>*</default>
+      <initialValue>*</initialValue>
+      <delimiter> OR </delimiter>
+      <valuePrefix>host="</valuePrefix>
+      <prefix>(</prefix>
+      <suffix>)</suffix>
+      <valueSuffix>"</valueSuffix>
+    </input>
+    <input type="time" token="Time" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliest>-15m</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <chart>
+        <title>Logons over Time</title>
+        <search>
+          <query>(eventtype=msad-successful-user-logons OR eventtype=msad-failed-user-logons) dest_nt_domain!="NT AUTHORITY" $multidropdown_host$|fillnull value="255" Logon_Type|lookup LogonTypeName Logon_Type|eval user_subject=dest_nt_domain."\\\\".user|fields * |eval x=1|timechart per_minute(x) by Logon_TypeName</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="charting.chart">column</option>
+      </chart>
+    </panel>
+    <panel>
+      <table>
+        <title>Top Users by Successful Logons</title>
+        <search>
+          <query>(eventtype=msad-successful-user-logons OR eventtype=msad-failed-user-logons) dest_nt_domain!="NT AUTHORITY" $multidropdown_host$|fillnull value="255" Logon_Type|lookup LogonTypeName Logon_Type|eval user_subject=dest_nt_domain."\\\\".user|fields * |search eventtype=msad-successful-user-logons|top user,dest_nt_domain|rename user as "Username",dest_nt_domain as "Domain"</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/ad_audit_user?form.ldaprecord.nt_domain=$row.Domain$&form.ldaprecord.user=$row.Username$
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Locked Accounts</title>
+        <search>
+          <query>eventtype=msad-account-lockout $multidropdown_host$ | eval src_nt_host=if(isnull(src_nt_host),host,src_nt_host) | eval lockout=if(EventCode==644 OR EventCode==4740,"Yes","No") | stats latest(_time) as time,latest(src_nt_host) as host,latest(lockout) as lockedout by dest_nt_domain,user | search lockedout="Yes" | eval ltime=strftime(time,"%c") | table ltime,dest_nt_domain,user,host | rename ltime as "Lockout Time",dest_nt_domain as "Domain",user as "Account Locked Out", host as "Workstation"</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+        <option name="fields">"Lockout Time", "Domain", "Account Locked Out", "Workstation"</option>
+        <drilldown target="_blank">
+          <link>
+            <![CDATA[
+            /app/splunk_app_windows_infrastructure/ad_audit_user?form.ldaprecord.nt_domain=$row.Domain$&form.ldaprecord.user=$row.user$
+            ]]>
+          </link>
+        </drilldown>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Top Authenticating Workstations</title>
+        <search>
+          <query>(eventtype=msad-successful-user-logons OR eventtype=msad-failed-user-logons) dest_nt_domain!="NT AUTHORITY" $multidropdown_host$|fillnull value="255" Logon_Type|lookup LogonTypeName Logon_Type|eval user_subject=dest_nt_domain."\\\\".user|fields * |search eventtype=msad-successful-user-logons|top src_nt_host|rename src_nt_host as Workstation</query>
+          <earliest>$Time.earliest$</earliest>
+          <latest>$Time.latest$</latest>
+        </search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">row</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</form>

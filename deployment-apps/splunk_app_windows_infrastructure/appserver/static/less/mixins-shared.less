@@ -1,0 +1,179 @@
+// Splunk: Mixins
+// ==================
+// Snippets of reusable CSS to develop faster and keep code readable
+
+
+
+// Border Radius
+// -----------------------------
+// for setting individual radius for all browsers
+
+.border-top-left-radius(@radius)  {
+   -webkit-border-top-left-radius: @radius;
+	  -moz-border-radius-topleft: @radius;
+		   border-top-left-radius: @radius;
+}
+
+.border-top-right-radius(@radius)  {
+   -webkit-border-top-right-radius: @radius;
+	  -moz-border-radius-topright: @radius;
+		   border-top-right-radius: @radius;
+}
+
+.border-bottom-right-radius(@radius)  {
+   -webkit-border-bottom-right-radius: @radius;
+	  -moz-border-radius-bottomright: @radius;
+		   border-bottom-right-radius: @radius;
+}
+
+.border-bottom-left-radius(@radius)  {
+   -webkit-border-bottom-left-radius: @radius;
+	  -moz-border-radius-bottomleft: @radius;
+		   border-bottom-left-radius: @radius;
+}
+
+// Disable highlighting text
+// -------------------------
+.disable-text-highlight() {
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+// Printing
+// ------------------
+.print-width-100-percent()  {
+	max-width: 100% !important;
+	width: 100% !important;
+	overflow: hidden !important;
+}
+
+.print-hide() {
+	display: none !important;
+}
+
+.print-no-background() {
+	background: none !important;
+}
+
+.print-wrap-all()  {
+	word-break: break-all !important;
+	word-wrap: break-word !important;
+	overflow-wrap: break-word !important;
+	white-space: normal !important;
+}
+
+// font-size mixin for rems
+.font-size (@size) {
+  font-size: 0px + @size;
+  font-size: 0rem + @size / @docFontSize;
+}
+
+
+
+// Gradients
+// -------------
+
+#gradients {
+
+  .vertical-two-color-stops(@startColor: @interactiveGradientStartColor, @colorStop: 50%, @endColor: @interactiveGradientEndColor, @endColorStop: 100%) {
+	background-color: mix(@startColor, @endColor, 80%); /* Old browsers */
+	background-image: -moz-linear-gradient(top, @startColor @colorStop, @endColor @endColorStop); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(@colorStop, @startColor), color-stop(@endColorStop, @endColor)); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top, @startColor @colorStop, @endColor @endColorStop); /* Chrome10+,Safari5.1+ */
+	background-image: -o-linear-gradient(top, @startColor @colorStop, @endColor @endColorStop); /* Opera 11.10+ */
+	background-image: -ms-linear-gradient(top, @startColor @colorStop, @endColor @endColorStop); /* IE10+ */
+	background-image: linear-gradient(to bottom, @startColor @colorStop, @endColor @endColorStop); /* W3C */
+	filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@startColor),argb(@endColor))); // IE9 and down, gets no color-stop at all for proper fallback
+  }
+
+}
+
+.horizontal-two-color-stops(@startColor, @colorStop, @endColor, @IE9ImageFallback) {
+    background: @endColor @IE9ImageFallback left top repeat-y;
+    background: -ms-linear-gradient(left, @startColor (@colorStop - 1), transparent @colorStop ), @endColor; // IE10
+    background: -webkit-linear-gradient(left, @startColor (@colorStop - 1), transparent @colorStop ), @endColor; //Chrome10+,Safari5.1+
+    background: linear-gradient(left, @startColor (@colorStop - 1), transparent @colorStop ), @endColor; // w3c
+    background: -moz-linear-gradient(left, @startColor (@colorStop - 1), transparent @colorStop ), @endColor; // FF3.6+ IE10
+}
+
+// Full Page Layout
+// -------------
+.application-layout(@leftColWidth: 400px) {
+    html {
+        height: 100% !important;
+    }
+    
+    body {
+        height: 100% !important;
+    }
+    
+    .shared-page {
+        height: 100% !important;
+    }
+    
+    .layoutCol {
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+    }
+    
+    .layoutRow {
+        overflow: hidden;
+        position: absolute;
+        left: 0;
+        right: 0;
+    }
+    
+    .scroll-x {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .scroll-y {
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    /* Pane configuration */
+    .main-section-body {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0px;
+        top: 25px; /* this makes room for splunkbar. */
+        min-height:0px !important;
+    }
+    
+    .layoutBodyColumns {
+        bottom: 0px;
+        background-color: @white;
+        overflow: auto;
+    }
+    
+    .layoutColLeft {
+        width: @leftColWidth;
+    }
+    
+    .layoutColRight {
+        right: 0px;
+        left: @leftColWidth; /* left equals width of layoutColLeft */
+    }
+
+}
+
+
+// HACK TO FIX INCOMPATIBLITY WITH LESS 2.3.0
+// --------------------------------------------------
+
+#grid {
+    .core  {
+        .span(@gridColumns) {
+            width: (@gridColumnWidth * @gridColumns) + (@gridGutterWidth * (@gridColumns - 1));
+        }
+    }
+};

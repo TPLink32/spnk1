@@ -1,0 +1,139 @@
+<dashboard>
+  <label>Dashboard</label>
+  <row>
+    <single>
+      <title>Total Hosts</title>
+      <searchString>index=qualys sourcetype=qualys_vm_detection HOSTSUMMARY | stats dc(HOST_ID)</searchString>
+      <earliestTime>0</earliestTime>
+      <latestTime>now</latestTime>
+      <option name="underLabel">Active Hosts</option>
+      <option name="linkView">search</option>
+    </single>
+    <chart>
+      <title>OS distribution</title>
+      <searchString>index=qualys sourcetype=qualys_vm_detection HOSTSUMMARY | stats dc(HOST_ID) as HOSTS by OS</searchString>
+      <earliestTime>0</earliestTime>
+      <latestTime>$latest$</latestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">pie</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+    </chart>
+  </row>
+  <row>
+    <table>
+      <title>Top 10 Hosts ( Active and Severity 5 vulns)</title>
+      <searchString>index=qualys sourcetype=qualys_vm_detection HOSTSUMMARY ACTIVE_SEVERITY_5>0 | fillnull value=- DNS OS NETBIOS | dedup HOST_ID sortby -_time | stats sum(ACTIVE_SEVERITY_5) as VULNS by HOST_ID, IP, DNS | sort 10 -VULNS | table HOST_ID, IP, DNS, VULNS</searchString>
+      <earliestTime>0</earliestTime>
+      <latestTime>now</latestTime>
+      <option name="wrap">true</option>
+      <option name="rowNumbers">false</option>
+      <option name="drilldown">row</option>
+      <option name="count">10</option>
+    </table>
+    <table>
+      <title>Most Prevalent Vulnerabilities</title>
+      <searchString>index=qualys sourcetype=qualys_vm_detection HOSTVULN TYPE="CONFIRMED" SEVERITY>=3 | dedup 1 HOST_ID, QID, SSL, PROTOCOL, STATUS keepempty=true sortby -_time | search STATUS!="FIXED"  | stats dc(HOST_ID) as HOST_COUNT by QID | sort 10 -HOST_COUNT | lookup qualys_kb_lookup QID OUTPUT TITLE SEVERITY CATEGORY | table QID, TITLE, CATEGORY, SEVERITY, HOST_COUNT</searchString>
+      <earliestTime>0</earliestTime>
+    </table>
+  </row>
+  <row>
+    <chart>
+      <title>Host, Vuln Count over time ( Severity &gt;=3)</title>
+      <searchString>index=qualys sourcetype=qualys_vm_detection HOSTVULN SEVERITY&gt;=3 STATUS="FIXED" OR STATUS="NEW" OR STATUS="ACTIVE"| dedup 1 HOST_ID QID sortby -_time | timechart count(QID) as VULNS_COUNT, dc(HOST_ID) as HOST_COUNT</searchString>
+      <earliestTime>0</earliestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">area</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">1</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+    </chart>
+    <chart>
+      <title>Scan Volume</title>
+      <searchString>index=qualys sourcetype=qualys_vm_detection HOSTSUMMARY | timechart dc(HOST_ID) as HOSTS</searchString>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">line</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+    </chart>
+  </row>
+  <row>
+    <chart>
+      <title>Total Vulns by Status</title>
+      <searchString>index=qualys sourcetype=qualys_vm_detection HOSTVULN  TYPE="CONFIRMED" | dedup HOST_ID, QID, SSL, PROTOCOL keepempty=true sortby -_time | timechart count(QID) as TOTAL_VULNS by STATUS</searchString>
+      <earliestTime>0</earliestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">column</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+    </chart>
+  </row>
+  <row>
+    <chart>
+      <title>Total Vulns by Severity over time</title>
+      <searchString>index=qualys sourcetype=qualys_vm_detection HOSTVULN  TYPE="CONFIRMED" | dedup HOST_ID, QID, SSL, PROTOCOL keepempty=true sortby -_time | timechart count(QID) as TOTAL_VULNS by SEVERITY</searchString>
+      <earliestTime>0</earliestTime>
+      <option name="charting.axisTitleX.visibility">visible</option>
+      <option name="charting.axisTitleY.visibility">visible</option>
+      <option name="charting.axisX.scale">linear</option>
+      <option name="charting.axisY.scale">linear</option>
+      <option name="charting.chart">column</option>
+      <option name="charting.chart.nullValueMode">gaps</option>
+      <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+      <option name="charting.chart.stackMode">default</option>
+      <option name="charting.chart.style">shiny</option>
+      <option name="charting.drilldown">all</option>
+      <option name="charting.layout.splitSeries">0</option>
+      <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+      <option name="charting.legend.placement">right</option>
+    </chart>
+  </row>
+   <row>
+    <panel>
+      <table>
+        <title>Hosts not scanned in more than 30 days</title>
+        <search ref="Hosts not Scanned in more than 30 days"></search>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">cell</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+</dashboard>

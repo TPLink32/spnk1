@@ -1,0 +1,19 @@
+reply_code
+No error
+TSIG Signature Failure
+Server Failure
+Name not contained in zone
+Name Exists when it should not
+Signature out of time window
+Server Not Authoritative for zone
+RR Set that should exist does not
+RR Set Exists when it should not
+Query Refused
+Not Implemented
+Non-Existent Domain
+No such name
+Key not recognized
+Duplicate key name
+Bad TKEY Mode
+Bad OPT Version
+Algorithm not supported

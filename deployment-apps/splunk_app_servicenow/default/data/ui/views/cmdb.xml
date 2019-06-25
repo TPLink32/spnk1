@@ -1,0 +1,61 @@
+<form script="dashboard_entry.js, cmdb.js">
+  <label>CMDB</label>
+  <fieldset autoRun="true" submitButton="false">
+    <input id="time" type="time" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliest>-30d@d</earliest>
+        <latest>now</latest>
+      </default>
+    </input>
+    <input type="multiselect" token="host" searchWhenChanged="true">
+      <label>Specify the hostname</label>
+      <allowCustomValues>true</allowCustomValues>
+      <default>*</default>
+      <search>
+        <query>
+            <![CDATA[
+                index=`snow_cmdb_ci_list_index` | head 1000
+                | append [search [| inputlookup cmdb_ci_list_checkpoint.csv
+                | rename latestTimestamp as _index_earliest  | return _index_earliest] eventtype=snow_cmdb_ci_list | head 1000]
+                | dedup name | head 1000 | table name
+            ]]>
+        </query>
+      </search>
+      <fieldForLabel>name</fieldForLabel>
+      <fieldForValue>name</fieldForValue>
+      <delimiter>" OR name="</delimiter>
+      <choice value="*">All</choice>
+    </input>
+  </fieldset>
+  <row>
+    <table>
+      <title>Change Ticket Lookup</title>
+      <search>
+        <query>eventtype=snow_change_request | dedup sys_id  | join cmdb_ci [search index=`snow_cmdb_ci_list_index` (name="$host$")| rename sys_id as cmdb_ci ] |rename name as ci_name |lookup sys_user_list_lookup sys_id as requested_by OUTPUTNEW name AS "Requested by" | table number,description,  "Requested by", ci_name, assigned_to_name, change_state_name, priority|rename number as Number|rename description as Description|rename ci_name as "CI Name"|rename assigned_to_name as "Assigned To"|rename change_state_name as State| rename priority as Priority</query>
+        <earliest>0</earliest>
+        <latest>now</latest>
+      </search>
+      <option name="wrap">true</option>
+      <option name="rowNumbers">false</option>
+      <option name="dataOverlayMode">none</option>
+      <option name="drilldown">cell</option>
+      <option name="count">10</option>
+    </table>
+  </row>
+  <row>
+    <table>
+      <title>Incident Ticket Lookup</title>
+      <search>
+        <query>eventtype=snow_incident | dedup sys_id   | join cmdb_ci [search index=`snow_cmdb_ci_list_index` name="$host$"| rename sys_id as cmdb_ci ] |rename name as ci_name |lookup sys_user_list_lookup sys_id as opened_by OUTPUTNEW name AS "Opened by"| table number,short_description, ci_name, category, "Opened by", user, assignment_group_name, priority, incident_state_name|rename assignment_group_name as "Assignment Group"| rename user as "User"|rename short_description as "Description"|rename incident_state_name as State |rename ci_name as "CI Name"|rename priority as "Priority"|rename category as "Category"</query>
+        <earliest>0</earliest>
+        <latest>now</latest>
+      </search>
+      <option name="wrap">true</option>
+      <option name="rowNumbers">false</option>
+      <option name="dataOverlayMode">none</option>
+      <option name="drilldown">row</option>
+      <option name="count">10</option>
+    </table>
+  </row>
+</form>

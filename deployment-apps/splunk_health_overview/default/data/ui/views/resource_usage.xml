@@ -1,0 +1,210 @@
+<form>
+  <label>Resource Usage</label>
+  <fieldset submitButton="false">
+    <input type="time" token="time2" searchWhenChanged="true">
+      <label></label>
+      <default>
+        <earliestTime>@d</earliestTime>
+        <latestTime>now</latestTime>
+      </default>
+    </input>
+    <input type="multiselect" token="hosts" searchWhenChanged="true">
+      <label>Host</label>
+      <choice value="*">All</choice>
+      <fieldForLabel>host</fieldForLabel>
+      <fieldForValue>host</fieldForValue>
+      <default>*</default>
+      <valuePrefix>host=</valuePrefix>
+      <delimiter> OR </delimiter>
+      <populatingSearch fieldForLabel="host" fieldForValue="host">|inputlookup all_servers.csv | dedup host | fields host | sort + host</populatingSearch>
+    </input>
+  </fieldset>
+  <row>
+    <panel>
+      <table>
+        <title>Current Resource Usage</title>
+        <searchString>|inputlookup all_servers.csv  | eval splunk_server=host  | join type=left   splunk_server [|rest /services/server/info]  | join type=left splunk_server [| rest /services/server/status/resource-usage/hostwide | eval pct_cpu_used=(100-cpu_idle_pct)."%" | eval mb_mem_used=round(mem_used,2) | fields splunk_server cpu_system_pct cpu_user_pct mb_mem_used]  | fillnull value="Non-Reporting" |rename splunk_server AS Server | stats list(role) AS Role values(cpu_system_pct) AS "CPU System Utilized" values(cpu_user_pct) AS "CPU User Utilized" values(os_name) AS OS values(numberOfCores) AS "Cores" values(physicalMemoryMB) AS "Avail Mem (MB)" values(mb_mem_used) AS "Mem Utilized (MB)" by Server | table Server Role OS Cores "Avail Mem (MB)"  "CPU System Utilized" "CPU User Utilized" "Mem Utilized (MB)"  | sort - "CPU System Utilized" "CPU User Utilized" |  fillnull value="Non-Reporting" "Mem Utilized (MB)" "CPU System Utilized" "CPU User Utilized"</searchString>
+        <earliest>@d</earliest>
+        <latest>now</latest>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">cell</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+    <panel>
+      <table>
+        <title>Current Disk Usage by Host/Mount</title>
+        <searchString>| tstats max(Introspection.Disk_Objects.Capacity) AS Capacity max(Introspection.Disk_Objects.Avail) AS Avail max(Introspection.Disk_Objects.Used) AS Used max(Introspection.Disk_Objects.UsedPct) AS UsedPct FROM datamodel=Introspection_Usage WHERE nodename=Introspection.Disk_Objects $hosts$ GROUPBY _time host Introspection.data.mount_point | eventstats max(_time) AS latest by host | where _time=latest | lookup all_servers.csv host OUTPUT role | rename Introspection.data.mount_point AS Mount role AS Role |table host Role Mount Capacity Avail Used UsedPct | sort - UsedPct</searchString>
+        <earliest>@d</earliest>
+        <latest>now</latest>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="count">10</option>
+        <drilldown>
+          <set token="host">$row.host$</set>
+        </drilldown>
+        <option name="drilldown">cell</option>
+        <option name="dataOverlayMode">none</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <table>
+        <title>Today's Resource Usage by PID/Host</title>
+        <searchString>index=_introspection component=PerProcess $hosts$| stats earliest(_time) AS "Earliest Occurrence" latest(_time) AS "Latest Occurrence" max(data.fd_used) AS "File Descriptors Used" avg(data.mem_used) AS "Mem Used" avg(data.pct_memory) AS "Avg % Mem" avg(data.pct_cpu) AS "Avg % CPU" by data.pid data.ppid data.process host  | eval "Runtime Min"=('Latest Occurrence'-'Earliest Occurrence')/60 | convert ctime(*Occurrence) | rename data.pid AS PID data.ppid AS "Parent PID" data.process AS Process | table "Earliest Occurrence" "Latest Occurrence" host PID "Parent PID" Process "File Descriptors Used" "Mem Used" "Avg % Mem" "Avg % CPU" "Runtime Min" | sort - "Avg % CPU" "Avg % Mem"</searchString>
+        <earliestTime>@d</earliestTime>
+        <latestTime>now</latestTime>
+        <option name="wrap">true</option>
+        <option name="rowNumbers">false</option>
+        <option name="drilldown">cell</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="count">10</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <chart>
+        <title>System Load Average by Host</title>
+        <searchString>| tstats max(Introspection.data.normalized_load_avg_1min) AS load FROM datamodel=Introspection_Usage WHERE nodename=Introspection.Hostwide_Resource_Usage $hosts$ GROUPBY _time host | timechart max(load) AS "Load Average" by host</searchString>
+        <earliestTime>$time2.earliest$</earliestTime>
+        <latestTime>$time2.latest$</latestTime>
+        <option name="charting.chart">line</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.text">Load Average</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>% CPU by Host</title>
+        <searchString>| tstats avg(Introspection.data.cpu_user_pct) AS pct_cpu_user FROM datamodel=Introspection_Usage WHERE nodename=Introspection.Hostwide_Resource_Usage $hosts$ GROUPBY _time host | timechart avg(pct_cpu_user) AS "% CPU User Used" by host</searchString>
+        <earliestTime>$time2.earliest$</earliestTime>
+        <latestTime>$time2.latest$</latestTime>
+        <option name="charting.chart">line</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.text">% CPU Used</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+    <panel>
+      <chart>
+        <title>Memory Usage MB by Host</title>
+        <searchString>| tstats avg(Introspection.data.mem_used) AS mem_used avg(Introspection.data.swap_used) AS swap_used FROM datamodel=Introspection_Usage WHERE nodename=Introspection.Hostwide_Resource_Usage $hosts$ GROUPBY _time host | timechart avg(mem_used) AS "MB Average" by host</searchString>
+        <earliestTime>$time2.earliest$</earliestTime>
+        <latestTime>$time2.latest$</latestTime>
+        <option name="charting.chart">line</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.text">MB Used</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <input type="time" token="time" searchWhenChanged="true">
+        <label></label>
+        <default>
+          <earliestTime>-30d@d</earliestTime>
+          <latestTime>now</latestTime>
+        </default>
+      </input>
+      <input type="dropdown" token="host" searchWhenChanged="true">
+        <label>Host</label>
+        <selectFirstChoice>true</selectFirstChoice>
+        <populatingSearch fieldForLabel="host" fieldForValue="host">|inputlookup all_servers.csv | dedup host | fields host | sort + host</populatingSearch>
+        <fieldForLabel>host</fieldForLabel>
+        <fieldForValue>host</fieldForValue>
+      </input>
+      <chart>
+        <title>Disk Usage % by Host/Mount Over Time - $host$</title>
+          <searchString>| tstats max(Introspection.Disk_Objects.UsedPct) AS UsedPct FROM datamodel=Introspection_Usage WHERE nodename=Introspection.Disk_Objects host=$host$ GROUPBY _time host Introspection.data.mount_point | rename Introspection.data.mount_point AS Mount | timechart max(UsedPct) As UsedPct by Mount</searchString>
+          <earliest>$time.earliest$</earliest>
+          <latest>$time.latest$</latest>
+        <option name="charting.chart">line</option>
+        <option name="charting.axisY2.enabled">false</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">visible</option>
+        <option name="charting.axisTitleY.visibility">visible</option>
+        <option name="charting.axisTitleY2.visibility">visible</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">all</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.placement">right</option>
+        <option name="charting.axisTitleX.text">Time</option>
+        <option name="charting.axisTitleY.text">% Usage</option>
+      </chart>
+    </panel>
+  </row>
+</form>
